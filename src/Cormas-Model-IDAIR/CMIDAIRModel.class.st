@@ -17,7 +17,7 @@ CMIDAIRModel >> init [
 		neighbourhood: 8
 		closed: false.
 	self createN: 400 randomlyLocatedEntities: CMIDAIRCitizen.
-	1 to: 10 do: [ :index | (self theCitizens at: index) beIncubative ].
+	1 to: 10 do: [ :index | (self theCitizens at: index) beAsymptomatic ].
 	self
 		displayPov: #diseasePov of: CMIDAIRCitizen;
 		displayPov: #contaminationPov of: CMIDAIRLocation

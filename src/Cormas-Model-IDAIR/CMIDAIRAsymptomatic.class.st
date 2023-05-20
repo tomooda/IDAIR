@@ -1,13 +1,13 @@
 Class {
 	#name : #CMIDAIRAsymptomatic,
-	#superclass : #CMIDAIRPositive,
+	#superclass : #CMIDAIRSusceptible,
 	#category : #'Cormas-Model-IDAIR'
 }
 
 { #category : #accessing }
 CMIDAIRAsymptomatic >> color [
 
-	^ Color yellow
+	^ Color blue
 ]
 
 { #category : #actions }
@@ -31,16 +31,12 @@ CMIDAIRAsymptomatic >> isTransmissible [
 { #category : #actions }
 CMIDAIRAsymptomatic >> step [
 	self duration: self duration + 1.
-	self duration >= self recoveryPeriod ifTrue: [ ^ self beNegative ].
+	self duration >= self recoveryPeriod ifTrue: [ ^ self beHealthy ].
 	^ self
 ]
 
 { #category : #actions }
 CMIDAIRAsymptomatic >> test [
 
-	self random >= self pFalseNegative ifTrue: [ 
-		^ self random <= self pHospitalized
-			  ifTrue: [ self beHospitalized ]
-			  ifFalse: [ self beHomeCared ] ].
 	^ self
 ]

@@ -1,13 +1,13 @@
 Class {
 	#name : #CMIDAIRHospitalized,
-	#superclass : #CMIDAIRPositive,
+	#superclass : #CMIDAIRSymptomatic,
 	#category : #'Cormas-Model-IDAIR'
 }
 
 { #category : #accessing }
 CMIDAIRHospitalized >> color [
 
-	^ Color gray
+	^ Color black
 ]
 
 { #category : #actions }
@@ -44,8 +44,8 @@ CMIDAIRHospitalized >> pCritical [
 CMIDAIRHospitalized >> step [
 
 	self duration: self duration + 1.
-	self duration >= self recoveryPeriod ifTrue: [ ^ self beNegative ].
-	self random <= self pCritical ifTrue: [ ^ self beICUed ].
+	self duration >= self recoveryPeriod ifTrue: [ ^ self beHealthy ].
+	self random <= self pCritical ifTrue: [ ^ self beDead ].
 	^ self
 ]
 

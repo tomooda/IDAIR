@@ -1,6 +1,9 @@
 Class {
 	#name : #CMIDAIRDiseaseDynamics,
 	#superclass : #Object,
+	#instVars : [
+		'citizen'
+	],
 	#classInstVars : [
 		'randomGenerator'
 	],
@@ -11,6 +14,14 @@ Class {
 CMIDAIRDiseaseDynamics class >> isAbstract [
 
 	^ self = CMIDAIRDiseaseDynamics
+]
+
+{ #category : #'instance creation' }
+CMIDAIRDiseaseDynamics class >> on: aCMIDAIRCitizen [
+
+	^ self new
+		  citizen: aCMIDAIRCitizen;
+		  yourself
 ]
 
 { #category : #accessing }
@@ -32,9 +43,9 @@ CMIDAIRDiseaseDynamics >> beDead [
 ]
 
 { #category : #transitioning }
-CMIDAIRDiseaseDynamics >> beHomeCared [
+CMIDAIRDiseaseDynamics >> beHealthy [
 
-	^ CMIDAIRHomeCared newFrom: self
+	^ CMIDAIRHealthy newFrom: self
 ]
 
 { #category : #transitioning }
@@ -44,21 +55,45 @@ CMIDAIRDiseaseDynamics >> beHospitalized [
 ]
 
 { #category : #transitioning }
-CMIDAIRDiseaseDynamics >> beICUed [
+CMIDAIRDiseaseDynamics >> beMildSymptoms [
 
-	^ CMIDAIRICUed newFrom: self
+	^ CMIDAIRMildSymptoms newFrom: self
 ]
 
 { #category : #transitioning }
-CMIDAIRDiseaseDynamics >> beIncubative [
+CMIDAIRDiseaseDynamics >> bePreMildSymptomatic [
 
-	^ CMIDAIRIncubative new
+	^ CMIDAIRPreMildSymptomatic newFrom: self
 ]
 
 { #category : #transitioning }
-CMIDAIRDiseaseDynamics >> beNegative [
+CMIDAIRDiseaseDynamics >> bePreSevereSymptomatic [
 
-	^ CMIDAIRNegative new
+	^ CMIDAIRPreSevereSymptomatic newFrom: self
+]
+
+{ #category : #transitioning }
+CMIDAIRDiseaseDynamics >> beSevereSymptoms [
+
+	^ CMIDAIRSevereSymptoms newFrom: self
+]
+
+{ #category : #transitioning }
+CMIDAIRDiseaseDynamics >> beSusceptible [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+CMIDAIRDiseaseDynamics >> citizen [
+
+	^ citizen
+]
+
+{ #category : #accessing }
+CMIDAIRDiseaseDynamics >> citizen: aCMIDAIRCitizen [
+
+	citizen := aCMIDAIRCitizen
 ]
 
 { #category : #accessing }
@@ -104,15 +139,15 @@ CMIDAIRDiseaseDynamics >> isTransmissible [
 ]
 
 { #category : #parameters }
-CMIDAIRDiseaseDynamics >> pFalseNegative [
+CMIDAIRDiseaseDynamics >> pAsymptomaticOdm [
 
-	^ 0.1
+	^ 0.5
 ]
 
 { #category : #parameters }
-CMIDAIRDiseaseDynamics >> pHospitalized [
+CMIDAIRDiseaseDynamics >> pFalseNegative [
 
-	^ 0.2
+	^ 0.1
 ]
 
 { #category : #parameters }
@@ -122,9 +157,15 @@ CMIDAIRDiseaseDynamics >> pInfection [
 ]
 
 { #category : #parameters }
-CMIDAIRDiseaseDynamics >> pSymptomatic [
+CMIDAIRDiseaseDynamics >> pPreSymptomaticMildOdm [
 
-	^ 0.5
+	^ 0.3
+]
+
+{ #category : #parameters }
+CMIDAIRDiseaseDynamics >> pPreSymptomaticSevereOdm [
+
+	^ 1.0 - self pAsymptomaticOdm - self pPreSymptomaticMildOdm
 ]
 
 { #category : #accessing }

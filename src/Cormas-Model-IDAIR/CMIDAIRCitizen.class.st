@@ -20,9 +20,9 @@ CMIDAIRCitizen >> beDead [
 ]
 
 { #category : #accessing }
-CMIDAIRCitizen >> beHomeCared [
+CMIDAIRCitizen >> beHealthy [
 
-	self diseaseDynamics: self diseaseDynamics beHomeCared
+	self diseaseDynamics: self diseaseDynamics beHealthy
 ]
 
 { #category : #accessing }
@@ -32,21 +32,15 @@ CMIDAIRCitizen >> beHospitalized [
 ]
 
 { #category : #accessing }
-CMIDAIRCitizen >> beICUed [
+CMIDAIRCitizen >> bePreMildSymptomatic [ 
 
-	self diseaseDynamics: self diseaseDynamics beICUed
+	self diseaseDynamics: self diseaseDynamics bePreMildSymptomatic
 ]
 
 { #category : #accessing }
-CMIDAIRCitizen >> beIncubative [
+CMIDAIRCitizen >> beSusceptible [
 
-	self diseaseDynamics: self diseaseDynamics beIncubative
-]
-
-{ #category : #accessing }
-CMIDAIRCitizen >> beNegative [
-
-	self diseaseDynamics: self diseaseDynamics beNegative
+	self diseaseDynamics: self diseaseDynamics beSusceptible
 ]
 
 { #category : #actions }
@@ -66,7 +60,7 @@ CMIDAIRCitizen >> contaminate [
 { #category : #defaults }
 CMIDAIRCitizen >> defaultDiseaseDynamics [
 
-	^ CMIDAIRNegative new
+	^ CMIDAIRHealthy on: self
 ]
 
 { #category : #accessing }

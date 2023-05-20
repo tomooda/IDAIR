@@ -4,6 +4,12 @@ Class {
 	#category : #'Cormas-Model-IDAIR'
 }
 
+{ #category : #'initialize - release' }
+CMIDAIRDead >> beSusceptible [
+
+	^ self
+]
+
 { #category : #accessing }
 CMIDAIRDead >> color [
 

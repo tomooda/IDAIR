@@ -1,5 +1,5 @@
 Class {
-	#name : #CMIDAIRPositive,
+	#name : #CMIDAIRSusceptible,
 	#superclass : #CMIDAIRDiseaseDynamics,
 	#instVars : [
 		'duration',
@@ -9,43 +9,49 @@ Class {
 }
 
 { #category : #testing }
-CMIDAIRPositive class >> isAbstract [
+CMIDAIRSusceptible class >> isAbstract [
 
-	^ self = CMIDAIRPositive
+	^ self = CMIDAIRSusceptible
+]
+
+{ #category : #transitioning }
+CMIDAIRSusceptible >> beSusceptible [
+
+	^ self
 ]
 
 { #category : #actions }
-CMIDAIRPositive >> contact [
+CMIDAIRSusceptible >> contact [
 
 	^ self
 ]
 
 { #category : #accessing }
-CMIDAIRPositive >> duration [
+CMIDAIRSusceptible >> duration [
 
 	^ duration ifNil: [ duration := 0 ]
 ]
 
 { #category : #accessing }
-CMIDAIRPositive >> duration: anInteger [
+CMIDAIRSusceptible >> duration: anInteger [
 
 	duration := anInteger
 ]
 
 { #category : #parameters }
-CMIDAIRPositive >> recoveryCurve [
+CMIDAIRSusceptible >> recoveryCurve [
 
 	^ self random * 30 + 15
 ]
 
 { #category : #accessing }
-CMIDAIRPositive >> recoveryPeriod [
+CMIDAIRSusceptible >> recoveryPeriod [
 
 	^ recoveryPeriod ifNil: [ recoveryPeriod := self recoveryCurve ]
 ]
 
 { #category : #accessing }
-CMIDAIRPositive >> recoveryPeriod: anObject [
+CMIDAIRSusceptible >> recoveryPeriod: anObject [
 
 	recoveryPeriod := anObject
 ]
