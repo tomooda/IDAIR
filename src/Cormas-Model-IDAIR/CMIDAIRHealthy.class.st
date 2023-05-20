@@ -12,14 +12,14 @@ CMIDAIRHealthy >> beSusceptible [
 	(p := p - self pAsymptomaticOdm) <= 0.0 ifTrue: [ 
 		^ self beAsymptomatic ].
 	(p := p - self pPreSymptomaticMildOdm) <= 0.0 ifTrue: [ 
-		^ self bePreMildSymptomatic ].
-	^ self bePreSevereSymptomatic
+		^ self bePreSymptomaticMild ].
+	^ self bePreSymptomaticSevere
 ]
 
 { #category : #accessing }
 CMIDAIRHealthy >> color [
 
-	^ Color green
+	^ Color green muchLighter
 ]
 
 { #category : #actions }
@@ -45,6 +45,12 @@ CMIDAIRHealthy >> isActive [
 CMIDAIRHealthy >> isTransmissible [
 
 	^ false
+]
+
+{ #category : #accessing }
+CMIDAIRHealthy >> name [
+
+	^ 'healthy'
 ]
 
 { #category : #actions }

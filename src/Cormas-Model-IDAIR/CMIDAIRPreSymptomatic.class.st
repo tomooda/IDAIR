@@ -22,12 +22,6 @@ CMIDAIRPreSymptomatic >> isTransmissible [
 	^ false
 ]
 
-{ #category : #parameters }
-CMIDAIRPreSymptomatic >> preSymptomaticPeriod [
-
-	^ 3
-]
-
 { #category : #actions }
 CMIDAIRPreSymptomatic >> test [
 

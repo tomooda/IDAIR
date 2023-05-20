@@ -1,6 +1,9 @@
 Class {
 	#name : #CMIDAIRHospitalized,
 	#superclass : #CMIDAIRSymptomatic,
+	#instVars : [
+		'toSurvive'
+	],
 	#category : #'Cormas-Model-IDAIR'
 }
 
@@ -34,18 +37,20 @@ CMIDAIRHospitalized >> isTransmissible [
 	^ true
 ]
 
-{ #category : #parameters }
-CMIDAIRHospitalized >> pCritical [
+{ #category : #accessing }
+CMIDAIRHospitalized >> name [
 
-	^ 0.01
+	^ 'hospitalized'
 ]
 
 { #category : #actions }
 CMIDAIRHospitalized >> step [
 
 	self duration: self duration + 1.
-	self duration >= self recoveryPeriod ifTrue: [ ^ self beHealthy ].
-	self random <= self pCritical ifTrue: [ ^ self beDead ].
+	self toSurvive
+		ifTrue: [ 
+		self duration >= self tauHospRec ifTrue: [ ^ self beHealthy ] ]
+		ifFalse: [ self duration >= self tauCrit ifTrue: [ ^ self beDead ] ].
 	^ self
 ]
 
@@ -53,4 +58,11 @@ CMIDAIRHospitalized >> step [
 CMIDAIRHospitalized >> test [
 
 	^ self
+]
+
+{ #category : #testing }
+CMIDAIRHospitalized >> toSurvive [
+
+	^ toSurvive ifNil: [ 
+		  toSurvive := self random <= self pSurvivalInHospital ]
 ]

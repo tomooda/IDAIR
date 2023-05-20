@@ -2,8 +2,7 @@ Class {
 	#name : #CMIDAIRSusceptible,
 	#superclass : #CMIDAIRDiseaseDynamics,
 	#instVars : [
-		'duration',
-		'recoveryPeriod'
+		'duration'
 	],
 	#category : #'Cormas-Model-IDAIR'
 }
@@ -12,6 +11,14 @@ Class {
 CMIDAIRSusceptible class >> isAbstract [
 
 	^ self = CMIDAIRSusceptible
+]
+
+{ #category : #'instance creation' }
+CMIDAIRSusceptible class >> newFrom: anObject [
+
+	^ (super newFrom: anObject)
+		  duration: 0.0;
+		  yourself
 ]
 
 { #category : #transitioning }
@@ -29,29 +36,11 @@ CMIDAIRSusceptible >> contact [
 { #category : #accessing }
 CMIDAIRSusceptible >> duration [
 
-	^ duration ifNil: [ duration := 0 ]
+	^ duration ifNil: [ duration := 0.0 ]
 ]
 
 { #category : #accessing }
-CMIDAIRSusceptible >> duration: anInteger [
+CMIDAIRSusceptible >> duration: aNumber [
 
-	duration := anInteger
-]
-
-{ #category : #parameters }
-CMIDAIRSusceptible >> recoveryCurve [
-
-	^ self random * 30 + 15
-]
-
-{ #category : #accessing }
-CMIDAIRSusceptible >> recoveryPeriod [
-
-	^ recoveryPeriod ifNil: [ recoveryPeriod := self recoveryCurve ]
-]
-
-{ #category : #accessing }
-CMIDAIRSusceptible >> recoveryPeriod: anObject [
-
-	recoveryPeriod := anObject
+	duration := aNumber
 ]

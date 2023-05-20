@@ -7,7 +7,7 @@ Class {
 { #category : #accessing }
 CMIDAIRAsymptomatic >> color [
 
-	^ Color blue
+	^ Color blue muchLighter
 ]
 
 { #category : #actions }
@@ -28,10 +28,17 @@ CMIDAIRAsymptomatic >> isTransmissible [
 	^ true
 ]
 
+{ #category : #accessing }
+CMIDAIRAsymptomatic >> name [
+
+	^ 'asymptomatic'
+]
+
 { #category : #actions }
 CMIDAIRAsymptomatic >> step [
+
 	self duration: self duration + 1.
-	self duration >= self recoveryPeriod ifTrue: [ ^ self beHealthy ].
+	self duration >= self tauARec ifTrue: [ ^ self beHealthy ].
 	^ self
 ]
 

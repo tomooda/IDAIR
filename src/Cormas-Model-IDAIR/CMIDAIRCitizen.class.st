@@ -32,9 +32,9 @@ CMIDAIRCitizen >> beHospitalized [
 ]
 
 { #category : #accessing }
-CMIDAIRCitizen >> bePreMildSymptomatic [ 
+CMIDAIRCitizen >> bePreSymptomaticMild [ 
 
-	self diseaseDynamics: self diseaseDynamics bePreMildSymptomatic
+	self diseaseDynamics: self diseaseDynamics bePreSymptomaticMild
 ]
 
 { #category : #accessing }

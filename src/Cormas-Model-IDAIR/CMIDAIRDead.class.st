@@ -52,6 +52,12 @@ CMIDAIRDead >> isTransmissible [
 	^ false
 ]
 
+{ #category : #accessing }
+CMIDAIRDead >> name [
+
+	^ 'dead'
+]
+
 { #category : #actions }
 CMIDAIRDead >> step [
 

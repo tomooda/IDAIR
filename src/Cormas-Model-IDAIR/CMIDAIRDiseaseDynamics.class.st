@@ -55,33 +55,33 @@ CMIDAIRDiseaseDynamics >> beHospitalized [
 ]
 
 { #category : #transitioning }
-CMIDAIRDiseaseDynamics >> beMildSymptoms [
+CMIDAIRDiseaseDynamics >> bePreSymptomaticMild [
 
-	^ CMIDAIRMildSymptoms newFrom: self
+	^ CMIDAIRPreSymptomaticMild newFrom: self
 ]
 
 { #category : #transitioning }
-CMIDAIRDiseaseDynamics >> bePreMildSymptomatic [
+CMIDAIRDiseaseDynamics >> bePreSymptomaticSevere [
 
-	^ CMIDAIRPreMildSymptomatic newFrom: self
-]
-
-{ #category : #transitioning }
-CMIDAIRDiseaseDynamics >> bePreSevereSymptomatic [
-
-	^ CMIDAIRPreSevereSymptomatic newFrom: self
-]
-
-{ #category : #transitioning }
-CMIDAIRDiseaseDynamics >> beSevereSymptoms [
-
-	^ CMIDAIRSevereSymptoms newFrom: self
+	^ CMIDAIRPreSymptomaticSevere newFrom: self
 ]
 
 { #category : #transitioning }
 CMIDAIRDiseaseDynamics >> beSusceptible [
 
 	^ self subclassResponsibility
+]
+
+{ #category : #transitioning }
+CMIDAIRDiseaseDynamics >> beSymptomsMild [
+
+	^ CMIDAIRSymptomsMild newFrom: self
+]
+
+{ #category : #transitioning }
+CMIDAIRDiseaseDynamics >> beSymptomsSevere [
+
+	^ CMIDAIRSymptomsSevere newFrom: self
 ]
 
 { #category : #accessing }
@@ -138,6 +138,12 @@ CMIDAIRDiseaseDynamics >> isTransmissible [
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+CMIDAIRDiseaseDynamics >> name [
+
+	^ self subclassResponsibility
+]
+
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> pAsymptomaticOdm [
 
@@ -146,6 +152,12 @@ CMIDAIRDiseaseDynamics >> pAsymptomaticOdm [
 
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> pFalseNegative [
+
+	^ 0.1
+]
+
+{ #category : #parameters }
+CMIDAIRDiseaseDynamics >> pHosp [
 
 	^ 0.1
 ]
@@ -168,6 +180,12 @@ CMIDAIRDiseaseDynamics >> pPreSymptomaticSevereOdm [
 	^ 1.0 - self pAsymptomaticOdm - self pPreSymptomaticMildOdm
 ]
 
+{ #category : #parameters }
+CMIDAIRDiseaseDynamics >> pSurvivalInHospital [
+
+	^ 0.05
+]
+
 { #category : #accessing }
 CMIDAIRDiseaseDynamics >> random [
 
@@ -178,6 +196,36 @@ CMIDAIRDiseaseDynamics >> random [
 CMIDAIRDiseaseDynamics >> step [
 
 	^ self subclassResponsibility
+]
+
+{ #category : #parameters }
+CMIDAIRDiseaseDynamics >> tauARec [
+	^ 15
+]
+
+{ #category : #parameters }
+CMIDAIRDiseaseDynamics >> tauCrit [
+	^ 4.25
+]
+
+{ #category : #parameters }
+CMIDAIRDiseaseDynamics >> tauHosp [
+	^ 5
+]
+
+{ #category : #parameters }
+CMIDAIRDiseaseDynamics >> tauHospRec [
+	^ 3.25
+]
+
+{ #category : #parameters }
+CMIDAIRDiseaseDynamics >> tauRec [
+	^ 12
+]
+
+{ #category : #parameters }
+CMIDAIRDiseaseDynamics >> tauSym [
+	^ 6
 ]
 
 { #category : #actions }

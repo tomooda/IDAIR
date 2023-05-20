@@ -9,13 +9,6 @@ Class {
 	#category : #'Cormas-Model-IDAIR'
 }
 
-{ #category : #converting }
-CMIDAIRLocation >> asString [
-
-	^ super asString , '[' , self name , 'p='
-	  , (self pTransDisease printShowingDecimalPlaces: 3) , ']'
-]
-
 { #category : #accessing }
 CMIDAIRLocation >> clearContamination [
 
