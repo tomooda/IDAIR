@@ -55,6 +55,18 @@ CMIDAIRDiseaseDynamics >> beHospitalized [
 ]
 
 { #category : #transitioning }
+CMIDAIRDiseaseDynamics >> beHospitalizedRecovering [
+
+	^ CMIDAIRHospitalizedRecovering newFrom: self
+]
+
+{ #category : #transitioning }
+CMIDAIRDiseaseDynamics >> beICUed [
+
+	^ CMIDAIRICUed newFrom: self
+]
+
+{ #category : #transitioning }
 CMIDAIRDiseaseDynamics >> bePreSymptomaticMild [
 
 	^ CMIDAIRPreSymptomaticMild newFrom: self
@@ -151,6 +163,17 @@ CMIDAIRDiseaseDynamics >> pAsymptomaticOdm [
 ]
 
 { #category : #parameters }
+CMIDAIRDiseaseDynamics >> pCrit [
+
+	^ 0.95
+]
+
+{ #category : #parameters }
+CMIDAIRDiseaseDynamics >> pDeath [
+	^ 0.5
+]
+
+{ #category : #parameters }
 CMIDAIRDiseaseDynamics >> pFalseNegative [
 
 	^ 0.1
@@ -158,6 +181,12 @@ CMIDAIRDiseaseDynamics >> pFalseNegative [
 
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> pHosp [
+
+	^ 0.1
+]
+
+{ #category : #parameters }
+CMIDAIRDiseaseDynamics >> pICU [
 
 	^ 0.1
 ]
@@ -206,6 +235,16 @@ CMIDAIRDiseaseDynamics >> tauARec [
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> tauCrit [
 	^ 4.25
+]
+
+{ #category : #parameters }
+CMIDAIRDiseaseDynamics >> tauCritSurv [
+	^ 6.0
+]
+
+{ #category : #parameters }
+CMIDAIRDiseaseDynamics >> tauDeath [
+	^ 3.0
 ]
 
 { #category : #parameters }

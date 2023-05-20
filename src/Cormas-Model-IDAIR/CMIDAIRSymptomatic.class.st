@@ -9,3 +9,9 @@ CMIDAIRSymptomatic class >> isAbstract [
 
 	^ self = CMIDAIRSymptomatic
 ]
+
+{ #category : #actions }
+CMIDAIRSymptomatic >> test [
+
+	^ self
+]

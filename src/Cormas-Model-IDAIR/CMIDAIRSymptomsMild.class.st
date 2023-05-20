@@ -48,9 +48,3 @@ CMIDAIRSymptomsMild >> step [
 	self duration >= self tauRec ifTrue: [ ^ self beHealthy ].
 	^ self
 ]
-
-{ #category : #actions }
-CMIDAIRSymptomsMild >> test [
-
-	^ self
-]
