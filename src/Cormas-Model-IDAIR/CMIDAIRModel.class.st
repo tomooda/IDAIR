@@ -38,15 +38,14 @@ CMIDAIRModel class >> deploy [
 CMIDAIRModel >> init [
 
 	self
-		createGridLines: 27
-		columns: 27
+		createGridLines: 33
+		columns: 33
 		neighbourhood: 8
 		closed: false.
-	self createN: 400 randomlyLocatedEntities: CMIDAIRCitizen.
+	self createN: 1000 randomlyLocatedEntities: CMIDAIRCitizen.
 	1 to: 10 do: [ :index | (self theCitizens at: index) beAsymptomatic ].
-	self
-		displayPov: #diseasePov of: CMIDAIRCitizen;
-		displayPov: #contaminationPov of: CMIDAIRLocation
+	self displayPov: #diseasePov of: CMIDAIRCitizen.
+	"self displayPov: #contaminationPov of: CMIDAIRLocation"
 ]
 
 { #category : #control }
