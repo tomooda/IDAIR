@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'randomGenerator'
 	],
-	#category : #'Cormas-Model-IDAIR'
+	#category : #'Cormas-Model-IDAIR-Disease'
 }
 
 { #category : #testing }
@@ -150,6 +150,18 @@ CMIDAIRDiseaseDynamics >> isTransmissible [
 	^ self subclassResponsibility
 ]
 
+{ #category : #parameters }
+CMIDAIRDiseaseDynamics >> modelParameter [
+
+	^ self modelParameterAt: thisContext sender selector
+]
+
+{ #category : #parameters }
+CMIDAIRDiseaseDynamics >> modelParameterAt: aSymbol [
+
+	^ citizen cormasModel submodelAt: #disease do: aSymbol
+]
+
 { #category : #accessing }
 CMIDAIRDiseaseDynamics >> name [
 
@@ -159,60 +171,49 @@ CMIDAIRDiseaseDynamics >> name [
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> pAsymptomaticOdm [
 
-	^ 0.5
+	^ self modelParameter
 ]
 
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> pCrit [
 
-	^ 0.95
+	^ self modelParameter
 ]
 
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> pDeath [
-	^ 0.5
+
+	^ self modelParameter
 ]
 
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> pFalseNegative [
 
-	^ 0.1
+	^ self modelParameter
 ]
 
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> pHosp [
 
-	^ 0.1
+	^ self modelParameter
 ]
 
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> pICU [
 
-	^ 0.1
+	^ self modelParameter
 ]
 
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> pInfection [
 
-	^ 0.3
+	^ self modelParameter
 ]
 
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> pPreSymptomaticMildOdm [
 
-	^ 0.3
-]
-
-{ #category : #parameters }
-CMIDAIRDiseaseDynamics >> pPreSymptomaticSevereOdm [
-
-	^ 1.0 - self pAsymptomaticOdm - self pPreSymptomaticMildOdm
-]
-
-{ #category : #parameters }
-CMIDAIRDiseaseDynamics >> pSurvivalInHospital [
-
-	^ 0.05
+	^ self modelParameter
 ]
 
 { #category : #accessing }
@@ -229,42 +230,50 @@ CMIDAIRDiseaseDynamics >> step [
 
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> tauARec [
-	^ 15
+
+	^ self modelParameter
 ]
 
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> tauCrit [
-	^ 4.25
+
+	^ self modelParameter
 ]
 
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> tauCritSurv [
-	^ 6.0
+
+	^ self modelParameter
 ]
 
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> tauDeath [
-	^ 3.0
+
+	^ self modelParameter
 ]
 
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> tauHosp [
-	^ 5
+
+	^ self modelParameter
 ]
 
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> tauHospRec [
-	^ 3.25
+
+	^ self modelParameter
 ]
 
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> tauRec [
-	^ 12
+
+	^ self modelParameter
 ]
 
 { #category : #parameters }
 CMIDAIRDiseaseDynamics >> tauSym [
-	^ 6
+
+	^ self modelParameter
 ]
 
 { #category : #actions }

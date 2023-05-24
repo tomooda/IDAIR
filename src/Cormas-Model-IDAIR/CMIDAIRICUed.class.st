@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'toBeDead'
 	],
-	#category : #'Cormas-Model-IDAIR'
+	#category : #'Cormas-Model-IDAIR-Disease'
 }
 
 { #category : #accessing }

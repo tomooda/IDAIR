@@ -6,7 +6,7 @@ Class {
 		'isContaminated',
 		'pTransDisease'
 	],
-	#category : #'Cormas-Model-IDAIR'
+	#category : #'Cormas-Model-IDAIR-Core'
 }
 
 { #category : #accessing }

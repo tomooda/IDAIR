@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'diseaseDynamics'
 	],
-	#category : #'Cormas-Model-IDAIR'
+	#category : #'Cormas-Model-IDAIR-Core'
 }
 
 { #category : #accessing }

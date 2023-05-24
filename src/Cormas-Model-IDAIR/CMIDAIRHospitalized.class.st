@@ -5,7 +5,7 @@ Class {
 		'toBeICUed',
 		'toBeCritical'
 	],
-	#category : #'Cormas-Model-IDAIR'
+	#category : #'Cormas-Model-IDAIR-Disease'
 }
 
 { #category : #accessing }
