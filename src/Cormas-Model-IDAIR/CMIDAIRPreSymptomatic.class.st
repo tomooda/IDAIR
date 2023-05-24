@@ -4,6 +4,12 @@ Class {
 	#category : #'Cormas-Model-IDAIR-Disease'
 }
 
+{ #category : #testing }
+CMIDAIRPreSymptomatic class >> isAbstract [
+
+	^ self = CMIDAIRPreSymptomatic
+]
+
 { #category : #actions }
 CMIDAIRPreSymptomatic >> contaminate: aCMIDAIRLocation [
 
@@ -12,6 +18,12 @@ CMIDAIRPreSymptomatic >> contaminate: aCMIDAIRLocation [
 
 { #category : #testing }
 CMIDAIRPreSymptomatic >> isActive [
+
+	^ true
+]
+
+{ #category : #testing }
+CMIDAIRPreSymptomatic >> isPreSymptomatic [
 
 	^ true
 ]

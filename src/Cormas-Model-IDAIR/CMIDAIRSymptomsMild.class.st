@@ -24,6 +24,12 @@ CMIDAIRSymptomsMild >> isActive [
 ]
 
 { #category : #testing }
+CMIDAIRSymptomsMild >> isMildSymptom [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIRSymptomsMild >> isTransmissible [
 
 	^ true

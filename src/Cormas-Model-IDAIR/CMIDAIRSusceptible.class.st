@@ -44,3 +44,9 @@ CMIDAIRSusceptible >> duration: aNumber [
 
 	duration := aNumber
 ]
+
+{ #category : #testing }
+CMIDAIRSusceptible >> isSusceptible [
+
+	^ true
+]

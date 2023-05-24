@@ -27,7 +27,19 @@ CMIDAIRHospitalized >> isActive [
 ]
 
 { #category : #testing }
+CMIDAIRHospitalized >> isHospitalized [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIRHospitalized >> isIsolated [
+
+	^ true
+]
+
+{ #category : #testing }
+CMIDAIRHospitalized >> isSevereSymptom [
 
 	^ true
 ]

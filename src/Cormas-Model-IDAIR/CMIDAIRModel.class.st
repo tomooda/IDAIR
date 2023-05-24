@@ -9,6 +9,60 @@ Class {
 	#category : #'Cormas-Model-IDAIR-Core'
 }
 
+{ #category : #accessing }
+CMIDAIRModel class >> aboutThisModel [
+
+	" Answer a <String> which is the main description of the receiver's purpose "
+
+	^ 'A base ABM model for resource management in epidemic outbreaks'
+]
+
+{ #category : #probes }
+CMIDAIRModel class >> colorOfProbe_numberOfHealthy [
+	^ Color green
+]
+
+{ #category : #probes }
+CMIDAIRModel class >> colorOfProbe_numberOfHospitalized [
+	^ Color gray
+]
+
+{ #category : #probes }
+CMIDAIRModel class >> colorOfProbe_numberOfHospitalizedRecovering [
+	^ Color gray
+]
+
+{ #category : #probes }
+CMIDAIRModel class >> colorOfProbe_numberOfICUed [
+	^ Color black
+]
+
+{ #category : #probes }
+CMIDAIRModel class >> colorOfProbe_numberOfInfected [
+	^ Color cyan lighter
+]
+
+{ #category : #probes }
+CMIDAIRModel class >> colorOfProbe_numberOfPreSymptomatic [
+	^ Color magenta lighter
+]
+
+{ #category : #probes }
+CMIDAIRModel class >> colorOfProbe_numberOfSevereSymptoms [
+	^ Color red
+]
+
+{ #category : #probes }
+CMIDAIRModel class >> colorOfProbe_numberOfSymptomatic [
+	^ Color cyan muchDarker
+]
+
+{ #category : #probes }
+CMIDAIRModel class >> defaultProbes [
+
+	^ self probes
+]
+
 { #category : #utilities }
 CMIDAIRModel class >> deploy [
 	<script>
@@ -33,6 +87,13 @@ CMIDAIRModel class >> deploy [
 	5
 		timesRepeat:
 			[ "PharoCommandLineHandler forcePreferencesOmission: true" Smalltalk garbageCollect ]
+]
+
+{ #category : #accessing }
+CMIDAIRModel class >> howToRunIt [
+	" Answer a <String> with information about how to run the receiver "
+
+	^ 'Initialize with init, select all Probes, and run'
 ]
 
 { #category : #submodels }
@@ -62,6 +123,95 @@ CMIDAIRModel >> initialize [
 
 	super initialize.
 	submodels := Dictionary new
+]
+
+{ #category : #probes }
+CMIDAIRModel >> numberOfHealthy [
+
+	<probe>
+	| num |
+	num := 0.
+	self theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isHealthy ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #probes }
+CMIDAIRModel >> numberOfHospitalized [
+
+	<probe>
+	| num |
+	num := 0.
+	self theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isHospitalized ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #probes }
+CMIDAIRModel >> numberOfHospitalizedRecovering [
+
+	<probe>
+	| num |
+	num := 0.
+	self theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isHospitalizedRecovering ifTrue: [ 
+			num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #probes }
+CMIDAIRModel >> numberOfICUed [
+
+	<probe>
+	| num |
+	num := 0.
+	self theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isICUed ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #probes }
+CMIDAIRModel >> numberOfInfected [
+
+	<probe>
+	| num |
+	num := 0.
+	self theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isSusceptible ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #probes }
+CMIDAIRModel >> numberOfPreSymptomatic [
+
+	<probe>
+	| num |
+	num := 0.
+	self theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isPreSymptomatic ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #probes }
+CMIDAIRModel >> numberOfSevereSymptoms [
+
+	<probe>
+	| num |
+	num := 0.
+	self theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isSevereSymptom ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #probes }
+CMIDAIRModel >> numberOfSymptomatic [
+
+	<probe>
+	| num |
+	num := 0.
+	self theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isSymptomatic ifTrue: [ num := num + 1 ] ].
+	^ num
 ]
 
 { #category : #control }

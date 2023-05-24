@@ -42,6 +42,12 @@ CMIDAIRHealthy >> isActive [
 ]
 
 { #category : #testing }
+CMIDAIRHealthy >> isHealthy [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIRHealthy >> isTransmissible [
 
 	^ false

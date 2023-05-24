@@ -23,6 +23,18 @@ CMIDAIRHospitalizedRecovering >> isActive [
 ]
 
 { #category : #testing }
+CMIDAIRHospitalizedRecovering >> isHospitalizedRecovering [
+
+	^ true
+]
+
+{ #category : #testing }
+CMIDAIRHospitalizedRecovering >> isSevereSymptom [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIRHospitalizedRecovering >> isTransmissible [
 
 	^ true

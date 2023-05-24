@@ -23,6 +23,12 @@ CMIDAIRAsymptomatic >> isActive [
 ]
 
 { #category : #testing }
+CMIDAIRAsymptomatic >> isAsymptomatic [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIRAsymptomatic >> isTransmissible [
 
 	^ true

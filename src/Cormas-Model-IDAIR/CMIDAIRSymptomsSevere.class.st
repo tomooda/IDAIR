@@ -27,6 +27,12 @@ CMIDAIRSymptomsSevere >> isActive [
 ]
 
 { #category : #testing }
+CMIDAIRSymptomsSevere >> isSevereSymptom [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIRSymptomsSevere >> isTransmissible [
 
 	^ true

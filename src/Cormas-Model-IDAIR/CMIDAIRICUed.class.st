@@ -26,7 +26,19 @@ CMIDAIRICUed >> isActive [
 ]
 
 { #category : #testing }
+CMIDAIRICUed >> isICUed [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIRICUed >> isIsolated [
+
+	^ true
+]
+
+{ #category : #testing }
+CMIDAIRICUed >> isSevereSymptom [
 
 	^ true
 ]

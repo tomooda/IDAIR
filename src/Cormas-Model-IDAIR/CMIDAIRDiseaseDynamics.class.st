@@ -133,13 +133,73 @@ CMIDAIRDiseaseDynamics >> isActive [
 ]
 
 { #category : #testing }
+CMIDAIRDiseaseDynamics >> isAsymptomatic [
+
+	^ false
+]
+
+{ #category : #testing }
 CMIDAIRDiseaseDynamics >> isDead [
 
 	^ false
 ]
 
 { #category : #testing }
+CMIDAIRDiseaseDynamics >> isHealthy [
+
+	^ false
+]
+
+{ #category : #testing }
+CMIDAIRDiseaseDynamics >> isHospitalized [
+
+	^ false
+]
+
+{ #category : #testing }
+CMIDAIRDiseaseDynamics >> isHospitalizedRecovering [
+
+	^ false
+]
+
+{ #category : #testing }
+CMIDAIRDiseaseDynamics >> isICUed [
+
+	^ false
+]
+
+{ #category : #testing }
 CMIDAIRDiseaseDynamics >> isIsolated [
+
+	^ false
+]
+
+{ #category : #testing }
+CMIDAIRDiseaseDynamics >> isMildSymptom [
+
+	^ false
+]
+
+{ #category : #testing }
+CMIDAIRDiseaseDynamics >> isPreSymptomatic [
+
+	^ false
+]
+
+{ #category : #testing }
+CMIDAIRDiseaseDynamics >> isSevereSymptom [
+
+	^ false
+]
+
+{ #category : #testing }
+CMIDAIRDiseaseDynamics >> isSusceptible [
+
+	^ false
+]
+
+{ #category : #testing }
+CMIDAIRDiseaseDynamics >> isSymptomatic [
 
 	^ false
 ]
