@@ -7,7 +7,7 @@ Class {
 { #category : #accessing }
 CMIDAIRSymptomsMild >> color [
 
-	^ Color yellow muchDarker
+	^ self modelParameterAt: #symptomsMildColor
 ]
 
 { #category : #actions }

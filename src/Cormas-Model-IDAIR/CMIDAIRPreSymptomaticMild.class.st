@@ -7,7 +7,7 @@ Class {
 { #category : #accessing }
 CMIDAIRPreSymptomaticMild >> color [
 
-	^ Color yellow lighter
+	^ self modelParameterAt: #preSymptomaticMildColor
 ]
 
 { #category : #accessing }

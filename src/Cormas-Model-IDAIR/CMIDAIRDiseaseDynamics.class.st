@@ -150,13 +150,13 @@ CMIDAIRDiseaseDynamics >> isTransmissible [
 	^ self subclassResponsibility
 ]
 
-{ #category : #parameters }
+{ #category : #accessing }
 CMIDAIRDiseaseDynamics >> modelParameter [
 
 	^ self modelParameterAt: thisContext sender selector
 ]
 
-{ #category : #parameters }
+{ #category : #accessing }
 CMIDAIRDiseaseDynamics >> modelParameterAt: aSymbol [
 
 	^ citizen cormasModel submodelAt: #disease do: aSymbol

@@ -13,7 +13,7 @@ CMIDAIRDead >> beSusceptible [
 { #category : #accessing }
 CMIDAIRDead >> color [
 
-	^ Color black
+	^ self modelParameterAt: #deadColor
 ]
 
 { #category : #actions }

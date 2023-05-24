@@ -10,7 +10,7 @@ Class {
 { #category : #accessing }
 CMIDAIRICUed >> color [
 
-	^ Color black
+	^ self modelParameterAt: #icuedColor
 ]
 
 { #category : #actions }

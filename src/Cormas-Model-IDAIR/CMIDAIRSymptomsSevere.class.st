@@ -10,7 +10,7 @@ Class {
 { #category : #accessing }
 CMIDAIRSymptomsSevere >> color [
 
-	^ Color red darker
+	^ self modelParameterAt: #symptomsSevereColor
 ]
 
 { #category : #actions }

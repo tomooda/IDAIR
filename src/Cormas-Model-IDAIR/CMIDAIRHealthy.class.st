@@ -19,7 +19,7 @@ CMIDAIRHealthy >> beSusceptible [
 { #category : #accessing }
 CMIDAIRHealthy >> color [
 
-	^ Color green muchLighter
+	^ self modelParameterAt: #healthyColor
 ]
 
 { #category : #actions }

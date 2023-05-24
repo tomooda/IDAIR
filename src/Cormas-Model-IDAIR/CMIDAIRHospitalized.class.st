@@ -11,7 +11,7 @@ Class {
 { #category : #accessing }
 CMIDAIRHospitalized >> color [
 
-	^ Color gray
+	^ self modelParameterAt: #hospitalizedColor
 ]
 
 { #category : #actions }

@@ -7,7 +7,7 @@ Class {
 { #category : #accessing }
 CMIDAIRAsymptomatic >> color [
 
-	^ Color blue muchLighter
+	^ self modelParameterAt: #asymptomaticColor
 ]
 
 { #category : #actions }

@@ -7,7 +7,7 @@ Class {
 { #category : #accessing }
 CMIDAIRPreSymptomaticSevere >> color [
 
-	^ Color red muchLighter
+	^ self modelParameterAt: #preSymptomaticSevereColor
 ]
 
 { #category : #accessing }
