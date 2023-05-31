@@ -5,7 +5,7 @@ Class {
 		'r0',
 		'estimatedTransmissibleDuration'
 	],
-	#category : #'Cormas-Model-IDAIR-Contact-SimpleStochastic'
+	#category : #'Cormas-Model-IDAIR-Contact-SingleLocation'
 }
 
 { #category : #converting }

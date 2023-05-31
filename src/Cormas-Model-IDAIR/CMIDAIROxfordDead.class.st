@@ -1,71 +1,71 @@
 Class {
-	#name : #CMIDAIRDead,
-	#superclass : #CMIDAIRDiseaseDynamics,
+	#name : #CMIDAIROxfordDead,
+	#superclass : #CMIDAIROxfordDiseaseDynamics,
 	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
 { #category : #'initialize - release' }
-CMIDAIRDead >> beInfected [
+CMIDAIROxfordDead >> beInfected [
 
 	^ self
 ]
 
 { #category : #accessing }
-CMIDAIRDead >> color [
+CMIDAIROxfordDead >> color [
 
 	^ self modelParameterAt: #deadColor
 ]
 
 { #category : #actions }
-CMIDAIRDead >> contact [
+CMIDAIROxfordDead >> contact [
 
 	^ self
 ]
 
 { #category : #actions }
-CMIDAIRDead >> contaminate: aCMIDAIRLocation [
+CMIDAIROxfordDead >> contaminate: aCMIDAIRLocation [
 
 	
 ]
 
 { #category : #testing }
-CMIDAIRDead >> isActive [
+CMIDAIROxfordDead >> isActive [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRDead >> isDead [
+CMIDAIROxfordDead >> isDead [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRDead >> isIsolated [
+CMIDAIROxfordDead >> isIsolated [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRDead >> isTransmissible [
+CMIDAIROxfordDead >> isTransmissible [
 
 	^ false
 ]
 
 { #category : #accessing }
-CMIDAIRDead >> name [
+CMIDAIROxfordDead >> name [
 
 	^ 'dead'
 ]
 
 { #category : #actions }
-CMIDAIRDead >> step [
+CMIDAIROxfordDead >> step [
 
 	^ self
 ]
 
 { #category : #actions }
-CMIDAIRDead >> test [
+CMIDAIROxfordDead >> test [
 
 	^ self
 ]

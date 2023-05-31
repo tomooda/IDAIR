@@ -1,23 +1,23 @@
 Class {
-	#name : #CMIDAIRPreSymptomaticSevere,
-	#superclass : #CMIDAIRPreSymptomatic,
+	#name : #CMIDAIROxfordPreSymptomaticSevere,
+	#superclass : #CMIDAIROxfordPreSymptomatic,
 	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
 { #category : #accessing }
-CMIDAIRPreSymptomaticSevere >> color [
+CMIDAIROxfordPreSymptomaticSevere >> color [
 
 	^ self modelParameterAt: #preSymptomaticSevereColor
 ]
 
 { #category : #accessing }
-CMIDAIRPreSymptomaticSevere >> name [
+CMIDAIROxfordPreSymptomaticSevere >> name [
 
 	^ 'pre severe symptoms'
 ]
 
 { #category : #actions }
-CMIDAIRPreSymptomaticSevere >> step [
+CMIDAIROxfordPreSymptomaticSevere >> step [
 
 	self duration: self duration + 1.
 	self duration >= self tauSym ifTrue: [ ^ self beSymptomsSevere ].

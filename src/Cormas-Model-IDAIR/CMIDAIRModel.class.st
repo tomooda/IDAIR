@@ -105,7 +105,23 @@ CMIDAIRModel >> addSubmodel: aCMIDAIRSubmodel [
 { #category : #init }
 CMIDAIRModel >> init [
 
-	self addSubmodel: (CMIDAIRDiseaseModel on: self).
+	self addSubmodel: (CMIDAIROxfordDiseaseModel on: self).
+	self addSubmodel: (CMIDAIRContactModel on: self).
+	self
+		createGridLines: 33
+		columns: 33
+		neighbourhood: 8
+		closed: false.
+	self createN: 1000 randomlyLocatedEntities: CMIDAIRCitizen.
+	1 to: 10 do: [ :index | (self theCitizens at: index) beAsymptomatic ].
+	self displayPov: #diseasePov of: CMIDAIRCitizen.
+	self submodelsDo: [ :m | m openGUI ]
+]
+
+{ #category : #init }
+CMIDAIRModel >> init_Oxford_SingleLocation [
+
+	self addSubmodel: (CMIDAIROxfordDiseaseModel on: self).
 	self addSubmodel: (CMIDAIRContactModel on: self).
 	self
 		createGridLines: 33

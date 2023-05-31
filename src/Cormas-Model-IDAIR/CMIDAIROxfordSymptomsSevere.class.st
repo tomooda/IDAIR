@@ -1,6 +1,6 @@
 Class {
-	#name : #CMIDAIRSymptomsSevere,
-	#superclass : #CMIDAIRSymptomatic,
+	#name : #CMIDAIROxfordSymptomsSevere,
+	#superclass : #CMIDAIROxfordSymptomatic,
 	#instVars : [
 		'toBeHospitalized'
 	],
@@ -8,50 +8,50 @@ Class {
 }
 
 { #category : #accessing }
-CMIDAIRSymptomsSevere >> color [
+CMIDAIROxfordSymptomsSevere >> color [
 
 	^ self modelParameterAt: #symptomsSevereColor
 ]
 
 { #category : #actions }
-CMIDAIRSymptomsSevere >> contaminate: aCMIDAIRLocation [
+CMIDAIROxfordSymptomsSevere >> contaminate: aCMIDAIRLocation [
 
 	self random <= self pContaminate ifTrue: [ 
 		aCMIDAIRLocation isContaminated: true ]
 ]
 
 { #category : #testing }
-CMIDAIRSymptomsSevere >> isActive [
+CMIDAIROxfordSymptomsSevere >> isActive [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSymptomsSevere >> isSevereSymptom [
+CMIDAIROxfordSymptomsSevere >> isSevereSymptom [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRSymptomsSevere >> isTransmissible [
+CMIDAIROxfordSymptomsSevere >> isTransmissible [
 
 	^ true
 ]
 
 { #category : #accessing }
-CMIDAIRSymptomsSevere >> name [
+CMIDAIROxfordSymptomsSevere >> name [
 
 	^ 'severe symptom'
 ]
 
 { #category : #parameters }
-CMIDAIRSymptomsSevere >> pContaminate [
+CMIDAIROxfordSymptomsSevere >> pContaminate [
 
 	^ 0.9
 ]
 
 { #category : #actions }
-CMIDAIRSymptomsSevere >> step [
+CMIDAIROxfordSymptomsSevere >> step [
 
 	self duration: self duration + 1.
 	self toBeHospitalized
@@ -63,13 +63,13 @@ CMIDAIRSymptomsSevere >> step [
 ]
 
 { #category : #actions }
-CMIDAIRSymptomsSevere >> test [
+CMIDAIROxfordSymptomsSevere >> test [
 
 	^ self
 ]
 
 { #category : #accessing }
-CMIDAIRSymptomsSevere >> toBeHospitalized [
+CMIDAIROxfordSymptomsSevere >> toBeHospitalized [
 
 	^ toBeHospitalized ifNil: [ 
 		  toBeHospitalized := self random <= self pHosp ]

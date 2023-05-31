@@ -1,5 +1,5 @@
 Class {
-	#name : #CMIDAIRDiseaseModelPresenter,
+	#name : #CMIDAIROxfordDiseaseModelPresenter,
 	#superclass : #SpPresenterWithModel,
 	#instVars : [
 		'pAsymptomaticOdm',
@@ -32,7 +32,7 @@ Class {
 }
 
 { #category : #specs }
-CMIDAIRDiseaseModelPresenter class >> defaultSpec [
+CMIDAIROxfordDiseaseModelPresenter class >> defaultSpec [
 
 	^ SpBoxLayout newVertical
 		  add: (SpBoxLayout newHorizontal
@@ -163,7 +163,7 @@ CMIDAIRDiseaseModelPresenter class >> defaultSpec [
 ]
 
 { #category : #accessing }
-CMIDAIRDiseaseModelPresenter >> iconFor: aColor [
+CMIDAIROxfordDiseaseModelPresenter >> iconFor: aColor [
 
 	| e form |
 	e := 8 @ 8.
@@ -179,7 +179,7 @@ CMIDAIRDiseaseModelPresenter >> iconFor: aColor [
 ]
 
 { #category : #initialization }
-CMIDAIRDiseaseModelPresenter >> initializePresenters [
+CMIDAIROxfordDiseaseModelPresenter >> initializePresenters [
 
 	super initializePresenters.
 	pAsymptomaticOdm := self newNumberInput
@@ -300,14 +300,14 @@ CMIDAIRDiseaseModelPresenter >> initializePresenters [
 ]
 
 { #category : #initialization }
-CMIDAIRDiseaseModelPresenter >> initializeWindow: aSpWindowPresenter [
+CMIDAIROxfordDiseaseModelPresenter >> initializeWindow: aSpWindowPresenter [
 
 	super initializeWindow: aSpWindowPresenter.
 	aSpWindowPresenter initialExtent: 600 @ 400
 ]
 
 { #category : #updating }
-CMIDAIRDiseaseModelPresenter >> modelChanged [
+CMIDAIROxfordDiseaseModelPresenter >> modelChanged [
 
 	super modelChanged.
 	self model ifNotNil: [ :m | 
@@ -340,7 +340,7 @@ CMIDAIRDiseaseModelPresenter >> modelChanged [
 ]
 
 { #category : #'instance creation' }
-CMIDAIRDiseaseModelPresenter >> newColorDropList [
+CMIDAIROxfordDiseaseModelPresenter >> newColorDropList [
 
 	^ self newDropList
 		  display: [ :color | ' ' ];
@@ -381,6 +381,6 @@ CMIDAIRDiseaseModelPresenter >> newColorDropList [
 ]
 
 { #category : #accessing }
-CMIDAIRDiseaseModelPresenter >> title [
+CMIDAIROxfordDiseaseModelPresenter >> title [
 	^ 'Disease model parameters'
 ]

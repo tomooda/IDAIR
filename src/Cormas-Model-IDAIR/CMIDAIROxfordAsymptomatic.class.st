@@ -1,47 +1,47 @@
 Class {
-	#name : #CMIDAIRAsymptomatic,
-	#superclass : #CMIDAIRInfected,
+	#name : #CMIDAIROxfordAsymptomatic,
+	#superclass : #CMIDAIROxfordInfected,
 	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
 { #category : #accessing }
-CMIDAIRAsymptomatic >> color [
+CMIDAIROxfordAsymptomatic >> color [
 
 	^ self modelParameterAt: #asymptomaticColor
 ]
 
 { #category : #actions }
-CMIDAIRAsymptomatic >> contaminate: aCMIDAIRLocation [
+CMIDAIROxfordAsymptomatic >> contaminate: aCMIDAIRLocation [
 
 	aCMIDAIRLocation isContaminated: true
 ]
 
 { #category : #testing }
-CMIDAIRAsymptomatic >> isActive [
+CMIDAIROxfordAsymptomatic >> isActive [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRAsymptomatic >> isAsymptomatic [
+CMIDAIROxfordAsymptomatic >> isAsymptomatic [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRAsymptomatic >> isTransmissible [
+CMIDAIROxfordAsymptomatic >> isTransmissible [
 
 	^ true
 ]
 
 { #category : #accessing }
-CMIDAIRAsymptomatic >> name [
+CMIDAIROxfordAsymptomatic >> name [
 
 	^ 'asymptomatic'
 ]
 
 { #category : #actions }
-CMIDAIRAsymptomatic >> step [
+CMIDAIROxfordAsymptomatic >> step [
 
 	self duration: self duration + 1.
 	self duration >= self tauARec ifTrue: [ ^ self beHealthy ].
@@ -49,7 +49,7 @@ CMIDAIRAsymptomatic >> step [
 ]
 
 { #category : #actions }
-CMIDAIRAsymptomatic >> test [
+CMIDAIROxfordAsymptomatic >> test [
 
 	^ self
 ]

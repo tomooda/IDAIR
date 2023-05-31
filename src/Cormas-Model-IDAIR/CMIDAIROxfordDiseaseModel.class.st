@@ -1,5 +1,5 @@
 Class {
-	#name : #CMIDAIRDiseaseModel,
+	#name : #CMIDAIROxfordDiseaseModel,
 	#superclass : #CMIDAIRSubmodel,
 	#instVars : [
 		'pAsymptomaticOdm',
@@ -33,85 +33,85 @@ Class {
 }
 
 { #category : #converting }
-CMIDAIRDiseaseModel >> asPresenter [
+CMIDAIROxfordDiseaseModel >> asPresenter [
 
-	^ CMIDAIRDiseaseModelPresenter on: self
+	^ CMIDAIROxfordDiseaseModelPresenter on: self
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> asymptomaticColor [
+CMIDAIROxfordDiseaseModel >> asymptomaticColor [
 
 	^ asymptomaticColor
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> asymptomaticColor: aColor [
+CMIDAIROxfordDiseaseModel >> asymptomaticColor: aColor [
 
 	asymptomaticColor := aColor
 ]
 
 { #category : #accessing }
-CMIDAIRDiseaseModel >> deadColor [
+CMIDAIROxfordDiseaseModel >> deadColor [
 
 	^ deadColor
 ]
 
 { #category : #accessing }
-CMIDAIRDiseaseModel >> deadColor: aColor [
+CMIDAIROxfordDiseaseModel >> deadColor: aColor [
 
 	deadColor := aColor
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> healthyColor [
+CMIDAIROxfordDiseaseModel >> healthyColor [
 
 	^ healthyColor
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> healthyColor: aColor [
+CMIDAIROxfordDiseaseModel >> healthyColor: aColor [
 
 	healthyColor := aColor
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> hospitalizedColor [
+CMIDAIROxfordDiseaseModel >> hospitalizedColor [
 
 	^ hospitalizedColor
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> hospitalizedColor: aColor [
+CMIDAIROxfordDiseaseModel >> hospitalizedColor: aColor [
 
 	hospitalizedColor := aColor
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> hospitalizedRecoveringColor [
+CMIDAIROxfordDiseaseModel >> hospitalizedRecoveringColor [
 
 	^ hospitalizedRecoveringColor
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> hospitalizedRecoveringColor: aColor [
+CMIDAIROxfordDiseaseModel >> hospitalizedRecoveringColor: aColor [
 
 	hospitalizedRecoveringColor := aColor
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> icuedColor [
+CMIDAIROxfordDiseaseModel >> icuedColor [
 
 	^ icuedColor
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> icuedColor: anObject [
+CMIDAIROxfordDiseaseModel >> icuedColor: anObject [
 
 	icuedColor := anObject
 ]
 
 { #category : #initialization }
-CMIDAIRDiseaseModel >> initialize [
+CMIDAIROxfordDiseaseModel >> initialize [
 
 	super initialize.
 	pAsymptomaticOdm := 0.5.
@@ -145,260 +145,260 @@ CMIDAIRDiseaseModel >> initialize [
 ]
 
 { #category : #accessing }
-CMIDAIRDiseaseModel >> name [
+CMIDAIROxfordDiseaseModel >> name [
 
 	^ #disease
 ]
 
 { #category : #'user interfaces' }
-CMIDAIRDiseaseModel >> openGUI [
+CMIDAIROxfordDiseaseModel >> openGUI [
 
 	^ self asPresenter openWithSpec
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> pAsymptomaticOdm [
+CMIDAIROxfordDiseaseModel >> pAsymptomaticOdm [
 
 	^ pAsymptomaticOdm
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> pAsymptomaticOdm: aNumber [
+CMIDAIROxfordDiseaseModel >> pAsymptomaticOdm: aNumber [
 
 	pAsymptomaticOdm := aNumber
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> pCrit [
+CMIDAIROxfordDiseaseModel >> pCrit [
 
 	^ pCrit
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> pCrit: aNumber [
+CMIDAIROxfordDiseaseModel >> pCrit: aNumber [
 
 	pCrit := aNumber
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> pDeath [
+CMIDAIROxfordDiseaseModel >> pDeath [
 
 	^ pDeath
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> pDeath: aNumber [
+CMIDAIROxfordDiseaseModel >> pDeath: aNumber [
 
 	pDeath := aNumber
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> pFalseNegative [
+CMIDAIROxfordDiseaseModel >> pFalseNegative [
 
 	^ pFalseNegative
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> pFalseNegative: aNumber [
+CMIDAIROxfordDiseaseModel >> pFalseNegative: aNumber [
 
 	pFalseNegative := aNumber
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> pHosp [
+CMIDAIROxfordDiseaseModel >> pHosp [
 
 	^ pHosp
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> pHosp: aNumber [
+CMIDAIROxfordDiseaseModel >> pHosp: aNumber [
 
 	pHosp := aNumber
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> pICU [
+CMIDAIROxfordDiseaseModel >> pICU [
 
 	^ pICU
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> pICU: aNumber [
+CMIDAIROxfordDiseaseModel >> pICU: aNumber [
 
 	pICU := aNumber
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> pInfection [
+CMIDAIROxfordDiseaseModel >> pInfection [
 
 	^ pInfection
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> pInfection: aNumber [
+CMIDAIROxfordDiseaseModel >> pInfection: aNumber [
 
 	pInfection := aNumber
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> pPreSymptomaticMildOdm [
+CMIDAIROxfordDiseaseModel >> pPreSymptomaticMildOdm [
 
 	^ pPreSymptomaticMildOdm
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> pPreSymptomaticMildOdm: aNumber [
+CMIDAIROxfordDiseaseModel >> pPreSymptomaticMildOdm: aNumber [
 
 	pPreSymptomaticMildOdm := aNumber
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> preSymptomaticMildColor [
+CMIDAIROxfordDiseaseModel >> preSymptomaticMildColor [
 
 	^ preSymptomaticMildColor
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> preSymptomaticMildColor: aColor [
+CMIDAIROxfordDiseaseModel >> preSymptomaticMildColor: aColor [
 
 	preSymptomaticMildColor := aColor
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> preSymptomaticSevereColor [
+CMIDAIROxfordDiseaseModel >> preSymptomaticSevereColor [
 
 	^ preSymptomaticSevereColor
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> preSymptomaticSevereColor: aColor [
+CMIDAIROxfordDiseaseModel >> preSymptomaticSevereColor: aColor [
 
 	preSymptomaticSevereColor := aColor
 ]
 
 { #category : #control }
-CMIDAIRDiseaseModel >> step: anInteger [
+CMIDAIROxfordDiseaseModel >> step: anInteger [
 
 	self cormasModel theCitizens do: [ :citizen | 
 		citizen diseaseDynamics: citizen diseaseDynamics step ]
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> symptomsMildColor [
+CMIDAIROxfordDiseaseModel >> symptomsMildColor [
 
 	^ symptomsMildColor
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> symptomsMildColor: aColor [
+CMIDAIROxfordDiseaseModel >> symptomsMildColor: aColor [
 
 	symptomsMildColor := aColor
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> symptomsSevereColor [
+CMIDAIROxfordDiseaseModel >> symptomsSevereColor [
 
 	^ symptomsSevereColor
 ]
 
 { #category : #'accessing-colors' }
-CMIDAIRDiseaseModel >> symptomsSevereColor: aColor [
+CMIDAIROxfordDiseaseModel >> symptomsSevereColor: aColor [
 
 	symptomsSevereColor := aColor
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> tauARec [
+CMIDAIROxfordDiseaseModel >> tauARec [
 
 	^ tauARec
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> tauARec: aNumber [
+CMIDAIROxfordDiseaseModel >> tauARec: aNumber [
 
 	tauARec := aNumber
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> tauCrit [
+CMIDAIROxfordDiseaseModel >> tauCrit [
 
 	^ tauCrit
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> tauCrit: aNumber [
+CMIDAIROxfordDiseaseModel >> tauCrit: aNumber [
 
 	tauCrit := aNumber
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> tauCritSurv [
+CMIDAIROxfordDiseaseModel >> tauCritSurv [
 
 	^ tauCritSurv
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> tauCritSurv: aNumber [
+CMIDAIROxfordDiseaseModel >> tauCritSurv: aNumber [
 
 	tauCritSurv := aNumber
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> tauDeath [
+CMIDAIROxfordDiseaseModel >> tauDeath [
 
 	^ tauDeath
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> tauDeath: aNumber [
+CMIDAIROxfordDiseaseModel >> tauDeath: aNumber [
 
 	tauDeath := aNumber
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> tauHosp [
+CMIDAIROxfordDiseaseModel >> tauHosp [
 
 	^ tauHosp
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> tauHosp: aNumber [
+CMIDAIROxfordDiseaseModel >> tauHosp: aNumber [
 
 	tauHosp := aNumber
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> tauHospRec [
+CMIDAIROxfordDiseaseModel >> tauHospRec [
 
 	^ tauHospRec
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> tauHospRec: aNumber [
+CMIDAIROxfordDiseaseModel >> tauHospRec: aNumber [
 
 	tauHospRec := aNumber
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> tauRec [
+CMIDAIROxfordDiseaseModel >> tauRec [
 
 	^ tauRec
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> tauRec: aNumber [
+CMIDAIROxfordDiseaseModel >> tauRec: aNumber [
 
 	tauRec := aNumber
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> tauSym [
+CMIDAIROxfordDiseaseModel >> tauSym [
 
 	^ tauSym
 ]
 
 { #category : #'accessing-parameters' }
-CMIDAIRDiseaseModel >> tauSym: aNumber [
+CMIDAIROxfordDiseaseModel >> tauSym: aNumber [
 
 	tauSym := aNumber
 ]

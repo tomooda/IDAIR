@@ -1,6 +1,6 @@
 Class {
-	#name : #CMIDAIRICUed,
-	#superclass : #CMIDAIRSymptomatic,
+	#name : #CMIDAIROxfordICUed,
+	#superclass : #CMIDAIROxfordSymptomatic,
 	#instVars : [
 		'toBeDead'
 	],
@@ -8,55 +8,55 @@ Class {
 }
 
 { #category : #accessing }
-CMIDAIRICUed >> color [
+CMIDAIROxfordICUed >> color [
 
 	^ self modelParameterAt: #icuedColor
 ]
 
 { #category : #actions }
-CMIDAIRICUed >> contaminate: aCMIDAIRLocation [
+CMIDAIROxfordICUed >> contaminate: aCMIDAIRLocation [
 
 	
 ]
 
 { #category : #testing }
-CMIDAIRICUed >> isActive [
+CMIDAIROxfordICUed >> isActive [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRICUed >> isICUed [
+CMIDAIROxfordICUed >> isICUed [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRICUed >> isIsolated [
+CMIDAIROxfordICUed >> isIsolated [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRICUed >> isSevereSymptom [
+CMIDAIROxfordICUed >> isSevereSymptom [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRICUed >> isTransmissible [
+CMIDAIROxfordICUed >> isTransmissible [
 
 	^ true
 ]
 
 { #category : #accessing }
-CMIDAIRICUed >> name [
+CMIDAIROxfordICUed >> name [
 
 	^ 'ICUed'
 ]
 
 { #category : #actions }
-CMIDAIRICUed >> step [
+CMIDAIROxfordICUed >> step [
 
 	self duration: self duration + 1.
 	self toBeDead
@@ -68,7 +68,7 @@ CMIDAIRICUed >> step [
 ]
 
 { #category : #testing }
-CMIDAIRICUed >> toBeDead [
+CMIDAIROxfordICUed >> toBeDead [
 
 	^ toBeDead ifNil: [ 
 		  toBeDead := self random <= self pDeath ]

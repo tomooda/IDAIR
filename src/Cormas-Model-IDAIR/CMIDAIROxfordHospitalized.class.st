@@ -1,6 +1,6 @@
 Class {
-	#name : #CMIDAIRHospitalized,
-	#superclass : #CMIDAIRSymptomatic,
+	#name : #CMIDAIROxfordHospitalized,
+	#superclass : #CMIDAIROxfordSymptomatic,
 	#instVars : [
 		'toBeICUed',
 		'toBeCritical'
@@ -9,55 +9,55 @@ Class {
 }
 
 { #category : #accessing }
-CMIDAIRHospitalized >> color [
+CMIDAIROxfordHospitalized >> color [
 
 	^ self modelParameterAt: #hospitalizedColor
 ]
 
 { #category : #actions }
-CMIDAIRHospitalized >> contaminate: aCMIDAIRLocation [
+CMIDAIROxfordHospitalized >> contaminate: aCMIDAIRLocation [
 
 	
 ]
 
 { #category : #testing }
-CMIDAIRHospitalized >> isActive [
+CMIDAIROxfordHospitalized >> isActive [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRHospitalized >> isHospitalized [
+CMIDAIROxfordHospitalized >> isHospitalized [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRHospitalized >> isIsolated [
+CMIDAIROxfordHospitalized >> isIsolated [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRHospitalized >> isSevereSymptom [
+CMIDAIROxfordHospitalized >> isSevereSymptom [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRHospitalized >> isTransmissible [
+CMIDAIROxfordHospitalized >> isTransmissible [
 
 	^ true
 ]
 
 { #category : #accessing }
-CMIDAIRHospitalized >> name [
+CMIDAIROxfordHospitalized >> name [
 
 	^ 'hospitalized'
 ]
 
 { #category : #actions }
-CMIDAIRHospitalized >> step [
+CMIDAIROxfordHospitalized >> step [
 
 	self duration: self duration + 1.
 	self toBeCritical
@@ -72,14 +72,14 @@ CMIDAIRHospitalized >> step [
 ]
 
 { #category : #testing }
-CMIDAIRHospitalized >> toBeCritical [
+CMIDAIROxfordHospitalized >> toBeCritical [
 
 	^ toBeCritical ifNil: [ 
 		  toBeCritical := self random < self pCrit ]
 ]
 
 { #category : #testing }
-CMIDAIRHospitalized >> toBeICUed [
+CMIDAIROxfordHospitalized >> toBeICUed [
 
 	^ toBeICUed ifNil: [ 
 		  toBeICUed := self random < self pICU ]

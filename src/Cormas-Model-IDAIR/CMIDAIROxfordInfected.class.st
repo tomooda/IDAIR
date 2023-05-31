@@ -1,6 +1,6 @@
 Class {
-	#name : #CMIDAIRInfected,
-	#superclass : #CMIDAIRDiseaseDynamics,
+	#name : #CMIDAIROxfordInfected,
+	#superclass : #CMIDAIROxfordDiseaseDynamics,
 	#instVars : [
 		'duration'
 	],
@@ -8,13 +8,13 @@ Class {
 }
 
 { #category : #testing }
-CMIDAIRInfected class >> isAbstract [
+CMIDAIROxfordInfected class >> isAbstract [
 
-	^ self = CMIDAIRInfected
+	^ self = CMIDAIROxfordInfected
 ]
 
 { #category : #'instance creation' }
-CMIDAIRInfected class >> newFrom: anObject [
+CMIDAIROxfordInfected class >> newFrom: anObject [
 
 	^ (super newFrom: anObject)
 		  duration: 0.0;
@@ -22,31 +22,31 @@ CMIDAIRInfected class >> newFrom: anObject [
 ]
 
 { #category : #transitioning }
-CMIDAIRInfected >> beInfected [
+CMIDAIROxfordInfected >> beInfected [
 
 	^ self
 ]
 
 { #category : #actions }
-CMIDAIRInfected >> contact [
+CMIDAIROxfordInfected >> contact [
 
 	^ self
 ]
 
 { #category : #accessing }
-CMIDAIRInfected >> duration [
+CMIDAIROxfordInfected >> duration [
 
 	^ duration ifNil: [ duration := 0.0 ]
 ]
 
 { #category : #accessing }
-CMIDAIRInfected >> duration: aNumber [
+CMIDAIROxfordInfected >> duration: aNumber [
 
 	duration := aNumber
 ]
 
 { #category : #testing }
-CMIDAIRInfected >> isInfected [
+CMIDAIROxfordInfected >> isInfected [
 
 	^ true
 ]

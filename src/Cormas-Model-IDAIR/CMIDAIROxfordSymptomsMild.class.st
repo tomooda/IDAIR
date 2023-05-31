@@ -1,54 +1,54 @@
 Class {
-	#name : #CMIDAIRSymptomsMild,
-	#superclass : #CMIDAIRSymptomatic,
+	#name : #CMIDAIROxfordSymptomsMild,
+	#superclass : #CMIDAIROxfordSymptomatic,
 	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
 { #category : #accessing }
-CMIDAIRSymptomsMild >> color [
+CMIDAIROxfordSymptomsMild >> color [
 
 	^ self modelParameterAt: #symptomsMildColor
 ]
 
 { #category : #actions }
-CMIDAIRSymptomsMild >> contaminate: aCMIDAIRLocation [
+CMIDAIROxfordSymptomsMild >> contaminate: aCMIDAIRLocation [
 
 	self random <= self pContaminate ifTrue: [ 
 		aCMIDAIRLocation isContaminated: true ]
 ]
 
 { #category : #testing }
-CMIDAIRSymptomsMild >> isActive [
+CMIDAIROxfordSymptomsMild >> isActive [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSymptomsMild >> isMildSymptom [
+CMIDAIROxfordSymptomsMild >> isMildSymptom [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRSymptomsMild >> isTransmissible [
+CMIDAIROxfordSymptomsMild >> isTransmissible [
 
 	^ true
 ]
 
 { #category : #accessing }
-CMIDAIRSymptomsMild >> name [
+CMIDAIROxfordSymptomsMild >> name [
 
 	^ 'mild symptom'
 ]
 
 { #category : #parameters }
-CMIDAIRSymptomsMild >> pContaminate [
+CMIDAIROxfordSymptomsMild >> pContaminate [
 
 	^ 0.9
 ]
 
 { #category : #actions }
-CMIDAIRSymptomsMild >> step [
+CMIDAIROxfordSymptomsMild >> step [
 
 	self duration: self duration + 1.
 	self duration >= self tauRec ifTrue: [ ^ self beHealthy ].

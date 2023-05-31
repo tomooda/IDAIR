@@ -60,7 +60,7 @@ CMIDAIRCitizen >> contaminate [
 { #category : #defaults }
 CMIDAIRCitizen >> defaultDiseaseDynamics [
 
-	^ CMIDAIRHealthy on: self
+	^ CMIDAIROxfordHealthy on: self
 ]
 
 { #category : #accessing }
