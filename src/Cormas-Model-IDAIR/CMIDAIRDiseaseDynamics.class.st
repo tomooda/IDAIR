@@ -4,7 +4,10 @@ Class {
 	#instVars : [
 		'citizen'
 	],
-	#category : #'Cormas-Model-IDAIR-Disease'
+	#classVars : [
+		'RandomGenerator'
+	],
+	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
 { #category : #testing }
