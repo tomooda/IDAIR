@@ -1,7 +1,7 @@
 Class {
 	#name : #CMIDAIRPreSymptomaticSevere,
 	#superclass : #CMIDAIRPreSymptomatic,
-	#category : #'Cormas-Model-IDAIR-Disease'
+	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
 { #category : #accessing }

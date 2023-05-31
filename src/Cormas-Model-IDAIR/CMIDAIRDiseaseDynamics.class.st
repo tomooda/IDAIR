@@ -4,9 +4,6 @@ Class {
 	#instVars : [
 		'citizen'
 	],
-	#classInstVars : [
-		'randomGenerator'
-	],
 	#category : #'Cormas-Model-IDAIR-Disease'
 }
 
@@ -27,7 +24,7 @@ CMIDAIRDiseaseDynamics class >> on: aCMIDAIRCitizen [
 { #category : #accessing }
 CMIDAIRDiseaseDynamics class >> randomGenerator [
 
-	^ randomGenerator ifNil: [ randomGenerator := Random new ]
+	^ RandomGenerator ifNil: [ RandomGenerator := Random new ]
 ]
 
 { #category : #transitioning }
@@ -67,6 +64,12 @@ CMIDAIRDiseaseDynamics >> beICUed [
 ]
 
 { #category : #transitioning }
+CMIDAIRDiseaseDynamics >> beInfected [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #transitioning }
 CMIDAIRDiseaseDynamics >> bePreSymptomaticMild [
 
 	^ CMIDAIRPreSymptomaticMild newFrom: self
@@ -76,12 +79,6 @@ CMIDAIRDiseaseDynamics >> bePreSymptomaticMild [
 CMIDAIRDiseaseDynamics >> bePreSymptomaticSevere [
 
 	^ CMIDAIRPreSymptomaticSevere newFrom: self
-]
-
-{ #category : #transitioning }
-CMIDAIRDiseaseDynamics >> beSusceptible [
-
-	^ self subclassResponsibility
 ]
 
 { #category : #transitioning }
@@ -169,6 +166,12 @@ CMIDAIRDiseaseDynamics >> isICUed [
 ]
 
 { #category : #testing }
+CMIDAIRDiseaseDynamics >> isInfected [
+
+	^ false
+]
+
+{ #category : #testing }
 CMIDAIRDiseaseDynamics >> isIsolated [
 
 	^ false
@@ -188,12 +191,6 @@ CMIDAIRDiseaseDynamics >> isPreSymptomatic [
 
 { #category : #testing }
 CMIDAIRDiseaseDynamics >> isSevereSymptom [
-
-	^ false
-]
-
-{ #category : #testing }
-CMIDAIRDiseaseDynamics >> isSusceptible [
 
 	^ false
 ]

@@ -1,11 +1,11 @@
 Class {
 	#name : #CMIDAIRDead,
 	#superclass : #CMIDAIRDiseaseDynamics,
-	#category : #'Cormas-Model-IDAIR-Disease'
+	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
 { #category : #'initialize - release' }
-CMIDAIRDead >> beSusceptible [
+CMIDAIRDead >> beInfected [
 
 	^ self
 ]

@@ -1,7 +1,7 @@
 Class {
 	#name : #CMIDAIRHospitalizedRecovering,
 	#superclass : #CMIDAIRSymptomatic,
-	#category : #'Cormas-Model-IDAIR-Disease'
+	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
 { #category : #accessing }

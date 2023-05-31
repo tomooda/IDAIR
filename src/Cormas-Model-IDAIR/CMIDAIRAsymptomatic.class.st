@@ -1,7 +1,7 @@
 Class {
 	#name : #CMIDAIRAsymptomatic,
-	#superclass : #CMIDAIRSusceptible,
-	#category : #'Cormas-Model-IDAIR-Disease'
+	#superclass : #CMIDAIRInfected,
+	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
 { #category : #accessing }

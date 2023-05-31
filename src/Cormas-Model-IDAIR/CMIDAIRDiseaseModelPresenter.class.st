@@ -28,15 +28,15 @@ Class {
 		'icuedColor',
 		'symptomsMildColor'
 	],
-	#category : #'Cormas-Model-IDAIR-Disease'
+	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
 { #category : #specs }
 CMIDAIRDiseaseModelPresenter class >> defaultSpec [
 
 	^ SpBoxLayout newVertical
-		  vAlignCenter;
 		  add: (SpBoxLayout newHorizontal
+				   vAlignCenter;
 				   add: 'Healthy' expand: false;
 				   add: #healthyColor width: 24;
 				   add: '→ Susceptible pInfection=' expand: false;
@@ -44,6 +44,7 @@ CMIDAIRDiseaseModelPresenter class >> defaultSpec [
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
+				   vAlignCenter;
 				   add: '        → Asymptomatic' expand: false;
 				   add: #asymptomaticColor width: 24;
 				   add: 'pAsym=' expand: false;
@@ -51,11 +52,13 @@ CMIDAIRDiseaseModelPresenter class >> defaultSpec [
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
+				   vAlignCenter;
 				   add: '                → Recovered p=1, tauARec=' expand: false;
 				   add: #tauARec expand: false;
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
+				   vAlignCenter;
 				   add: '        → Pre-symptomatic (mild)' expand: false;
 				   add: #preSymptomaticMildColor width: 24;
 				   add: 'pMild=' expand: false;
@@ -63,6 +66,7 @@ CMIDAIRDiseaseModelPresenter class >> defaultSpec [
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
+				   vAlignCenter;
 				   add: '                → Mild symptoms' expand: false;
 				   add: #symptomsMildColor width: 24;
 				   add: 'p=1, tauSym=' expand: false;
@@ -70,24 +74,28 @@ CMIDAIRDiseaseModelPresenter class >> defaultSpec [
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
+				   vAlignCenter;
 				   add: '                        → Recovered p=1, tauRec='
 				   expand: false;
 				   add: #tauRec expand: false;
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
+				   vAlignCenter;
 				   add: '        → Pre-symptomatic (severe)' expand: false;
 				   add: #preSymptomaticSevereColor width: 24;
 				   add: 'p=1-pAsym-pMild' expand: false;
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
+				   vAlignCenter;
 				   add: '                → Severe symptoms' expand: false;
 				   add: #symptomsSevereColor width: 24;
 				   add: 'tauSym' expand: false;
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
+				   vAlignCenter;
 				   add: '                        → Hospitalized' expand: false;
 				   add: #hospitalizedColor width: 24;
 				   add: 'pHosp=' expand: false;
@@ -97,6 +105,7 @@ CMIDAIRDiseaseModelPresenter class >> defaultSpec [
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
+				   vAlignCenter;
 				   add: '                                → ICU' expand: false;
 				   add: #icuedColor width: 24;
 				   add: 'pCrit=' expand: false;
@@ -108,6 +117,7 @@ CMIDAIRDiseaseModelPresenter class >> defaultSpec [
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
+				   vAlignCenter;
 				   add: '                                        → Death'
 				   expand: false;
 				   add: #deadColor width: 24;
@@ -118,6 +128,7 @@ CMIDAIRDiseaseModelPresenter class >> defaultSpec [
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
+				   vAlignCenter;
 				   add:
 					   '                                        → Hospitalized recovering'
 				   expand: false;
@@ -127,6 +138,7 @@ CMIDAIRDiseaseModelPresenter class >> defaultSpec [
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
+				   vAlignCenter;
 				   add:
 					   '                                                → Recovered p=1, tauHospRec='
 				   expand: false;
@@ -134,12 +146,14 @@ CMIDAIRDiseaseModelPresenter class >> defaultSpec [
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
+				   vAlignCenter;
 				   add:
 					   '                                → Death p=pCrit*(1-pICU), tauCrit'
 				   expand: false;
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
+				   vAlignCenter;
 				   add:
 					   '                                → Recovered p=1-pCrit, tauRec'
 				   expand: false;

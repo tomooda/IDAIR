@@ -29,16 +29,8 @@ Class {
 		'icuedColor',
 		'symptomsMildColor'
 	],
-	#category : #'Cormas-Model-IDAIR-Disease'
+	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
-
-{ #category : #'instance creation' }
-CMIDAIRDiseaseModel class >> on: aCMIDAIRModel [
-
-	^ self new
-		  cormasModel: aCMIDAIRModel;
-		  yourself
-]
 
 { #category : #converting }
 CMIDAIRDiseaseModel >> asPresenter [
@@ -156,6 +148,12 @@ CMIDAIRDiseaseModel >> initialize [
 CMIDAIRDiseaseModel >> name [
 
 	^ #disease
+]
+
+{ #category : #'user interfaces' }
+CMIDAIRDiseaseModel >> openGUI [
+
+	^ self asPresenter openWithSpec
 ]
 
 { #category : #'accessing-parameters' }
@@ -276,6 +274,13 @@ CMIDAIRDiseaseModel >> preSymptomaticSevereColor [
 CMIDAIRDiseaseModel >> preSymptomaticSevereColor: aColor [
 
 	preSymptomaticSevereColor := aColor
+]
+
+{ #category : #control }
+CMIDAIRDiseaseModel >> step: anInteger [
+
+	self cormasModel theCitizens do: [ :citizen | 
+		citizen diseaseDynamics: citizen diseaseDynamics step ]
 ]
 
 { #category : #'accessing-colors' }

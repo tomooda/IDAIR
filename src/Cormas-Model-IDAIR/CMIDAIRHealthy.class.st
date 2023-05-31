@@ -1,11 +1,11 @@
 Class {
 	#name : #CMIDAIRHealthy,
 	#superclass : #CMIDAIRDiseaseDynamics,
-	#category : #'Cormas-Model-IDAIR-Disease'
+	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
 { #category : #transitioning }
-CMIDAIRHealthy >> beSusceptible [
+CMIDAIRHealthy >> beInfected [
 
 	| p |
 	p := self random.
@@ -25,7 +25,7 @@ CMIDAIRHealthy >> color [
 { #category : #actions }
 CMIDAIRHealthy >> contact [
 
-	self random <= self pInfection ifTrue: [ ^ self beSusceptible ].
+	self random <= self pInfection ifTrue: [ ^ self beInfected ].
 	^ self
 ]
 

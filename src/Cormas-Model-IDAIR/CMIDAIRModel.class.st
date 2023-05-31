@@ -106,6 +106,7 @@ CMIDAIRModel >> addSubmodel: aCMIDAIRSubmodel [
 CMIDAIRModel >> init [
 
 	self addSubmodel: (CMIDAIRDiseaseModel on: self).
+	self addSubmodel: (CMIDAIRContactModel on: self).
 	self
 		createGridLines: 33
 		columns: 33
@@ -114,8 +115,7 @@ CMIDAIRModel >> init [
 	self createN: 1000 randomlyLocatedEntities: CMIDAIRCitizen.
 	1 to: 10 do: [ :index | (self theCitizens at: index) beAsymptomatic ].
 	self displayPov: #diseasePov of: CMIDAIRCitizen.
-	"self displayPov: #contaminationPov of: CMIDAIRLocation."
-	self submodelAt: #disease do: [ :m | m asPresenter openWithSpec ]
+	self submodelsDo: [ :m | m openGUI ]
 ]
 
 { #category : #initialization }
@@ -177,7 +177,7 @@ CMIDAIRModel >> numberOfInfected [
 	| num |
 	num := 0.
 	self theCitizens do: [ :citizen | 
-		citizen diseaseDynamics isSusceptible ifTrue: [ num := num + 1 ] ].
+		citizen diseaseDynamics isInfected ifTrue: [ num := num + 1 ] ].
 	^ num
 ]
 
@@ -217,16 +217,19 @@ CMIDAIRModel >> numberOfSymptomatic [
 { #category : #control }
 CMIDAIRModel >> step: time [
 
-	self theCitizens do: #step.
-	self theLocations do: #clearContamination.
-	self theCitizens do: #contaminate.
-	self theCitizens do: #contact
+	self submodelsDo: [ :m | m step: time ]
 ]
 
 { #category : #submodels }
 CMIDAIRModel >> submodelAt: aSymbol do: aBlock [
 
 	^ submodels at: aSymbol ifPresent: aBlock
+]
+
+{ #category : #submodels }
+CMIDAIRModel >> submodelsDo: aBlock [
+
+	submodels valuesDo: aBlock
 ]
 
 { #category : #accessing }

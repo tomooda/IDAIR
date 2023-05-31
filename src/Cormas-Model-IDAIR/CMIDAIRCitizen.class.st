@@ -32,15 +32,15 @@ CMIDAIRCitizen >> beHospitalized [
 ]
 
 { #category : #accessing }
-CMIDAIRCitizen >> bePreSymptomaticMild [ 
+CMIDAIRCitizen >> beInfected [
 
-	self diseaseDynamics: self diseaseDynamics bePreSymptomaticMild
+	self diseaseDynamics: self diseaseDynamics beInfected
 ]
 
 { #category : #accessing }
-CMIDAIRCitizen >> beSusceptible [
+CMIDAIRCitizen >> bePreSymptomaticMild [ 
 
-	self diseaseDynamics: self diseaseDynamics beSusceptible
+	self diseaseDynamics: self diseaseDynamics bePreSymptomaticMild
 ]
 
 { #category : #actions }
@@ -83,6 +83,24 @@ CMIDAIRCitizen >> diseasePov [
 
 	<pov>
 	^ self diseaseDynamics color
+]
+
+{ #category : #testing }
+CMIDAIRCitizen >> isHealthy [
+
+	^ self diseaseDynamics isHealthy
+]
+
+{ #category : #testing }
+CMIDAIRCitizen >> isInfected [
+
+	^ self diseaseDynamics isInfected
+]
+
+{ #category : #testing }
+CMIDAIRCitizen >> isIsolated [
+
+	^ self diseaseDynamics isIsolated
 ]
 
 { #category : #actions }

@@ -1,20 +1,20 @@
 Class {
-	#name : #CMIDAIRSusceptible,
+	#name : #CMIDAIRInfected,
 	#superclass : #CMIDAIRDiseaseDynamics,
 	#instVars : [
 		'duration'
 	],
-	#category : #'Cormas-Model-IDAIR-Disease'
+	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
 { #category : #testing }
-CMIDAIRSusceptible class >> isAbstract [
+CMIDAIRInfected class >> isAbstract [
 
-	^ self = CMIDAIRSusceptible
+	^ self = CMIDAIRInfected
 ]
 
 { #category : #'instance creation' }
-CMIDAIRSusceptible class >> newFrom: anObject [
+CMIDAIRInfected class >> newFrom: anObject [
 
 	^ (super newFrom: anObject)
 		  duration: 0.0;
@@ -22,31 +22,31 @@ CMIDAIRSusceptible class >> newFrom: anObject [
 ]
 
 { #category : #transitioning }
-CMIDAIRSusceptible >> beSusceptible [
+CMIDAIRInfected >> beInfected [
 
 	^ self
 ]
 
 { #category : #actions }
-CMIDAIRSusceptible >> contact [
+CMIDAIRInfected >> contact [
 
 	^ self
 ]
 
 { #category : #accessing }
-CMIDAIRSusceptible >> duration [
+CMIDAIRInfected >> duration [
 
 	^ duration ifNil: [ duration := 0.0 ]
 ]
 
 { #category : #accessing }
-CMIDAIRSusceptible >> duration: aNumber [
+CMIDAIRInfected >> duration: aNumber [
 
 	duration := aNumber
 ]
 
 { #category : #testing }
-CMIDAIRSusceptible >> isSusceptible [
+CMIDAIRInfected >> isInfected [
 
 	^ true
 ]
