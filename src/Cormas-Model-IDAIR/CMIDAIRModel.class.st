@@ -18,6 +18,11 @@ CMIDAIRModel class >> aboutThisModel [
 ]
 
 { #category : #probes }
+CMIDAIRModel class >> colorOfProbe_numberOfAsymptomatic [
+	^ Color yellow
+]
+
+{ #category : #probes }
 CMIDAIRModel class >> colorOfProbe_numberOfHealthy [
 	^ Color green
 ]
@@ -28,33 +33,18 @@ CMIDAIRModel class >> colorOfProbe_numberOfHospitalized [
 ]
 
 { #category : #probes }
-CMIDAIRModel class >> colorOfProbe_numberOfHospitalizedRecovering [
-	^ Color gray
-]
-
-{ #category : #probes }
 CMIDAIRModel class >> colorOfProbe_numberOfICUed [
 	^ Color black
 ]
 
 { #category : #probes }
 CMIDAIRModel class >> colorOfProbe_numberOfInfected [
-	^ Color cyan lighter
-]
-
-{ #category : #probes }
-CMIDAIRModel class >> colorOfProbe_numberOfPreSymptomatic [
-	^ Color magenta lighter
-]
-
-{ #category : #probes }
-CMIDAIRModel class >> colorOfProbe_numberOfSevereSymptoms [
-	^ Color red
+	^ Color blue
 ]
 
 { #category : #probes }
 CMIDAIRModel class >> colorOfProbe_numberOfSymptomatic [
-	^ Color cyan muchDarker
+	^ Color red
 ]
 
 { #category : #probes }
@@ -142,6 +132,17 @@ CMIDAIRModel >> initialize [
 ]
 
 { #category : #probes }
+CMIDAIRModel >> numberOfAsymptomatic [
+
+	<probe>
+	| num |
+	num := 0.
+	self theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isSymptomatic ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #probes }
 CMIDAIRModel >> numberOfHealthy [
 
 	<probe>
@@ -164,18 +165,6 @@ CMIDAIRModel >> numberOfHospitalized [
 ]
 
 { #category : #probes }
-CMIDAIRModel >> numberOfHospitalizedRecovering [
-
-	<probe>
-	| num |
-	num := 0.
-	self theCitizens do: [ :citizen | 
-		citizen diseaseDynamics isHospitalizedRecovering ifTrue: [ 
-			num := num + 1 ] ].
-	^ num
-]
-
-{ #category : #probes }
 CMIDAIRModel >> numberOfICUed [
 
 	<probe>
@@ -194,28 +183,6 @@ CMIDAIRModel >> numberOfInfected [
 	num := 0.
 	self theCitizens do: [ :citizen | 
 		citizen diseaseDynamics isInfected ifTrue: [ num := num + 1 ] ].
-	^ num
-]
-
-{ #category : #probes }
-CMIDAIRModel >> numberOfPreSymptomatic [
-
-	<probe>
-	| num |
-	num := 0.
-	self theCitizens do: [ :citizen | 
-		citizen diseaseDynamics isPreSymptomatic ifTrue: [ num := num + 1 ] ].
-	^ num
-]
-
-{ #category : #probes }
-CMIDAIRModel >> numberOfSevereSymptoms [
-
-	<probe>
-	| num |
-	num := 0.
-	self theCitizens do: [ :citizen | 
-		citizen diseaseDynamics isSevereSymptom ifTrue: [ num := num + 1 ] ].
 	^ num
 ]
 

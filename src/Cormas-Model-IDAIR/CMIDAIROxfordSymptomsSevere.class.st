@@ -13,13 +13,6 @@ CMIDAIROxfordSymptomsSevere >> color [
 	^ self modelParameterAt: #symptomsSevereColor
 ]
 
-{ #category : #actions }
-CMIDAIROxfordSymptomsSevere >> contaminate: aCMIDAIRLocation [
-
-	self random <= self pContaminate ifTrue: [ 
-		aCMIDAIRLocation isContaminated: true ]
-]
-
 { #category : #testing }
 CMIDAIROxfordSymptomsSevere >> isActive [
 

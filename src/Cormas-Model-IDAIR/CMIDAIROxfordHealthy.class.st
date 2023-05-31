@@ -29,12 +29,6 @@ CMIDAIROxfordHealthy >> contact [
 	^ self
 ]
 
-{ #category : #actions }
-CMIDAIROxfordHealthy >> contaminate: aCMIDAIRLocation [
-
-	
-]
-
 { #category : #testing }
 CMIDAIROxfordHealthy >> isActive [
 

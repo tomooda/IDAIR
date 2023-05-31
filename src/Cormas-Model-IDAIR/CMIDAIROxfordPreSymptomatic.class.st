@@ -10,12 +10,6 @@ CMIDAIROxfordPreSymptomatic class >> isAbstract [
 	^ self = CMIDAIROxfordPreSymptomatic
 ]
 
-{ #category : #actions }
-CMIDAIROxfordPreSymptomatic >> contaminate: aCMIDAIRLocation [
-
-	
-]
-
 { #category : #testing }
 CMIDAIROxfordPreSymptomatic >> isActive [
 
@@ -31,7 +25,7 @@ CMIDAIROxfordPreSymptomatic >> isPreSymptomatic [
 { #category : #testing }
 CMIDAIROxfordPreSymptomatic >> isTransmissible [
 
-	^ false
+	^ true
 ]
 
 { #category : #actions }

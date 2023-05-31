@@ -10,12 +10,6 @@ CMIDAIROxfordAsymptomatic >> color [
 	^ self modelParameterAt: #asymptomaticColor
 ]
 
-{ #category : #actions }
-CMIDAIROxfordAsymptomatic >> contaminate: aCMIDAIRLocation [
-
-	aCMIDAIRLocation isContaminated: true
-]
-
 { #category : #testing }
 CMIDAIROxfordAsymptomatic >> isActive [
 

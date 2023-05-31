@@ -43,20 +43,6 @@ CMIDAIRCitizen >> bePreSymptomaticMild [
 	self diseaseDynamics: self diseaseDynamics bePreSymptomaticMild
 ]
 
-{ #category : #actions }
-CMIDAIRCitizen >> contact [
-
-	patch ifNotNil: [ 
-		patch isContaminated ifTrue: [ 
-			self diseaseDynamics: self diseaseDynamics contact ] ]
-]
-
-{ #category : #actions }
-CMIDAIRCitizen >> contaminate [
-
-	patch ifNotNil: [ self diseaseDynamics contaminate: patch ]
-]
-
 { #category : #defaults }
 CMIDAIRCitizen >> defaultDiseaseDynamics [
 
@@ -86,9 +72,27 @@ CMIDAIRCitizen >> diseasePov [
 ]
 
 { #category : #testing }
+CMIDAIRCitizen >> isAsymptomatic [
+
+	^ self diseaseDynamics isAsymptomatic
+]
+
+{ #category : #testing }
 CMIDAIRCitizen >> isHealthy [
 
 	^ self diseaseDynamics isHealthy
+]
+
+{ #category : #testing }
+CMIDAIRCitizen >> isHospitalized [
+
+	^ self diseaseDynamics isHospitalized
+]
+
+{ #category : #testing }
+CMIDAIRCitizen >> isICUed [
+
+	^ self diseaseDynamics isICUed
 ]
 
 { #category : #testing }
@@ -98,15 +102,15 @@ CMIDAIRCitizen >> isInfected [
 ]
 
 { #category : #testing }
-CMIDAIRCitizen >> isIsolated [
+CMIDAIRCitizen >> isSymptomatic [
 
-	^ self diseaseDynamics isIsolated
+	^ self diseaseDynamics isAsymptomatic
 ]
 
-{ #category : #actions }
-CMIDAIRCitizen >> move [
+{ #category : #testing }
+CMIDAIRCitizen >> isTransmissible [
 
-	self randomWalkConstrainedBy: [ :locaton | true ]
+	^ self diseaseDynamics isTransmissible
 ]
 
 { #category : #pov }
@@ -124,8 +128,7 @@ CMIDAIRCitizen >> sizeOfPOV [
 { #category : #control }
 CMIDAIRCitizen >> step [
 
-	self diseaseDynamics: self diseaseDynamics step.
-	self diseaseDynamics isActive ifTrue: [ self move ]
+	self diseaseDynamics: self diseaseDynamics step
 ]
 
 { #category : #actions }

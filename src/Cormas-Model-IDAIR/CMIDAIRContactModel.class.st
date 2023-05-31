@@ -57,13 +57,13 @@ CMIDAIRContactModel >> numberOfHealthy [
 ]
 
 { #category : #accessing }
-CMIDAIRContactModel >> numberOfNonIsolatedInfected [
+CMIDAIRContactModel >> numberOfTransmissibleInCommunity [
 
 	| num |
 	num := 0.
 	self cormasModel theCitizens do: [ :citizen | 
-		(citizen isInfected and: [ citizen isIsolated not ]) ifTrue: [ 
-			num := num + 1 ] ].
+		(citizen isTransmissible and: [ citizen isHospitalized not ]) 
+			ifTrue: [ num := num + 1 ] ].
 	^ num
 ]
 
@@ -89,7 +89,7 @@ CMIDAIRContactModel >> r0: aNumber [
 CMIDAIRContactModel >> step: anInteger [
 
 	| numberOfHealthy numberOfNonIsolatedInfected p |
-	numberOfNonIsolatedInfected := self numberOfNonIsolatedInfected.
+	numberOfNonIsolatedInfected := self numberOfTransmissibleInCommunity.
 	numberOfHealthy := self numberOfHealthy.
 	numberOfHealthy > 0 ifTrue: [ 
 		p := self r0 asFloat * numberOfNonIsolatedInfected / numberOfHealthy

@@ -13,12 +13,6 @@ CMIDAIROxfordICUed >> color [
 	^ self modelParameterAt: #icuedColor
 ]
 
-{ #category : #actions }
-CMIDAIROxfordICUed >> contaminate: aCMIDAIRLocation [
-
-	
-]
-
 { #category : #testing }
 CMIDAIROxfordICUed >> isActive [
 
@@ -26,13 +20,13 @@ CMIDAIROxfordICUed >> isActive [
 ]
 
 { #category : #testing }
-CMIDAIROxfordICUed >> isICUed [
+CMIDAIROxfordICUed >> isHospitalized [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIROxfordICUed >> isIsolated [
+CMIDAIROxfordICUed >> isICUed [
 
 	^ true
 ]

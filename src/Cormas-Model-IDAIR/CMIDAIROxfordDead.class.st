@@ -22,12 +22,6 @@ CMIDAIROxfordDead >> contact [
 	^ self
 ]
 
-{ #category : #actions }
-CMIDAIROxfordDead >> contaminate: aCMIDAIRLocation [
-
-	
-]
-
 { #category : #testing }
 CMIDAIROxfordDead >> isActive [
 
@@ -36,12 +30,6 @@ CMIDAIROxfordDead >> isActive [
 
 { #category : #testing }
 CMIDAIROxfordDead >> isDead [
-
-	^ true
-]
-
-{ #category : #testing }
-CMIDAIROxfordDead >> isIsolated [
 
 	^ true
 ]

@@ -1,12 +1,6 @@
 Class {
 	#name : #CMIDAIROxfordDiseaseDynamics,
-	#superclass : #Object,
-	#instVars : [
-		'citizen'
-	],
-	#classVars : [
-		'RandomGenerator'
-	],
+	#superclass : #CMIDAIRDiseaseDynamics,
 	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
@@ -14,20 +8,6 @@ Class {
 CMIDAIROxfordDiseaseDynamics class >> isAbstract [
 
 	^ self = CMIDAIROxfordDiseaseDynamics
-]
-
-{ #category : #'instance creation' }
-CMIDAIROxfordDiseaseDynamics class >> on: aCMIDAIRCitizen [
-
-	^ self new
-		  citizen: aCMIDAIRCitizen;
-		  yourself
-]
-
-{ #category : #accessing }
-CMIDAIROxfordDiseaseDynamics class >> randomGenerator [
-
-	^ RandomGenerator ifNil: [ RandomGenerator := Random new ]
 ]
 
 { #category : #transitioning }
@@ -96,42 +76,6 @@ CMIDAIROxfordDiseaseDynamics >> beSymptomsSevere [
 	^ CMIDAIROxfordSymptomsSevere newFrom: self
 ]
 
-{ #category : #accessing }
-CMIDAIROxfordDiseaseDynamics >> citizen [
-
-	^ citizen
-]
-
-{ #category : #accessing }
-CMIDAIROxfordDiseaseDynamics >> citizen: aCMIDAIRCitizen [
-
-	citizen := aCMIDAIRCitizen
-]
-
-{ #category : #accessing }
-CMIDAIROxfordDiseaseDynamics >> color [
-
-	^ self subclassResponsibility
-]
-
-{ #category : #actions }
-CMIDAIROxfordDiseaseDynamics >> contact [
-
-	^ self subclassResponsibility
-]
-
-{ #category : #actions }
-CMIDAIROxfordDiseaseDynamics >> contaminate: aCMIDAIRLocation [
-
-	^ self subclassResponsibility
-]
-
-{ #category : #testing }
-CMIDAIROxfordDiseaseDynamics >> isActive [
-
-	^ self subclassResponsibility
-]
-
 { #category : #testing }
 CMIDAIROxfordDiseaseDynamics >> isAsymptomatic [
 
@@ -175,12 +119,6 @@ CMIDAIROxfordDiseaseDynamics >> isInfected [
 ]
 
 { #category : #testing }
-CMIDAIROxfordDiseaseDynamics >> isIsolated [
-
-	^ false
-]
-
-{ #category : #testing }
 CMIDAIROxfordDiseaseDynamics >> isMildSymptom [
 
 	^ false
@@ -202,12 +140,6 @@ CMIDAIROxfordDiseaseDynamics >> isSevereSymptom [
 CMIDAIROxfordDiseaseDynamics >> isSymptomatic [
 
 	^ false
-]
-
-{ #category : #testing }
-CMIDAIROxfordDiseaseDynamics >> isTransmissible [
-
-	^ self subclassResponsibility
 ]
 
 { #category : #accessing }

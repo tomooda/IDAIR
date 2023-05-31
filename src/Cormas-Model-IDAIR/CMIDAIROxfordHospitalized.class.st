@@ -14,12 +14,6 @@ CMIDAIROxfordHospitalized >> color [
 	^ self modelParameterAt: #hospitalizedColor
 ]
 
-{ #category : #actions }
-CMIDAIROxfordHospitalized >> contaminate: aCMIDAIRLocation [
-
-	
-]
-
 { #category : #testing }
 CMIDAIROxfordHospitalized >> isActive [
 
@@ -28,12 +22,6 @@ CMIDAIROxfordHospitalized >> isActive [
 
 { #category : #testing }
 CMIDAIROxfordHospitalized >> isHospitalized [
-
-	^ true
-]
-
-{ #category : #testing }
-CMIDAIROxfordHospitalized >> isIsolated [
 
 	^ true
 ]
