@@ -4,7 +4,7 @@ Class {
 	#category : #'Cormas-Model-IDAIR-Disease-Vietnam'
 }
 
-{ #category : #accessing }
+{ #category : #transitioning }
 CMIDAIRVietnamDiseaseAm >> next [
 
 	^ self random <= self pq
