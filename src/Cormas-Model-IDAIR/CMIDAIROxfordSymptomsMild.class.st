@@ -44,6 +44,6 @@ CMIDAIROxfordSymptomsMild >> pContaminate [
 CMIDAIROxfordSymptomsMild >> step [
 
 	self duration: self duration + 1.
-	self duration >= self tauRec ifTrue: [ ^ self beHealthy ].
+	self duration >= self tauRec ifTrue: [ ^ self beSusceptive ].
 	^ self
 ]

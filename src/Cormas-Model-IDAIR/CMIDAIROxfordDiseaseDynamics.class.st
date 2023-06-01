@@ -23,12 +23,6 @@ CMIDAIROxfordDiseaseDynamics >> beDead [
 ]
 
 { #category : #transitioning }
-CMIDAIROxfordDiseaseDynamics >> beHealthy [
-
-	^ CMIDAIROxfordHealthy newFrom: self
-]
-
-{ #category : #transitioning }
 CMIDAIROxfordDiseaseDynamics >> beHospitalized [
 
 	^ CMIDAIROxfordHospitalized newFrom: self
@@ -65,6 +59,12 @@ CMIDAIROxfordDiseaseDynamics >> bePreSymptomaticSevere [
 ]
 
 { #category : #transitioning }
+CMIDAIROxfordDiseaseDynamics >> beSusceptive [
+
+	^ CMIDAIROxfordHealthy newFrom: self
+]
+
+{ #category : #transitioning }
 CMIDAIROxfordDiseaseDynamics >> beSymptomsMild [
 
 	^ CMIDAIROxfordSymptomsMild newFrom: self
@@ -84,12 +84,6 @@ CMIDAIROxfordDiseaseDynamics >> isAsymptomatic [
 
 { #category : #testing }
 CMIDAIROxfordDiseaseDynamics >> isDead [
-
-	^ false
-]
-
-{ #category : #testing }
-CMIDAIROxfordDiseaseDynamics >> isHealthy [
 
 	^ false
 ]
@@ -132,6 +126,12 @@ CMIDAIROxfordDiseaseDynamics >> isPreSymptomatic [
 
 { #category : #testing }
 CMIDAIROxfordDiseaseDynamics >> isSevereSymptom [
+
+	^ false
+]
+
+{ #category : #testing }
+CMIDAIROxfordDiseaseDynamics >> isSusceptive [
 
 	^ false
 ]

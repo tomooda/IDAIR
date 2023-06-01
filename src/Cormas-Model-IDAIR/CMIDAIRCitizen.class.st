@@ -20,12 +20,6 @@ CMIDAIRCitizen >> beDead [
 ]
 
 { #category : #accessing }
-CMIDAIRCitizen >> beHealthy [
-
-	self diseaseDynamics: self diseaseDynamics beHealthy
-]
-
-{ #category : #accessing }
 CMIDAIRCitizen >> beHospitalized [
 
 	self diseaseDynamics: self diseaseDynamics beHospitalized
@@ -41,6 +35,12 @@ CMIDAIRCitizen >> beInfected [
 CMIDAIRCitizen >> bePreSymptomaticMild [ 
 
 	self diseaseDynamics: self diseaseDynamics bePreSymptomaticMild
+]
+
+{ #category : #accessing }
+CMIDAIRCitizen >> beSusceptive [
+
+	self diseaseDynamics: self diseaseDynamics beSusceptive
 ]
 
 { #category : #defaults }
@@ -78,12 +78,6 @@ CMIDAIRCitizen >> isAsymptomatic [
 ]
 
 { #category : #testing }
-CMIDAIRCitizen >> isHealthy [
-
-	^ self diseaseDynamics isHealthy
-]
-
-{ #category : #testing }
 CMIDAIRCitizen >> isHospitalized [
 
 	^ self diseaseDynamics isHospitalized
@@ -99,6 +93,12 @@ CMIDAIRCitizen >> isICUed [
 CMIDAIRCitizen >> isInfected [
 
 	^ self diseaseDynamics isInfected
+]
+
+{ #category : #testing }
+CMIDAIRCitizen >> isSusceptive [
+
+	^ self diseaseDynamics isSusceptive
 ]
 
 { #category : #testing }

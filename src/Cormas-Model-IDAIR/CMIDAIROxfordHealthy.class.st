@@ -36,7 +36,7 @@ CMIDAIROxfordHealthy >> isActive [
 ]
 
 { #category : #testing }
-CMIDAIROxfordHealthy >> isHealthy [
+CMIDAIROxfordHealthy >> isSusceptive [
 
 	^ true
 ]

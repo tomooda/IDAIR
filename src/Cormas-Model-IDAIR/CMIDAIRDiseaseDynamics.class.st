@@ -61,12 +61,6 @@ CMIDAIRDiseaseDynamics >> isDead [
 ]
 
 { #category : #testing }
-CMIDAIRDiseaseDynamics >> isHealthy [
-
-	^ self subclassResponsibility
-]
-
-{ #category : #testing }
 CMIDAIRDiseaseDynamics >> isHospitalized [
 
 	^ self subclassResponsibility
@@ -80,6 +74,12 @@ CMIDAIRDiseaseDynamics >> isICUed [
 
 { #category : #testing }
 CMIDAIRDiseaseDynamics >> isInfected [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #testing }
+CMIDAIRDiseaseDynamics >> isSusceptive [
 
 	^ self subclassResponsibility
 ]

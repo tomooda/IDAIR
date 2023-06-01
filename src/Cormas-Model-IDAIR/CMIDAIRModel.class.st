@@ -143,17 +143,6 @@ CMIDAIRModel >> numberOfAsymptomatic [
 ]
 
 { #category : #probes }
-CMIDAIRModel >> numberOfHealthy [
-
-	<probe>
-	| num |
-	num := 0.
-	self theCitizens do: [ :citizen | 
-		citizen diseaseDynamics isHealthy ifTrue: [ num := num + 1 ] ].
-	^ num
-]
-
-{ #category : #probes }
 CMIDAIRModel >> numberOfHospitalized [
 
 	<probe>
@@ -183,6 +172,17 @@ CMIDAIRModel >> numberOfInfected [
 	num := 0.
 	self theCitizens do: [ :citizen | 
 		citizen diseaseDynamics isInfected ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #probes }
+CMIDAIRModel >> numberOfSusceptive [
+
+	<probe>
+	| num |
+	num := 0.
+	self theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isSusceptive ifTrue: [ num := num + 1 ] ].
 	^ num
 ]
 
@@ -224,12 +224,6 @@ CMIDAIRModel >> theCitizens [
 ]
 
 { #category : #accessing }
-CMIDAIRModel >> theCitizens1 [
-
-	^ theCitizens
-]
-
-{ #category : #accessing }
 CMIDAIRModel >> theCitizens: anObject [
 
 	theCitizens := anObject
@@ -241,12 +235,6 @@ CMIDAIRModel >> theLocations [
 	^ theLocations
 		  ifNil: [ theLocations := OrderedCollection new ]
 		  ifNotNil: [ theLocations ]
-]
-
-{ #category : #accessing }
-CMIDAIRModel >> theLocations1 [
-
-	^ theLocations
 ]
 
 { #category : #accessing }

@@ -38,7 +38,7 @@ CMIDAIROxfordAsymptomatic >> name [
 CMIDAIROxfordAsymptomatic >> step [
 
 	self duration: self duration + 1.
-	self duration >= self tauARec ifTrue: [ ^ self beHealthy ].
+	self duration >= self tauARec ifTrue: [ ^ self beSusceptive ].
 	^ self
 ]
 
