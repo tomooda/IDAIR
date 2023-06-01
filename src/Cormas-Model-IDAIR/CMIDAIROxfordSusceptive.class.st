@@ -1,11 +1,11 @@
 Class {
-	#name : #CMIDAIROxfordHealthy,
+	#name : #CMIDAIROxfordSusceptive,
 	#superclass : #CMIDAIROxfordDiseaseDynamics,
 	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
 { #category : #transitioning }
-CMIDAIROxfordHealthy >> beInfected [
+CMIDAIROxfordSusceptive >> beInfected [
 
 	| p |
 	p := self random.
@@ -17,50 +17,50 @@ CMIDAIROxfordHealthy >> beInfected [
 ]
 
 { #category : #accessing }
-CMIDAIROxfordHealthy >> color [
+CMIDAIROxfordSusceptive >> color [
 
 	^ self modelParameterAt: #healthyColor
 ]
 
 { #category : #actions }
-CMIDAIROxfordHealthy >> contact [
+CMIDAIROxfordSusceptive >> contact [
 
 	self random <= self pInfection ifTrue: [ ^ self beInfected ].
 	^ self
 ]
 
 { #category : #testing }
-CMIDAIROxfordHealthy >> isActive [
+CMIDAIROxfordSusceptive >> isActive [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIROxfordHealthy >> isSusceptive [
+CMIDAIROxfordSusceptive >> isSusceptive [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIROxfordHealthy >> isTransmissible [
+CMIDAIROxfordSusceptive >> isTransmissible [
 
 	^ false
 ]
 
 { #category : #accessing }
-CMIDAIROxfordHealthy >> name [
+CMIDAIROxfordSusceptive >> name [
 
 	^ 'healthy'
 ]
 
 { #category : #actions }
-CMIDAIROxfordHealthy >> step [
+CMIDAIROxfordSusceptive >> step [
 
 	^ self
 ]
 
 { #category : #actions }
-CMIDAIROxfordHealthy >> test [
+CMIDAIROxfordSusceptive >> test [
 
 	^ self
 ]

@@ -61,7 +61,7 @@ CMIDAIROxfordDiseaseDynamics >> bePreSymptomaticSevere [
 { #category : #transitioning }
 CMIDAIROxfordDiseaseDynamics >> beSusceptive [
 
-	^ CMIDAIROxfordHealthy newFrom: self
+	^ CMIDAIROxfordSusceptive newFrom: self
 ]
 
 { #category : #transitioning }
