@@ -97,5 +97,5 @@ CMIDAIRContactModel >> step: anInteger [
 		     / numberOfSusceptive / self estimatedTransmissibleDuration.
 		self cormasModel theCitizens do: [ :citizen | 
 			(citizen isSusceptive and: [ self random <= p ]) ifTrue: [ 
-				citizen beInfected ] ] ]
+				citizen beExposed ] ] ]
 ]

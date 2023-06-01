@@ -53,6 +53,12 @@ CMIDAIROxfordDiseaseDynamics >> bePreSymptomaticSevere [
 ]
 
 { #category : #transitioning }
+CMIDAIROxfordDiseaseDynamics >> beRecovered [
+
+	^ CMIDAIROxfordRecovered newFrom: self
+]
+
+{ #category : #transitioning }
 CMIDAIROxfordDiseaseDynamics >> beSusceptive [
 
 	^ CMIDAIROxfordSusceptive newFrom: self
@@ -119,6 +125,12 @@ CMIDAIROxfordDiseaseDynamics >> isPreSymptomatic [
 ]
 
 { #category : #testing }
+CMIDAIROxfordDiseaseDynamics >> isRecovered [
+
+	^ false
+]
+
+{ #category : #testing }
 CMIDAIROxfordDiseaseDynamics >> isSevereSymptom [
 
 	^ false
@@ -134,24 +146,6 @@ CMIDAIROxfordDiseaseDynamics >> isSusceptive [
 CMIDAIROxfordDiseaseDynamics >> isSymptomatic [
 
 	^ false
-]
-
-{ #category : #accessing }
-CMIDAIROxfordDiseaseDynamics >> modelParameter [
-
-	^ self modelParameterAt: thisContext sender selector
-]
-
-{ #category : #accessing }
-CMIDAIROxfordDiseaseDynamics >> modelParameterAt: aSymbol [
-
-	^ citizen cormasModel submodelAt: #disease do: aSymbol
-]
-
-{ #category : #accessing }
-CMIDAIROxfordDiseaseDynamics >> name [
-
-	^ self subclassResponsibility
 ]
 
 { #category : #parameters }
@@ -202,18 +196,6 @@ CMIDAIROxfordDiseaseDynamics >> pPreSymptomaticMildOdm [
 	^ self modelParameter
 ]
 
-{ #category : #accessing }
-CMIDAIROxfordDiseaseDynamics >> random [
-
-	^ self class randomGenerator next
-]
-
-{ #category : #actions }
-CMIDAIROxfordDiseaseDynamics >> step [
-
-	^ self subclassResponsibility
-]
-
 { #category : #parameters }
 CMIDAIROxfordDiseaseDynamics >> tauARec [
 
@@ -260,10 +242,4 @@ CMIDAIROxfordDiseaseDynamics >> tauRec [
 CMIDAIROxfordDiseaseDynamics >> tauSym [
 
 	^ self modelParameter
-]
-
-{ #category : #actions }
-CMIDAIROxfordDiseaseDynamics >> test [
-
-	^ self subclassResponsibility
 ]

@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #transitioning }
-CMIDAIROxfordSusceptive >> beInfected [
+CMIDAIROxfordSusceptive >> beExposed [
 
 	| p |
 	p := self random.
@@ -25,7 +25,7 @@ CMIDAIROxfordSusceptive >> color [
 { #category : #actions }
 CMIDAIROxfordSusceptive >> contact [
 
-	self random <= self pInfection ifTrue: [ ^ self beInfected ].
+	self random <= self pInfection ifTrue: [ ^ self beExposed ].
 	^ self
 ]
 

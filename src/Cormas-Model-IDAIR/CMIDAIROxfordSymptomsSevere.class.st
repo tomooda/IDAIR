@@ -51,7 +51,7 @@ CMIDAIROxfordSymptomsSevere >> step [
 		ifTrue: [ 
 		self duration >= self tauHosp ifTrue: [ ^ self beHospitalized ] ]
 		ifFalse: [ 
-		self duration >= self tauRec ifTrue: [ ^ self beSusceptive ] ].
+		self duration >= self tauRec ifTrue: [ ^ self beRecovered ] ].
 	^ self
 ]
 

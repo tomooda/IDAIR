@@ -37,7 +37,7 @@ CMIDAIRDiseaseDynamics >> beAsymptomatic [
 ]
 
 { #category : #actions }
-CMIDAIRDiseaseDynamics >> beInfected [
+CMIDAIRDiseaseDynamics >> beExposed [
 
 	^ self subclassResponsibility
 ]
@@ -91,6 +91,12 @@ CMIDAIRDiseaseDynamics >> isInfected [
 ]
 
 { #category : #testing }
+CMIDAIRDiseaseDynamics >> isRecovered [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #testing }
 CMIDAIRDiseaseDynamics >> isSusceptive [
 
 	^ self subclassResponsibility
@@ -108,8 +114,38 @@ CMIDAIRDiseaseDynamics >> isTransmissible [
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+CMIDAIRDiseaseDynamics >> modelParameter [
+
+	^ self modelParameterAt: thisContext sender selector
+]
+
+{ #category : #accessing }
+CMIDAIRDiseaseDynamics >> modelParameterAt: aSymbol [
+
+	^ citizen cormasModel submodelAt: #disease do: aSymbol
+]
+
+{ #category : #accessing }
+CMIDAIRDiseaseDynamics >> name [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+CMIDAIRDiseaseDynamics >> random [
+
+	^ self class randomGenerator next
+]
+
 { #category : #actions }
 CMIDAIRDiseaseDynamics >> step [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #actions }
+CMIDAIRDiseaseDynamics >> test [
 
 	^ self subclassResponsibility
 ]

@@ -62,7 +62,7 @@ CMIDAIROxfordDiseaseModel >> deadColor: aColor [
 	deadColor := aColor
 ]
 
-{ #category : #accessing }
+{ #category : #defaults }
 CMIDAIROxfordDiseaseModel >> defaultDiseaseDynamicsClass [
 
 	^ CMIDAIROxfordSusceptive

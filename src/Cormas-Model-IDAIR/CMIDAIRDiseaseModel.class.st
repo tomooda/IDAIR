@@ -10,7 +10,7 @@ CMIDAIRDiseaseModel class >> isAbstract [
 	^ self = CMIDAIRDiseaseModel
 ]
 
-{ #category : #accessing }
+{ #category : #defaults }
 CMIDAIRDiseaseModel >> defaultDiseaseDynamicsClass [
 
 	^ self subclassResponsibility

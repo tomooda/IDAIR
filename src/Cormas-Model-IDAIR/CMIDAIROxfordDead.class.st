@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #'initialize - release' }
-CMIDAIROxfordDead >> beInfected [
+CMIDAIROxfordDead >> beExposed [
 
 	^ self
 ]

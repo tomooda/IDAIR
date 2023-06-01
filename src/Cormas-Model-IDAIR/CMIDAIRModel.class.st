@@ -23,11 +23,6 @@ CMIDAIRModel class >> colorOfProbe_numberOfAsymptomatic [
 ]
 
 { #category : #probes }
-CMIDAIRModel class >> colorOfProbe_numberOfHealthy [
-	^ Color green
-]
-
-{ #category : #probes }
 CMIDAIRModel class >> colorOfProbe_numberOfHospitalized [
 	^ Color gray
 ]
@@ -40,6 +35,16 @@ CMIDAIRModel class >> colorOfProbe_numberOfICUed [
 { #category : #probes }
 CMIDAIRModel class >> colorOfProbe_numberOfInfected [
 	^ Color blue
+]
+
+{ #category : #probes }
+CMIDAIRModel class >> colorOfProbe_numberOfRecovered [
+	^ Color green muchDarker
+]
+
+{ #category : #probes }
+CMIDAIRModel class >> colorOfProbe_numberOfSusceptive [
+	^ Color green
 ]
 
 { #category : #probes }
@@ -92,7 +97,7 @@ CMIDAIRModel >> addSubmodel: aCMIDAIRSubmodel [
 	^ submodels at: aCMIDAIRSubmodel name put: aCMIDAIRSubmodel
 ]
 
-{ #category : #accessing }
+{ #category : #defaults }
 CMIDAIRModel >> defaultDiseaseDynamicsClass [
 
 	^ self
@@ -101,7 +106,7 @@ CMIDAIRModel >> defaultDiseaseDynamicsClass [
 ]
 
 { #category : #init }
-CMIDAIRModel >> init [
+CMIDAIRModel >> init_Oxford_SingleLocation [
 
 	self addSubmodel: (CMIDAIROxfordDiseaseModel on: self).
 	self addSubmodel: (CMIDAIRContactModel on: self).
@@ -117,9 +122,9 @@ CMIDAIRModel >> init [
 ]
 
 { #category : #init }
-CMIDAIRModel >> init_Oxford_SingleLocation [
+CMIDAIRModel >> init_Vietnam_SingleLocation [
 
-	self addSubmodel: (CMIDAIROxfordDiseaseModel on: self).
+	self addSubmodel: (CMIDAIRVietnamDiseaseModel on: self).
 	self addSubmodel: (CMIDAIRContactModel on: self).
 	self
 		createGridLines: 33
@@ -180,6 +185,17 @@ CMIDAIRModel >> numberOfInfected [
 	num := 0.
 	self theCitizens do: [ :citizen | 
 		citizen diseaseDynamics isInfected ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #probes }
+CMIDAIRModel >> numberOfRecovered [
+
+	<probe>
+	| num |
+	num := 0.
+	self theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isRecovered ifTrue: [ num := num + 1 ] ].
 	^ num
 ]
 

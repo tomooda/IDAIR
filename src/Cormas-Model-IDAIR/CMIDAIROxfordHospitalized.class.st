@@ -55,7 +55,7 @@ CMIDAIROxfordHospitalized >> step [
 					ifTrue: [ ^ self beICUed ]
 					ifFalse: [ ^ self beDead ] ] ]
 		ifFalse: [ 
-		self duration >= self tauHospRec ifTrue: [ ^ self beSusceptive ] ].
+		self duration >= self tauHospRec ifTrue: [ ^ self beRecovered ] ].
 	^ self
 ]
 

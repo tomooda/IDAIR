@@ -20,9 +20,9 @@ CMIDAIRCitizen >> beDead [
 ]
 
 { #category : #accessing }
-CMIDAIRCitizen >> beInfected [
+CMIDAIRCitizen >> beExposed [
 
-	self diseaseDynamics: self diseaseDynamics beInfected
+	self diseaseDynamics: self diseaseDynamics beExposed
 ]
 
 { #category : #accessing }
@@ -82,6 +82,12 @@ CMIDAIRCitizen >> isICUed [
 CMIDAIRCitizen >> isInfected [
 
 	^ self diseaseDynamics isInfected
+]
+
+{ #category : #testing }
+CMIDAIRCitizen >> isRecovered [
+
+	^ self diseaseDynamics isRecovered
 ]
 
 { #category : #testing }

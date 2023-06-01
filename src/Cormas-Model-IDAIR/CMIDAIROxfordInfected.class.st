@@ -22,7 +22,7 @@ CMIDAIROxfordInfected class >> newFrom: anObject [
 ]
 
 { #category : #transitioning }
-CMIDAIROxfordInfected >> beInfected [
+CMIDAIROxfordInfected >> beExposed [
 
 	^ self
 ]

@@ -50,6 +50,6 @@ CMIDAIROxfordHospitalizedRecovering >> name [
 CMIDAIROxfordHospitalizedRecovering >> step [
 
 	self duration: self duration + 1.
-	self duration >= self tauHospRec ifTrue: [ ^ self beSusceptive ].
+	self duration >= self tauHospRec ifTrue: [ ^ self beRecovered ].
 	^ self
 ]
