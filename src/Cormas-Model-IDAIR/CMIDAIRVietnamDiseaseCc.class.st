@@ -9,3 +9,9 @@ CMIDAIRVietnamDiseaseCc >> next [
 
 	^ CMIDAIRVietnamDiseaseR newFrom: self
 ]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseCc >> requiredDuration [
+
+	^ self tCc
+]

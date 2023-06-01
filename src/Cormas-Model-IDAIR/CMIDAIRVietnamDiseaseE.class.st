@@ -15,9 +15,3 @@ CMIDAIRVietnamDiseaseE >> color [
 
 	^ Color blue
 ]
-
-{ #category : #accessing }
-CMIDAIRVietnamDiseaseE >> requiredDuration [
-
-	^ self tE
-]

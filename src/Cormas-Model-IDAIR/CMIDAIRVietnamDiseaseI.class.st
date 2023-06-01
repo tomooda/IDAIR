@@ -33,9 +33,3 @@ CMIDAIRVietnamDiseaseI >> isTransmissible [
 
 	^ true
 ]
-
-{ #category : #accessing }
-CMIDAIRVietnamDiseaseI >> requiredDuration [
-
-	^ self tI
-]

@@ -7,12 +7,27 @@ Class {
 		'pc',
 		'pd',
 		'pq',
-		'tE',
-		'tA',
-		'tI',
-		'tH',
+		'tEa',
+		'tEm',
+		'tEh',
+		'tEc',
+		'tEd',
+		'tAa',
+		'tAm',
+		'tAh',
+		'tAc',
+		'tAd',
+		'tIm',
+		'tIq',
+		'tIh',
+		'tIc',
+		'tId',
+		'tHh',
+		'tHc',
+		'tHd',
 		'tQ',
-		'tC',
+		'tCc',
+		'tCd',
 		'tR'
 	],
 	#category : #'Cormas-Model-IDAIR-Disease-Vietnam'
@@ -28,17 +43,32 @@ CMIDAIRVietnamDiseaseModel >> defaultDiseaseDynamicsClass [
 CMIDAIRVietnamDiseaseModel >> initialize [
 
 	super initialize.
-	pa := 0.5.
-	ph := 0.1.
-	pc := 0.05.
-	pd := 0.5.
+	pa := 0.43.
+	ph := 0.14.
+	pc := 0.33.
+	pd := 0.01.
 	pq := 0.5.
-	tE := 2.0.
-	tA := 4.0.
-	tI := 12.0.
-	tH := 5.0.
-	tQ := 5.0.
-	tC := 4.25.
+	tEa := 2.0.
+	tEm := 2.0.
+	tEh := 2.0.
+	tEc := 2.0.
+	tEd := 2.0.
+	tAa := 4.0.
+	tAm := 4.0.
+	tAh := 4.0.
+	tAc := 4.0.
+	tAd := 4.0.
+	tIm := 12.0.
+	tIq := 2.0.
+	tIh := 5.0.
+	tIc := 5.0.
+	tId := 5.0.
+	tQ := 10.0.
+	tHh := 3.25.
+	tHc := 4.25.
+	tHd := 4.25.
+	tCc := 6.0.
+	tCd := 3.0.
 	tR := 999.0
 ]
 
@@ -103,63 +133,243 @@ CMIDAIRVietnamDiseaseModel >> pq: aNumber [
 ]
 
 { #category : #accessing }
-CMIDAIRVietnamDiseaseModel >> tA [
+CMIDAIRVietnamDiseaseModel >> tAa [
 
-	^ tA
+	^ tAa
 ]
 
 { #category : #accessing }
-CMIDAIRVietnamDiseaseModel >> tA: aNumber [
+CMIDAIRVietnamDiseaseModel >> tAa: anObject [
 
-	tA := aNumber
+	tAa := anObject
 ]
 
 { #category : #accessing }
-CMIDAIRVietnamDiseaseModel >> tC [
+CMIDAIRVietnamDiseaseModel >> tAc [
 
-	^ tC
+	^ tAc
 ]
 
 { #category : #accessing }
-CMIDAIRVietnamDiseaseModel >> tC: aNumber [
+CMIDAIRVietnamDiseaseModel >> tAc: anObject [
 
-	tC := aNumber
+	tAc := anObject
 ]
 
 { #category : #accessing }
-CMIDAIRVietnamDiseaseModel >> tE [
+CMIDAIRVietnamDiseaseModel >> tAd [
 
-	^ tE
+	^ tAd
 ]
 
 { #category : #accessing }
-CMIDAIRVietnamDiseaseModel >> tE: aNumber [
+CMIDAIRVietnamDiseaseModel >> tAd: anObject [
 
-	tE := aNumber
+	tAd := anObject
 ]
 
 { #category : #accessing }
-CMIDAIRVietnamDiseaseModel >> tH [
+CMIDAIRVietnamDiseaseModel >> tAh [
 
-	^ tH
+	^ tAh
 ]
 
 { #category : #accessing }
-CMIDAIRVietnamDiseaseModel >> tH: aNumber [
+CMIDAIRVietnamDiseaseModel >> tAh: anObject [
 
-	tH := aNumber
+	tAh := anObject
 ]
 
 { #category : #accessing }
-CMIDAIRVietnamDiseaseModel >> tI [
+CMIDAIRVietnamDiseaseModel >> tAm [
 
-	^ tI
+	^ tAm
 ]
 
 { #category : #accessing }
-CMIDAIRVietnamDiseaseModel >> tI: aNumber [
+CMIDAIRVietnamDiseaseModel >> tAm: anObject [
 
-	tI := aNumber
+	tAm := anObject
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tCc [
+
+	^ tCc
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tCc: anObject [
+
+	tCc := anObject
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tCd [
+
+	^ tCd
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tCd: anObject [
+
+	tCd := anObject
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tEa [
+
+	^ tEa
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tEa: anObject [
+
+	tEa := anObject
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tEc [
+
+	^ tEc
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tEc: anObject [
+
+	tEc := anObject
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tEd [
+
+	^ tEd
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tEd: anObject [
+
+	tEd := anObject
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tEh [
+
+	^ tEh
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tEh: anObject [
+
+	tEh := anObject
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tEm [
+
+	^ tEm
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tEm: anObject [
+
+	tEm := anObject
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tHc [
+
+	^ tHc
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tHc: anObject [
+
+	tHc := anObject
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tHd [
+
+	^ tHd
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tHd: anObject [
+
+	tHd := anObject
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tHh [
+
+	^ tHh
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tHh: anObject [
+
+	tHh := anObject
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tIc [
+
+	^ tIc
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tIc: anObject [
+
+	tIc := anObject
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tId [
+
+	^ tId
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tId: anObject [
+
+	tId := anObject
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tIh [
+
+	^ tIh
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tIh: anObject [
+
+	tIh := anObject
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tIm [
+
+	^ tIm
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tIm: anObject [
+
+	tIm := anObject
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tIq [
+
+	^ tIq
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> tIq: anObject [
+
+	tIq := anObject
 ]
 
 { #category : #accessing }

@@ -165,31 +165,121 @@ CMIDAIRVietnamDiseaseDynamics >> step [
 ]
 
 { #category : #parameters }
-CMIDAIRVietnamDiseaseDynamics >> tA [
+CMIDAIRVietnamDiseaseDynamics >> tAa [
 
 	^ self modelParameter
 ]
 
 { #category : #parameters }
-CMIDAIRVietnamDiseaseDynamics >> tC [
+CMIDAIRVietnamDiseaseDynamics >> tAc [
 
 	^ self modelParameter
 ]
 
 { #category : #parameters }
-CMIDAIRVietnamDiseaseDynamics >> tE [
+CMIDAIRVietnamDiseaseDynamics >> tAd [
 
 	^ self modelParameter
 ]
 
 { #category : #parameters }
-CMIDAIRVietnamDiseaseDynamics >> tH [
+CMIDAIRVietnamDiseaseDynamics >> tAh [
 
 	^ self modelParameter
 ]
 
 { #category : #parameters }
-CMIDAIRVietnamDiseaseDynamics >> tI [
+CMIDAIRVietnamDiseaseDynamics >> tAm [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> tCc [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> tCd [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> tEa [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> tEc [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> tEd [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> tEh [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> tEm [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> tHc [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> tHd [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> tHh [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> tIc [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> tId [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> tIh [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> tIm [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> tIq [
 
 	^ self modelParameter
 ]

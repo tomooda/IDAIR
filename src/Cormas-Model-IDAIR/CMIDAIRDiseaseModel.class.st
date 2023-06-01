@@ -1,7 +1,7 @@
 Class {
 	#name : #CMIDAIRDiseaseModel,
 	#superclass : #CMIDAIRSubmodel,
-	#category : #'Cormas-Model-IDAIR-Disease'
+	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
 { #category : #testing }

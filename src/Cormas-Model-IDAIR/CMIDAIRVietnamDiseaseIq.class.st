@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #accessing }
-CMIDAIRVietnamDiseaseIq >> next [
+CMIDAIRVietnamDiseaseIq >> requiredDuration [
 
-	^ CMIDAIRVietnamDiseaseQ newFrom: self
+	^ self tIq
 ]

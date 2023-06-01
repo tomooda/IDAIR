@@ -11,3 +11,9 @@ CMIDAIRVietnamDiseaseAm >> next [
 		  ifTrue: [ CMIDAIRVietnamDiseaseIq newFrom: self ]
 		  ifFalse: [ CMIDAIRVietnamDiseaseIm newFrom: self ]
 ]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseAm >> requiredDuration [
+
+	^ self tAm
+]

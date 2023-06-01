@@ -7,7 +7,7 @@ Class {
 	#classVars : [
 		'RandomGenerator'
 	],
-	#category : #'Cormas-Model-IDAIR-Disease'
+	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
 { #category : #testing }

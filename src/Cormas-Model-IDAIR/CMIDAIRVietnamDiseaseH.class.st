@@ -33,9 +33,3 @@ CMIDAIRVietnamDiseaseH >> isSymptomatic [
 
 	^ true
 ]
-
-{ #category : #accessing }
-CMIDAIRVietnamDiseaseH >> requiredDuration [
-
-	^ self tH
-]
