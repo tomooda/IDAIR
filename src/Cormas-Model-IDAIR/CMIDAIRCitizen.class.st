@@ -60,6 +60,12 @@ CMIDAIRCitizen >> diseasePov [
 	^ self diseaseDynamics color
 ]
 
+{ #category : #accessing }
+CMIDAIRCitizen >> estimatedTransmissibleDuration [
+
+	^ self diseaseDynamics estimatedTransmissibleDuration
+]
+
 { #category : #testing }
 CMIDAIRCitizen >> isAsymptomatic [
 

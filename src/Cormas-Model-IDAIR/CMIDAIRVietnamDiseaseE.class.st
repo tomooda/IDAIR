@@ -15,3 +15,9 @@ CMIDAIRVietnamDiseaseE >> color [
 
 	^ Color blue
 ]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseE >> estimatedTransmissibleDuration [
+
+	^ 0.0
+]

@@ -16,6 +16,12 @@ CMIDAIROxfordRecovered >> color [
 	^ Color cyan
 ]
 
+{ #category : #accessing }
+CMIDAIROxfordRecovered >> estimatedTransmissibleDuration [
+
+	^ 0.0
+]
+
 { #category : #testing }
 CMIDAIROxfordRecovered >> isRecovered [
 

@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #accessing }
+CMIDAIRVietnamDiseaseCd >> estimatedTransmissibleDuration [
+
+	^ 0.0
+]
+
+{ #category : #accessing }
 CMIDAIRVietnamDiseaseCd >> next [
 
 	^ CMIDAIRVietnamDiseaseD newFrom: self

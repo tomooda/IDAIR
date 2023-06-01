@@ -22,6 +22,12 @@ CMIDAIROxfordDead >> contact [
 	^ self
 ]
 
+{ #category : #accessing }
+CMIDAIROxfordDead >> estimatedTransmissibleDuration [
+
+	^ 0.0
+]
+
 { #category : #testing }
 CMIDAIROxfordDead >> isActive [
 

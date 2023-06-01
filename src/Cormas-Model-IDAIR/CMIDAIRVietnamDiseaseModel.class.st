@@ -33,6 +33,12 @@ Class {
 	#category : #'Cormas-Model-IDAIR-Disease-Vietnam'
 }
 
+{ #category : #converting }
+CMIDAIRVietnamDiseaseModel >> asPresenter [
+
+	^ CMIDAIRVietnamDiseaseModelPresenter on: self
+]
+
 { #category : #defaults }
 CMIDAIRVietnamDiseaseModel >> defaultDiseaseDynamicsClass [
 
@@ -70,6 +76,12 @@ CMIDAIRVietnamDiseaseModel >> initialize [
 	tCc := 6.0.
 	tCd := 3.0.
 	tR := 999.0
+]
+
+{ #category : #'user interfaces' }
+CMIDAIRVietnamDiseaseModel >> openGUI [
+
+	^ self asPresenter openWithSpec
 ]
 
 { #category : #accessing }

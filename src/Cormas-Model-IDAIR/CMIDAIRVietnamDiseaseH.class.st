@@ -16,6 +16,12 @@ CMIDAIRVietnamDiseaseH >> color [
 	^ Color gray
 ]
 
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseH >> estimatedTransmissibleDuration [
+
+	^ 0.0
+]
+
 { #category : #testing }
 CMIDAIRVietnamDiseaseH >> isHospitalized [
 

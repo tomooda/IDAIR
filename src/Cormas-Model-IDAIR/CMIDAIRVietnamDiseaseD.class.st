@@ -10,6 +10,12 @@ CMIDAIRVietnamDiseaseD >> color [
 	^ Color black
 ]
 
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseD >> estimatedTransmissibleDuration [
+
+	^ 0.0
+]
+
 { #category : #testing }
 CMIDAIRVietnamDiseaseD >> isDead [
 

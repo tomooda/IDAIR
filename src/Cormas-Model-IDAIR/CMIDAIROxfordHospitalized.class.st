@@ -14,6 +14,12 @@ CMIDAIROxfordHospitalized >> color [
 	^ self modelParameterAt: #hospitalizedColor
 ]
 
+{ #category : #accessing }
+CMIDAIROxfordHospitalized >> estimatedTransmissibleDuration [
+
+	^ 0.0
+]
+
 { #category : #testing }
 CMIDAIROxfordHospitalized >> isActive [
 

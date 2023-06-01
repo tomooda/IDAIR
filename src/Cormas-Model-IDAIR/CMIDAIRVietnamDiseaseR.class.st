@@ -10,6 +10,12 @@ CMIDAIRVietnamDiseaseR >> color [
 	^ Color cyan
 ]
 
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseR >> estimatedTransmissibleDuration [
+
+	^ 0.0
+]
+
 { #category : #testing }
 CMIDAIRVietnamDiseaseR >> isRecovered [
 

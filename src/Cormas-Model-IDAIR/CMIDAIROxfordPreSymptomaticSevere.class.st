@@ -11,6 +11,12 @@ CMIDAIROxfordPreSymptomaticSevere >> color [
 ]
 
 { #category : #accessing }
+CMIDAIROxfordPreSymptomaticSevere >> estimatedTransmissibleDuration [
+
+	^ self tauSym + (1 - self pHosp * self tauRec)
+]
+
+{ #category : #accessing }
 CMIDAIROxfordPreSymptomaticSevere >> name [
 
 	^ 'pre severe symptoms'

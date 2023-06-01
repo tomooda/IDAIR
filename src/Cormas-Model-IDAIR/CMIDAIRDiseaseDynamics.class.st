@@ -60,6 +60,12 @@ CMIDAIRDiseaseDynamics >> color [
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+CMIDAIRDiseaseDynamics >> estimatedTransmissibleDuration [
+
+	^ self subclassResponsibility
+]
+
 { #category : #testing }
 CMIDAIRDiseaseDynamics >> isAsymptomatic [
 

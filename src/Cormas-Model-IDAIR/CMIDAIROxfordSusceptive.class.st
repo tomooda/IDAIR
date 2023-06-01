@@ -29,6 +29,12 @@ CMIDAIROxfordSusceptive >> contact [
 	^ self
 ]
 
+{ #category : #accessing }
+CMIDAIROxfordSusceptive >> estimatedTransmissibleDuration [
+
+	^ 0.0
+]
+
 { #category : #testing }
 CMIDAIROxfordSusceptive >> isActive [
 

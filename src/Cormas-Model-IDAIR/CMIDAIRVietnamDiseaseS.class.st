@@ -10,6 +10,12 @@ CMIDAIRVietnamDiseaseS >> color [
 	^ Color green
 ]
 
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseS >> estimatedTransmissibleDuration [
+
+	^ 0.0
+]
+
 { #category : #testing }
 CMIDAIRVietnamDiseaseS >> isSusceptive [
 

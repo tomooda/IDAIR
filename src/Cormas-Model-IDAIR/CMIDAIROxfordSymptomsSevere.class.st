@@ -13,6 +13,12 @@ CMIDAIROxfordSymptomsSevere >> color [
 	^ self modelParameterAt: #symptomsSevereColor
 ]
 
+{ #category : #accessing }
+CMIDAIROxfordSymptomsSevere >> estimatedTransmissibleDuration [
+
+	^ self tauSym + (1 - self pHosp * self tauRec)
+]
+
 { #category : #testing }
 CMIDAIROxfordSymptomsSevere >> isActive [
 

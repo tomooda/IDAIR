@@ -10,6 +10,12 @@ CMIDAIROxfordAsymptomatic >> color [
 	^ self modelParameterAt: #asymptomaticColor
 ]
 
+{ #category : #accessing }
+CMIDAIROxfordAsymptomatic >> estimatedTransmissibleDuration [
+
+	^ self tauARec
+]
+
 { #category : #testing }
 CMIDAIROxfordAsymptomatic >> isActive [
 

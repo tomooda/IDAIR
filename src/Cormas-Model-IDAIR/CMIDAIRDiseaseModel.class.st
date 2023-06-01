@@ -17,6 +17,22 @@ CMIDAIRDiseaseModel >> defaultDiseaseDynamicsClass [
 ]
 
 { #category : #accessing }
+CMIDAIRDiseaseModel >> estimatedTransmissibleDuration [
+
+	| t n |
+	t := 0.
+	n := 0.
+	self cormasModel theCitizens do: [ :citizen | 
+		(citizen isTransmissible and: [ citizen isHospitalized not ]) 
+			ifTrue: [ 
+				t := t + citizen estimatedTransmissibleDuration.
+				n := n + 1 ] ].
+	^ n > 0
+		  ifTrue: [ t asFloat / n asFloat ]
+		  ifFalse: [ 0.0 ]
+]
+
+{ #category : #accessing }
 CMIDAIRDiseaseModel >> name [
 
 	^ #disease

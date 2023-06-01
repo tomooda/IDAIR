@@ -2,8 +2,7 @@ Class {
 	#name : #CMIDAIRContactModel,
 	#superclass : #CMIDAIRSubmodel,
 	#instVars : [
-		'r0',
-		'estimatedTransmissibleDuration'
+		'r0'
 	],
 	#category : #'Cormas-Model-IDAIR-Contact-SingleLocation'
 }
@@ -15,12 +14,6 @@ CMIDAIRContactModel >> asPresenter [
 ]
 
 { #category : #defaults }
-CMIDAIRContactModel >> defaultEstimatedTransmissibleDuration [
-
-	^ 13.0
-]
-
-{ #category : #defaults }
 CMIDAIRContactModel >> defaultR0 [
 
 	^ 1.0
@@ -29,15 +22,9 @@ CMIDAIRContactModel >> defaultR0 [
 { #category : #accessing }
 CMIDAIRContactModel >> estimatedTransmissibleDuration [
 
-	^ estimatedTransmissibleDuration ifNil: [ 
-		  estimatedTransmissibleDuration := self
-			                                    defaultEstimatedTransmissibleDuration ]
-]
-
-{ #category : #accessing }
-CMIDAIRContactModel >> estimatedTransmissibleDuration: aNumber [
-
-	estimatedTransmissibleDuration := aNumber
+	^ self cormasModel
+		  submodelAt: #disease
+		  do: [ :diseaseModel | diseaseModel estimatedTransmissibleDuration ]
 ]
 
 { #category : #accessing }
@@ -92,10 +79,11 @@ CMIDAIRContactModel >> step: anInteger [
 	numberOfTransmissibleInCommunity := self
 		                                    numberOfTransmissibleInCommunity.
 	numberOfSusceptive := self numberOfSusceptive.
-	numberOfSusceptive > 0 ifTrue: [ 
-		p := self r0 asFloat * numberOfTransmissibleInCommunity
-		     / numberOfSusceptive / self estimatedTransmissibleDuration.
-		self cormasModel theCitizens do: [ :citizen | 
-			(citizen isSusceptive and: [ self random <= p ]) ifTrue: [ 
-				citizen beExposed ] ] ]
+	(numberOfSusceptive > 0 and: [ numberOfTransmissibleInCommunity > 0 ]) 
+		ifTrue: [ 
+			p := self r0 asFloat * numberOfTransmissibleInCommunity
+			     / numberOfSusceptive / self estimatedTransmissibleDuration.
+			self cormasModel theCitizens do: [ :citizen | 
+				(citizen isSusceptive and: [ self random <= p ]) ifTrue: [ 
+					citizen beExposed ] ] ]
 ]

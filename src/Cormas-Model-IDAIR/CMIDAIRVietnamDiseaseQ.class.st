@@ -10,6 +10,12 @@ CMIDAIRVietnamDiseaseQ >> color [
 	^ Color gray
 ]
 
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseQ >> estimatedTransmissibleDuration [
+
+	^ 0.0
+]
+
 { #category : #testing }
 CMIDAIRVietnamDiseaseQ >> isInfected [
 

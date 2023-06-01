@@ -13,6 +13,12 @@ CMIDAIROxfordICUed >> color [
 	^ self modelParameterAt: #icuedColor
 ]
 
+{ #category : #accessing }
+CMIDAIROxfordICUed >> estimatedTransmissibleDuration [
+
+	^ 0.0
+]
+
 { #category : #testing }
 CMIDAIROxfordICUed >> isActive [
 

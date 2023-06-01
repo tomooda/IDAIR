@@ -4,6 +4,12 @@ Class {
 	#category : #'Cormas-Model-IDAIR-Disease-Vietnam'
 }
 
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseAh >> estimatedTransmissibleDuration [
+
+	^ self tAh + self tIh
+]
+
 { #category : #transitioning }
 CMIDAIRVietnamDiseaseAh >> next [
 
