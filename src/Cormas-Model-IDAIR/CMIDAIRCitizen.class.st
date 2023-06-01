@@ -20,21 +20,9 @@ CMIDAIRCitizen >> beDead [
 ]
 
 { #category : #accessing }
-CMIDAIRCitizen >> beHospitalized [
-
-	self diseaseDynamics: self diseaseDynamics beHospitalized
-]
-
-{ #category : #accessing }
 CMIDAIRCitizen >> beInfected [
 
 	self diseaseDynamics: self diseaseDynamics beInfected
-]
-
-{ #category : #accessing }
-CMIDAIRCitizen >> bePreSymptomaticMild [ 
-
-	self diseaseDynamics: self diseaseDynamics bePreSymptomaticMild
 ]
 
 { #category : #accessing }
@@ -44,15 +32,16 @@ CMIDAIRCitizen >> beSusceptive [
 ]
 
 { #category : #defaults }
-CMIDAIRCitizen >> defaultDiseaseDynamics [
+CMIDAIRCitizen >> defaultDiseaseDynamicsClass [
 
-	^ CMIDAIROxfordHealthy on: self
+	^ self cormasModel defaultDiseaseDynamicsClass
 ]
 
 { #category : #accessing }
 CMIDAIRCitizen >> diseaseDynamics [
 
-	^ diseaseDynamics ifNil: [ diseaseDynamics := self defaultDiseaseDynamics ]
+	^ diseaseDynamics ifNil: [ 
+		  diseaseDynamics := self defaultDiseaseDynamicsClass on: self ]
 ]
 
 { #category : #accessing }

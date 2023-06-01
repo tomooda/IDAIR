@@ -92,6 +92,14 @@ CMIDAIRModel >> addSubmodel: aCMIDAIRSubmodel [
 	^ submodels at: aCMIDAIRSubmodel name put: aCMIDAIRSubmodel
 ]
 
+{ #category : #accessing }
+CMIDAIRModel >> defaultDiseaseDynamicsClass [
+
+	^ self
+		  submodelAt: #disease
+		  do: [ :diseaseModel | diseaseModel defaultDiseaseDynamicsClass ]
+]
+
 { #category : #init }
 CMIDAIRModel >> init [
 

@@ -7,7 +7,7 @@ Class {
 	#classVars : [
 		'RandomGenerator'
 	],
-	#category : #'Cormas-Model-IDAIR-Core'
+	#category : #'Cormas-Model-IDAIR-Disease'
 }
 
 { #category : #testing }
@@ -28,6 +28,18 @@ CMIDAIRDiseaseDynamics class >> on: aCMIDAIRCitizen [
 CMIDAIRDiseaseDynamics class >> randomGenerator [
 
 	^ RandomGenerator ifNil: [ RandomGenerator := Random new ]
+]
+
+{ #category : #actions }
+CMIDAIRDiseaseDynamics >> beAsymptomatic [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #actions }
+CMIDAIRDiseaseDynamics >> beInfected [
+
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
@@ -92,6 +104,12 @@ CMIDAIRDiseaseDynamics >> isSymptomatic [
 
 { #category : #testing }
 CMIDAIRDiseaseDynamics >> isTransmissible [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #actions }
+CMIDAIRDiseaseDynamics >> step [
 
 	^ self subclassResponsibility
 ]

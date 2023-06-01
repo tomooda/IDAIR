@@ -41,12 +41,6 @@ CMIDAIROxfordDiseaseDynamics >> beICUed [
 ]
 
 { #category : #transitioning }
-CMIDAIROxfordDiseaseDynamics >> beInfected [
-
-	^ self subclassResponsibility
-]
-
-{ #category : #transitioning }
 CMIDAIROxfordDiseaseDynamics >> bePreSymptomaticMild [
 
 	^ CMIDAIROxfordPreSymptomaticMild newFrom: self

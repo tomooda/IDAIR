@@ -1,6 +1,6 @@
 Class {
 	#name : #CMIDAIROxfordDiseaseModel,
-	#superclass : #CMIDAIRSubmodel,
+	#superclass : #CMIDAIRDiseaseModel,
 	#instVars : [
 		'pAsymptomaticOdm',
 		'pPreSymptomaticMildOdm',
@@ -50,16 +50,22 @@ CMIDAIROxfordDiseaseModel >> asymptomaticColor: aColor [
 	asymptomaticColor := aColor
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing-colors' }
 CMIDAIROxfordDiseaseModel >> deadColor [
 
 	^ deadColor
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing-colors' }
 CMIDAIROxfordDiseaseModel >> deadColor: aColor [
 
 	deadColor := aColor
+]
+
+{ #category : #accessing }
+CMIDAIROxfordDiseaseModel >> defaultDiseaseDynamicsClass [
+
+	^ CMIDAIROxfordSusceptive
 ]
 
 { #category : #'accessing-colors' }
@@ -142,12 +148,6 @@ CMIDAIROxfordDiseaseModel >> initialize [
 	symptomsSevereColor := Color red darker
 	
 	
-]
-
-{ #category : #accessing }
-CMIDAIROxfordDiseaseModel >> name [
-
-	^ #disease
 ]
 
 { #category : #'user interfaces' }
@@ -274,13 +274,6 @@ CMIDAIROxfordDiseaseModel >> preSymptomaticSevereColor [
 CMIDAIROxfordDiseaseModel >> preSymptomaticSevereColor: aColor [
 
 	preSymptomaticSevereColor := aColor
-]
-
-{ #category : #control }
-CMIDAIROxfordDiseaseModel >> step: anInteger [
-
-	self cormasModel theCitizens do: [ :citizen | 
-		citizen diseaseDynamics: citizen diseaseDynamics step ]
 ]
 
 { #category : #'accessing-colors' }
