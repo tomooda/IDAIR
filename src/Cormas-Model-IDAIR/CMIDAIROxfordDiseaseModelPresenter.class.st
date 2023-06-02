@@ -51,7 +51,7 @@ CMIDAIROxfordDiseaseModelPresenter class >> defaultSpec [
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
 				   vAlignCenter;
-				   add: '                → Recovered p=1, tauARec=' expand: false;
+				   add: '                → Recovered p=1, τARec=' expand: false;
 				   add: #tauARec expand: false;
 				   yourself)
 		  expand: false;
@@ -67,13 +67,13 @@ CMIDAIROxfordDiseaseModelPresenter class >> defaultSpec [
 				   vAlignCenter;
 				   add: '                → Mild symptoms' expand: false;
 				   add: #symptomsMildColor width: 24;
-				   add: 'p=1, tauSym=' expand: false;
+				   add: 'p=1, τSym=' expand: false;
 				   add: #tauSym expand: false;
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
 				   vAlignCenter;
-				   add: '                        → Recovered p=1, tauRec='
+				   add: '                        → Recovered p=1, τRec='
 				   expand: false;
 				   add: #tauRec expand: false;
 				   yourself)
@@ -89,7 +89,7 @@ CMIDAIROxfordDiseaseModelPresenter class >> defaultSpec [
 				   vAlignCenter;
 				   add: '                → Severe symptoms' expand: false;
 				   add: #symptomsSevereColor width: 24;
-				   add: 'tauSym' expand: false;
+				   add: 'τSym' expand: false;
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
@@ -98,7 +98,7 @@ CMIDAIROxfordDiseaseModelPresenter class >> defaultSpec [
 				   add: #hospitalizedColor width: 24;
 				   add: 'pHosp=' expand: false;
 				   add: #pHosp expand: false;
-				   add: ', tauHosp=' expand: false;
+				   add: ', τHosp=' expand: false;
 				   add: #tauHosp expand: false;
 				   yourself)
 		  expand: false;
@@ -110,7 +110,7 @@ CMIDAIROxfordDiseaseModelPresenter class >> defaultSpec [
 				   add: #pCrit expand: false;
 				   add: ' * pICU=' expand: false;
 				   add: #pICU expand: false;
-				   add: ', tauCrit=' expand: false;
+				   add: ', τCrit=' expand: false;
 				   add: #tauCrit expand: false;
 				   yourself)
 		  expand: false;
@@ -121,7 +121,7 @@ CMIDAIROxfordDiseaseModelPresenter class >> defaultSpec [
 				   add: #deadColor width: 24;
 				   add: 'pDeath=' expand: false;
 				   add: #pDeath expand: false;
-				   add: ', tauDeath=' expand: false;
+				   add: ', τDeath=' expand: false;
 				   add: #tauDeath expand: false;
 				   yourself)
 		  expand: false;
@@ -131,14 +131,14 @@ CMIDAIROxfordDiseaseModelPresenter class >> defaultSpec [
 					   '                                        → Hospitalized recovering'
 				   expand: false;
 				   add: #hospitalizedRecoveringColor width: 24;
-				   add: 'p=1-pDeath, tauCritSurv=' expand: false;
+				   add: 'p=1-pDeath, τCritSurv=' expand: false;
 				   add: #tauCritSurv expand: false;
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
 				   vAlignCenter;
 				   add:
-					   '                                                → Recovered p=1, tauHospRec='
+					   '                                                → Recovered p=1, τHospRec='
 				   expand: false;
 				   add: #tauHospRec expand: false;
 				   yourself)
@@ -146,14 +146,14 @@ CMIDAIROxfordDiseaseModelPresenter class >> defaultSpec [
 		  add: (SpBoxLayout newHorizontal
 				   vAlignCenter;
 				   add:
-					   '                                → Death p=pCrit*(1-pICU), tauCrit'
+					   '                                → Death p=pCrit*(1-pICU), τCrit'
 				   expand: false;
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
 				   vAlignCenter;
 				   add:
-					   '                                → Recovered p=1-pCrit, tauRec'
+					   '                                → Recovered p=1-pCrit, τRec'
 				   expand: false;
 				   yourself)
 		  expand: false;
