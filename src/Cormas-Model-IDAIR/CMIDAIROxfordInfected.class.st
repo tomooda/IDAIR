@@ -27,12 +27,6 @@ CMIDAIROxfordInfected >> beExposed [
 	^ self
 ]
 
-{ #category : #actions }
-CMIDAIROxfordInfected >> contact [
-
-	^ self
-]
-
 { #category : #accessing }
 CMIDAIROxfordInfected >> duration [
 

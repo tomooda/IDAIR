@@ -16,7 +16,6 @@ Class {
 		'tauCritSurv',
 		'tauHospRec',
 		'tauDeath',
-		'pInfection',
 		'pFalseNegative',
 		'healthyColor',
 		'asymptomaticColor',
@@ -134,7 +133,6 @@ CMIDAIROxfordDiseaseModel >> initialize [
 	tauCritSurv := 6.0.
 	tauHospRec := 3.25.
 	tauDeath := 3.0.
-	pInfection := 0.3.
 	pFalseNegative := 0.0	.
 	deadColor := Color black.
 	healthyColor :=  Color green muchLighter.
@@ -226,18 +224,6 @@ CMIDAIROxfordDiseaseModel >> pICU [
 CMIDAIROxfordDiseaseModel >> pICU: aNumber [
 
 	pICU := aNumber
-]
-
-{ #category : #'accessing-parameters' }
-CMIDAIROxfordDiseaseModel >> pInfection [
-
-	^ pInfection
-]
-
-{ #category : #'accessing-parameters' }
-CMIDAIROxfordDiseaseModel >> pInfection: aNumber [
-
-	pInfection := aNumber
 ]
 
 { #category : #'accessing-parameters' }

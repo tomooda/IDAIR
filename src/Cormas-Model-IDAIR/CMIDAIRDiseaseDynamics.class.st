@@ -43,6 +43,12 @@ CMIDAIRDiseaseDynamics >> beExposed [
 ]
 
 { #category : #accessing }
+CMIDAIRDiseaseDynamics >> beta [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
 CMIDAIRDiseaseDynamics >> citizen [
 
 	^ citizen

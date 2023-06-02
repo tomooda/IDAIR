@@ -22,13 +22,6 @@ CMIDAIROxfordSusceptive >> color [
 	^ self modelParameterAt: #healthyColor
 ]
 
-{ #category : #actions }
-CMIDAIROxfordSusceptive >> contact [
-
-	self random <= self pInfection ifTrue: [ ^ self beExposed ].
-	^ self
-]
-
 { #category : #accessing }
 CMIDAIROxfordSusceptive >> estimatedTransmissibleDuration [
 

@@ -16,12 +16,6 @@ CMIDAIROxfordDead >> color [
 	^ self modelParameterAt: #deadColor
 ]
 
-{ #category : #actions }
-CMIDAIROxfordDead >> contact [
-
-	^ self
-]
-
 { #category : #accessing }
 CMIDAIROxfordDead >> estimatedTransmissibleDuration [
 

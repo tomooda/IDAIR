@@ -16,7 +16,6 @@ Class {
 		'tauCritSurv',
 		'tauHospRec',
 		'tauDeath',
-		'pInfection',
 		'healthyColor',
 		'asymptomaticColor',
 		'preSymptomaticMildColor',
@@ -39,8 +38,7 @@ CMIDAIROxfordDiseaseModelPresenter class >> defaultSpec [
 				   vAlignCenter;
 				   add: 'Healthy' expand: false;
 				   add: #healthyColor width: 24;
-				   add: '→ Susceptible pInfection=' expand: false;
-				   add: #pInfection expand: false;
+				   add: '→ Susceptible' expand: false;
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
@@ -254,11 +252,6 @@ CMIDAIROxfordDiseaseModelPresenter >> initializePresenters [
 		            whenNumberChangedDo: [ :value | 
 			            self model ifNotNil: [ :m | m tauDeath: value ] ];
 		            yourself.
-	pInfection := self newNumberInput
-		              beFloat;
-		              whenNumberChangedDo: [ :value | 
-			              self model ifNotNil: [ :m | m pInfection: value ] ];
-		              yourself.
 	healthyColor := self newColorDropList whenSelectedItemChangedDo: [ 
 		                :color | 
 		                self model ifNotNil: [ :m | m healthyColor: color ] ].
@@ -325,7 +318,6 @@ CMIDAIROxfordDiseaseModelPresenter >> modelChanged [
 		tauCritSurv number: m tauCritSurv.
 		tauHospRec number: m tauHospRec.
 		tauDeath number: m tauDeath.
-		pInfection number: m pInfection.
 		healthyColor selectItem: m healthyColor.
 		asymptomaticColor selectItem: m asymptomaticColor.
 		preSymptomaticMildColor selectItem: m preSymptomaticMildColor.
