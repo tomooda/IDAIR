@@ -2,7 +2,7 @@ Class {
 	#name : #CMIDAIRContactModel,
 	#superclass : #CMIDAIRSubmodel,
 	#instVars : [
-		'r0'
+		'socialDistanceFactor'
 	],
 	#category : #'Cormas-Model-IDAIR-Contact-SingleLocation'
 }
@@ -14,9 +14,9 @@ CMIDAIRContactModel >> asPresenter [
 ]
 
 { #category : #defaults }
-CMIDAIRContactModel >> defaultR0 [
+CMIDAIRContactModel >> defaultSocialDistanceFactor [
 
-	^ 1.0
+	^ 0.0
 ]
 
 { #category : #accessing }
@@ -43,17 +43,6 @@ CMIDAIRContactModel >> numberOfSusceptive [
 	^ num
 ]
 
-{ #category : #accessing }
-CMIDAIRContactModel >> numberOfTransmissibleInCommunity [
-
-	| num |
-	num := 0.
-	self cormasModel theCitizens do: [ :citizen | 
-		(citizen isTransmissible and: [ citizen isHospitalized not ]) 
-			ifTrue: [ num := num + 1 ] ].
-	^ num
-]
-
 { #category : #converting }
 CMIDAIRContactModel >> openGUI [
 
@@ -61,29 +50,34 @@ CMIDAIRContactModel >> openGUI [
 ]
 
 { #category : #accessing }
-CMIDAIRContactModel >> r0 [
+CMIDAIRContactModel >> socialDistanceFactor [
 
-	^ r0 ifNil: [ r0 := self defaultR0 ]
+	^ socialDistanceFactor ifNil: [ 
+		  socialDistanceFactor := self defaultSocialDistanceFactor ]
 ]
 
 { #category : #accessing }
-CMIDAIRContactModel >> r0: aNumber [
+CMIDAIRContactModel >> socialDistanceFactor: aNumber [
 
-	r0 := aNumber
+	socialDistanceFactor := aNumber
 ]
 
 { #category : #control }
 CMIDAIRContactModel >> step: anInteger [
 
-	| numberOfSusceptive numberOfTransmissibleInCommunity p |
-	numberOfTransmissibleInCommunity := self
-		                                    numberOfTransmissibleInCommunity.
-	numberOfSusceptive := self numberOfSusceptive.
-	(numberOfSusceptive > 0 and: [ numberOfTransmissibleInCommunity > 0 ]) 
-		ifTrue: [ 
-			p := self r0 asFloat * numberOfTransmissibleInCommunity
-			     / numberOfSusceptive / self estimatedTransmissibleDuration.
+	| numberOfSusceptive |
+	(numberOfSusceptive := self numberOfSusceptive) > 0 ifTrue: [ 
+		| totalBeta |
+		totalBeta := self cormasModel theCitizens
+			             inject: 0.0
+			             into: [ :sum :citizen | 
+				             citizen diseaseDynamics beta
+				             / citizen diseaseDynamics tau + sum ].
+		totalBeta > 0.0 ifTrue: [ 
+			| p |
+			p := (1.0 - self socialDistanceFactor min: 1.0 max: 0.0)
+			     * totalBeta / numberOfSusceptive.
 			self cormasModel theCitizens do: [ :citizen | 
 				(citizen isSusceptive and: [ self random <= p ]) ifTrue: [ 
-					citizen beExposed ] ] ]
+					citizen beExposed ] ] ] ]
 ]

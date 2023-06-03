@@ -11,6 +11,12 @@ CMIDAIROxfordRecovered >> beExposed [
 ]
 
 { #category : #accessing }
+CMIDAIROxfordRecovered >> beta [
+
+	^ 0.0
+]
+
+{ #category : #accessing }
 CMIDAIROxfordRecovered >> color [
 
 	^ Color cyan
@@ -46,8 +52,8 @@ CMIDAIROxfordRecovered >> step [
 	^ self
 ]
 
-{ #category : #actions }
-CMIDAIROxfordRecovered >> test [
+{ #category : #accessing }
+CMIDAIROxfordRecovered >> tau [
 
-	^ self
+	^ Float infinity
 ]

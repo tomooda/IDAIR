@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #accessing }
+CMIDAIRVietnamDiseaseD >> beta [
+
+	^ 0.0
+]
+
+{ #category : #accessing }
 CMIDAIRVietnamDiseaseD >> color [
 
 	^ Color black
@@ -30,6 +36,12 @@ CMIDAIRVietnamDiseaseD >> next [
 
 { #category : #accessing }
 CMIDAIRVietnamDiseaseD >> requiredDuration [
+
+	^ Float infinity
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseD >> tau [
 
 	^ Float infinity
 ]

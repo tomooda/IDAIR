@@ -156,8 +156,8 @@ CMIDAIRDiseaseDynamics >> step [
 	^ self subclassResponsibility
 ]
 
-{ #category : #actions }
-CMIDAIRDiseaseDynamics >> test [
+{ #category : #accessing }
+CMIDAIRDiseaseDynamics >> tau [
 
 	^ self subclassResponsibility
 ]

@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #accessing }
+CMIDAIROxfordICUed >> beta [
+
+	^ 0.0
+]
+
+{ #category : #accessing }
 CMIDAIROxfordICUed >> color [
 
 	^ self modelParameterAt: #icuedColor
@@ -65,6 +71,14 @@ CMIDAIROxfordICUed >> step [
 			self duration >= self tauCritSurv ifTrue: [ 
 				^ self beHospitalizedRecovering ] ].
 	^ self
+]
+
+{ #category : #accessing }
+CMIDAIROxfordICUed >> tau [
+
+	^ self toBeDead
+		  ifTrue: [ self tauDeath ]
+		  ifFalse: [ self tauCritSurv ]
 ]
 
 { #category : #testing }

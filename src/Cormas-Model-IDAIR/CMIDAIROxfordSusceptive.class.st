@@ -17,6 +17,12 @@ CMIDAIROxfordSusceptive >> beExposed [
 ]
 
 { #category : #accessing }
+CMIDAIROxfordSusceptive >> beta [
+
+	^ 0.0
+]
+
+{ #category : #accessing }
 CMIDAIROxfordSusceptive >> color [
 
 	^ self modelParameterAt: #healthyColor
@@ -58,8 +64,8 @@ CMIDAIROxfordSusceptive >> step [
 	^ self
 ]
 
-{ #category : #actions }
-CMIDAIROxfordSusceptive >> test [
+{ #category : #accessing }
+CMIDAIROxfordSusceptive >> tau [
 
-	^ self
+	^ Float infinity
 ]

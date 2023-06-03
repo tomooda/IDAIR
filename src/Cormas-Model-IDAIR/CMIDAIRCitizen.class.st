@@ -7,25 +7,25 @@ Class {
 	#category : #'Cormas-Model-IDAIR-Core'
 }
 
-{ #category : #accessing }
+{ #category : #'transitioning-disease' }
 CMIDAIRCitizen >> beAsymptomatic [
 
 	self diseaseDynamics: self diseaseDynamics beAsymptomatic
 ]
 
-{ #category : #accessing }
+{ #category : #'transitioning-disease' }
 CMIDAIRCitizen >> beDead [
 
 	self diseaseDynamics: self diseaseDynamics beDead
 ]
 
-{ #category : #accessing }
+{ #category : #'transitioning-disease' }
 CMIDAIRCitizen >> beExposed [
 
 	self diseaseDynamics: self diseaseDynamics beExposed
 ]
 
-{ #category : #accessing }
+{ #category : #'transitioning-disease' }
 CMIDAIRCitizen >> beSusceptive [
 
 	self diseaseDynamics: self diseaseDynamics beSusceptive
@@ -37,14 +37,14 @@ CMIDAIRCitizen >> defaultDiseaseDynamicsClass [
 	^ self cormasModel defaultDiseaseDynamicsClass
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing-disease' }
 CMIDAIRCitizen >> diseaseDynamics [
 
 	^ diseaseDynamics ifNil: [ 
 		  diseaseDynamics := self defaultDiseaseDynamicsClass on: self ]
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing-disease' }
 CMIDAIRCitizen >> diseaseDynamics: aCMIDAIRDiseaseDynamics [
 
 	diseaseDynamics == aCMIDAIRDiseaseDynamics ifFalse: [ 
@@ -60,7 +60,7 @@ CMIDAIRCitizen >> diseasePov [
 	^ self diseaseDynamics color
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing-disease' }
 CMIDAIRCitizen >> estimatedTransmissibleDuration [
 
 	^ self diseaseDynamics estimatedTransmissibleDuration
@@ -130,10 +130,4 @@ CMIDAIRCitizen >> sizeOfPOV [
 CMIDAIRCitizen >> step [
 
 	self diseaseDynamics: self diseaseDynamics step
-]
-
-{ #category : #actions }
-CMIDAIRCitizen >> test [
-
-	self diseaseDynamics: self diseaseDynamics test
 ]

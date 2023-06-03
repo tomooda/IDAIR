@@ -9,6 +9,12 @@ Class {
 }
 
 { #category : #accessing }
+CMIDAIROxfordHospitalized >> beta [
+
+	^ 0.0
+]
+
+{ #category : #accessing }
 CMIDAIROxfordHospitalized >> color [
 
 	^ self modelParameterAt: #hospitalizedColor
@@ -63,6 +69,14 @@ CMIDAIROxfordHospitalized >> step [
 		ifFalse: [ 
 		self duration >= self tauHospRec ifTrue: [ ^ self beRecovered ] ].
 	^ self
+]
+
+{ #category : #accessing }
+CMIDAIROxfordHospitalized >> tau [
+
+	^ self toBeCritical
+		  ifTrue: [ self tauCrit ]
+		  ifFalse: [ self tauHospRec ]
 ]
 
 { #category : #testing }

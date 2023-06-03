@@ -11,6 +11,12 @@ CMIDAIRVietnamDiseaseH class >> isAbstract [
 ]
 
 { #category : #accessing }
+CMIDAIRVietnamDiseaseH >> beta [
+
+	^ 0.0
+]
+
+{ #category : #accessing }
 CMIDAIRVietnamDiseaseH >> color [
 
 	^ Color gray

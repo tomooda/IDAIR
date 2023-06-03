@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #accessing }
+CMIDAIROxfordSymptomsMild >> beta [
+
+	^ self betaSymptomaticMild
+]
+
+{ #category : #accessing }
 CMIDAIROxfordSymptomsMild >> color [
 
 	^ self modelParameterAt: #symptomsMildColor
@@ -52,4 +58,10 @@ CMIDAIROxfordSymptomsMild >> step [
 	self duration: self duration + 1.
 	self duration >= self tauRec ifTrue: [ ^ self beRecovered ].
 	^ self
+]
+
+{ #category : #accessing }
+CMIDAIROxfordSymptomsMild >> tau [
+
+	^ self tauRec
 ]

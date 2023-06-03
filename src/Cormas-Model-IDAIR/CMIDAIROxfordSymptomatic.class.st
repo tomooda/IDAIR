@@ -15,9 +15,3 @@ CMIDAIROxfordSymptomatic >> isSymptomatic [
 
 	^ true
 ]
-
-{ #category : #actions }
-CMIDAIROxfordSymptomatic >> test [
-
-	^ self
-]

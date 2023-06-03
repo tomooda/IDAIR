@@ -21,3 +21,9 @@ CMIDAIRVietnamDiseaseCd >> requiredDuration [
 
 	^ self tCd
 ]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseCd >> tau [
+
+	^ self tCd
+]

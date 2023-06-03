@@ -76,6 +76,36 @@ CMIDAIROxfordDiseaseDynamics >> beSymptomsSevere [
 	^ CMIDAIROxfordSymptomsSevere newFrom: self
 ]
 
+{ #category : #parameters }
+CMIDAIROxfordDiseaseDynamics >> betaAsymptomatic [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIROxfordDiseaseDynamics >> betaPreSymptomaticMild [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIROxfordDiseaseDynamics >> betaPreSymptomaticSevere [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIROxfordDiseaseDynamics >> betaSymptomaticMild [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIROxfordDiseaseDynamics >> betaSymptomaticSevere [
+
+	^ self modelParameter
+]
+
 { #category : #testing }
 CMIDAIROxfordDiseaseDynamics >> isAsymptomatic [
 

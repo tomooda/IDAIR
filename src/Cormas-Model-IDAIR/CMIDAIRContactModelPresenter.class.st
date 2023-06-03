@@ -2,7 +2,7 @@ Class {
 	#name : #CMIDAIRContactModelPresenter,
 	#superclass : #SpPresenterWithModel,
 	#instVars : [
-		'r0'
+		'socialDistanceFactor'
 	],
 	#category : #'Cormas-Model-IDAIR-Contact-SingleLocation'
 }
@@ -13,8 +13,8 @@ CMIDAIRContactModelPresenter class >> defaultSpec [
 	^ SpGridLayout new
 		  beColumnHomogeneous;
 		  beRowHomogeneous;
-		  add: 'R0' at: 1 @ 1;
-		  add: #r0 at: 2 @ 1;
+		  add: 'Social distance factor' at: 1 @ 1;
+		  add: #socialDistanceFactor at: 2 @ 1;
 		  yourself
 ]
 
@@ -24,13 +24,15 @@ CMIDAIRContactModelPresenter >> initializePresenters [
 	"self new open"
 
 	super initializePresenters.
-	r0 := self newNumberInput
-		      beFloat;
-		      minimum: 0.0;
-		      climbRate: 1.0;
-		      whenNumberChangedDo: [ :value | 
-			      self model ifNotNil: [ :m | m r0: value ] ];
-		      yourself
+	socialDistanceFactor := self newNumberInput
+		                        beFloat;
+		                        minimum: 0.0;
+		                        maximum: 0.0;
+		                        climbRate: 0.1;
+		                        whenNumberChangedDo: [ :value | 
+			                        self model ifNotNil: [ :m | 
+					                        m socialDistanceFactor: value ] ];
+		                        yourself
 ]
 
 { #category : #initialization }
@@ -44,7 +46,8 @@ CMIDAIRContactModelPresenter >> initializeWindow: aSpWindowPresenter [
 CMIDAIRContactModelPresenter >> modelChanged [
 
 	super modelChanged.
-	self model ifNotNil: [ :m | r0 number: m r0 ]
+	self model ifNotNil: [ :m | 
+		socialDistanceFactor number: m socialDistanceFactor ]
 ]
 
 { #category : #accessing }

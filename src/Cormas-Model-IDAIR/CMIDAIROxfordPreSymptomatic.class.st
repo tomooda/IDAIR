@@ -28,8 +28,8 @@ CMIDAIROxfordPreSymptomatic >> isTransmissible [
 	^ true
 ]
 
-{ #category : #actions }
-CMIDAIROxfordPreSymptomatic >> test [
+{ #category : #accessing }
+CMIDAIROxfordPreSymptomatic >> tau [
 
-	^ self
+	^ self tauSym
 ]

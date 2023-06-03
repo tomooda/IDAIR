@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #accessing }
+CMIDAIROxfordPreSymptomaticSevere >> beta [
+
+	^ self betaPreSymptomaticSevere
+]
+
+{ #category : #accessing }
 CMIDAIROxfordPreSymptomaticSevere >> color [
 
 	^ self modelParameterAt: #preSymptomaticSevereColor

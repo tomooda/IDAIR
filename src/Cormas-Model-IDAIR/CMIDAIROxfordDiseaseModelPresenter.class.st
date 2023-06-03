@@ -16,6 +16,11 @@ Class {
 		'tauCritSurv',
 		'tauHospRec',
 		'tauDeath',
+		'betaAsymptomatic',
+		'betaPreSymptomaticMild',
+		'betaPreSymptomaticSevere',
+		'betaSymptomaticMild',
+		'betaSymptomaticSevere',
 		'healthyColor',
 		'asymptomaticColor',
 		'preSymptomaticMildColor',
@@ -47,6 +52,8 @@ CMIDAIROxfordDiseaseModelPresenter class >> defaultSpec [
 				   add: #asymptomaticColor width: 24;
 				   add: 'pAsym=' expand: false;
 				   add: #pAsymptomaticOdm expand: false;
+				   add: 'βAsymptomatic=' expand: false;
+				   add: #betaAsymptomatic expand: false;
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
@@ -61,6 +68,8 @@ CMIDAIROxfordDiseaseModelPresenter class >> defaultSpec [
 				   add: #preSymptomaticMildColor width: 24;
 				   add: 'pMild=' expand: false;
 				   add: #pPreSymptomaticMildOdm expand: false;
+				   add: 'βPreSymptomaticMild=' expand: false;
+				   add: #betaPreSymptomaticMild expand: false;
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
@@ -69,6 +78,8 @@ CMIDAIROxfordDiseaseModelPresenter class >> defaultSpec [
 				   add: #symptomsMildColor width: 24;
 				   add: 'p=1, τSym=' expand: false;
 				   add: #tauSym expand: false;
+				   add: 'βSymptomaticMild=' expand: false;
+				   add: #betaSymptomaticMild expand: false;
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
@@ -82,14 +93,18 @@ CMIDAIROxfordDiseaseModelPresenter class >> defaultSpec [
 				   vAlignCenter;
 				   add: '        → Pre-symptomatic (severe)' expand: false;
 				   add: #preSymptomaticSevereColor width: 24;
-				   add: 'p=1-pAsym-pMild' expand: false;
+				   add: 'p=1-pAsym-pMild, ' expand: false;
+				   add: 'βPreSymptomaticSevere=' expand: false;
+				   add: #betaPreSymptomaticSevere expand: false;
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
 				   vAlignCenter;
 				   add: '                → Severe symptoms' expand: false;
 				   add: #symptomsSevereColor width: 24;
-				   add: 'τSym' expand: false;
+				   add: 'τSym, ' expand: false;
+				   add: 'βSymptomaticSevere=' expand: false;
+				   add: #betaSymptomaticSevere expand: false;
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
@@ -252,6 +267,37 @@ CMIDAIROxfordDiseaseModelPresenter >> initializePresenters [
 		            whenNumberChangedDo: [ :value | 
 			            self model ifNotNil: [ :m | m tauDeath: value ] ];
 		            yourself.
+
+	betaAsymptomatic := self newNumberInput
+		                    beFloat;
+		                    whenNumberChangedDo: [ :value | 
+			                    self model ifNotNil: [ :m | 
+					                    m betaAsymptomatic: value ] ];
+		                    yourself.
+	betaPreSymptomaticMild := self newNumberInput
+		                          beFloat;
+		                          whenNumberChangedDo: [ :value | 
+			                          self model ifNotNil: [ :m | 
+					                          m betaPreSymptomaticMild: value ] ];
+		                          yourself.
+	betaPreSymptomaticSevere := self newNumberInput
+		                            beFloat;
+		                            whenNumberChangedDo: [ :value | 
+			                            self model ifNotNil: [ :m | 
+					                            m betaPreSymptomaticSevere: value ] ];
+		                            yourself.
+	betaSymptomaticMild := self newNumberInput
+		                       beFloat;
+		                       whenNumberChangedDo: [ :value | 
+			                       self model ifNotNil: [ :m | 
+					                       m betaSymptomaticMild: value ] ];
+		                       yourself.
+	betaSymptomaticSevere := self newNumberInput
+		                         beFloat;
+		                         whenNumberChangedDo: [ :value | 
+			                         self model ifNotNil: [ :m | 
+					                         m betaSymptomaticSevere: value ] ];
+		                         yourself.
 	healthyColor := self newColorDropList whenSelectedItemChangedDo: [ 
 		                :color | 
 		                self model ifNotNil: [ :m | m healthyColor: color ] ].
@@ -318,6 +364,11 @@ CMIDAIROxfordDiseaseModelPresenter >> modelChanged [
 		tauCritSurv number: m tauCritSurv.
 		tauHospRec number: m tauHospRec.
 		tauDeath number: m tauDeath.
+		betaAsymptomatic number: m betaAsymptomatic.
+		betaPreSymptomaticMild number: m betaPreSymptomaticMild.
+		betaPreSymptomaticSevere number: m betaPreSymptomaticSevere.
+		betaSymptomaticMild number: m betaSymptomaticMild.
+		betaSymptomaticSevere number: m betaSymptomaticSevere.
 		healthyColor selectItem: m healthyColor.
 		asymptomaticColor selectItem: m asymptomaticColor.
 		preSymptomaticMildColor selectItem: m preSymptomaticMildColor.

@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #accessing }
+CMIDAIROxfordSymptomsSevere >> beta [
+
+	^ self betaSymptomaticSevere
+]
+
+{ #category : #accessing }
 CMIDAIROxfordSymptomsSevere >> color [
 
 	^ self modelParameterAt: #symptomsSevereColor
@@ -62,9 +68,11 @@ CMIDAIROxfordSymptomsSevere >> step [
 ]
 
 { #category : #actions }
-CMIDAIROxfordSymptomsSevere >> test [
+CMIDAIROxfordSymptomsSevere >> tau [
 
-	^ self
+	^ self toBeHospitalized
+		  ifTrue: [ self tauHosp ]
+		  ifFalse: [ self tauRec ]
 ]
 
 { #category : #accessing }

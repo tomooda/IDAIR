@@ -28,7 +28,17 @@ Class {
 		'tQ',
 		'tCc',
 		'tCd',
-		'tR'
+		'tR',
+		'bAa',
+		'bAm',
+		'bAh',
+		'bAc',
+		'bAd',
+		'bIm',
+		'bIq',
+		'bIh',
+		'bIc',
+		'bId'
 	],
 	#category : #'Cormas-Model-IDAIR-Disease-Vietnam'
 }
@@ -39,60 +49,78 @@ CMIDAIRVietnamDiseaseModelPresenter class >> defaultSpec [
 	^ SpGridLayout new
 		  beColumnNotHomogeneous;
 		  beRowHomogeneous;
-		  add:'pa ' at: 1 @ 1;
+		  add: 'pa ' at: 1 @ 1;
 		  add: #pa at: 2 @ 1;
-		  add:'ph ' at: 1 @ 4;
+		  add: 'ph ' at: 1 @ 4;
 		  add: #ph at: 2 @ 4;
-		  add:'pc ' at: 1 @ 5;
+		  add: 'pc ' at: 1 @ 5;
 		  add: #pc at: 2 @ 5;
-		  add:'pd ' at: 1 @ 6;
+		  add: 'pd ' at: 1 @ 6;
 		  add: #pd at: 2 @ 6;
-		  add:'pq ' at: 1 @ 3;
+		  add: 'pq ' at: 1 @ 3;
 		  add: #pq at: 2 @ 3;
-		  add:'τEa' at: 3 @ 1;
+		  add: 'τEa' at: 3 @ 1;
 		  add: #tEa at: 4 @ 1;
-		  add:'τEm' at: 3 @ 2;
+		  add: 'τEm' at: 3 @ 2;
 		  add: #tEm at: 4 @ 2;
-		  add:'τEh' at: 3 @ 4;
+		  add: 'τEh' at: 3 @ 4;
 		  add: #tEh at: 4 @ 4;
-		  add:'τEc' at: 3 @ 5;
+		  add: 'τEc' at: 3 @ 5;
 		  add: #tEc at: 4 @ 5;
-		  add:'τEd' at: 3 @ 6;
+		  add: 'τEd' at: 3 @ 6;
 		  add: #tEd at: 4 @ 6;
-		  add:'τAa' at: 5 @ 1;
-		  add: #tAa at: 6 @ 1;
-		  add:'τAm' at: 5 @ 2;
+		  add: 'τAm' at: 5 @ 2;
 		  add: #tAm at: 6 @ 2;
-		  add:'τAh' at: 5 @ 4;
+		  add: 'τAh' at: 5 @ 4;
 		  add: #tAh at: 6 @ 4;
-		  add:'τAc' at: 5 @ 5;
+		  add: 'τAc' at: 5 @ 5;
 		  add: #tAc at: 6 @ 5;
-		  add:'τAd' at: 5 @ 6;
+		  add: 'τAd' at: 5 @ 6;
 		  add: #tAd at: 6 @ 6;
-		  add:'τIm' at: 7 @ 2;
-		  add: #tIm at: 8 @ 2;
-		  add:'τIq' at: 7 @ 3;
-		  add: #tIq at: 8 @ 3;
-		  add:'τIh' at: 7 @ 4;
-		  add: #tIh at: 8 @ 4;
-		  add:'τIc' at: 7 @ 5;
-		  add: #tIc at: 8 @ 5;
-		  add:'τId' at: 7 @ 6;
-		  add: #tId at: 8 @ 6;
-		  add:'τQ' at: 9 @ 3;
-		  add: #tQ at: 10 @ 3;
-		  add:'τHh' at: 9 @ 4;
-		  add: #tHh at: 10 @ 4;
-		  add:'τHc' at: 9 @ 5;
-		  add: #tHc at: 10 @ 5;
-		  add:'τHd' at: 9 @ 6;
-		  add: #tHd at: 10 @ 6;
-		  add:'τCc' at: 11 @ 5;
-		  add: #tCc at: 12 @ 5;
-		  add:'τCd' at: 11 @ 6;
-		  add: #tCd at: 12 @ 6;
-		  add:'τR' at: 13 @ 6;
-		  add: #tR at: 14 @ 6;
+		  add: 'τIm' at: 9 @ 2;
+		  add: #tIm at: 10 @ 2;
+		  add: 'τIq' at: 9 @ 3;
+		  add: #tIq at: 10 @ 3;
+		  add: 'τIh' at: 9 @ 4;
+		  add: #tIh at: 10 @ 4;
+		  add: 'τIc' at: 9 @ 5;
+		  add: #tIc at: 10 @ 5;
+		  add: 'τId' at: 9 @ 6;
+		  add: #tId at: 10 @ 6;
+		  add: 'τQ' at: 13 @ 3;
+		  add: #tQ at: 14 @ 3;
+		  add: 'τHh' at: 13 @ 4;
+		  add: #tHh at: 14 @ 4;
+		  add: 'τHc' at: 13 @ 5;
+		  add: #tHc at: 14 @ 5;
+		  add: 'τHd' at: 13 @ 6;
+		  add: #tHd at: 14 @ 6;
+		  add: 'τCc' at: 15 @ 5;
+		  add: #tCc at: 16 @ 5;
+		  add: 'τCd' at: 15 @ 6;
+		  add: #tCd at: 16 @ 6;
+		  add: 'τR' at: 15 @ 7;
+		  add: #tR at: 16 @ 7;
+		  add: 'βAa' at: 7 @ 1;
+		  add: #bAa at: 8 @ 1;
+		  add: 'βAm' at: 7 @ 2;
+		  add: #bAm at: 8 @ 2;
+		  add: 'βAh' at: 7 @ 4;
+		  add: #bAh at: 8 @ 4;
+		  add: 'βAc' at: 7 @ 5;
+		  add: #bAc at: 8 @ 5;
+		  add: 'βAd' at: 7 @ 6;
+		  add: #bAd at: 8 @ 6;
+		  add: 'βIm' at: 11 @ 2;
+		  add: #bIm at: 12 @ 2;
+		  add: 'βIq' at: 11 @ 3;
+		  add: #bIq at: 12 @ 3;
+		  add: 'βIh' at: 11 @ 4;
+		  add: #bIh at: 12 @ 4;
+		  add: 'βIc' at: 11 @ 5;
+		  add: #bIc at: 12 @ 5;
+		  add: 'βId' at: 11 @ 6;
+		  add: #bId at: 12 @ 6;
 		  yourself
 ]
 
@@ -261,14 +289,75 @@ CMIDAIRVietnamDiseaseModelPresenter >> initializePresenters [
 		      climbRate: 1.0;
 		      whenNumberChangedDo: [ :value | 
 			      self model ifNotNil: [ :m | m tR: value ] ];
-		      yourself
+		      yourself.
+
+	bAa := self newNumberInput
+		       beFloat;
+		       climbRate: 0.1;
+		       whenNumberChangedDo: [ :value | 
+			       self model ifNotNil: [ :m | m bAa: value ] ];
+		       yourself.
+	bAm := self newNumberInput
+		       beFloat;
+		       climbRate: 0.1;
+		       whenNumberChangedDo: [ :value | 
+			       self model ifNotNil: [ :m | m bAm: value ] ];
+		       yourself.
+	bAh := self newNumberInput
+		       beFloat;
+		       climbRate: 0.1;
+		       whenNumberChangedDo: [ :value | 
+			       self model ifNotNil: [ :m | m bAh: value ] ];
+		       yourself.
+	bAc := self newNumberInput
+		       beFloat;
+		       climbRate: 0.1;
+		       whenNumberChangedDo: [ :value | 
+			       self model ifNotNil: [ :m | m bAc: value ] ];
+		       yourself.
+	bAd := self newNumberInput
+		       beFloat;
+		       climbRate: 0.1;
+		       whenNumberChangedDo: [ :value | 
+			       self model ifNotNil: [ :m | m bAd: value ] ];
+		       yourself.
+	bIm := self newNumberInput
+		       beFloat;
+		       climbRate: 0.1;
+		       whenNumberChangedDo: [ :value | 
+			       self model ifNotNil: [ :m | m bIm: value ] ];
+		       yourself.
+	bIq := self newNumberInput
+		       beFloat;
+		       climbRate: 0.1;
+		       whenNumberChangedDo: [ :value | 
+			       self model ifNotNil: [ :m | m bIq: value ] ];
+		       yourself.
+	bIh := self newNumberInput
+		       beFloat;
+		       climbRate: 0.1;
+		       whenNumberChangedDo: [ :value | 
+			       self model ifNotNil: [ :m | m bIh: value ] ];
+		       yourself.
+	bIc := self newNumberInput
+		       beFloat;
+		       climbRate: 0.1;
+		       whenNumberChangedDo: [ :value | 
+			       self model ifNotNil: [ :m | m bIc: value ] ];
+		       yourself.
+	bId := self newNumberInput
+		       beFloat;
+		       climbRate: 0.1;
+		       whenNumberChangedDo: [ :value | 
+			       self model ifNotNil: [ :m | m bId: value ] ];
+		       yourself
 ]
 
 { #category : #initialization }
 CMIDAIRVietnamDiseaseModelPresenter >> initializeWindow: aSpWindowPresenter [
 
 	super initializeWindow: aSpWindowPresenter.
-	aSpWindowPresenter initialExtent: 650 @ 300
+	aSpWindowPresenter initialExtent: 780.0 @ 218.0
 ]
 
 { #category : #updating }
@@ -302,7 +391,17 @@ CMIDAIRVietnamDiseaseModelPresenter >> modelChanged [
 		tQ number: m tQ.
 		tCc number: m tCc.
 		tCd number: m tCd.
-		tR number: m tR ]
+		tR number: m tR.
+		bAa number: m bAa.
+		bAm number: m bAm.
+		bAh number: m bAh.
+		bAc number: m bAc.
+		bAd number: m bAd.
+		bIm number: m bIm.
+		bIq number: m bIq.
+		bIh number: m bIh.
+		bIc number: m bIc.
+		bId number: m bId ]
 ]
 
 { #category : #accessing }

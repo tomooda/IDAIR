@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #accessing }
+CMIDAIROxfordAsymptomatic >> beta [
+
+	^ self betaAsymptomatic
+]
+
+{ #category : #accessing }
 CMIDAIROxfordAsymptomatic >> color [
 
 	^ self modelParameterAt: #asymptomaticColor
@@ -48,8 +54,8 @@ CMIDAIROxfordAsymptomatic >> step [
 	^ self
 ]
 
-{ #category : #actions }
-CMIDAIROxfordAsymptomatic >> test [
+{ #category : #accessing }
+CMIDAIROxfordAsymptomatic >> tau [
 
-	^ self
+	^ self tauARec
 ]

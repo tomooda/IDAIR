@@ -28,7 +28,17 @@ Class {
 		'tQ',
 		'tCc',
 		'tCd',
-		'tR'
+		'tR',
+		'bAa',
+		'bAm',
+		'bAh',
+		'bAc',
+		'bAd',
+		'bIm',
+		'bIq',
+		'bIh',
+		'bIc',
+		'bId'
 	],
 	#category : #'Cormas-Model-IDAIR-Disease-Vietnam'
 }
@@ -37,6 +47,126 @@ Class {
 CMIDAIRVietnamDiseaseModel >> asPresenter [
 
 	^ CMIDAIRVietnamDiseaseModelPresenter on: self
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bAa [
+
+	^ bAa
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bAa: aNumber [
+
+	bAa := aNumber
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bAc [
+
+	^ bAc
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bAc: aNumber [
+
+	bAc := aNumber
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bAd [
+
+	^ bAd
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bAd: aNumber [
+
+	bAd := aNumber
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bAh [
+
+	^ bAh
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bAh: aNumber [
+
+	bAh := aNumber
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bAm [
+
+	^ bAm
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bAm: aNumber [
+
+	bAm := aNumber
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bIc [
+
+	^ bIc
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bIc: aNumber [
+
+	bIc := aNumber
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bId [
+
+	^ bId
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bId: aNumber [
+
+	bId := aNumber
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bIh [
+
+	^ bIh
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bIh: aNumber [
+
+	bIh := aNumber
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bIm [
+
+	^ bIm
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bIm: aNumber [
+
+	bIm := aNumber
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bIq [
+
+	^ bIq
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel >> bIq: aNumber [
+
+	bIq := aNumber
 ]
 
 { #category : #defaults }
@@ -75,7 +205,17 @@ CMIDAIRVietnamDiseaseModel >> initialize [
 	tHd := 4.25.
 	tCc := 6.0.
 	tCd := 3.0.
-	tR := 999.0
+	tR := 999.0.
+	bAa := 0.5.
+	bAm := 0.5.
+	bAh := 0.5.
+	bAc := 0.5.
+	bAd := 0.5.
+	bIm := 1.0.
+	bIq := 1.0.
+	bIh := 1.0.
+	bIc := 1.0.
+	bId := 1.0
 ]
 
 { #category : #'user interfaces' }

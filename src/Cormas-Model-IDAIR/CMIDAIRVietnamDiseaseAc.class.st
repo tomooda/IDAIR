@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #accessing }
+CMIDAIRVietnamDiseaseAc >> beta [
+
+	^ self bAc
+]
+
+{ #category : #accessing }
 CMIDAIRVietnamDiseaseAc >> estimatedTransmissibleDuration [
 
 	^ self tAc + self tIc
@@ -18,6 +24,12 @@ CMIDAIRVietnamDiseaseAc >> next [
 
 { #category : #accessing }
 CMIDAIRVietnamDiseaseAc >> requiredDuration [
+
+	^ self tAc
+]
+
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseAc >> tau [
 
 	^ self tAc
 ]

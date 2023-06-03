@@ -11,6 +11,12 @@ CMIDAIROxfordDead >> beExposed [
 ]
 
 { #category : #accessing }
+CMIDAIROxfordDead >> beta [
+
+	^ 0.0
+]
+
+{ #category : #accessing }
 CMIDAIROxfordDead >> color [
 
 	^ self modelParameterAt: #deadColor
@@ -52,8 +58,8 @@ CMIDAIROxfordDead >> step [
 	^ self
 ]
 
-{ #category : #actions }
-CMIDAIROxfordDead >> test [
+{ #category : #accessing }
+CMIDAIROxfordDead >> tau [
 
-	^ self
+	^ Float infinity
 ]

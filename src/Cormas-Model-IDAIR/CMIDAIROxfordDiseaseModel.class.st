@@ -16,7 +16,11 @@ Class {
 		'tauCritSurv',
 		'tauHospRec',
 		'tauDeath',
-		'pFalseNegative',
+		'betaAsymptomatic',
+		'betaPreSymptomaticMild',
+		'betaPreSymptomaticSevere',
+		'betaSymptomaticMild',
+		'betaSymptomaticSevere',
 		'healthyColor',
 		'asymptomaticColor',
 		'preSymptomaticMildColor',
@@ -47,6 +51,66 @@ CMIDAIROxfordDiseaseModel >> asymptomaticColor [
 CMIDAIROxfordDiseaseModel >> asymptomaticColor: aColor [
 
 	asymptomaticColor := aColor
+]
+
+{ #category : #'accessing-parameters' }
+CMIDAIROxfordDiseaseModel >> betaAsymptomatic [
+
+	^ betaAsymptomatic
+]
+
+{ #category : #'accessing-parameters' }
+CMIDAIROxfordDiseaseModel >> betaAsymptomatic: aNumber [
+
+	betaAsymptomatic := aNumber
+]
+
+{ #category : #'accessing-parameters' }
+CMIDAIROxfordDiseaseModel >> betaPreSymptomaticMild [
+
+	^ betaPreSymptomaticMild
+]
+
+{ #category : #'accessing-parameters' }
+CMIDAIROxfordDiseaseModel >> betaPreSymptomaticMild: aNumber [
+
+	betaPreSymptomaticMild := aNumber
+]
+
+{ #category : #'accessing-parameters' }
+CMIDAIROxfordDiseaseModel >> betaPreSymptomaticSevere [
+
+	^ betaPreSymptomaticSevere
+]
+
+{ #category : #'accessing-parameters' }
+CMIDAIROxfordDiseaseModel >> betaPreSymptomaticSevere: aNumber [
+
+	betaPreSymptomaticSevere := aNumber
+]
+
+{ #category : #'accessing-parameters' }
+CMIDAIROxfordDiseaseModel >> betaSymptomaticMild [
+
+	^ betaSymptomaticMild
+]
+
+{ #category : #'accessing-parameters' }
+CMIDAIROxfordDiseaseModel >> betaSymptomaticMild: aNumber [
+
+	betaSymptomaticMild := aNumber
+]
+
+{ #category : #'accessing-parameters' }
+CMIDAIROxfordDiseaseModel >> betaSymptomaticSevere [
+
+	^ betaSymptomaticSevere
+]
+
+{ #category : #'accessing-parameters' }
+CMIDAIROxfordDiseaseModel >> betaSymptomaticSevere: aNumber [
+
+	betaSymptomaticSevere := aNumber
 ]
 
 { #category : #'accessing-colors' }
@@ -133,19 +197,21 @@ CMIDAIROxfordDiseaseModel >> initialize [
 	tauCritSurv := 6.0.
 	tauHospRec := 3.25.
 	tauDeath := 3.0.
-	pFalseNegative := 0.0	.
+	betaAsymptomatic := 0.8.
+	betaPreSymptomaticMild := 0.8.
+	betaPreSymptomaticSevere := 0.8.
+	betaSymptomaticMild := 1.5.
+	betaSymptomaticSevere := 1.5.
 	deadColor := Color black.
-	healthyColor :=  Color green muchLighter.
+	healthyColor := Color green muchLighter.
 	asymptomaticColor := Color blue muchLighter.
 	preSymptomaticMildColor := Color yellow lighter.
 	preSymptomaticSevereColor := Color red muchLighter.
 	hospitalizedColor := Color gray.
-	hospitalizedRecoveringColor := Color gray.	
+	hospitalizedRecoveringColor := Color gray.
 	icuedColor := Color black.
 	symptomsMildColor := Color yellow darker.
 	symptomsSevereColor := Color red darker
-	
-	
 ]
 
 { #category : #'user interfaces' }
@@ -188,18 +254,6 @@ CMIDAIROxfordDiseaseModel >> pDeath [
 CMIDAIROxfordDiseaseModel >> pDeath: aNumber [
 
 	pDeath := aNumber
-]
-
-{ #category : #'accessing-parameters' }
-CMIDAIROxfordDiseaseModel >> pFalseNegative [
-
-	^ pFalseNegative
-]
-
-{ #category : #'accessing-parameters' }
-CMIDAIROxfordDiseaseModel >> pFalseNegative: aNumber [
-
-	pFalseNegative := aNumber
 ]
 
 { #category : #'accessing-parameters' }

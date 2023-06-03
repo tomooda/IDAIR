@@ -21,6 +21,66 @@ CMIDAIRVietnamDiseaseDynamics class >> newFrom: anObject [
 		  yourself
 ]
 
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> bAa [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> bAc [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> bAd [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> bAh [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> bAm [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> bIc [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> bId [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> bIh [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> bIm [
+
+	^ self modelParameter
+]
+
+{ #category : #parameters }
+CMIDAIRVietnamDiseaseDynamics >> bIq [
+
+	^ self modelParameter
+]
+
 { #category : #transitioning }
 CMIDAIRVietnamDiseaseDynamics >> beAsymptomatic [
 
@@ -294,10 +354,4 @@ CMIDAIRVietnamDiseaseDynamics >> tQ [
 CMIDAIRVietnamDiseaseDynamics >> tR [
 
 	^ self modelParameter
-]
-
-{ #category : #actions }
-CMIDAIRVietnamDiseaseDynamics >> test [
-
-	
 ]
