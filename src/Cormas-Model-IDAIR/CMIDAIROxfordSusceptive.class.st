@@ -41,6 +41,12 @@ CMIDAIROxfordSusceptive >> isActive [
 ]
 
 { #category : #testing }
+CMIDAIROxfordSusceptive >> isInCommunity [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIROxfordSusceptive >> isSusceptive [
 
 	^ true

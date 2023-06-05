@@ -29,6 +29,12 @@ CMIDAIROxfordSymptomsMild >> isActive [
 ]
 
 { #category : #testing }
+CMIDAIROxfordSymptomsMild >> isInCommunity [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIROxfordSymptomsMild >> isMildSymptom [
 
 	^ true

@@ -23,6 +23,12 @@ CMIDAIRVietnamDiseaseA >> isAsymptomatic [
 ]
 
 { #category : #testing }
+CMIDAIRVietnamDiseaseA >> isInCommunity [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIRVietnamDiseaseA >> isInfected [
 
 	^ true

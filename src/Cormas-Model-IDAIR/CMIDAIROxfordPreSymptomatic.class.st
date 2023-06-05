@@ -17,6 +17,12 @@ CMIDAIROxfordPreSymptomatic >> isActive [
 ]
 
 { #category : #testing }
+CMIDAIROxfordPreSymptomatic >> isInCommunity [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIROxfordPreSymptomatic >> isPreSymptomatic [
 
 	^ true

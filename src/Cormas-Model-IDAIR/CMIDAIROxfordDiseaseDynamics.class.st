@@ -137,6 +137,12 @@ CMIDAIROxfordDiseaseDynamics >> isICUed [
 ]
 
 { #category : #testing }
+CMIDAIROxfordDiseaseDynamics >> isInCommunity [
+
+	^ false
+]
+
+{ #category : #testing }
 CMIDAIROxfordDiseaseDynamics >> isInfected [
 
 	^ false

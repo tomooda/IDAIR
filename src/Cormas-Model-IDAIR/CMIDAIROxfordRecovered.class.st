@@ -29,6 +29,12 @@ CMIDAIROxfordRecovered >> estimatedTransmissibleDuration [
 ]
 
 { #category : #testing }
+CMIDAIROxfordRecovered >> isInCommunity [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIROxfordRecovered >> isRecovered [
 
 	^ true

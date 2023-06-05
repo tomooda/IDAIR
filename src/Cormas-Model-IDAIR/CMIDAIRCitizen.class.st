@@ -1,6 +1,6 @@
 Class {
 	#name : #CMIDAIRCitizen,
-	#superclass : #CMAgentLocation,
+	#superclass : #CMLocatedAgent,
 	#instVars : [
 		'diseaseDynamics'
 	],
@@ -82,6 +82,12 @@ CMIDAIRCitizen >> isHospitalized [
 CMIDAIRCitizen >> isICUed [
 
 	^ self diseaseDynamics isICUed
+]
+
+{ #category : #testing }
+CMIDAIRCitizen >> isInCommunity [
+
+	^ self diseaseDynamics isInCommunity
 ]
 
 { #category : #testing }

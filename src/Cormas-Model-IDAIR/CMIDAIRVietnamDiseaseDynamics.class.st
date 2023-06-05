@@ -138,6 +138,12 @@ CMIDAIRVietnamDiseaseDynamics >> isICUed [
 ]
 
 { #category : #testing }
+CMIDAIRVietnamDiseaseDynamics >> isInCommunity [
+
+	^ false
+]
+
+{ #category : #testing }
 CMIDAIRVietnamDiseaseDynamics >> isInfected [
 
 	^ false

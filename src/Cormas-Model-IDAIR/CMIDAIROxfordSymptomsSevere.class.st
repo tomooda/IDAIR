@@ -32,6 +32,12 @@ CMIDAIROxfordSymptomsSevere >> isActive [
 ]
 
 { #category : #testing }
+CMIDAIROxfordSymptomsSevere >> isInCommunity [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIROxfordSymptomsSevere >> isSevereSymptom [
 
 	^ true

@@ -65,8 +65,13 @@ CMIDAIRContactModel >> socialDistanceFactor: aNumber [
 { #category : #control }
 CMIDAIRContactModel >> step: anInteger [
 
-	| numberOfSusceptive |
-	(numberOfSusceptive := self numberOfSusceptive) > 0 ifTrue: [ 
+	| numberOfCitizensInCommunity |
+	numberOfCitizensInCommunity := 0.
+	self cormasModel theCitizens do: [ :citizen | 
+		citizen isInCommunity ifTrue: [ 
+			numberOfCitizensInCommunity := numberOfCitizensInCommunity + 1 ] ].
+
+	numberOfCitizensInCommunity > 0 ifTrue: [ 
 		| totalBeta |
 		totalBeta := self cormasModel theCitizens
 			             inject: 0.0
@@ -76,7 +81,7 @@ CMIDAIRContactModel >> step: anInteger [
 		totalBeta > 0.0 ifTrue: [ 
 			| p |
 			p := (1.0 - self socialDistanceFactor min: 1.0 max: 0.0)
-			     * totalBeta / numberOfSusceptive.
+			     * totalBeta / numberOfCitizensInCommunity.
 			self cormasModel theCitizens do: [ :citizen | 
 				(citizen isSusceptive and: [ self random <= p ]) ifTrue: [ 
 					citizen beExposed ] ] ] ]

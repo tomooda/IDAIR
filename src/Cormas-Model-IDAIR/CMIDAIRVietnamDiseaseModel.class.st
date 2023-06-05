@@ -206,11 +206,11 @@ CMIDAIRVietnamDiseaseModel >> initialize [
 	tCc := 6.0.
 	tCd := 3.0.
 	tR := 999.0.
-	bAa := 0.5.
-	bAm := 0.5.
-	bAh := 0.5.
-	bAc := 0.5.
-	bAd := 0.5.
+	bAa := 1.5.
+	bAm := 1.0.
+	bAh := 1.0.
+	bAc := 1.0.
+	bAd := 1.0.
 	bIm := 1.0.
 	bIq := 1.0.
 	bIh := 1.0.

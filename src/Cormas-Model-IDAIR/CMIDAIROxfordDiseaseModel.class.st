@@ -197,11 +197,11 @@ CMIDAIROxfordDiseaseModel >> initialize [
 	tauCritSurv := 6.0.
 	tauHospRec := 3.25.
 	tauDeath := 3.0.
-	betaAsymptomatic := 0.8.
-	betaPreSymptomaticMild := 0.8.
-	betaPreSymptomaticSevere := 0.8.
-	betaSymptomaticMild := 1.5.
-	betaSymptomaticSevere := 1.5.
+	betaAsymptomatic := 1.5.
+	betaPreSymptomaticMild := 1.0.
+	betaPreSymptomaticSevere := 1.0.
+	betaSymptomaticMild := 1.0.
+	betaSymptomaticSevere := 1.0.
 	deadColor := Color black.
 	healthyColor := Color green muchLighter.
 	asymptomaticColor := Color blue muchLighter.

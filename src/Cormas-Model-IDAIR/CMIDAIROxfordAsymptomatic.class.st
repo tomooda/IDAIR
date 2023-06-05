@@ -35,6 +35,12 @@ CMIDAIROxfordAsymptomatic >> isAsymptomatic [
 ]
 
 { #category : #testing }
+CMIDAIROxfordAsymptomatic >> isInCommunity [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIROxfordAsymptomatic >> isTransmissible [
 
 	^ true

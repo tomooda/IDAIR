@@ -17,6 +17,12 @@ CMIDAIRVietnamDiseaseI >> color [
 ]
 
 { #category : #testing }
+CMIDAIRVietnamDiseaseI >> isInCommunity [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIRVietnamDiseaseI >> isInfected [
 
 	^ true

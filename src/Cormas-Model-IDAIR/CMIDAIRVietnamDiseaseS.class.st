@@ -23,6 +23,12 @@ CMIDAIRVietnamDiseaseS >> estimatedTransmissibleDuration [
 ]
 
 { #category : #testing }
+CMIDAIRVietnamDiseaseS >> isInCommunity [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIRVietnamDiseaseS >> isSusceptive [
 
 	^ true

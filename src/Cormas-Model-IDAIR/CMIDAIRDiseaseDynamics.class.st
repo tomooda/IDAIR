@@ -97,6 +97,12 @@ CMIDAIRDiseaseDynamics >> isICUed [
 ]
 
 { #category : #testing }
+CMIDAIRDiseaseDynamics >> isInCommunity [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #testing }
 CMIDAIRDiseaseDynamics >> isInfected [
 
 	^ self subclassResponsibility

@@ -23,6 +23,12 @@ CMIDAIRVietnamDiseaseR >> estimatedTransmissibleDuration [
 ]
 
 { #category : #testing }
+CMIDAIRVietnamDiseaseR >> isInCommunity [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIRVietnamDiseaseR >> isRecovered [
 
 	^ true
