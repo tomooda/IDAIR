@@ -69,6 +69,8 @@ CMIDAIRVietnamDiseaseModelPresenter class >> defaultSpec [
 		  add: #tEc at: 4 @ 5;
 		  add: 'τEd' at: 3 @ 6;
 		  add: #tEd at: 4 @ 6;
+		  add: 'τAa' at: 5 @ 1;
+		  add: #tAa at: 6 @ 1;
 		  add: 'τAm' at: 5 @ 2;
 		  add: #tAm at: 6 @ 2;
 		  add: 'τAh' at: 5 @ 4;
