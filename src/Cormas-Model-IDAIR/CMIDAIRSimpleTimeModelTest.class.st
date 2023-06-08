@@ -1,0 +1,27 @@
+Class {
+	#name : #CMIDAIRSimpleTimeModelTest,
+	#superclass : #TestCase,
+	#instVars : [
+		'cormasModel',
+		'timeModel'
+	],
+	#category : #'Cormas-Model-IDAIR-Tests'
+}
+
+{ #category : #running }
+CMIDAIRSimpleTimeModelTest >> setUp [
+
+	super setUp.
+	cormasModel := CMIDAIRModel new.
+	timeModel := CMIDAIRSimpleTimeModel on: cormasModel.
+	cormasModel addSubmodel: timeModel
+]
+
+{ #category : #running }
+CMIDAIRSimpleTimeModelTest >> testDaysPerStep [
+
+	timeModel daysPerStep: 0.1.
+	self assert: timeModel daysPerStep closeTo: 0.1.
+	timeModel daysPerStep: 2.0.
+	self assert: timeModel daysPerStep closeTo: 2.0
+]
