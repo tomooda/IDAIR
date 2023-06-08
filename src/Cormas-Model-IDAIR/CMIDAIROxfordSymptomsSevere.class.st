@@ -64,7 +64,7 @@ CMIDAIROxfordSymptomsSevere >> pContaminate [
 { #category : #actions }
 CMIDAIROxfordSymptomsSevere >> step [
 
-	self duration: self duration + 1.
+	self duration: self duration + self daysPerStep.
 	self toBeHospitalized
 		ifTrue: [ 
 		self duration >= self tauHosp ifTrue: [ ^ self beHospitalized ] ]

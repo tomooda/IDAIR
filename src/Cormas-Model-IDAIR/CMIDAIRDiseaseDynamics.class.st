@@ -67,6 +67,12 @@ CMIDAIRDiseaseDynamics >> color [
 ]
 
 { #category : #accessing }
+CMIDAIRDiseaseDynamics >> daysPerStep [
+
+	^ self citizen cormasModel daysPerStep
+]
+
+{ #category : #accessing }
 CMIDAIRDiseaseDynamics >> estimatedTransmissibleDuration [
 
 	^ self subclassResponsibility

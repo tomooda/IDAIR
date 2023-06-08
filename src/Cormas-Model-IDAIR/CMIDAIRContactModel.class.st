@@ -13,6 +13,12 @@ CMIDAIRContactModel >> asPresenter [
 	^ CMIDAIRContactModelPresenter on: self
 ]
 
+{ #category : #accessing }
+CMIDAIRContactModel >> daysPerStep [
+
+	^ self cormasModel daysPerStep
+]
+
 { #category : #defaults }
 CMIDAIRContactModel >> defaultSocialDistanceFactor [
 
@@ -81,7 +87,7 @@ CMIDAIRContactModel >> step: anInteger [
 		totalBeta > 0.0 ifTrue: [ 
 			| p |
 			p := (1.0 - self socialDistanceFactor min: 1.0 max: 0.0)
-			     * totalBeta / numberOfCitizensInCommunity.
+			     * totalBeta / numberOfCitizensInCommunity * self daysPerStep.
 			self cormasModel theCitizens do: [ :citizen | 
 				(citizen isSusceptive and: [ self random <= p ]) ifTrue: [ 
 					citizen beExposed ] ] ] ]

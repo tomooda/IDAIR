@@ -59,7 +59,7 @@ CMIDAIROxfordHospitalized >> name [
 { #category : #actions }
 CMIDAIROxfordHospitalized >> step [
 
-	self duration: self duration + 1.
+	self duration: self duration + self daysPerStep.
 	self toBeCritical
 		ifTrue: [ 
 			self duration >= self tauCrit ifTrue: [ 

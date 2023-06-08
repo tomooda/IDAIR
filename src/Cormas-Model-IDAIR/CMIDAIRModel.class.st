@@ -97,6 +97,12 @@ CMIDAIRModel >> addSubmodel: aCMIDAIRSubmodel [
 	^ submodels at: aCMIDAIRSubmodel name put: aCMIDAIRSubmodel
 ]
 
+{ #category : #accessing }
+CMIDAIRModel >> daysPerStep [
+
+	^ self submodelAt: #time do: [ :timeModel | timeModel daysPerStep ]
+]
+
 { #category : #defaults }
 CMIDAIRModel >> defaultDiseaseDynamicsClass [
 
@@ -110,6 +116,7 @@ CMIDAIRModel >> init_Oxford_SingleLocation [
 
 	self addSubmodel: (CMIDAIROxfordDiseaseModel on: self).
 	self addSubmodel: (CMIDAIRContactModel on: self).
+	self addSubmodel: (CMIDAIRSimpleTimeModel on: self).
 	self
 		createGridLines: 33
 		columns: 33
@@ -126,6 +133,7 @@ CMIDAIRModel >> init_Vietnam_SingleLocation [
 
 	self addSubmodel: (CMIDAIRVietnamDiseaseModel on: self).
 	self addSubmodel: (CMIDAIRContactModel on: self).
+	self addSubmodel: (CMIDAIRSimpleTimeModel on: self).
 	self
 		createGridLines: 33
 		columns: 33

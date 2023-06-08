@@ -226,7 +226,7 @@ CMIDAIRVietnamDiseaseDynamics >> requiredDuration [
 { #category : #actions }
 CMIDAIRVietnamDiseaseDynamics >> step [
 
-	self duration: self duration + 1.
+	self duration: self duration + self daysPerStep.
 	self duration > self requiredDuration ifTrue: [ ^ self next ]
 ]
 

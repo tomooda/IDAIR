@@ -61,7 +61,7 @@ CMIDAIROxfordSymptomsMild >> pContaminate [
 { #category : #actions }
 CMIDAIROxfordSymptomsMild >> step [
 
-	self duration: self duration + 1.
+	self duration: self duration + self daysPerStep.
 	self duration >= self tauRec ifTrue: [ ^ self beRecovered ].
 	^ self
 ]

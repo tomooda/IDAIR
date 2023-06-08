@@ -64,7 +64,7 @@ CMIDAIROxfordICUed >> name [
 { #category : #actions }
 CMIDAIROxfordICUed >> step [
 
-	self duration: self duration + 1.
+	self duration: self duration + self daysPerStep.
 	self toBeDead
 		ifTrue: [ self duration >= self tauDeath ifTrue: [ ^ self beDead ] ]
 		ifFalse: [ 

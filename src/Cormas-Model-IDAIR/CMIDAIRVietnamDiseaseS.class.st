@@ -49,7 +49,7 @@ CMIDAIRVietnamDiseaseS >> requiredDuration [
 { #category : #actions }
 CMIDAIRVietnamDiseaseS >> step [
 
-	self duration: self duration + 1
+	self duration: self duration + self daysPerStep
 ]
 
 { #category : #accessing }

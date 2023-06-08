@@ -31,7 +31,7 @@ CMIDAIROxfordPreSymptomaticMild >> name [
 { #category : #actions }
 CMIDAIROxfordPreSymptomaticMild >> step [
 
-	self duration: self duration + 1.
+	self duration: self duration + self daysPerStep.
 	self duration >= self tauSym ifTrue: [ ^ self beSymptomsMild ].
 	^ self
 ]

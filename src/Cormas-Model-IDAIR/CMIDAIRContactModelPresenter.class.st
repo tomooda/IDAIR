@@ -21,13 +21,11 @@ CMIDAIRContactModelPresenter class >> defaultSpec [
 { #category : #initialization }
 CMIDAIRContactModelPresenter >> initializePresenters [
 
-	"self new open"
-
 	super initializePresenters.
 	socialDistanceFactor := self newNumberInput
 		                        beFloat;
 		                        minimum: 0.0;
-		                        maximum: 0.0;
+		                        maximum: 1.0;
 		                        climbRate: 0.1;
 		                        whenNumberChangedDo: [ :value | 
 			                        self model ifNotNil: [ :m | 
