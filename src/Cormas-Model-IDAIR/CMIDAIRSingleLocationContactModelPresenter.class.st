@@ -1,5 +1,5 @@
 Class {
-	#name : #CMIDAIRContactModelPresenter,
+	#name : #CMIDAIRSingleLocationContactModelPresenter,
 	#superclass : #SpPresenterWithModel,
 	#instVars : [
 		'socialDistanceFactor'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #specs }
-CMIDAIRContactModelPresenter class >> defaultSpec [
+CMIDAIRSingleLocationContactModelPresenter class >> defaultSpec [
 
 	^ SpGridLayout new
 		  beColumnHomogeneous;
@@ -19,7 +19,7 @@ CMIDAIRContactModelPresenter class >> defaultSpec [
 ]
 
 { #category : #initialization }
-CMIDAIRContactModelPresenter >> initializePresenters [
+CMIDAIRSingleLocationContactModelPresenter >> initializePresenters [
 
 	super initializePresenters.
 	socialDistanceFactor := self newNumberInput
@@ -34,14 +34,14 @@ CMIDAIRContactModelPresenter >> initializePresenters [
 ]
 
 { #category : #initialization }
-CMIDAIRContactModelPresenter >> initializeWindow: aSpWindowPresenter [
+CMIDAIRSingleLocationContactModelPresenter >> initializeWindow: aSpWindowPresenter [
 
 	super initializeWindow: aSpWindowPresenter.
 	aSpWindowPresenter initialExtent: 600 @ 100
 ]
 
 { #category : #initialization }
-CMIDAIRContactModelPresenter >> modelChanged [
+CMIDAIRSingleLocationContactModelPresenter >> modelChanged [
 
 	super modelChanged.
 	self model ifNotNil: [ :m | 
@@ -49,6 +49,6 @@ CMIDAIRContactModelPresenter >> modelChanged [
 ]
 
 { #category : #accessing }
-CMIDAIRContactModelPresenter >> title [
+CMIDAIRSingleLocationContactModelPresenter >> title [
 	^ 'Contact model parameters'
 ]

@@ -115,7 +115,7 @@ CMIDAIRModel >> defaultDiseaseDynamicsClass [
 CMIDAIRModel >> init_Oxford_SingleLocation [
 
 	self addSubmodel: (CMIDAIROxfordDiseaseModel on: self).
-	self addSubmodel: (CMIDAIRContactModel on: self).
+	self addSubmodel: (CMIDAIRSingleLocationContactModel on: self).
 	self addSubmodel: (CMIDAIRSimpleTimeModel on: self).
 	self
 		createGridLines: 33
@@ -132,7 +132,7 @@ CMIDAIRModel >> init_Oxford_SingleLocation [
 CMIDAIRModel >> init_Vietnam_SingleLocation [
 
 	self addSubmodel: (CMIDAIRVietnamDiseaseModel on: self).
-	self addSubmodel: (CMIDAIRContactModel on: self).
+	self addSubmodel: (CMIDAIRSingleLocationContactModel on: self).
 	self addSubmodel: (CMIDAIRSimpleTimeModel on: self).
 	self
 		createGridLines: 33
