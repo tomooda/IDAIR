@@ -21,3 +21,9 @@ CMIDAIRTimeModel >> name [
 
 	^ #time
 ]
+
+{ #category : #accessing }
+CMIDAIRTimeModel >> order [
+
+	^ 0.9
+]

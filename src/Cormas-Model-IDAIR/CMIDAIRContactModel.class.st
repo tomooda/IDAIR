@@ -15,3 +15,9 @@ CMIDAIRContactModel >> name [
 
 	^ #contact
 ]
+
+{ #category : #accessing }
+CMIDAIRContactModel >> order [
+
+	^ 0.5
+]

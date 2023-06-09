@@ -53,6 +53,12 @@ CMIDAIRSubmodel >> openGUI [
 ]
 
 { #category : #accessing }
+CMIDAIRSubmodel >> order [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
 CMIDAIRSubmodel >> random [
 
 	^ self class randomGenerator next

@@ -38,6 +38,12 @@ CMIDAIRDiseaseModel >> name [
 	^ #disease
 ]
 
+{ #category : #accessing }
+CMIDAIRDiseaseModel >> order [
+
+	^ 0.1
+]
+
 { #category : #control }
 CMIDAIRDiseaseModel >> step: anInteger [
 

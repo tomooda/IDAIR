@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'theCitizens',
 		'theLocations',
-		'submodels'
+		'submodels',
+		'isHeadless'
 	],
 	#category : #'Cormas-Model-IDAIR-Core'
 }
@@ -97,6 +98,30 @@ CMIDAIRModel >> addSubmodel: aCMIDAIRSubmodel [
 	^ submodels at: aCMIDAIRSubmodel name put: aCMIDAIRSubmodel
 ]
 
+{ #category : #'user interfaces' }
+CMIDAIRModel >> asPresenter [
+
+	^ CMIDAIRModelPresenter on: self
+]
+
+{ #category : #'user interfaces' }
+CMIDAIRModel >> beGUI [
+
+	self isHeadless: false
+]
+
+{ #category : #'user interfaces' }
+CMIDAIRModel >> beHeadless [
+
+	self isHeadless: true
+]
+
+{ #category : #'user interfaces' }
+CMIDAIRModel >> chartPresenter [
+
+	^ CMR3ChartPresenter on: self
+]
+
 { #category : #accessing }
 CMIDAIRModel >> daysPerStep [
 
@@ -111,6 +136,18 @@ CMIDAIRModel >> defaultDiseaseDynamicsClass [
 		  do: [ :diseaseModel | diseaseModel defaultDiseaseDynamicsClass ]
 ]
 
+{ #category : #'user interfaces' }
+CMIDAIRModel >> ifGUI: aBlock [
+
+	^ self isHeadless ifFalse: aBlock
+]
+
+{ #category : #scheduling }
+CMIDAIRModel >> initSimFromScnrStage2 [
+	super initSimFromScnrStage2.
+	self openGUI
+]
+
 { #category : #init }
 CMIDAIRModel >> init_Oxford_SingleLocation [
 
@@ -123,9 +160,7 @@ CMIDAIRModel >> init_Oxford_SingleLocation [
 		neighbourhood: 8
 		closed: false.
 	self createN: 1000 randomlyLocatedEntities: CMIDAIRCitizen.
-	1 to: 10 do: [ :index | (self theCitizens at: index) beAsymptomatic ].
-	self displayPov: #diseasePov of: CMIDAIRCitizen.
-	self submodelsDo: [ :m | m openGUI ]
+	1 to: 10 do: [ :index | (self theCitizens at: index) beAsymptomatic ]
 ]
 
 { #category : #init }
@@ -140,16 +175,27 @@ CMIDAIRModel >> init_Vietnam_SingleLocation [
 		neighbourhood: 8
 		closed: false.
 	self createN: 1000 randomlyLocatedEntities: CMIDAIRCitizen.
-	1 to: 10 do: [ :index | (self theCitizens at: index) beAsymptomatic ].
-	self displayPov: #diseasePov of: CMIDAIRCitizen.
-	self submodelsDo: [ :m | m openGUI ]
+	1 to: 10 do: [ :index | (self theCitizens at: index) beAsymptomatic ]
 ]
 
 { #category : #initialization }
 CMIDAIRModel >> initialize [
 
 	super initialize.
-	submodels := Dictionary new
+	submodels := Dictionary new.
+	isHeadless := false
+]
+
+{ #category : #'user interfaces' }
+CMIDAIRModel >> isHeadless [
+
+	^ isHeadless
+]
+
+{ #category : #'user interfaces' }
+CMIDAIRModel >> isHeadless: aBoolean [
+
+	isHeadless := aBoolean = true
 ]
 
 { #category : #probes }
@@ -229,6 +275,12 @@ CMIDAIRModel >> numberOfSymptomatic [
 	^ num
 ]
 
+{ #category : #'user interfaces' }
+CMIDAIRModel >> openGUI [
+
+	self ifGUI: [ self asPresenter openWithSpec ]
+]
+
 { #category : #control }
 CMIDAIRModel >> step: time [
 
@@ -245,6 +297,13 @@ CMIDAIRModel >> submodelAt: aSymbol do: aBlock [
 CMIDAIRModel >> submodelsDo: aBlock [
 
 	submodels valuesDo: aBlock
+]
+
+{ #category : #submodels }
+CMIDAIRModel >> submodelsInOrderDo: aBlock [
+
+	(submodels values asSortedCollection: [ :less :more | 
+		 less order <= more order ]) do: aBlock
 ]
 
 { #category : #accessing }
