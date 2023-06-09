@@ -119,7 +119,7 @@ CMIDAIRModel >> beHeadless [
 { #category : #'user interfaces' }
 CMIDAIRModel >> chartPresenter [
 
-	^ CMR3ChartPresenter on: self
+	^ CMIDAIRChartPresenter on: self
 ]
 
 { #category : #accessing }

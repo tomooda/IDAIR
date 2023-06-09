@@ -5,7 +5,8 @@ Class {
 		'notebook',
 		'daysLabel',
 		'daysField',
-		'runButton'
+		'runButton',
+		'chart'
 	],
 	#category : #'Cormas-Model-IDAIR-UI'
 }
@@ -18,8 +19,8 @@ CMIDAIRModelPresenter class >> defaultSpec [
 		  add: (SpBoxLayout newHorizontal
 				   vAlignCenter;
 				   add: 'now: ' expand: false;
-				   add: #daysLabel width: 50;
-				   add: ' days    run ' expand: false;
+				   add: #daysLabel width: 30;
+				   add: ' days         run ' expand: false;
 				   add: #daysField expand: false;
 				   add: ' days ' expand: false;
 				   add: #runButton expand: false;
@@ -68,7 +69,7 @@ CMIDAIRModelPresenter >> initializePresenters [
 					 yourself) ].
 		notebook addPage: (self newNotebookPage
 				 title: 'Chart';
-				 presenterProvider: [ cormasModel chartPresenter ];
+				 presenterProvider: [ chart := cormasModel chartPresenter ];
 				 yourself) ].
 	daysLabel := self newLabel
 		             label: '0.0';
@@ -101,6 +102,7 @@ CMIDAIRModelPresenter >> runSimulation [
 			(days / model daysPerStep) rounded timesRepeat: [ model runStep ].
 			daysLabel label:
 				(model timeStep * model daysPerStep printShowingDecimalPlaces: 2).
+			chart ifNotNil: [ chart newMaxX: model timeStep ].
 			notebook selectPage: notebook pages last ] ]
 ]
 
