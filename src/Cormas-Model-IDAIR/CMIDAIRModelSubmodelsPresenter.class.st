@@ -39,6 +39,13 @@ CMIDAIRModelSubmodelsPresenter >> initializePresenters [
 ]
 
 { #category : #initialization }
+CMIDAIRModelSubmodelsPresenter >> initializeWindow: aWindowPresenter [
+
+	super initializeWindow: aWindowPresenter.
+	aWindowPresenter initialExtent: 300 @ 200
+]
+
+{ #category : #initialization }
 CMIDAIRModelSubmodelsPresenter >> layout [
 
 	| newLayout rowIndex |
@@ -49,8 +56,14 @@ CMIDAIRModelSubmodelsPresenter >> layout [
 	rowIndex := 1.
 	dropLists keysAndValuesDo: [ :categoryName :dropList | 
 		newLayout
-			add: categoryName asPresenter at: 1 @ rowIndex;
+			add: (categoryName , ' model') asPresenter at: 1 @ rowIndex;
 			add: dropList at: 2 @ rowIndex.
 		rowIndex := rowIndex + 1 ].
 	^ newLayout
+]
+
+{ #category : #accessing }
+CMIDAIRModelSubmodelsPresenter >> title [
+
+	^ 'I-DAIR ABM Launcher'
 ]

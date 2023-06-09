@@ -78,7 +78,7 @@ CMIDAIRModelPresenter >> initializePresenters [
 		             beFloat;
 		             climbRate: 1.0;
 		             minimum: 0.0;
-		             number: 365.0;
+		             number: 30.0;
 		             yourself.
 	runButton := self newButton
 		             icon: (Smalltalk ui iconNamed: #forward);
