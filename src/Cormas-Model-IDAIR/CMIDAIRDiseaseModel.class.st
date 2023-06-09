@@ -10,6 +10,18 @@ CMIDAIRDiseaseModel class >> isAbstract [
 	^ self = CMIDAIRDiseaseModel
 ]
 
+{ #category : #accessing }
+CMIDAIRDiseaseModel class >> order [
+
+	^ 0.1
+]
+
+{ #category : #accessing }
+CMIDAIRDiseaseModel class >> submodelCategoryName [
+
+	^ #disease
+]
+
 { #category : #defaults }
 CMIDAIRDiseaseModel >> defaultDiseaseDynamicsClass [
 
@@ -30,18 +42,6 @@ CMIDAIRDiseaseModel >> estimatedTransmissibleDuration [
 	^ n > 0
 		  ifTrue: [ t asFloat / n asFloat ]
 		  ifFalse: [ 0.0 ]
-]
-
-{ #category : #accessing }
-CMIDAIRDiseaseModel >> name [
-
-	^ #disease
-]
-
-{ #category : #accessing }
-CMIDAIRDiseaseModel >> order [
-
-	^ 0.1
 ]
 
 { #category : #control }

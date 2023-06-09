@@ -11,13 +11,13 @@ CMIDAIRContactModel class >> isAbstract [
 ]
 
 { #category : #accessing }
-CMIDAIRContactModel >> name [
+CMIDAIRContactModel class >> order [
 
-	^ #contact
+	^ 0.5
 ]
 
 { #category : #accessing }
-CMIDAIRContactModel >> order [
+CMIDAIRContactModel class >> submodelCategoryName [
 
-	^ 0.5
+	^ #contact
 ]

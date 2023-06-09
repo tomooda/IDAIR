@@ -35,6 +35,12 @@ Class {
 	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
+{ #category : #accessing }
+CMIDAIROxfordDiseaseModel class >> submodelName [
+
+	^ 'Oxford'
+]
+
 { #category : #converting }
 CMIDAIROxfordDiseaseModel >> asPresenter [
 

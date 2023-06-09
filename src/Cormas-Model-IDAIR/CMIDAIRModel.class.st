@@ -95,7 +95,7 @@ CMIDAIRModel class >> howToRunIt [
 { #category : #submodels }
 CMIDAIRModel >> addSubmodel: aCMIDAIRSubmodel [
 
-	^ submodels at: aCMIDAIRSubmodel name put: aCMIDAIRSubmodel
+	^ submodels at: aCMIDAIRSubmodel submodelCategoryName put: aCMIDAIRSubmodel
 ]
 
 { #category : #'user interfaces' }
@@ -140,6 +140,18 @@ CMIDAIRModel >> defaultDiseaseDynamicsClass [
 CMIDAIRModel >> ifGUI: aBlock [
 
 	^ self isHeadless ifFalse: aBlock
+]
+
+{ #category : #initialization }
+CMIDAIRModel >> init [
+
+	self
+		createGridLines: 1
+		columns: 1
+		neighbourhood: 8
+		closed: false.
+	self createN: 1000 randomlyLocatedEntities: CMIDAIRCitizen.
+	1 to: 10 do: [ :index | (self theCitizens at: index) beAsymptomatic ]
 ]
 
 { #category : #scheduling }
@@ -196,6 +208,14 @@ CMIDAIRModel >> isHeadless [
 CMIDAIRModel >> isHeadless: aBoolean [
 
 	isHeadless := aBoolean = true
+]
+
+{ #category : #initialization }
+CMIDAIRModel >> loadDefaultSubmodels [
+
+	self addSubmodel: (CMIDAIRVietnamDiseaseModel on: self).
+	self addSubmodel: (CMIDAIRSingleLocationContactModel on: self).
+	self addSubmodel: (CMIDAIRSimpleTimeModel on: self)
 ]
 
 { #category : #probes }

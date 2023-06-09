@@ -43,6 +43,12 @@ Class {
 	#category : #'Cormas-Model-IDAIR-Disease-Vietnam'
 }
 
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseModel class >> submodelName [
+
+	^ 'Vietnam'
+]
+
 { #category : #converting }
 CMIDAIRVietnamDiseaseModel >> asPresenter [
 

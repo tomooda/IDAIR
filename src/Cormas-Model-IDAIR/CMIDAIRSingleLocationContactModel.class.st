@@ -7,6 +7,12 @@ Class {
 	#category : #'Cormas-Model-IDAIR-Contact-SingleLocation'
 }
 
+{ #category : #accessing }
+CMIDAIRSingleLocationContactModel class >> submodelName [
+
+	^ 'single location'
+]
+
 { #category : #converting }
 CMIDAIRSingleLocationContactModel >> asPresenter [
 

@@ -7,6 +7,12 @@ Class {
 	#category : #'Cormas-Model-IDAIR-Time-Simple'
 }
 
+{ #category : #accessing }
+CMIDAIRSimpleTimeModel class >> submodelName [
+
+	^ 'simple'
+]
+
 { #category : #converting }
 CMIDAIRSimpleTimeModel >> asPresenter [
 

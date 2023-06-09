@@ -11,19 +11,19 @@ CMIDAIRTimeModel class >> isAbstract [
 ]
 
 { #category : #accessing }
-CMIDAIRTimeModel >> daysPerStep [
+CMIDAIRTimeModel class >> order [
 
-	^ self subclassResponsibility
+	^ 0.9
 ]
 
 { #category : #accessing }
-CMIDAIRTimeModel >> name [
+CMIDAIRTimeModel class >> submodelCategoryName [
 
 	^ #time
 ]
 
 { #category : #accessing }
-CMIDAIRTimeModel >> order [
+CMIDAIRTimeModel >> daysPerStep [
 
-	^ 0.9
+	^ self subclassResponsibility
 ]
