@@ -225,7 +225,7 @@ CMIDAIRModel >> numberOfAsymptomatic [
 	| num |
 	num := 0.
 	self theCitizens do: [ :citizen | 
-		citizen diseaseDynamics isSymptomatic ifTrue: [ num := num + 1 ] ].
+		citizen diseaseDynamics isAsymptomatic ifTrue: [ num := num + 1 ] ].
 	^ num
 ]
 
