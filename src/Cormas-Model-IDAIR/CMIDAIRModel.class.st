@@ -128,6 +128,31 @@ CMIDAIRModel >> chartPresenter [
 	^ CMIDAIRChartPresenter on: self
 ]
 
+{ #category : #'instance creation - agents & objects' }
+CMIDAIRModel >> createN: aNumber randomlyLocatedEntities: aClass initMethod: aSymbol arguments: aCollec [
+
+	"Return a collection of aNumber of entities of aClass for wich the init method 'aSymbol' with a set of arguments 'aCollec' has been send. 
+	The new entities are randomly located on the grid.
+	ex: self createN: 10 randomlyLocatedEntities: Predator initMethod: #initAge:energy: arguments: #(0 50) "
+
+	| anAgent newEntities counter step |
+	newEntities := OrderedCollection new.
+	counter := 0.
+	step := aNumber // 100 + 1.
+	'Creating agents...'
+		displayProgressFrom: 0
+		to: 100
+		during: [ :progress | 
+			aNumber timesRepeat: [ 
+				anAgent := self newEntity: aClass.
+				anAgent moveTo: self pickCell.
+				anAgent perform: aSymbol withArguments: aCollec.
+				newEntities add: anAgent.
+				(counter := counter + 1) % step = 0 ifTrue: [ 
+					progress value: counter // step ] ] ].
+	^ newEntities
+]
+
 { #category : #accessing }
 CMIDAIRModel >> daysPerStep [
 
