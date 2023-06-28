@@ -103,7 +103,18 @@ CMIDAIRModelPresenter >> runSimulation [
 
 	self model ifNotNil: [ :model | 
 		daysField number ifNotNil: [ :days | 
-			(days / model daysPerStep) rounded timesRepeat: [ model runStep ].
+			'Simulating...'
+				displayProgressFrom: 0
+				to: 100
+				during: [ :progress | 
+					| steps count step |
+					steps := (days / model daysPerStep) rounded.
+					count := 0.
+					step := steps // 100 + 1.
+					steps timesRepeat: [ 
+						model runStep.
+						(count := count + 1) % step = 0 ifTrue: [ 
+							progress value: count // step ] ] ].
 			daysLabel label:
 				(model timeStep * model daysPerStep printShowingDecimalPlaces: 2).
 			chart ifNotNil: [ chart newMaxX: model timeStep ].
