@@ -40,6 +40,12 @@ CMIDAIRSingleLocationContactModel >> estimatedTransmissibleDuration [
 ]
 
 { #category : #accessing }
+CMIDAIRSingleLocationContactModel >> initializers [
+
+	^ {  }
+]
+
+{ #category : #accessing }
 CMIDAIRSingleLocationContactModel >> numberOfSusceptive [
 
 	| num |

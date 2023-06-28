@@ -36,8 +36,20 @@ CMIDAIRDiseaseDynamics >> beAsymptomatic [
 	^ self subclassResponsibility
 ]
 
+{ #category : #testing }
+CMIDAIRDiseaseDynamics >> beDead [
+
+	^ self subclassResponsibility
+]
+
 { #category : #actions }
 CMIDAIRDiseaseDynamics >> beExposed [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #testing }
+CMIDAIRDiseaseDynamics >> beSusceptive [
 
 	^ self subclassResponsibility
 ]

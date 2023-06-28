@@ -44,6 +44,16 @@ CMIDAIRDiseaseModel >> estimatedTransmissibleDuration [
 		  ifFalse: [ 0.0 ]
 ]
 
+{ #category : #accessing }
+CMIDAIRDiseaseModel >> initializers [
+
+	^ { 
+		  ('Susceptive' -> [ :citizen | citizen beSusceptive ]).
+		  ('Exposed' -> [ :citizen | citizen beExposed ]).
+		  ('Asymptomatic' -> [ :citizen | citizen beAsymptomatic ]).
+		  ('Dead' -> [ :citizen | citizen beDead ]) }
+]
+
 { #category : #control }
 CMIDAIRDiseaseModel >> step: anInteger [
 

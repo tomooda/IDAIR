@@ -5,7 +5,8 @@ Class {
 		'theCitizens',
 		'theLocations',
 		'submodels',
-		'isHeadless'
+		'isHeadless',
+		'initializer'
 	],
 	#category : #'Cormas-Model-IDAIR-Core'
 }
@@ -24,13 +25,18 @@ CMIDAIRModel class >> colorOfProbe_numberOfAsymptomatic [
 ]
 
 { #category : #probes }
+CMIDAIRModel class >> colorOfProbe_numberOfDead [
+	^ Color black
+]
+
+{ #category : #probes }
 CMIDAIRModel class >> colorOfProbe_numberOfHospitalized [
-	^ Color gray
+	^ Color lightGray
 ]
 
 { #category : #probes }
 CMIDAIRModel class >> colorOfProbe_numberOfICUed [
-	^ Color black
+	^ Color gray
 ]
 
 { #category : #probes }
@@ -150,8 +156,9 @@ CMIDAIRModel >> init [
 		columns: 1
 		neighbourhood: 8
 		closed: false.
-	self createN: 1000 randomlyLocatedEntities: CMIDAIRCitizen.
-	1 to: 10 do: [ :index | (self theCitizens at: index) beAsymptomatic ]
+	initializer ifNotNil: [ initializer value: self ].
+	"self createN: 1000 randomlyLocatedEntities: CMIDAIRCitizen.
+	1 to: 10 do: [ :index | (self theCitizens at: index) beAsymptomatic ]"
 ]
 
 { #category : #scheduling }
@@ -198,6 +205,20 @@ CMIDAIRModel >> initialize [
 	isHeadless := false
 ]
 
+{ #category : #initialization }
+CMIDAIRModel >> initializer: aBlock [
+
+	initializer := aBlock
+]
+
+{ #category : #accessing }
+CMIDAIRModel >> initializers [
+
+	^ Array streamContents: [ :stream | 
+		  self submodelsDo: [ :submodel | 
+			  stream nextPut: submodel initializers ] ]
+]
+
 { #category : #'user interfaces' }
 CMIDAIRModel >> isHeadless [
 
@@ -226,6 +247,17 @@ CMIDAIRModel >> numberOfAsymptomatic [
 	num := 0.
 	self theCitizens do: [ :citizen | 
 		citizen diseaseDynamics isAsymptomatic ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #probes }
+CMIDAIRModel >> numberOfDead [
+
+	<probe>
+	| num |
+	num := 0.
+	self theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isDead ifTrue: [ num := num + 1 ] ].
 	^ num
 ]
 
@@ -299,6 +331,12 @@ CMIDAIRModel >> numberOfSymptomatic [
 CMIDAIRModel >> openGUI [
 
 	self ifGUI: [ self asPresenter openWithSpec ]
+]
+
+{ #category : #removing }
+CMIDAIRModel >> removeDestroyedEntities [
+
+	"don't remove dead entities because we want to count dead people."
 ]
 
 { #category : #control }

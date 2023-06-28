@@ -73,6 +73,12 @@ CMIDAIRCitizen >> isAsymptomatic [
 ]
 
 { #category : #testing }
+CMIDAIRCitizen >> isDead [
+
+	^ self diseaseDynamics isDead
+]
+
+{ #category : #testing }
 CMIDAIRCitizen >> isHospitalized [
 
 	^ self diseaseDynamics isHospitalized

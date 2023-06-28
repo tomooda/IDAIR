@@ -60,6 +60,12 @@ CMIDAIRSubmodel >> cormasModel: aCMIDAIRModel [
 	cormasModel := aCMIDAIRModel
 ]
 
+{ #category : #accessing }
+CMIDAIRSubmodel >> initializers [
+
+	^ self subclassResponsibility
+]
+
 { #category : #'user interfaces' }
 CMIDAIRSubmodel >> openGUI [
 ]

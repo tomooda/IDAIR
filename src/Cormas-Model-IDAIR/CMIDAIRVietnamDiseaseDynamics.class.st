@@ -88,6 +88,12 @@ CMIDAIRVietnamDiseaseDynamics >> beAsymptomatic [
 ]
 
 { #category : #transitioning }
+CMIDAIRVietnamDiseaseDynamics >> beDead [
+
+	^ CMIDAIRVietnamDiseaseD newFrom: self
+]
+
+{ #category : #transitioning }
 CMIDAIRVietnamDiseaseDynamics >> beExposed [
 
 	self random <= self pa ifTrue: [ 
@@ -99,6 +105,12 @@ CMIDAIRVietnamDiseaseDynamics >> beExposed [
 	self random <= self pd ifFalse: [ 
 		^ CMIDAIRVietnamDiseaseEc newFrom: self ].
 	^ CMIDAIRVietnamDiseaseEd newFrom: self
+]
+
+{ #category : #transitioning }
+CMIDAIRVietnamDiseaseDynamics >> beSusceptive [
+
+	^ CMIDAIRVietnamDiseaseS newFrom: self
 ]
 
 { #category : #accessing }

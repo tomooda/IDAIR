@@ -31,6 +31,12 @@ CMIDAIRSimpleTimeModel >> daysPerStep: aNumber [
 	daysPerStep := aNumber
 ]
 
+{ #category : #accessing }
+CMIDAIRSimpleTimeModel >> initializers [
+
+	^ {  }
+]
+
 { #category : #'user interfaces' }
 CMIDAIRSimpleTimeModel >> openGUI [
 
