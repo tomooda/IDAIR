@@ -96,6 +96,12 @@ CMIDAIRModelInitializationPresenter >> modelChanged [
 							              items: initializers) ] ] ] ]
 ]
 
+{ #category : #accessing }
+CMIDAIRModelInitializationPresenter >> title [
+
+	^ 'ABM Initial Condition'
+]
+
 { #category : #evaluating }
 CMIDAIRModelInitializationPresenter >> value: aCMIDAIRModel [
 
