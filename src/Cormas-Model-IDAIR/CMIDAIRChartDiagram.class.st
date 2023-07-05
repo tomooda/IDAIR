@@ -4,6 +4,14 @@ Class {
 	#category : #'Cormas-Model-IDAIR-UI'
 }
 
+{ #category : #accessing }
+CMIDAIRChartDiagram >> maxYValue [
+
+	^ self scaleToMinMax
+		  ifTrue: [ self detectMaxProbeValue ]
+		  ifFalse: [ self owner maxYValue ]
+]
+
 { #category : #'accessing - chart' }
 CMIDAIRChartDiagram >> newMaxX: aNumber [
 
