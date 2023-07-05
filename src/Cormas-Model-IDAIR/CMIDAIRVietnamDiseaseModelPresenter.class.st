@@ -38,13 +38,269 @@ Class {
 		'bIq',
 		'bIh',
 		'bIc',
-		'bId'
+		'bId',
+		'notebook'
 	],
 	#category : #'Cormas-Model-IDAIR-Disease-Vietnam'
 }
 
 { #category : #specs }
 CMIDAIRVietnamDiseaseModelPresenter class >> defaultSpec [
+
+	^ self pagedSpec
+]
+
+{ #category : #specs }
+CMIDAIRVietnamDiseaseModelPresenter class >> layoutForAsymptomatic [
+
+	<script: 'self new openWithSpec: #layoutForAsymptomatic'>
+	^ SpBoxLayout newVertical
+		  add: (SpBoxLayout newHorizontal
+				   add: 'Probability of becoming asymptomatic (pa)' expand: false;
+				   add: #pa width: 80;
+				   yourself)
+		  expand: false;
+		  add: (SpGridLayout new
+				   beColumnNotHomogeneous;
+				   beRowNotHomogeneous;
+				   add: 'Exposed phase' at: 1 @ 1 span: 2 @ 1;
+				   add: 'mean duration (τEa)' at: 1 @ 2;
+				   add: #tEa at: 2 @ 2;
+				   add: 'no transmission' at: 1 @ 3 span: 2 @ 1;
+				   add: '' asPresenter at: 3 @ 1;
+				   add: 'Asymptomatic phase' at: 4 @ 1 span: 2 @ 1;
+				   add: 'mean duration (τAa)' at: 4 @ 2;
+				   add: #tAa at: 5 @ 2;
+				   add: 'mean transmission (βAa)' at: 4 @ 3;
+				   add: #bAa at: 5 @ 3;
+				   yourself)
+		  expand: true;
+		  yourself
+]
+
+{ #category : #specs }
+CMIDAIRVietnamDiseaseModelPresenter class >> layoutForCritical [
+
+	<script: 'self new openWithSpec: #layoutForCritical'>
+	^ SpBoxLayout newVertical
+		  add: (SpBoxLayout newHorizontal
+				   add: 'Probability of becoming critical given hospitalized'
+				   expand: false;
+				   add: #pc width: 80;
+				   yourself)
+		  expand: false;
+		  add: (SpGridLayout new
+				   beColumnNotHomogeneous;
+				   beRowNotHomogeneous;
+				   add: 'Exposed phase' at: 1 @ 1 span: 2 @ 1;
+				   add: 'mean duration (τEc)' at: 1 @ 2;
+				   add: #tEc at: 2 @ 2;
+				   add: 'no transmission' at: 1 @ 3 span: 2 @ 1;
+				   add: '' asPresenter at: 3 @ 1;
+				   add: 'Asymptomatic phase' at: 4 @ 1 span: 2 @ 1;
+				   add: 'mean duration (τAc)' at: 4 @ 2;
+				   add: #tAc at: 5 @ 2;
+				   add: 'mean transmission (βAc)' at: 4 @ 3;
+				   add: #bAc at: 5 @ 3;
+				   add: '' asPresenter at: 6 @ 1;
+				   add: 'Ill phase' at: 7 @ 1 span: 2 @ 1;
+				   add: 'mean duration (τIc)' at: 7 @ 2;
+				   add: #tIc at: 8 @ 2;
+				   add: 'mean transmission (βIc)' at: 7 @ 3;
+				   add: #bIc at: 8 @ 3;
+				   add: '' asPresenter at: 1 @ 4;
+				   add: 'Hospitalized phase' at: 1 @ 5 span: 2 @ 1;
+				   add: 'mean duration (τHc)' at: 1 @ 6;
+				   add: #tHc at: 2 @ 6;
+				   add: 'no transmission' asPresenter at: 1 @ 7;
+				   add: '' asPresenter at: 3 @ 4;
+				   add: 'Critical phase' at: 4 @ 5 span: 2 @ 1;
+				   add: 'mean duration (τCc)' at: 4 @ 6;
+				   add: #tCc at: 5 @ 6;
+				   add: 'no transmission' asPresenter at: 4 @ 7;
+				   yourself)
+		  expand: true;
+		  yourself
+]
+
+{ #category : #specs }
+CMIDAIRVietnamDiseaseModelPresenter class >> layoutForDying [
+
+	<script: 'self new openWithSpec: #layoutForDying'>
+	^ SpBoxLayout newVertical
+		  add: (SpBoxLayout newHorizontal
+				   add: 'Probability of death given critical' expand: false;
+				   add: #pd width: 80;
+				   yourself)
+		  expand: false;
+		  add: (SpGridLayout new
+				   beColumnNotHomogeneous;
+				   beRowNotHomogeneous;
+				   add: 'Exposed phase' at: 1 @ 1 span: 2 @ 1;
+				   add: 'mean duration (τEd)' at: 1 @ 2;
+				   add: #tEd at: 2 @ 2;
+				   add: 'no transmission' at: 1 @ 3 span: 2 @ 1;
+				   add: '' asPresenter at: 3 @ 1;
+				   add: 'Asymptomatic phase' at: 4 @ 1 span: 2 @ 1;
+				   add: 'mean duration (τAd)' at: 4 @ 2;
+				   add: #tAd at: 5 @ 2;
+				   add: 'mean transmission (βAd)' at: 4 @ 3;
+				   add: #bAd at: 5 @ 3;
+				   add: '' asPresenter at: 6 @ 1;
+				   add: 'Ill phase' at: 7 @ 1 span: 2 @ 1;
+				   add: 'mean duration (τId)' at: 7 @ 2;
+				   add: #tId at: 8 @ 2;
+				   add: 'mean transmission (βId)' at: 7 @ 3;
+				   add: #bId at: 8 @ 3;
+				   add: '' asPresenter at: 1 @ 4;
+				   add: 'Hospitalized phase' at: 1 @ 5 span: 2 @ 1;
+				   add: 'mean duration (τHd)' at: 1 @ 6;
+				   add: #tHd at: 2 @ 6;
+				   add: 'no transmission' asPresenter at: 1 @ 7;
+				   add: '' asPresenter at: 3 @ 4;
+				   add: 'Critical phase' at: 4 @ 5 span: 2 @ 1;
+				   add: 'mean duration (τCd)' at: 4 @ 6;
+				   add: #tCd at: 5 @ 6;
+				   add: 'no transmission' asPresenter at: 4 @ 7;
+				   yourself)
+		  expand: true;
+		  yourself
+]
+
+{ #category : #specs }
+CMIDAIRVietnamDiseaseModelPresenter class >> layoutForHospitalized [
+
+	<script: 'self new openWithSpec: #layoutForHospitalized'>
+	^ SpBoxLayout newVertical
+		  add: (SpBoxLayout newHorizontal
+				   add:
+					   'Probability of becoming hospitalized given not asymptomatic'
+				   expand: false;
+				   add: #ph width: 80;
+				   yourself)
+		  expand: false;
+		  add: (SpGridLayout new
+				   beColumnNotHomogeneous;
+				   beRowNotHomogeneous;
+				   add: 'Exposed phase' at: 1 @ 1 span: 2 @ 1;
+				   add: 'mean duration (τEh)' at: 1 @ 2;
+				   add: #tEh at: 2 @ 2;
+				   add: 'no transmission' at: 1 @ 3 span: 2 @ 1;
+				   add: '' asPresenter at: 3 @ 1;
+				   add: 'Asymptomatic phase' at: 4 @ 1 span: 2 @ 1;
+				   add: 'mean duration (τAh)' at: 4 @ 2;
+				   add: #tAh at: 5 @ 2;
+				   add: 'mean transmission (βAh)' at: 4 @ 3;
+				   add: #bAh at: 5 @ 3;
+				   add: '' asPresenter at: 6 @ 1;
+				   add: 'Ill phase' at: 7 @ 1 span: 2 @ 1;
+				   add: 'mean duration (τIh)' at: 7 @ 2;
+				   add: #tIh at: 8 @ 2;
+				   add: 'mean transmission (βIh)' at: 7 @ 3;
+				   add: #bIh at: 8 @ 3;
+				   add: '' asPresenter at: 1 @ 4;
+				   add: 'Hospitalized phase' at: 1 @ 5 span: 2 @ 1;
+				   add: 'mean duration (τHh)' at: 1 @ 6;
+				   add: #tHh at: 2 @ 6;
+				   add: 'no transmission' asPresenter at: 1 @ 7;
+				   yourself)
+		  expand: true;
+		  yourself
+]
+
+{ #category : #specs }
+CMIDAIRVietnamDiseaseModelPresenter class >> layoutForMildSymptomatic [
+
+	<script: 'self new openWithSpec: #layoutForMildSymptomatic'>
+	^ SpBoxLayout newVertical
+		  add: (SpBoxLayout newHorizontal
+				   add: '' expand: false;
+				   add: '' expand: false;
+				   yourself)
+		  expand: false;
+		  add: (SpGridLayout new
+				   beColumnNotHomogeneous;
+				   beRowNotHomogeneous;
+				   add: 'Exposed phase' at: 1 @ 1 span: 2 @ 1;
+				   add: 'mean duration (τEm)' at: 1 @ 2;
+				   add: #tEm at: 2 @ 2;
+				   add: 'no transmission' at: 1 @ 3 span: 2 @ 1;
+					add: '' asPresenter at: 3@1;
+				   add: 'Asymptomatic phase' at: 4 @ 1 span: 2 @ 1;
+				   add: 'mean duration (τAm)' at: 4 @ 2;
+				   add: #tAa at: 5 @ 2;
+				   add: 'mean transmission (βAm)' at: 4 @ 3;
+				   add: #bAm at: 5 @ 3;
+					add: '' asPresenter at: 6@1;
+				   add: 'Ill phase' at: 7 @ 1 span: 2 @ 1;
+				   add: 'mean duration (τIm)' at: 7 @ 2;
+				   add: #tIm at: 8 @ 2;
+				   add: 'mean transmission (βIm)' at: 7 @ 3;
+				   add: #bIm at: 8 @ 3;
+				   yourself)
+		  expand: true;
+		  yourself
+]
+
+{ #category : #specs }
+CMIDAIRVietnamDiseaseModelPresenter class >> layoutForQuarantine [
+
+	<script: 'self new openWithSpec: #layoutForQuarantine'>
+	^ SpBoxLayout newVertical
+		  add: (SpBoxLayout newHorizontal
+				   add: 'Probability of quarantine given mild symptom'
+				   expand: false;
+				   add: #pq width: 80;
+				   yourself)
+		  expand: false;
+		  add: (SpGridLayout new
+				   beColumnNotHomogeneous;
+				   beRowNotHomogeneous;
+				   add: 'Exposed phase' at: 1 @ 1 span: 2 @ 1;
+				   add: 'same as mild symptom' asPresenter at: 1 @ 2;
+				   add: '' asPresenter at: 2 @ 2;
+				   add: '' asPresenter at: 3 @ 1;
+				   add: 'Asymptomatic phase' at: 4 @ 1 span: 2 @ 1;
+				   add: 'same as mild symptom' asPresenter at: 4 @ 2;
+				   add: '' asPresenter at: 5 @ 2;
+				   add: '' asPresenter at: 6 @ 1;
+				   add: 'Ill phase' at: 7 @ 1 span: 2 @ 1;
+				   add: 'mean duration (τIq)' at: 7 @ 2;
+				   add: #tIq at: 8 @ 2;
+				   add: 'mean transmission (βIq)' at: 7 @ 3;
+				   add: #bIq at: 8 @ 3;
+				   add: '' asPresenter at: 9 @ 1;
+				   add: 'Quarantine phase' at: 10 @ 1 span: 2 @ 1;
+				   add: 'mean duration (τQ)' at: 10 @ 2;
+				   add: #tQ at: 11 @ 2;
+				   yourself)
+		  expand: true;
+		  yourself
+]
+
+{ #category : #specs }
+CMIDAIRVietnamDiseaseModelPresenter class >> layoutForRecovered [
+
+	<script: 'self new openWithSpec: #layoutForRecovered'>
+	^ SpBoxLayout newVertical
+		  add: (SpBoxLayout newHorizontal
+				   add: '' asPresenter expand: false;
+				   yourself)
+		  expand: false;
+		  add: (SpGridLayout new
+				   beColumnNotHomogeneous;
+				   beRowNotHomogeneous;
+				   add: 'Recovered phase' at: 1 @ 1 span: 2 @ 1;
+				   add: 'mean duration (τR)' at: 1 @ 2;
+				   add: #tR at: 2 @ 2;
+				   add: 'no transmission' at: 1 @ 3 span: 2 @ 1;
+				   yourself)
+		  expand: true;
+		  yourself
+]
+
+{ #category : #specs }
+CMIDAIRVietnamDiseaseModelPresenter class >> monolithicSpec [
 
 	^ SpGridLayout new
 		  beColumnNotHomogeneous;
@@ -126,10 +382,45 @@ CMIDAIRVietnamDiseaseModelPresenter class >> defaultSpec [
 		  yourself
 ]
 
+{ #category : #specs }
+CMIDAIRVietnamDiseaseModelPresenter class >> pagedSpec [
+
+	^ SpBoxLayout newVertical
+		  add: #notebook;
+		  add: (SpBoxLayout newHorizontal
+				   add: 'Mean duration of recovery (τR) ' expand: false;
+				   add: #tR width: 50;
+				   yourself)
+		  expand: false;
+		  yourself
+]
+
 { #category : #initialization }
 CMIDAIRVietnamDiseaseModelPresenter >> initializePresenters [
 
 	super initializePresenters.
+	notebook := self newNotebook
+		            addPage: (self newNotebookPage
+				             title: 'Asymptomatic';
+				             presenterProvider: [ self class on: self model ];
+				             layoutSpec: #layoutForAsymptomatic);
+		            addPage: (self newNotebookPage
+				             title: 'Mild symptomatic';
+				             presenterProvider: [ self class on: self model ];
+				             layoutSpec: #layoutForMildSymptomatic);
+		            addPage: (self newNotebookPage
+				             title: 'Hospitalized';
+				             presenterProvider: [ self class on: self model ];
+				             layoutSpec: #layoutForHospitalized);
+		            addPage: (self newNotebookPage
+				             title: 'Critical';
+				             presenterProvider: [ self class on: self model ];
+				             layoutSpec: #layoutForCritical);
+		            addPage: (self newNotebookPage
+				             title: 'Death';
+				             presenterProvider: [ self class on: self model ];
+				             layoutSpec: #layoutForDying);
+		            yourself.
 	pa := self newNumberInput
 		      beFloat;
 		      climbRate: 0.01;
