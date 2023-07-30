@@ -11,6 +11,12 @@ CMIDAIRVietnamDiseaseCd >> estimatedTransmissibleDuration [
 ]
 
 { #category : #accessing }
+CMIDAIRVietnamDiseaseCd >> inCommunity [
+
+	^ CMIDAIRVietnamDiseaseId newFrom: self
+]
+
+{ #category : #accessing }
 CMIDAIRVietnamDiseaseCd >> next [
 
 	^ CMIDAIRVietnamDiseaseD newFrom: self

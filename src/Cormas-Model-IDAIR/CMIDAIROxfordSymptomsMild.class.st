@@ -22,6 +22,12 @@ CMIDAIROxfordSymptomsMild >> estimatedTransmissibleDuration [
 	^ self tauSym + self tauRec
 ]
 
+{ #category : #accessing }
+CMIDAIROxfordSymptomsMild >> inCommunity [
+
+	^ self
+]
+
 { #category : #testing }
 CMIDAIROxfordSymptomsMild >> isActive [
 

@@ -25,6 +25,12 @@ CMIDAIROxfordSymptomsSevere >> estimatedTransmissibleDuration [
 	^ self tauSym + (1 - self pHosp * self tauRec)
 ]
 
+{ #category : #accessing }
+CMIDAIROxfordSymptomsSevere >> inCommunity [
+
+	^ self
+]
+
 { #category : #testing }
 CMIDAIROxfordSymptomsSevere >> isActive [
 

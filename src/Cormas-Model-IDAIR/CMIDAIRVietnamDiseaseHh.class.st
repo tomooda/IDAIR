@@ -4,6 +4,12 @@ Class {
 	#category : #'Cormas-Model-IDAIR-Disease-Vietnam'
 }
 
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseHh >> inCommunity [
+
+	^ CMIDAIRVietnamDiseaseIh newFrom: self
+]
+
 { #category : #transitioning }
 CMIDAIRVietnamDiseaseHh >> next [
 

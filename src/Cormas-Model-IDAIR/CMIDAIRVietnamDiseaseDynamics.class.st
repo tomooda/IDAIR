@@ -162,6 +162,12 @@ CMIDAIRVietnamDiseaseDynamics >> isInfected [
 ]
 
 { #category : #testing }
+CMIDAIRVietnamDiseaseDynamics >> isQuarrantined [
+
+	^ false
+]
+
+{ #category : #testing }
 CMIDAIRVietnamDiseaseDynamics >> isRecovered [
 
 	^ false

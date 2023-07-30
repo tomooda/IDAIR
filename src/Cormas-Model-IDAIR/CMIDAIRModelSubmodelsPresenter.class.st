@@ -42,7 +42,7 @@ CMIDAIRModelSubmodelsPresenter >> initializePresenters [
 CMIDAIRModelSubmodelsPresenter >> initializeWindow: aWindowPresenter [
 
 	super initializeWindow: aWindowPresenter.
-	aWindowPresenter initialExtent: 300 @ 200
+	aWindowPresenter initialExtent: 300 @ 250
 ]
 
 { #category : #initialization }

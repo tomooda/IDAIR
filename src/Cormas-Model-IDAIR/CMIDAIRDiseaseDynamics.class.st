@@ -90,6 +90,12 @@ CMIDAIRDiseaseDynamics >> estimatedTransmissibleDuration [
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+CMIDAIRDiseaseDynamics >> inCommunity [
+
+	^ self subclassResponsibility
+]
+
 { #category : #testing }
 CMIDAIRDiseaseDynamics >> isAsymptomatic [
 
@@ -122,6 +128,12 @@ CMIDAIRDiseaseDynamics >> isInCommunity [
 
 { #category : #testing }
 CMIDAIRDiseaseDynamics >> isInfected [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #testing }
+CMIDAIRDiseaseDynamics >> isQuarrantined [
 
 	^ self subclassResponsibility
 ]

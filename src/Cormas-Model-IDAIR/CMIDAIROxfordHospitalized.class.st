@@ -26,6 +26,12 @@ CMIDAIROxfordHospitalized >> estimatedTransmissibleDuration [
 	^ 0.0
 ]
 
+{ #category : #accessing }
+CMIDAIROxfordHospitalized >> inCommunity [
+
+	^ self beSymptomsSevere
+]
+
 { #category : #testing }
 CMIDAIROxfordHospitalized >> isActive [
 

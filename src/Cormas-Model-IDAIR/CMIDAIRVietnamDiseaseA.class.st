@@ -16,6 +16,12 @@ CMIDAIRVietnamDiseaseA >> color [
 	^ Color yellow
 ]
 
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseA >> inCommunity [
+
+	^ self
+]
+
 { #category : #testing }
 CMIDAIRVietnamDiseaseA >> isAsymptomatic [
 

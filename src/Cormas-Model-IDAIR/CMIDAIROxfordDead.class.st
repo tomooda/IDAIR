@@ -28,6 +28,12 @@ CMIDAIROxfordDead >> estimatedTransmissibleDuration [
 	^ 0.0
 ]
 
+{ #category : #accessing }
+CMIDAIROxfordDead >> inCommunity [
+
+	^ self
+]
+
 { #category : #testing }
 CMIDAIROxfordDead >> isActive [
 

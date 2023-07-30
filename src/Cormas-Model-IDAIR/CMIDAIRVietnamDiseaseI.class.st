@@ -16,6 +16,12 @@ CMIDAIRVietnamDiseaseI >> color [
 	^ Color red
 ]
 
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseI >> inCommunity [
+
+	^ self
+]
+
 { #category : #testing }
 CMIDAIRVietnamDiseaseI >> isInCommunity [
 

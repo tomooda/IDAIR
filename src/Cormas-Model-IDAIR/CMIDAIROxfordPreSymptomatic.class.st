@@ -10,6 +10,12 @@ CMIDAIROxfordPreSymptomatic class >> isAbstract [
 	^ self = CMIDAIROxfordPreSymptomatic
 ]
 
+{ #category : #accessing }
+CMIDAIROxfordPreSymptomatic >> inCommunity [
+
+	^ self
+]
+
 { #category : #testing }
 CMIDAIROxfordPreSymptomatic >> isActive [
 

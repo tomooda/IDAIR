@@ -1,11 +1,19 @@
 Class {
 	#name : #CMIDAIRCitizen,
-	#superclass : #CMLocatedAgent,
+	#superclass : #CMIDAIRAgent,
 	#instVars : [
-		'diseaseDynamics'
+		'diseaseDynamics',
+		'contactProfile',
+		'resourceDynamics'
 	],
 	#category : #'Cormas-Model-IDAIR-Core'
 }
+
+{ #category : #events }
+CMIDAIRCitizen >> ICUedAction [
+
+	self resourceDynamics citizenICUed
+]
 
 { #category : #'transitioning-disease' }
 CMIDAIRCitizen >> beAsymptomatic [
@@ -16,7 +24,8 @@ CMIDAIRCitizen >> beAsymptomatic [
 { #category : #'transitioning-disease' }
 CMIDAIRCitizen >> beDead [
 
-	self diseaseDynamics: self diseaseDynamics beDead
+	self diseaseDynamics: self diseaseDynamics beDead.
+	self event: #dead
 ]
 
 { #category : #'transitioning-disease' }
@@ -31,10 +40,53 @@ CMIDAIRCitizen >> beSusceptive [
 	self diseaseDynamics: self diseaseDynamics beSusceptive
 ]
 
-{ #category : #defaults }
+{ #category : #'accessing-disease' }
+CMIDAIRCitizen >> beta [
+
+	| disease |
+	disease := self diseaseDynamics.
+	self resourceDynamics hasIsolation ifFalse: [ 
+		disease := disease inCommunity ].
+	^ disease beta
+]
+
+{ #category : #'accessing-contact' }
+CMIDAIRCitizen >> contactProfile [
+
+	^ contactProfile ifNil: [ 
+		  contactProfile := self defaultContactProfileClass on: self ]
+]
+
+{ #category : #'accessing-contact' }
+CMIDAIRCitizen >> contactProfile: aCMIDAIRContactProfile [
+
+	contactProfile == aCMIDAIRContactProfile ifFalse: [ 
+		contactProfile := aCMIDAIRContactProfile.
+		self changed ]
+]
+
+{ #category : #events }
+CMIDAIRCitizen >> deadAction [
+
+	self resourceDynamics citizenDead
+]
+
+{ #category : #'accessing-contact' }
+CMIDAIRCitizen >> defaultContactProfileClass [
+
+	^ self cormasModel defaultContactProfileClass
+]
+
+{ #category : #'accessing-disease' }
 CMIDAIRCitizen >> defaultDiseaseDynamicsClass [
 
 	^ self cormasModel defaultDiseaseDynamicsClass
+]
+
+{ #category : #'accessing-resource' }
+CMIDAIRCitizen >> defaultResourceDynamicsClass [
+
+	^ self cormasModel defaultCitizenResourceDynamicsClass
 ]
 
 { #category : #'accessing-disease' }
@@ -48,7 +100,10 @@ CMIDAIRCitizen >> diseaseDynamics [
 CMIDAIRCitizen >> diseaseDynamics: aCMIDAIRDiseaseDynamics [
 
 	diseaseDynamics == aCMIDAIRDiseaseDynamics ifFalse: [ 
+		| oldDiseaseDynamics |
+		oldDiseaseDynamics := diseaseDynamics.
 		diseaseDynamics := aCMIDAIRDiseaseDynamics.
+		self triggerEvent: oldDiseaseDynamics.
 		self dead: diseaseDynamics isDead.
 		self changed ]
 ]
@@ -63,7 +118,27 @@ CMIDAIRCitizen >> diseasePov [
 { #category : #'accessing-disease' }
 CMIDAIRCitizen >> estimatedTransmissibleDuration [
 
-	^ self diseaseDynamics estimatedTransmissibleDuration
+	| disease |
+	disease := self diseaseDynamics.
+	self resourceDynamics hasIsolation ifFalse: [ 
+		disease := disease inCommunity ].
+	^ disease estimatedTransmissibleDuration
+]
+
+{ #category : #events }
+CMIDAIRCitizen >> event: aSymbol [
+
+	aSymbol = #hospitalized ifTrue: [ ^ self hospitalizedAction ].
+	aSymbol = #ICUed ifTrue: [ ^ self ICUedAction ].
+	aSymbol = #quarrantined ifTrue: [ ^ self quarrantinedAction ].
+	aSymbol = #released ifTrue: [ ^ self releasedAction ].
+	aSymbol = #dead ifTrue: [ ^ self deadAction ]
+]
+
+{ #category : #events }
+CMIDAIRCitizen >> hospitalizedAction [
+
+	self resourceDynamics citizenHospitalized
 ]
 
 { #category : #testing }
@@ -81,13 +156,14 @@ CMIDAIRCitizen >> isDead [
 { #category : #testing }
 CMIDAIRCitizen >> isHospitalized [
 
-	^ self diseaseDynamics isHospitalized
+	^ self diseaseDynamics isHospitalized and: [ 
+		  self resourceDynamics hasIsolation ]
 ]
 
 { #category : #testing }
 CMIDAIRCitizen >> isICUed [
 
-	^ self diseaseDynamics isICUed
+	^ self diseaseDynamics isICUed and: [ self resourceDynamics hasICU ]
 ]
 
 { #category : #testing }
@@ -132,6 +208,31 @@ CMIDAIRCitizen >> pov [
 	^ self diseasePov
 ]
 
+{ #category : #events }
+CMIDAIRCitizen >> quarrantinedAction [
+
+	self resourceDynamics citizenQuarrantined
+]
+
+{ #category : #events }
+CMIDAIRCitizen >> releasedAction [
+
+	self resourceDynamics citizenReleased
+]
+
+{ #category : #'accessing-resource' }
+CMIDAIRCitizen >> resourceDynamics [
+
+	^ resourceDynamics ifNil: [ 
+		  resourceDynamics := self defaultResourceDynamicsClass on: self ]
+]
+
+{ #category : #'accessing-resource' }
+CMIDAIRCitizen >> resourceDynamics: aCMIDAIRCitizenResourceDynamics [
+
+	resourceDynamics := aCMIDAIRCitizenResourceDynamics
+]
+
 { #category : #accessing }
 CMIDAIRCitizen >> sizeOfPOV [
 
@@ -142,4 +243,33 @@ CMIDAIRCitizen >> sizeOfPOV [
 CMIDAIRCitizen >> step [
 
 	self diseaseDynamics: self diseaseDynamics step
+]
+
+{ #category : #'accessing-disease' }
+CMIDAIRCitizen >> tau [
+
+	| disease |
+	disease := self diseaseDynamics.
+	self resourceDynamics hasIsolation ifFalse: [ 
+		disease := disease inCommunity ].
+	^ disease tau
+]
+
+{ #category : #events }
+CMIDAIRCitizen >> triggerEvent: aCMIDAIRDiseaseDynamics [
+
+	| oldDiseaseDynamics |
+	oldDiseaseDynamics := aCMIDAIRDiseaseDynamics.
+	(diseaseDynamics isHospitalized and: [ 
+		 oldDiseaseDynamics isHospitalized not ]) ifTrue: [ 
+		^ self event: #hospitalized ].
+	(diseaseDynamics isICUed and: [ oldDiseaseDynamics isICUed not ]) 
+		ifTrue: [ ^ self event: #ICUed ].
+	(diseaseDynamics isQuarrantined and: [ 
+		 oldDiseaseDynamics isQuarrantined not ]) ifTrue: [ 
+		^ self event: #quarrantined ].
+	(diseaseDynamics isHospitalized not and: [ 
+		 oldDiseaseDynamics isHospitalized ]) ifTrue: [ 
+		^ self event: #released ].
+	diseaseDynamics isDead ifTrue: [ ^ self event: #dead ]
 ]

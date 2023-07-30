@@ -161,6 +161,12 @@ CMIDAIROxfordDiseaseDynamics >> isPreSymptomatic [
 ]
 
 { #category : #testing }
+CMIDAIROxfordDiseaseDynamics >> isQuarrantined [
+
+	^ false
+]
+
+{ #category : #testing }
 CMIDAIROxfordDiseaseDynamics >> isRecovered [
 
 	^ false

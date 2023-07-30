@@ -72,7 +72,7 @@ CMIDAIRModelPresenter >> initializePresenters [
 					 presenterProvider: [ submodel asPresenter ];
 					 yourself) ].
 		notebook addPage: (self newNotebookPage
-				 title: 'Chart';
+				 title: 'Population Chart';
 				 presenterProvider: [ chart := cormasModel chartPresenter ];
 				 yourself) ].
 	daysLabel := self newLabel

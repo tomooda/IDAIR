@@ -160,6 +160,22 @@ CMIDAIRModel >> daysPerStep [
 ]
 
 { #category : #defaults }
+CMIDAIRModel >> defaultCitizenResourceDynamicsClass [
+
+	^ self
+		  submodelAt: #resource
+		  do: [ :resourceModel | resourceModel defaultCitizenResourceDynamicsClass ]
+]
+
+{ #category : #defaults }
+CMIDAIRModel >> defaultContactProfileClass [
+
+	^ self
+		  submodelAt: #contact
+		  do: [ :contactModel | contactModel defaultContactProfileClass ]
+]
+
+{ #category : #defaults }
 CMIDAIRModel >> defaultDiseaseDynamicsClass [
 
 	^ self
@@ -260,7 +276,8 @@ CMIDAIRModel >> isHeadless: aBoolean [
 CMIDAIRModel >> loadDefaultSubmodels [
 
 	self addSubmodel: (CMIDAIRVietnamDiseaseModel on: self).
-	self addSubmodel: (CMIDAIRSingleLocationContactModel on: self).
+	self addSubmodel: (CMIDAIRKenyaContactModel on: self).
+	self addSubmodel: (CMIDAIRMobiResourceModel on: self).
 	self addSubmodel: (CMIDAIRSimpleTimeModel on: self)
 ]
 
@@ -273,6 +290,28 @@ CMIDAIRModel >> numberOfAsymptomatic [
 	self theCitizens do: [ :citizen | 
 		citizen diseaseDynamics isAsymptomatic ifTrue: [ num := num + 1 ] ].
 	^ num
+]
+
+{ #category : #'accessing-population' }
+CMIDAIRModel >> numberOfCitizensInCommunity [
+
+	| numberOfCitizensInCommunity |
+	numberOfCitizensInCommunity := 0.
+	self theCitizens do: [ :citizen | 
+		citizen isInCommunity ifTrue: [ 
+			numberOfCitizensInCommunity := numberOfCitizensInCommunity + 1 ] ].
+	^ numberOfCitizensInCommunity
+]
+
+{ #category : #'accessing-population' }
+CMIDAIRModel >> numberOfCitizensInICU [
+
+	| numberOfCitizensInICU |
+	numberOfCitizensInICU := 0.
+	self theCitizens do: [ :citizen | 
+		citizen isICUed ifTrue: [ 
+			numberOfCitizensInICU := numberOfCitizensInICU + 1 ] ].
+	^ numberOfCitizensInICU
 ]
 
 { #category : #probes }
@@ -293,7 +332,7 @@ CMIDAIRModel >> numberOfHospitalized [
 	| num |
 	num := 0.
 	self theCitizens do: [ :citizen | 
-		citizen diseaseDynamics isHospitalized ifTrue: [ num := num + 1 ] ].
+		citizen isHospitalized ifTrue: [ num := num + 1 ] ].
 	^ num
 ]
 
@@ -304,7 +343,7 @@ CMIDAIRModel >> numberOfICUed [
 	| num |
 	num := 0.
 	self theCitizens do: [ :citizen | 
-		citizen diseaseDynamics isICUed ifTrue: [ num := num + 1 ] ].
+		citizen isICUed ifTrue: [ num := num + 1 ] ].
 	^ num
 ]
 
@@ -362,6 +401,16 @@ CMIDAIRModel >> openGUI [
 CMIDAIRModel >> removeDestroyedEntities [
 
 	"don't remove dead entities because we want to count dead people."
+]
+
+{ #category : #accessing }
+CMIDAIRModel >> socialPreventionResourceFactor [
+
+	self
+		submodelAt: #resource
+		do: [ :resourceModel | 
+		^ resourceModel socialPreventionResourceFactor ].
+	^ 1.0
 ]
 
 { #category : #control }

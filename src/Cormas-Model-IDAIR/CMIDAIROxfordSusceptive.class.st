@@ -34,6 +34,12 @@ CMIDAIROxfordSusceptive >> estimatedTransmissibleDuration [
 	^ 0.0
 ]
 
+{ #category : #accessing }
+CMIDAIROxfordSusceptive >> inCommunity [
+
+	^ self
+]
+
 { #category : #testing }
 CMIDAIROxfordSusceptive >> isActive [
 

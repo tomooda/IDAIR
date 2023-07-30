@@ -22,6 +22,12 @@ CMIDAIRVietnamDiseaseR >> estimatedTransmissibleDuration [
 	^ 0.0
 ]
 
+{ #category : #accessing }
+CMIDAIRVietnamDiseaseR >> inCommunity [
+
+	^ self
+]
+
 { #category : #testing }
 CMIDAIRVietnamDiseaseR >> isInCommunity [
 
