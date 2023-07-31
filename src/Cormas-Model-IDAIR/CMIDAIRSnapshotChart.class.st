@@ -13,8 +13,14 @@ Class {
 CMIDAIRSnapshotChart class >> defaultLayout [
 
 	^ SpBoxLayout newHorizontal
-		  add: #eventList expand: false;
-		  add: #dateList expand: false;
+		  add: (SpBoxLayout newVertical
+				   add: 'Events' expand: false;
+				   add: #eventList)
+		  expand: false;
+		  add: (SpBoxLayout newVertical
+				   add: 'Day' expand: false;
+				   add: #dateList)
+		  expand: false;
 		  add: #roassal;
 		  yourself
 ]
@@ -72,8 +78,10 @@ CMIDAIRSnapshotChart >> initialize [
 	             #( #commodities ) #( #medication ) #( #'go to bar'
 	                #'go to restaurant' ) ).
 	enabledItems ifNil: [ 
-		enabledItems := { #'public transport'. #commodities. #medications.
-		                #'go to bar'. #'go to restaurant' } ].
+		enabledItems := { #'public transport'.
+		                #commodities. #oxygen. #medications. #'masks (hospitals)'.
+		                #'masks (community)'. #vaccines. #'traditional medicines'.
+		                #PPEs. #'body bags'. #'go to bar'. #'go to restaurant' } ].
 
 	super initialize
 ]

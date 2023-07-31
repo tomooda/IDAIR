@@ -72,14 +72,43 @@ CMIDAIRChart >> initialize [
 				                  ifTrue: [ 30 ]
 				                  ifFalse: [ 
 				                  1 - (t - 100 / 100 * 3.14) sin * 5 + 25 ])).
+			                (#oxygen -> (t < 100
+				                  ifTrue: [ 100 ]
+				                  ifFalse: [ 
+				                  1 - (t - 100 / 100 * 3.14) sin * 40 + 20 ])).
 			                (#medications -> (t < 100
 				                  ifTrue: [ 100 ]
-				                  ifFalse: [ 1 - (t - 100 / 100 * 3.14) sin * 50 ])) }
+				                  ifFalse: [ 1 - (t - 100 / 100 * 3.14) sin * 50 ])).
+			                (#'masks (hospitals)' -> (t < 100
+				                  ifTrue: [ 100 ]
+				                  ifFalse: [ 
+				                  1 - (t - 100 / 100 * 3.14) sin * 40 + 20 ])).
+			                (#'masks (community)' -> (t < 50
+				                  ifTrue: [ 100 ]
+				                  ifFalse: [ 
+				                  1 - (t - 50 / 100 * 3.14) sin * 40 + 20 ])).
+			                (#vaccines -> (t < 150
+				                  ifTrue: [ 100 ]
+				                  ifFalse: [ 
+				                  1 - (t - 150 / 100 * 3.14) sin * 40 + 20 ])).
+			                (#'traditional medicines' -> (t < 10
+				                  ifTrue: [ 100 ]
+				                  ifFalse: [ 
+				                  1 - (t - 10 / 100 * 3.14) sin * 40 + 20 ])).
+			                (#PPEs -> (t < 130
+				                  ifTrue: [ 100 ]
+				                  ifFalse: [ 
+				                  1 - (t - 130 / 100 * 3.14) sin * 40 + 20 ])).
+			                (#'body bags' -> (t < 180
+				                  ifTrue: [ 100 ]
+				                  ifFalse: [ 
+				                  1 - (t - 180 / 100 * 3.14) sin * 40 + 20 ])) }
 			                asDictionary ].
 	enabledItems ifNil: [ 
 		enabledItems := { #'new patients'. #'public transport'.
-		                #commodities. #medications. #'go to bar'.
-		                #'go to restaurant' } ].
+		                #commodities. #oxygen. #medications. #'masks (hospitals)'.
+		                #'masks (community)'. #vaccines. #'traditional medicines'.
+		                #PPEs. #'body bags'. #'go to bar'. #'go to restaurant' } ].
 	super initialize
 ]
 

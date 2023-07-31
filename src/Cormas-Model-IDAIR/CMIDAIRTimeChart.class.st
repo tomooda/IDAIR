@@ -60,7 +60,7 @@ CMIDAIRTimeChart >> visualize: aCanvas [
 		          chart
 			          container: aCanvas;
 			          title: resource;
-			          extent: 800 @ 100;
+			          extent: 800 @ 200;
 			          minValueX: minX;
 			          maxValueX: maxX;
 			          minValueY: 0.
@@ -75,20 +75,21 @@ CMIDAIRTimeChart >> visualize: aCanvas [
 					           fontSize: 10;
 					           asFloat);
 			          addDecoration: (RSHorizontalTick new
-					           numberOfTicks: 4;
+					           numberOfTicks: 10;
 					           fontSize: 10;
 					           asFloat).
 		          decorations := OrderedCollection new.
 		          events keysAndValuesDo: [ :t :es | 
-			          | d |
-			          d := RSXMarkerDecoration new value: t.
-			          chart addDecoration: d.
-			          decorations add: d -> (String cr join: es) ].
+			          (t between: minX and: maxX) ifTrue: [ 
+				          | d |
+				          d := RSXMarkerDecoration new value: t.
+				          chart addDecoration: d.
+				          decorations add: d -> (String cr join: es) ] ].
 		          shape := chart asShape.
 		          decorations do: [ :d | 
 			          d key createdShapes first @ (RSPopup text: d value) ].
 		          shape ].
-	RSVerticalLineLayout on: charts.
+	RSVerticalGridLayout on: charts.
 	aCanvas addAll: charts.
 	aCanvas when: RSExtentChangedEvent do: [ 
 		aCanvas camera
