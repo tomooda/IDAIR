@@ -13,8 +13,8 @@ CMIDAIRTimeChart class >> defaultLayout [
 
 	^ SpBoxLayout newVertical
 		  add: #roassal;
-		  add: #startTimeSlider height: 10;
-		  add: #endTimeSlider height: 10;
+		  add: #startTimeSlider expand: false;
+		  add: #endTimeSlider expand: false;
 		  yourself
 ]
 
@@ -37,7 +37,7 @@ CMIDAIRTimeChart >> initializePresenters [
 		                   whenValueChangedDo: [ roassal refresh ];
 		                   yourself.
 	endTimeSlider := self newSlider
-		                 label: 'start';
+		                 label: 'end';
 		                 min: 1;
 		                 max: 200;
 		                 quantum: 1;

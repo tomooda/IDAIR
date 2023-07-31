@@ -10,6 +10,35 @@ Class {
 	#category : #'Cormas-Model-IDAIR-UI-Prototype'
 }
 
+{ #category : #specs }
+CMIDAIRChart class >> defaultLayout [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #specs }
+CMIDAIRChart class >> defaultSpec [
+
+	^ self defaultLayout
+]
+
+{ #category : #examples }
+CMIDAIRChart class >> example [
+
+	| notebook |
+	notebook := SpNotebookPresenter new.
+	notebook
+		addPage: (notebook newNotebookPage
+				 title: 'Overview';
+				 presenterProvider: [ CMIDAIRTimeChart new ];
+				 yourself);
+		addPage: (notebook newNotebookPage
+				 title: 'By Days';
+				 presenterProvider: [ CMIDAIRBarsChart new ];
+				 yourself).
+	notebook openWithSpec title: 'I-DAIR ABM Visualization Prototype'
+]
+
 { #category : #testing }
 CMIDAIRChart class >> isAbstract [
 
@@ -19,7 +48,6 @@ CMIDAIRChart class >> isAbstract [
 { #category : #initialization }
 CMIDAIRChart >> initialize [
 
-	super initialize.
 	events := { 
 		          (100 -> { #'start school closure' }).
 		          (120 -> { #'start traffic limit' }).
@@ -32,15 +60,27 @@ CMIDAIRChart >> initialize [
 			                (#'public transport' -> ((t between: 120 and: 150)
 				                  ifTrue: [ 30 ]
 				                  ifFalse: [ 100 ])).
-			                (#'commodities' -> (t < 100
+			                (#commodities -> (t < 100
 				                  ifTrue: [ 100 ]
 				                  ifFalse: [ 
 				                  1 - (t - 100 / 100 * 3.14) sin * 25 + 25 ])).
-			                (#'medications' -> (t < 100
+			                (#'go to bar' -> (t < 100
+				                  ifTrue: [ 10 ]
+				                  ifFalse: [ 
+				                  1 - (t - 100 / 100 * 3.14) sin * 2 + 5 ])).
+			                (#'go to restaurant' -> (t < 100
+				                  ifTrue: [ 30 ]
+				                  ifFalse: [ 
+				                  1 - (t - 100 / 100 * 3.14) sin * 5 + 25 ])).
+			                (#medications -> (t < 100
 				                  ifTrue: [ 100 ]
 				                  ifFalse: [ 1 - (t - 100 / 100 * 3.14) sin * 50 ])) }
 			                asDictionary ].
-	enabledItems := { #'new patients'. #'public transport'. #'commodities'. #'medications' }
+	enabledItems ifNil: [ 
+		enabledItems := { #'new patients'. #'public transport'.
+		                #commodities. #medications. #'go to bar'.
+		                #'go to restaurant' } ].
+	super initialize
 ]
 
 { #category : #initialization }
