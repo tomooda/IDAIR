@@ -21,26 +21,26 @@ CMIDAIRChart >> initialize [
 
 	super initialize.
 	events := { 
-		          (100 -> { #startSchoolClosure }).
-		          (120 -> { #startTrafficLimit }).
-		          (150 -> { #endSchoolClosure. #endTrafficLimit }) }
+		          (100 -> { #'start school closure' }).
+		          (120 -> { #'start traffic limit' }).
+		          (150 -> { #'end school closure'. #'end traffic limit' }) }
 		          asOrderedDictionary.
 	amountsByDay := (1 to: 200) collect: [ :t | 
 		                { 
-			                (#newPatients
+			                (#'new patients'
 			                 -> (1.0 - (t / 120.0 * 3.14) cos * 1000)).
-			                (#traffic -> ((t between: 120 and: 150)
+			                (#'public transport' -> ((t between: 120 and: 150)
 				                  ifTrue: [ 30 ]
 				                  ifFalse: [ 100 ])).
-			                (#commodities -> (t < 100
+			                (#'commodities' -> (t < 100
 				                  ifTrue: [ 100 ]
 				                  ifFalse: [ 
 				                  1 - (t - 100 / 100 * 3.14) sin * 25 + 25 ])).
-			                (#drugs -> (t < 100
+			                (#'medications' -> (t < 100
 				                  ifTrue: [ 100 ]
 				                  ifFalse: [ 1 - (t - 100 / 100 * 3.14) sin * 50 ])) }
 			                asDictionary ].
-	enabledItems := { #newPatients. #traffic. #commodities. #drugs }
+	enabledItems := { #'new patients'. #'public transport'. #'commodities'. #'medications' }
 ]
 
 { #category : #initialization }
