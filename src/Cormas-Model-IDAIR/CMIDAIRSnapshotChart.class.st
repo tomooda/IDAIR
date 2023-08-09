@@ -78,10 +78,11 @@ CMIDAIRSnapshotChart >> initialize [
 	             #( #commodities ) #( #medication ) #( #'go to bar'
 	                #'go to restaurant' ) ).
 	enabledItems ifNil: [ 
-		enabledItems := { #'public transport'.
-		                #commodities. #oxygen. #medications. #'masks (hospitals)'.
-		                #'masks (community)'. #vaccines. #'traditional medicines'.
-		                #PPEs. #'body bags'. #'go to bar'. #'go to restaurant' } ].
+		enabledItems := { #'public transport'. #commodities. #oxygen. #medications.
+		                #'masks (hospitals)'. #'masks (community)'.
+		                #vaccines. #'traditional medicines'.
+		                #PPEs. #'body bags'. #'go to bar'. #'go to restaurant' }
+			                asOrderedCollection ].
 
 	super initialize
 ]

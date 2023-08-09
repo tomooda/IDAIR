@@ -23,12 +23,6 @@ CMIDAIROxfordDead >> color [
 ]
 
 { #category : #accessing }
-CMIDAIROxfordDead >> estimatedTransmissibleDuration [
-
-	^ 0.0
-]
-
-{ #category : #accessing }
 CMIDAIROxfordDead >> inCommunity [
 
 	^ self

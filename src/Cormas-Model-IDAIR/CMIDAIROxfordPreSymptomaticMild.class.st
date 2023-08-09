@@ -17,12 +17,6 @@ CMIDAIROxfordPreSymptomaticMild >> color [
 ]
 
 { #category : #accessing }
-CMIDAIROxfordPreSymptomaticMild >> estimatedTransmissibleDuration [
-
-	^ self tauSym + self tauRec
-]
-
-{ #category : #accessing }
 CMIDAIROxfordPreSymptomaticMild >> name [
 
 	^ 'pre mild symptoms'

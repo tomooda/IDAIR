@@ -6,7 +6,8 @@ Class {
 		'theLocations',
 		'submodels',
 		'isHeadless',
-		'initializer'
+		'initializer',
+		'theCommunityHealthcareWorkers'
 	],
 	#category : #'Cormas-Model-IDAIR-Core'
 }
@@ -193,11 +194,14 @@ CMIDAIRModel >> ifGUI: aBlock [
 CMIDAIRModel >> init [
 
 	self
-		createGridLines: 1
-		columns: 1
+		createGridLines: 20
+		columns: 20
 		neighbourhood: 8
 		closed: false.
 	initializer ifNotNil: [ initializer value: self ].
+	self
+		displayPov: #defaultPov of: CMIDAIRLocation;
+		displayPov: #diseasePov of: CMIDAIRCitizen.
 	"self createN: 1000 randomlyLocatedEntities: CMIDAIRCitizen.
 	1 to: 10 do: [ :index | (self theCitizens at: index) beAsymptomatic ]"
 ]
@@ -221,6 +225,38 @@ CMIDAIRModel >> init_Oxford_SingleLocation [
 		closed: false.
 	self createN: 1000 randomlyLocatedEntities: CMIDAIRCitizen.
 	1 to: 10 do: [ :index | (self theCitizens at: index) beAsymptomatic ]
+]
+
+{ #category : #init }
+CMIDAIRModel >> init_SEIR_Community [
+
+	self addSubmodel: (CMIDAIRSEIRDiseaseModel on: self).
+	self addSubmodel: (CMIDAIRSingleLocationContactModel on: self).
+	self addSubmodel: (CMIDAIRMobiResourceModel on: self).
+	self addSubmodel: (CMIDAIRSimpleTimeModel on: self).
+	self addSubmodel: (CMIDAIRCommunityModel on: self).
+	self
+		createGridLines: 20
+		columns: 24
+		neighbourhood: 8
+		closed: false.
+	1 to: 20 do: [ :lineIndex | 
+		| homes |
+		homes := self theLocations select: [ :location | 
+			         location numLine = lineIndex and: [ location isHome ] ].
+		(self createN: 1 entity: CMIDAIRCommunityHealthcareWorker) do: [ 
+			:worker | 
+			worker
+				homesToVisit: homes;
+				patch: homes first ] ].
+	(self
+		 createN: 2000
+		 randomlyLocatedEntities: CMIDAIRCitizen
+		 constrainedBy: [ :location | location isHome ]) do: [ :citizen | 
+		citizen home: citizen patch ].
+	1 to: 20 do: [ :index | (self theCitizens at: index) beExposed ].
+	self
+		displayPov: #pov of: CMIDAIRLocation
 ]
 
 { #category : #init }
@@ -275,8 +311,8 @@ CMIDAIRModel >> isHeadless: aBoolean [
 { #category : #initialization }
 CMIDAIRModel >> loadDefaultSubmodels [
 
-	self addSubmodel: (CMIDAIRVietnamDiseaseModel on: self).
-	self addSubmodel: (CMIDAIRKenyaContactModel on: self).
+	self addSubmodel: (CMIDAIRSEIRDiseaseModel on: self).
+	self addSubmodel: (CMIDAIRSingleLocationContactModel on: self).
 	self addSubmodel: (CMIDAIRMobiResourceModel on: self).
 	self addSubmodel: (CMIDAIRSimpleTimeModel on: self)
 ]
@@ -447,9 +483,23 @@ CMIDAIRModel >> theCitizens [
 ]
 
 { #category : #accessing }
-CMIDAIRModel >> theCitizens: anObject [
+CMIDAIRModel >> theCitizens: aCollectionOfCMIDAIRCitizen [
 
-	theCitizens := anObject
+	theCitizens := aCollectionOfCMIDAIRCitizen
+]
+
+{ #category : #accessing }
+CMIDAIRModel >> theCommunityHealthcareWorkers [
+
+	^ theCommunityHealthcareWorkers
+		  ifNil: [ theCommunityHealthcareWorkers := OrderedCollection new ]
+		  ifNotNil: [ theCommunityHealthcareWorkers ]
+]
+
+{ #category : #accessing }
+CMIDAIRModel >> theCommunityHealthcareWorkers: aCollectionOfCMIDAIRCommunityHealthcareWorker [
+
+	theCommunityHealthcareWorkers := aCollectionOfCMIDAIRCommunityHealthcareWorker
 ]
 
 { #category : #accessing }
@@ -461,7 +511,7 @@ CMIDAIRModel >> theLocations [
 ]
 
 { #category : #accessing }
-CMIDAIRModel >> theLocations: anObject [
+CMIDAIRModel >> theLocations: aCollectionOfCMIDAIRLocation [
 
-	theLocations := anObject
+	theLocations := aCollectionOfCMIDAIRLocation
 ]

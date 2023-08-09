@@ -10,12 +10,6 @@ CMIDAIRVietnamDiseaseAa >> beta [
 	^ self bAa
 ]
 
-{ #category : #accessing }
-CMIDAIRVietnamDiseaseAa >> estimatedTransmissibleDuration [
-
-	^ self tAa
-]
-
 { #category : #transitioning }
 CMIDAIRVietnamDiseaseAa >> next [
 

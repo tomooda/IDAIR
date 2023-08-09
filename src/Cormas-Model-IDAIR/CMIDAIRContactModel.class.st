@@ -43,14 +43,6 @@ CMIDAIRContactModel >> defaultSocialDistanceFactor [
 	^ 0.0
 ]
 
-{ #category : #accessing }
-CMIDAIRContactModel >> estimatedTransmissibleDuration [
-
-	^ self cormasModel
-		  submodelAt: #disease
-		  do: [ :diseaseModel | diseaseModel estimatedTransmissibleDuration ]
-]
-
 { #category : #'accessing-population' }
 CMIDAIRContactModel >> numberOfCitizensInCommunity [
 

@@ -17,12 +17,6 @@ CMIDAIRVietnamDiseaseR >> color [
 ]
 
 { #category : #accessing }
-CMIDAIRVietnamDiseaseR >> estimatedTransmissibleDuration [
-
-	^ 0.0
-]
-
-{ #category : #accessing }
 CMIDAIRVietnamDiseaseR >> inCommunity [
 
 	^ self

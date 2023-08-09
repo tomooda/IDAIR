@@ -27,3 +27,9 @@ CMIDAIRTimeModel >> daysPerStep [
 
 	^ self subclassResponsibility
 ]
+
+{ #category : #initialization }
+CMIDAIRTimeModel >> init [
+
+	
+]

@@ -17,12 +17,6 @@ CMIDAIROxfordAsymptomatic >> color [
 ]
 
 { #category : #accessing }
-CMIDAIROxfordAsymptomatic >> estimatedTransmissibleDuration [
-
-	^ self tauARec
-]
-
-{ #category : #accessing }
 CMIDAIROxfordAsymptomatic >> inCommunity [
 
 	^ self

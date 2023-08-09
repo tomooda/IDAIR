@@ -20,12 +20,6 @@ CMIDAIROxfordICUed >> color [
 ]
 
 { #category : #accessing }
-CMIDAIROxfordICUed >> estimatedTransmissibleDuration [
-
-	^ 0.0
-]
-
-{ #category : #accessing }
 CMIDAIROxfordICUed >> inCommunity [
 
 	^ self beSymptomsSevere

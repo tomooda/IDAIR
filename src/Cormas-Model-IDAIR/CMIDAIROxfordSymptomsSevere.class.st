@@ -20,12 +20,6 @@ CMIDAIROxfordSymptomsSevere >> color [
 ]
 
 { #category : #accessing }
-CMIDAIROxfordSymptomsSevere >> estimatedTransmissibleDuration [
-
-	^ self tauSym + (1 - self pHosp * self tauRec)
-]
-
-{ #category : #accessing }
 CMIDAIROxfordSymptomsSevere >> inCommunity [
 
 	^ self

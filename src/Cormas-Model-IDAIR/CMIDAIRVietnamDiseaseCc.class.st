@@ -5,12 +5,6 @@ Class {
 }
 
 { #category : #accessing }
-CMIDAIRVietnamDiseaseCc >> estimatedTransmissibleDuration [
-
-	^ 0.0
-]
-
-{ #category : #accessing }
 CMIDAIRVietnamDiseaseCc >> inCommunity [
 
 	^ CMIDAIRVietnamDiseaseIc newFrom: self

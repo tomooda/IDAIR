@@ -36,7 +36,8 @@ CMIDAIRChart class >> example [
 				 title: 'By Days';
 				 presenterProvider: [ CMIDAIRBarsChart new ];
 				 yourself).
-	notebook openWithSpec title: 'I-DAIR ABM Visualization Prototype'
+	notebook openWithSpec title: 'I-DAIR ABM Visualization Prototype'.
+	notebook pages inspect
 ]
 
 { #category : #testing }
@@ -108,7 +109,7 @@ CMIDAIRChart >> initialize [
 		enabledItems := { #'new patients'. #'public transport'.
 		                #commodities. #oxygen. #medications. #'masks (hospitals)'.
 		                #'masks (community)'. #vaccines. #'traditional medicines'.
-		                #PPEs. #'body bags'. #'go to bar'. #'go to restaurant' } ].
+		                #PPEs. #'body bags'. #'go to bar'. #'go to restaurant' } asOrderedCollection ].
 	super initialize
 ]
 

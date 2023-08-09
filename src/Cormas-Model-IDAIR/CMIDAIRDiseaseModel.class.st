@@ -28,20 +28,10 @@ CMIDAIRDiseaseModel >> defaultDiseaseDynamicsClass [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
-CMIDAIRDiseaseModel >> estimatedTransmissibleDuration [
+{ #category : #initialization }
+CMIDAIRDiseaseModel >> init [
 
-	| t n |
-	t := 0.
-	n := 0.
-	self cormasModel theCitizens do: [ :citizen | 
-		(citizen isTransmissible and: [ citizen isHospitalized not ]) 
-			ifTrue: [ 
-				t := t + citizen estimatedTransmissibleDuration.
-				n := n + 1 ] ].
-	^ n > 0
-		  ifTrue: [ t asFloat / n asFloat ]
-		  ifFalse: [ 0.0 ]
+	
 ]
 
 { #category : #accessing }

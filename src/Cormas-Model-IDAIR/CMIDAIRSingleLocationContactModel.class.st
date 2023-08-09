@@ -22,6 +22,12 @@ CMIDAIRSingleLocationContactModel >> defaultContactProfileClass [
 	^ CMIDAIRSingleLocationContactProfile
 ]
 
+{ #category : #initialization }
+CMIDAIRSingleLocationContactModel >> init [
+
+	
+]
+
 { #category : #accessing }
 CMIDAIRSingleLocationContactModel >> initializers [
 

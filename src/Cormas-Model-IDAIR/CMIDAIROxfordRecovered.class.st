@@ -23,12 +23,6 @@ CMIDAIROxfordRecovered >> color [
 ]
 
 { #category : #accessing }
-CMIDAIROxfordRecovered >> estimatedTransmissibleDuration [
-
-	^ 0.0
-]
-
-{ #category : #accessing }
 CMIDAIROxfordRecovered >> inCommunity [
 
 	^ self

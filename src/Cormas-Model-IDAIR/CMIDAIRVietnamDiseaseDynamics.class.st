@@ -108,6 +108,16 @@ CMIDAIRVietnamDiseaseDynamics >> beExposed [
 ]
 
 { #category : #transitioning }
+CMIDAIRVietnamDiseaseDynamics >> beHospitalized [
+
+	self random <= self pc ifFalse: [ 
+		^ CMIDAIRVietnamDiseaseEh newFrom: self ].
+	self random <= self pd ifFalse: [ 
+		^ CMIDAIRVietnamDiseaseEc newFrom: self ].
+	^ CMIDAIRVietnamDiseaseEd newFrom: self
+]
+
+{ #category : #transitioning }
 CMIDAIRVietnamDiseaseDynamics >> beSusceptive [
 
 	^ CMIDAIRVietnamDiseaseS newFrom: self

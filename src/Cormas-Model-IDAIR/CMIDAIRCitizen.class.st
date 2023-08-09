@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'diseaseDynamics',
 		'contactProfile',
-		'resourceDynamics'
+		'resourceDynamics',
+		'home'
 	],
 	#category : #'Cormas-Model-IDAIR-Core'
 }
@@ -32,6 +33,12 @@ CMIDAIRCitizen >> beDead [
 CMIDAIRCitizen >> beExposed [
 
 	self diseaseDynamics: self diseaseDynamics beExposed
+]
+
+{ #category : #'transitioning-disease' }
+CMIDAIRCitizen >> beHospitalized [
+
+	self diseaseDynamics: self diseaseDynamics beHospitalized
 ]
 
 { #category : #'transitioning-disease' }
@@ -115,16 +122,6 @@ CMIDAIRCitizen >> diseasePov [
 	^ self diseaseDynamics color
 ]
 
-{ #category : #'accessing-disease' }
-CMIDAIRCitizen >> estimatedTransmissibleDuration [
-
-	| disease |
-	disease := self diseaseDynamics.
-	self resourceDynamics hasIsolation ifFalse: [ 
-		disease := disease inCommunity ].
-	^ disease estimatedTransmissibleDuration
-]
-
 { #category : #events }
 CMIDAIRCitizen >> event: aSymbol [
 
@@ -133,6 +130,18 @@ CMIDAIRCitizen >> event: aSymbol [
 	aSymbol = #quarrantined ifTrue: [ ^ self quarrantinedAction ].
 	aSymbol = #released ifTrue: [ ^ self releasedAction ].
 	aSymbol = #dead ifTrue: [ ^ self deadAction ]
+]
+
+{ #category : #accessing }
+CMIDAIRCitizen >> home [
+
+	^ home
+]
+
+{ #category : #accessing }
+CMIDAIRCitizen >> home: aCMIDAIRLocation [
+
+	home := aCMIDAIRLocation
 ]
 
 { #category : #events }
@@ -205,6 +214,7 @@ CMIDAIRCitizen >> isTransmissible [
 { #category : #pov }
 CMIDAIRCitizen >> pov [
 
+	<pov>
 	^ self diseasePov
 ]
 
@@ -217,7 +227,8 @@ CMIDAIRCitizen >> quarrantinedAction [
 { #category : #events }
 CMIDAIRCitizen >> releasedAction [
 
-	self resourceDynamics citizenReleased
+	self resourceDynamics citizenReleased.
+	self patch: self home
 ]
 
 { #category : #'accessing-resource' }

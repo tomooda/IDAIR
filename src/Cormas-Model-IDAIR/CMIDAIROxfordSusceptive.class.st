@@ -29,12 +29,6 @@ CMIDAIROxfordSusceptive >> color [
 ]
 
 { #category : #accessing }
-CMIDAIROxfordSusceptive >> estimatedTransmissibleDuration [
-
-	^ 0.0
-]
-
-{ #category : #accessing }
 CMIDAIROxfordSusceptive >> inCommunity [
 
 	^ self

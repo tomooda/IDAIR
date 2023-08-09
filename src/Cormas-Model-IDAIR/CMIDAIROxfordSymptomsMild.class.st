@@ -17,12 +17,6 @@ CMIDAIROxfordSymptomsMild >> color [
 ]
 
 { #category : #accessing }
-CMIDAIROxfordSymptomsMild >> estimatedTransmissibleDuration [
-
-	^ self tauSym + self tauRec
-]
-
-{ #category : #accessing }
 CMIDAIROxfordSymptomsMild >> inCommunity [
 
 	^ self

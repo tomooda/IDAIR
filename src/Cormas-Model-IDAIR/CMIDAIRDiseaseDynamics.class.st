@@ -48,6 +48,12 @@ CMIDAIRDiseaseDynamics >> beExposed [
 	^ self subclassResponsibility
 ]
 
+{ #category : #actions }
+CMIDAIRDiseaseDynamics >> beHospitalized [
+
+	^ self subclassResponsibility
+]
+
 { #category : #testing }
 CMIDAIRDiseaseDynamics >> beSusceptive [
 
@@ -58,6 +64,12 @@ CMIDAIRDiseaseDynamics >> beSusceptive [
 CMIDAIRDiseaseDynamics >> beta [
 
 	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+CMIDAIRDiseaseDynamics >> betaPerStep [
+
+	^ self beta * self daysPerStep / self tau
 ]
 
 { #category : #accessing }
@@ -82,12 +94,6 @@ CMIDAIRDiseaseDynamics >> color [
 CMIDAIRDiseaseDynamics >> daysPerStep [
 
 	^ self citizen cormasModel daysPerStep
-]
-
-{ #category : #accessing }
-CMIDAIRDiseaseDynamics >> estimatedTransmissibleDuration [
-
-	^ self subclassResponsibility
 ]
 
 { #category : #accessing }

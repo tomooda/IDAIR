@@ -17,12 +17,6 @@ CMIDAIROxfordHospitalizedRecovering >> color [
 ]
 
 { #category : #accessing }
-CMIDAIROxfordHospitalizedRecovering >> estimatedTransmissibleDuration [
-
-	^ 0.0
-]
-
-{ #category : #accessing }
 CMIDAIROxfordHospitalizedRecovering >> inCommunity [
 
 	^ self beSymptomsSevere

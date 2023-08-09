@@ -60,6 +60,12 @@ CMIDAIRSubmodel >> cormasModel: aCMIDAIRModel [
 	cormasModel := aCMIDAIRModel
 ]
 
+{ #category : #'initialize-release' }
+CMIDAIRSubmodel >> init [
+
+	^ self subclassResponsibility
+]
+
 { #category : #accessing }
 CMIDAIRSubmodel >> initializers [
 

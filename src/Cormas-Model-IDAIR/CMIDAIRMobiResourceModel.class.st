@@ -44,7 +44,7 @@ CMIDAIRMobiResourceModel >> consume: anInteger [
 				ifTrue: [ 
 					currentOxygen := currentOxygen - 1.
 					citizen resourceDynamics hasOxygen: true ]
-				ifFalse: [ citizen beDead. self halt ] ] ]
+				ifFalse: [ citizen beDead ] ] ]
 ]
 
 { #category : #accessing }
@@ -75,6 +75,12 @@ CMIDAIRMobiResourceModel >> currentOxygen: aNumber [
 CMIDAIRMobiResourceModel >> defaultCitizenResourceDynamicsClass [
 
 	^ CMIDAIRMobiCitizenResourceDynamics
+]
+
+{ #category : #initialization }
+CMIDAIRMobiResourceModel >> init [
+
+	
 ]
 
 { #category : #initialization }
