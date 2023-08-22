@@ -228,38 +228,6 @@ CMIDAIRModel >> init_Oxford_SingleLocation [
 ]
 
 { #category : #init }
-CMIDAIRModel >> init_SEIR_Community [
-
-	self addSubmodel: (CMIDAIRSEIRDiseaseModel on: self).
-	self addSubmodel: (CMIDAIRSingleLocationContactModel on: self).
-	self addSubmodel: (CMIDAIRMobiResourceModel on: self).
-	self addSubmodel: (CMIDAIRSimpleTimeModel on: self).
-	self addSubmodel: (CMIDAIRCommunityModel on: self).
-	self
-		createGridLines: 20
-		columns: 24
-		neighbourhood: 8
-		closed: false.
-	1 to: 20 do: [ :lineIndex | 
-		| homes |
-		homes := self theLocations select: [ :location | 
-			         location numLine = lineIndex and: [ location isHome ] ].
-		(self createN: 1 entity: CMIDAIRCommunityHealthcareWorker) do: [ 
-			:worker | 
-			worker
-				homesToVisit: homes;
-				patch: homes first ] ].
-	(self
-		 createN: 2000
-		 randomlyLocatedEntities: CMIDAIRCitizen
-		 constrainedBy: [ :location | location isHome ]) do: [ :citizen | 
-		citizen home: citizen patch ].
-	1 to: 20 do: [ :index | (self theCitizens at: index) beExposed ].
-	self
-		displayPov: #pov of: CMIDAIRLocation
-]
-
-{ #category : #init }
 CMIDAIRModel >> init_Vietnam_SingleLocation [
 
 	self addSubmodel: (CMIDAIRVietnamDiseaseModel on: self).
@@ -311,8 +279,8 @@ CMIDAIRModel >> isHeadless: aBoolean [
 { #category : #initialization }
 CMIDAIRModel >> loadDefaultSubmodels [
 
-	self addSubmodel: (CMIDAIRSEIRDiseaseModel on: self).
-	self addSubmodel: (CMIDAIRSingleLocationContactModel on: self).
+	self addSubmodel: (CMIDAIRVietnamDiseaseModel on: self).
+	self addSubmodel: (CMIDAIRRPGContactModel on: self).
 	self addSubmodel: (CMIDAIRMobiResourceModel on: self).
 	self addSubmodel: (CMIDAIRSimpleTimeModel on: self)
 ]
