@@ -154,6 +154,21 @@ CMIDAIRModel >> createN: aNumber randomlyLocatedEntities: aClass initMethod: aSy
 	^ newEntities
 ]
 
+{ #category : #'instance creation - agents & objects' }
+CMIDAIRModel >> createN: anInteger randomlyLocatedEntities: aClass playerName: aString [
+
+	| citizens |
+	citizens := self createN: anInteger randomlyLocatedEntities: aClass.
+	self submodelAt: #contact do: [ :contactModel | 
+		(contactModel isKindOf: CMIDAIRRPGContactModel) ifTrue: [ 
+			| player muppets |
+			player := citizens first.
+			muppets := citizens copyWithoutFirst.
+			muppets do: [ :muppet | muppet contactProfile player: player ].
+			contactModel addPlayer: player named: aString ] ].
+	^ citizens
+]
+
 { #category : #accessing }
 CMIDAIRModel >> daysPerStep [
 

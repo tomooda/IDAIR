@@ -10,7 +10,7 @@ Class {
 { #category : #accessing }
 CMIDAIRRPGActionPresenter >> citizen [
 
-	^ playerList selectedItem
+	^ playerList selectedItem value
 ]
 
 { #category : #specs }
@@ -43,7 +43,8 @@ CMIDAIRRPGActionPresenter >> citizenPlay: aNumberOrSymbol [
 	self citizen ifNotNil: [ :citizen | 
 		aNumberOrSymbol isSymbol
 			ifTrue: [ citizen perform: aNumberOrSymbol asSymbol ]
-			ifFalse: [ citizen contactProfile factor: aNumberOrSymbol asFloat ] ]
+			ifFalse: [ 
+			citizen contactProfile actionFactor: aNumberOrSymbol asFloat ] ]
 ]
 
 { #category : #specs }

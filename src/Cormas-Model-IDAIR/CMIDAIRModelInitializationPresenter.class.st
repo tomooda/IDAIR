@@ -5,7 +5,8 @@ Class {
 		'list',
 		'populationField',
 		'dropLists',
-		'addButton'
+		'addButton',
+		'playerNameField'
 	],
 	#category : #'Cormas-Model-IDAIR-UI'
 }
@@ -21,6 +22,7 @@ CMIDAIRModelInitializationPresenter >> add [
 
 	self model ifNotNil: [ :model | 
 		list items: (list items copyWith: { 
+					 playerNameField text trim.
 					 populationField number.
 					 (dropLists
 						  ifNotNil: [ 
@@ -34,14 +36,20 @@ CMIDAIRModelInitializationPresenter >> initializePresenters [
 	super initializePresenters.
 	list := self newTable
 		        addColumn: (SpStringTableColumn
-				         title: 'population'
+				         title: 'player'
 				         evaluated: [ :array | array first ]);
+		        addColumn: (SpStringTableColumn
+				         title: 'population'
+				         evaluated: [ :array | array second ]);
 		        addColumn: (SpStringTableColumn
 				         title: 'state'
 				         evaluated: [ :array | 
-					         ', ' join:
-							         (array second collect: [ :assoc | assoc key ]) ]);
+					         ', ' join: (array third collect: [ :assoc | assoc key ]) ]);
 		        yourself.
+	playerNameField := self newTextInput
+		                   help: 'Player''s name';
+		                   text: '';
+		                   yourself.
 	populationField := self newNumberInput
 		                   beInteger;
 		                   number: 1;
@@ -64,6 +72,10 @@ CMIDAIRModelInitializationPresenter >> layout [
 	| newLayout |
 	newLayout := SpBoxLayout newHorizontal
 		             vAlignCenter;
+		             add: (SpBoxLayout newVertical
+				              add: playerNameField
+				              height: self class buttonHeight)
+		             width: 100;
 		             add: (SpBoxLayout newVertical
 				              add: populationField
 				              height: self class buttonHeight)
@@ -106,10 +118,14 @@ CMIDAIRModelInitializationPresenter >> title [
 CMIDAIRModelInitializationPresenter >> value: aCMIDAIRModel [
 
 	list items do: [ :array | 
-		| newCitizens |
+		| playerName population attributes newCitizens |
+		playerName := array first.
+		population := array second.
+		attributes := array third.
 		newCitizens := aCMIDAIRModel
-			               createN: array first
-			               randomlyLocatedEntities: CMIDAIRCitizen.
-		array second do: [ :assoc | 
+			               createN: population
+			               randomlyLocatedEntities: CMIDAIRCitizen
+			               playerName: playerName.
+		attributes do: [ :assoc | 
 			newCitizens do: [ :citizen | assoc value value: citizen ] ] ]
 ]

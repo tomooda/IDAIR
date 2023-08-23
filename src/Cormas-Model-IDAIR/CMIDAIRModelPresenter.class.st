@@ -95,7 +95,7 @@ CMIDAIRModelPresenter >> initializePresenters [
 CMIDAIRModelPresenter >> initializeWindow: aWindowPresenter [
 
 	super initializeWindow: aWindowPresenter.
-	aWindowPresenter initialExtent: 800 @ 600
+	aWindowPresenter initialExtent: 980 @ 830
 ]
 
 { #category : #accessing }

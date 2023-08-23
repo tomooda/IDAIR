@@ -147,7 +147,29 @@ CMIDAIRRPGContactModel >> policyMakerActionsAndFactorsDo: aBlock [
 ]
 
 { #category : #accessing }
+CMIDAIRRPGContactModel >> probabilityForCitizen: aCMIDAIRCitizen prior: aNumber [
+
+	^ aCMIDAIRCitizen contactProfile probabilityFromPrior: aNumber
+]
+
+{ #category : #accessing }
 CMIDAIRRPGContactModel >> socialProfile [
 
 	^ socialProfile
+]
+
+{ #category : #actions }
+CMIDAIRRPGContactModel >> step: anInteger [
+
+	| numberOfCitizensInCommunity totalBeta |
+	numberOfCitizensInCommunity := self numberOfCitizensInCommunity.
+	totalBeta := self totalBeta.
+	totalBeta > 0.0 ifTrue: [ 
+		| p |
+		p := socialProfile probabilityFromPrior:
+			     totalBeta / numberOfCitizensInCommunity * self daysPerStep.
+		self cormasModel theCitizens do: [ :citizen | 
+			(citizen isSusceptive and: [ 
+				 self random <= (self probabilityForCitizen: citizen prior: p) ]) 
+				ifTrue: [ citizen beExposed ] ] ]
 ]
