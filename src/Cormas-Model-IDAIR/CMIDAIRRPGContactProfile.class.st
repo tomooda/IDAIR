@@ -40,6 +40,25 @@ CMIDAIRRPGContactProfile >> initialize [
 	actionFactor := 1.0
 ]
 
+{ #category : #testing }
+CMIDAIRRPGContactProfile >> isMuppetContactProfile [
+
+	^ false
+]
+
+{ #category : #accessing }
+CMIDAIRRPGContactProfile >> player: aCMIDAIRCitizen [
+
+	| muppetProfile |
+	aCMIDAIRCitizen contactProfile isMuppetContactProfile ifTrue: [ 
+		^ self error: 'Should not create muppet on muppet' ].
+	muppetProfile := (CMIDAIRRPGMuppetContactProfile on: citizen)
+		                 player: aCMIDAIRCitizen;
+		                 yourself.
+	citizen contactProfile: muppetProfile.
+	^ muppetProfile
+]
+
 { #category : #accessing }
 CMIDAIRRPGContactProfile >> probabilityFromPrior: aNumber [
 

@@ -2,32 +2,32 @@ Class {
 	#name : #CMIDAIRRPGSocialProfile,
 	#superclass : #Object,
 	#instVars : [
-		'socialFactor'
+		'factor'
 	],
 	#category : #'Cormas-Model-IDAIR-Contact-RPG'
 }
+
+{ #category : #accessing }
+CMIDAIRRPGSocialProfile >> factor [
+
+	^ factor
+]
+
+{ #category : #accessing }
+CMIDAIRRPGSocialProfile >> factor: aNumber [
+
+	factor := aNumber
+]
 
 { #category : #initialization }
 CMIDAIRRPGSocialProfile >> initialize [
 
 	super initialize.
-	socialFactor := 1.0
+	factor := 1.0
 ]
 
 { #category : #accessing }
 CMIDAIRRPGSocialProfile >> probabilityFromPrior: aNumber [
 
-	^ aNumber * socialFactor
-]
-
-{ #category : #accessing }
-CMIDAIRRPGSocialProfile >> socialFactor [
-
-	^ socialFactor
-]
-
-{ #category : #accessing }
-CMIDAIRRPGSocialProfile >> socialFactor: aNumber [
-
-	socialFactor := aNumber
+	^ aNumber * factor
 ]
