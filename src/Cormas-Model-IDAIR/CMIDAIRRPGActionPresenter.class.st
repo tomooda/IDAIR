@@ -7,6 +7,19 @@ Class {
 	#category : #'Cormas-Model-IDAIR-Contact-RPG'
 }
 
+{ #category : #operations }
+CMIDAIRRPGActionPresenter >> askEffectiveRate [
+
+	(UIManager default
+		 request: 'Effective rate among citizens?'
+		 initialAnswer: '1.0') ifNotNil: [ :answer | 
+		[ 
+		| rate |
+		rate := answer asFloat.
+		(rate between: 0.0 and: 1.0) ifTrue: [ ^ rate ] ] ].
+	^ nil
+]
+
 { #category : #accessing }
 CMIDAIRRPGActionPresenter >> citizen [
 
@@ -117,7 +130,9 @@ CMIDAIRRPGActionPresenter >> policyMakerPlay: aNumberOrSymbol [
 		aNumberOrSymbol isSymbol
 			ifTrue: [ contactModel perform: aNumberOrSymbol asSymbol ]
 			ifFalse: [ 
-			contactModel socialProfile factor: aNumberOrSymbol asFloat ] ]
+				self askEffectiveRate ifNotNil: [ :rate | 
+					contactModel socialProfile factor:
+						aNumberOrSymbol asFloat ** rate ] ] ]
 ]
 
 { #category : #api }
