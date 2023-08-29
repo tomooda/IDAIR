@@ -159,13 +159,18 @@ CMIDAIRModel >> createN: anInteger randomlyLocatedEntities: aClass playerName: a
 
 	| citizens |
 	citizens := self createN: anInteger randomlyLocatedEntities: aClass.
-	self submodelAt: #contact do: [ :contactModel | 
-		(contactModel isKindOf: CMIDAIRRPGContactModel) ifTrue: [ 
-			| player muppets |
-			player := citizens first.
-			muppets := citizens copyWithoutFirst.
-			muppets do: [ :muppet | muppet contactProfile player: player ].
-			contactModel addPlayer: player named: aString ] ].
+	aString ifNotEmpty: [ 
+		self submodelAt: #contact do: [ :contactModel | 
+			(contactModel isKindOf: CMIDAIRRPGContactModel) ifTrue: [ 
+				(contactModel playerNamed: aString)
+					ifNotNil: [ :player | 
+						citizens do: [ :muppet | muppet contactProfile player: player ] ]
+					ifNil: [ 
+						| player muppets |
+						player := citizens first.
+						muppets := citizens copyWithoutFirst.
+						muppets do: [ :muppet | muppet contactProfile player: player ].
+						contactModel addPlayer: player named: aString ] ] ] ].
 	^ citizens
 ]
 
@@ -294,7 +299,7 @@ CMIDAIRModel >> isHeadless: aBoolean [
 { #category : #initialization }
 CMIDAIRModel >> loadDefaultSubmodels [
 
-	self addSubmodel: (CMIDAIRVietnamDiseaseModel on: self).
+	self addSubmodel: (CMIDAIRSEIRDiseaseModel on: self).
 	self addSubmodel: (CMIDAIRRPGContactModel on: self).
 	self addSubmodel: (CMIDAIRMobiResourceModel on: self).
 	self addSubmodel: (CMIDAIRSimpleTimeModel on: self)

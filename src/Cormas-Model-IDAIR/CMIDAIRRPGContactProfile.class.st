@@ -3,7 +3,8 @@ Class {
 	#superclass : #CMIDAIRContactProfile,
 	#instVars : [
 		'immuneFactor',
-		'actionFactor'
+		'actionFactor',
+		'actionName'
 	],
 	#category : #'Cormas-Model-IDAIR-Contact-RPG'
 }
@@ -18,6 +19,18 @@ CMIDAIRRPGContactProfile >> actionFactor [
 CMIDAIRRPGContactProfile >> actionFactor: aNumber [
 
 	actionFactor := aNumber
+]
+
+{ #category : #accessing }
+CMIDAIRRPGContactProfile >> actionName [
+
+	^ actionName
+]
+
+{ #category : #accessing }
+CMIDAIRRPGContactProfile >> actionName: aString [
+
+	actionName := aString
 ]
 
 { #category : #accessing }
@@ -37,13 +50,20 @@ CMIDAIRRPGContactProfile >> initialize [
 
 	super initialize.
 	immuneFactor := 1.0.
-	actionFactor := 1.0
+	actionFactor := 1.0.
+	actionName := ''
 ]
 
 { #category : #testing }
 CMIDAIRRPGContactProfile >> isMuppetContactProfile [
 
 	^ false
+]
+
+{ #category : #accessing }
+CMIDAIRRPGContactProfile >> player [
+
+	^ citizen
 ]
 
 { #category : #accessing }

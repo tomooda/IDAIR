@@ -82,7 +82,7 @@ CMIDAIRModelPresenter >> initializePresenters [
 		             beFloat;
 		             climbRate: 1.0;
 		             minimum: 0.0;
-		             number: 30.0;
+		             number: 7.0;
 		             yourself.
 	runButton := self newButton
 		             icon: (Smalltalk ui iconNamed: #forward);
@@ -95,7 +95,7 @@ CMIDAIRModelPresenter >> initializePresenters [
 CMIDAIRModelPresenter >> initializeWindow: aWindowPresenter [
 
 	super initializeWindow: aWindowPresenter.
-	aWindowPresenter initialExtent: 980 @ 830
+	aWindowPresenter initialExtent: 800 @ 600
 ]
 
 { #category : #accessing }
@@ -118,7 +118,7 @@ CMIDAIRModelPresenter >> runSimulation [
 			daysLabel label:
 				(model timeStep * model daysPerStep printShowingDecimalPlaces: 2).
 			chart ifNotNil: [ chart newMaxX: model timeStep ].
-			notebook selectPage: notebook pages last ] ]
+			"notebook selectPage: notebook pages last" ] ]
 ]
 
 { #category : #accessing }

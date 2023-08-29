@@ -129,6 +129,12 @@ CMIDAIRRPGContactModel >> namesAndPlayersDo: aBlock [
 ]
 
 { #category : #accessing }
+CMIDAIRRPGContactModel >> playerNamed: aString [
+
+	^ players at: aString ifAbsent: [ nil ]
+]
+
+{ #category : #accessing }
 CMIDAIRRPGContactModel >> players [
 
 	^ players

@@ -2,10 +2,57 @@ Class {
 	#name : #CMIDAIRRPGActionPresenter,
 	#superclass : #SpPresenterWithModel,
 	#instVars : [
-		'playerList'
+		'playerList',
+		'barChart',
+		'citizenActionList',
+		'policyMakerActionList',
+		'citizenActionYesButton',
+		'citizenActionNoButton',
+		'policyMakerActionButton'
 	],
 	#category : #'Cormas-Model-IDAIR-Contact-RPG'
 }
+
+{ #category : #specs }
+CMIDAIRRPGActionPresenter class >> defaultSpec [
+
+	<script: 'CMIDAIRRPGContactModel new asPresenter openWithSpec'>
+	| citizenSpec policyMakerSpec |
+	citizenSpec := SpBoxLayout newVertical
+		               add: (SpBoxLayout newHorizontal
+				                add: 'Citizen''s Actions' asPresenter
+				                width: 200)
+		               height: self labelHeight + 5;
+		               yourself.
+	citizenSpec add: (SpBoxLayout newHorizontal
+			 add: (SpPanedLayout newVertical
+					  positionOfSlider: 0.5;
+					  add: #playerList;
+					  add: (SpBoxLayout newVertical
+							   add: #citizenActionList;
+							   add: (SpBoxLayout newHorizontal
+									    add: #citizenActionYesButton;
+									    add: #citizenActionNoButton;
+									    yourself)
+							   expand: false))
+			 width: 300;
+			 add: ' ' asPresenter width: 20;
+			 add: #barChart width: 100).
+
+	policyMakerSpec := SpBoxLayout newVertical
+		                   add: (SpBoxLayout newHorizontal
+				                    add: 'Policy Maker''s Actions' asPresenter
+				                    width: 200)
+		                   height: self labelHeight + 5;
+		                   yourself.
+	policyMakerSpec
+		add: #policyMakerActionList;
+		add: #policyMakerActionButton expand: false.
+	^ SpBoxLayout newHorizontal
+		  add: citizenSpec expand: false;
+		  add: '    ' asPresenter width: 50;
+		  add: policyMakerSpec expand: false
+]
 
 { #category : #operations }
 CMIDAIRRPGActionPresenter >> askEffectiveRate [
@@ -23,104 +70,148 @@ CMIDAIRRPGActionPresenter >> askEffectiveRate [
 { #category : #accessing }
 CMIDAIRRPGActionPresenter >> citizen [
 
-	^ playerList selectedItem value
-]
-
-{ #category : #specs }
-CMIDAIRRPGActionPresenter >> citizenActionsSpec [
-
-	| spec |
-	spec := SpBoxLayout newVertical.
-	self model citizenActionsAndFactorsDo: [ :action :factors | 
-		| yesButton noButton |
-		yesButton := self newButton
-			             label: 'YES';
-			             action: [ self citizenPlay: factors first ];
-			             yourself.
-		noButton := self newButton
-			            label: 'NO';
-			            action: [ self citizenPlay: factors second ];
-			            yourself.
-		spec
-			add: (SpBoxLayout newHorizontal
-					 add: action asString asPresenter width: 200;
-					 add: yesButton width: 100;
-					 add: noButton width: 100)
-			expand: false ].
-	^ spec
+	^ playerList selectedItem ifNotNil: #value
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> citizenPlay: aNumberOrSymbol [
+CMIDAIRRPGActionPresenter >> citizenPlay: aString factor: aNumberOrSymbol [
 
 	self citizen ifNotNil: [ :citizen | 
+		citizen contactProfile actionName: aString.
 		aNumberOrSymbol isSymbol
 			ifTrue: [ citizen perform: aNumberOrSymbol asSymbol ]
 			ifFalse: [ 
-			citizen contactProfile actionFactor: aNumberOrSymbol asFloat ] ]
+			citizen contactProfile actionFactor: aNumberOrSymbol asFloat ].
+		playerList refresh ]
 ]
 
-{ #category : #specs }
-CMIDAIRRPGActionPresenter >> defaultSpec [
+{ #category : #accessing }
+CMIDAIRRPGActionPresenter >> diseaseDynamicsAndPopulation [
 
-	<script: 'CMIDAIRRPGContactModel new asPresenter openWithSpec'>
-	| citizenSpec policyMakerSpec |
-	citizenSpec := SpBoxLayout newVertical
-		               add: (SpBoxLayout newHorizontal
-				                add: 'Citizen''s Actions' asPresenter
-				                width: 200)
-		               height: self class labelHeight + 5;
-		               yourself.
-	citizenSpec add: (SpBoxLayout newHorizontal
-			 add: #playerList width: 200;
-			 add: ' ' asPresenter width: 50;
-			 add: self citizenActionsSpec expand: false).
+	^ self citizen
+		  ifNotNil: [ :citizen | 
+			  | histogram |
+			  histogram := OrderedDictionary new.
+			  citizen diseaseDynamics class colors keysDo: [ :dynamics | 
+				  histogram at: dynamics put: 0 ].
+			  citizen cormasModel theCitizens do: [ :c | 
+				  c contactProfile player == citizen ifTrue: [ 
+					  | name |
+					  name := c diseaseDynamics name.
+					  histogram at: name put: (histogram at: name) + 1 ] ].
+			  histogram ]
+		  ifNil: [ OrderedDictionary new ]
+]
 
-	policyMakerSpec := SpBoxLayout newVertical
-		                   add: (SpBoxLayout newHorizontal
-				                    add: 'Policy Maker''s Actions' asPresenter
-				                    width: 200)
-		                   height: self class labelHeight + 5;
-		                   yourself.
-	policyMakerSpec add: self policyMakerActionsSpec expand: false.
-	^ SpBoxLayout newHorizontal
-		  add: citizenSpec expand: false;
-		  add: '    ' asPresenter width: 50;
-		  add: policyMakerSpec expand: false
+{ #category : #drawing }
+CMIDAIRRPGActionPresenter >> drawBarChart: aCanvas [
+
+	aCanvas color: Color transparent.
+
+	self diseaseDynamicsAndPopulation ifNotNil: [ :amounts | 
+		amounts ifNotEmpty: [ 
+			| chart |
+			chart := RSChart new.
+			chart extent: 60 @ 400.
+			chart container: aCanvas.
+			chart maxValueY: amounts values sum.
+			chart colors: (NSScale ordinal range:
+					 self citizen diseaseDynamics class colors values).
+			amounts values inject: 0 into: [ :bottom :value | 
+				(chart barHeights: { value }) bottom: { bottom }.
+				bottom + value ].
+			chart addDecoration: (RSVerticalTick new
+					 fontSize: 12;
+					 integer;
+					 yourself).
+			"chart addDecoration: (RSChartTitleDecoration new
+					 title: (self playerName ifNil: [ '-' ]);
+					 fontSize: 12;
+					 yourself)."
+			chart build.
+			RSZoomToFitCanvasInteraction new zoomToFitOnStart: aCanvas ] ]
 ]
 
 { #category : #initialization }
 CMIDAIRRPGActionPresenter >> initializePresenters [
 
-	playerList := self newList
-		              display: [ :assoc | assoc key ];
-		              yourself
+	playerList := self newTable
+		              addColumn:
+			              (SpStringTableColumn
+				               title: 'name'
+				               evaluated: [ :assoc | assoc key ]);
+		              addColumn: (SpStringTableColumn
+				               title: 'action'
+				               evaluated: [ :assoc | 
+					               assoc value contactProfile actionName ]);
+		              whenSelectionChangedDo: [ self playerChanged ];
+		              yourself.
+	barChart := self newRoassal script: [ :canvas | 
+		            self drawBarChart: canvas ].
+	citizenActionList := self newList
+		                     display: [ :assoc | assoc key ];
+		                     yourself.
+	citizenActionYesButton := self newButton
+		                          label: 'YES';
+		                          action: [ self playCitizenActionYes ];
+		                          yourself.
+	citizenActionNoButton := self newButton
+		                         label: 'NO';
+		                         action: [ self playCitizenActionNo ];
+		                         yourself.
+	policyMakerActionList := self newList
+		                         display: [ :assoc | assoc key ];
+		                         yourself.
+	policyMakerActionButton := self newButton
+		                           label: 'YES';
+		                           action: [ self playPolicyMakerAction ];
+		                           yourself
 ]
 
 { #category : #accessing }
 CMIDAIRRPGActionPresenter >> modelChanged [
 
 	super modelChanged.
-	playerList items: (self model
-			 ifNotNil: [ :model | model players associations ]
-			 ifNil: [ Array new ])
+	self model cormasModel projectAnnouncer
+		when: CMTimeChangedAnnouncement
+		do: [ :announcement | barChart refresh ].
+	self
+		updatePlayerList;
+		updateCitizenActionList;
+		updatePolicyMakerActionList
 ]
 
-{ #category : #specs }
-CMIDAIRRPGActionPresenter >> policyMakerActionsSpec [
+{ #category : #operations }
+CMIDAIRRPGActionPresenter >> playCitizenActionNo [
 
-	| spec |
-	spec := SpBoxLayout newVertical.
-	self model policyMakerActionsAndFactorsDo: [ :action :factor | 
-		spec
-			add: (SpBoxLayout newHorizontal
-					 add: (self newButton
-							  label: action;
-							  action: [ self policyMakerPlay: factor ];
-							  yourself)
-					 width: 200)
-			expand: false ].
-	^ spec
+	citizenActionList selectedItem ifNotNil: [ :assoc | 
+		self citizenPlay: assoc key, ' - NO' factor: assoc value second ]
+]
+
+{ #category : #operations }
+CMIDAIRRPGActionPresenter >> playCitizenActionYes [
+
+	citizenActionList selectedItem ifNotNil: [ :assoc | 
+		self citizenPlay: assoc key, ' - YES' factor: assoc value first ]
+]
+
+{ #category : #operations }
+CMIDAIRRPGActionPresenter >> playPolicyMakerAction [
+
+	policyMakerActionList selectedItem ifNotNil: [ :assoc | 
+		self policyMakerPlay: assoc value ]
+]
+
+{ #category : #updating }
+CMIDAIRRPGActionPresenter >> playerChanged [
+
+	barChart refresh
+]
+
+{ #category : #accessing }
+CMIDAIRRPGActionPresenter >> playerName [
+
+	^ playerList selectedItem ifNotNil: #key
 ]
 
 { #category : #operations }
@@ -142,4 +233,26 @@ CMIDAIRRPGActionPresenter >> retrieveSpec: aSelector [
 	spec := self perform: aSelector.
 	spec isSpLayout ifTrue: [ spec selector: aSelector ].
 	^ spec
+]
+
+{ #category : #updating }
+CMIDAIRRPGActionPresenter >> updateCitizenActionList [
+
+	citizenActionList items:
+		self model citizenActionsAndFactors associations
+]
+
+{ #category : #updating }
+CMIDAIRRPGActionPresenter >> updatePlayerList [
+
+	playerList items: (self model
+			 ifNotNil: [ :model | model players associations ]
+			 ifNil: [ Array new ])
+]
+
+{ #category : #updating }
+CMIDAIRRPGActionPresenter >> updatePolicyMakerActionList [
+
+	policyMakerActionList items:
+		self model policyMakerActionsAndFactors associations
 ]

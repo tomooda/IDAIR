@@ -7,6 +7,19 @@ Class {
 	#category : #'Cormas-Model-IDAIR-Disease-SEIR'
 }
 
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseDynamics class >> colors [
+
+	^ OrderedDictionary new
+		  at: 'susceptive' put: Color green;
+		  at: 'exposed' put: Color yellow;
+		  at: 'ill' put: Color red;
+		  at: 'hospitalized' put: Color gray;
+		  at: 'recovered' put: Color blue;
+		  at: 'dead' put: Color black;
+		  yourself
+]
+
 { #category : #testing }
 CMIDAIRSEIRDiseaseDynamics class >> isAbstract [
 

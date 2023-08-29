@@ -52,7 +52,7 @@ CMIDAIRModelInitializationPresenter >> initializePresenters [
 		                   yourself.
 	populationField := self newNumberInput
 		                   beInteger;
-		                   number: 1;
+		                   number: 1000;
 		                   yourself.
 	addButton := self newButton
 		             icon: (Smalltalk ui iconNamed: #add);
