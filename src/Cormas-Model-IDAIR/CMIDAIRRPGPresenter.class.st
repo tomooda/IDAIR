@@ -45,7 +45,14 @@ CMIDAIRRPGPresenter >> initializePresenters [
 		            addPage: (self newNotebookPage
 				             title: 'Population chart';
 				             presenterProvider: [ 
-					             chart := self model cormasModel chartPresenter ];
+					             chart := self model cormasModel chartPresenter.
+					             chart optionsPresenter probesMinMaxOptionsPresenter
+						             fixMaxInputPresenter text:
+							             self model cormasModel theCitizens size
+								             printString.
+					             chart optionsPresenter probesMinMaxOptionsPresenter
+						             fixMaxCheckPresenter state: true.
+					             chart ];
 				             yourself).
 	daysLabel := self newLabel
 		             label: '0.0';
