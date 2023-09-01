@@ -48,10 +48,12 @@ CMIDAIRRPGActionPresenter class >> defaultSpec [
 	policyMakerSpec
 		add: #policyMakerActionList;
 		add: #policyMakerActionButton expand: false.
-	^ SpBoxLayout newHorizontal
-		  add: citizenSpec expand: false;
-		  add: '    ' asPresenter width: 50;
-		  add: policyMakerSpec expand: false
+	^ SpBoxLayout newVertical
+		  add: (SpBoxLayout newHorizontal
+				   add: citizenSpec expand: false;
+				   add: '    ' asPresenter width: 50;
+				   add: policyMakerSpec expand: false);
+		  yourself
 ]
 
 { #category : #operations }
@@ -168,6 +170,13 @@ CMIDAIRRPGActionPresenter >> initializePresenters [
 		                           yourself
 ]
 
+{ #category : #initialization }
+CMIDAIRRPGActionPresenter >> initializeWindow: aSpWindowPresenter [
+
+	super initializeWindow: aSpWindowPresenter.
+	aSpWindowPresenter initialExtent: 680 @ 600
+]
+
 { #category : #accessing }
 CMIDAIRRPGActionPresenter >> modelChanged [
 
@@ -233,6 +242,11 @@ CMIDAIRRPGActionPresenter >> retrieveSpec: aSelector [
 	spec := self perform: aSelector.
 	spec isSpLayout ifTrue: [ spec selector: aSelector ].
 	^ spec
+]
+
+{ #category : #accessing }
+CMIDAIRRPGActionPresenter >> title [
+	^ 'IDAIR RPG Actions'
 ]
 
 { #category : #updating }

@@ -418,7 +418,12 @@ CMIDAIRModel >> numberOfSymptomatic [
 { #category : #'user interfaces' }
 CMIDAIRModel >> openGUI [
 
-	self ifGUI: [ self asPresenter openWithSpec ]
+	self ifGUI: [ 
+		self submodelAt: #contact do: [ :submodel | 
+			(submodel isKindOf: CMIDAIRRPGContactModel) ifTrue: [ 
+				(CMIDAIRRPGPresenter on: submodel) openWithSpec.
+				^ self ] ].
+		self asPresenter openWithSpec ]
 ]
 
 { #category : #removing }

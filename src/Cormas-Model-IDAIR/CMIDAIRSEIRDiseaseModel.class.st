@@ -17,6 +17,12 @@ CMIDAIRSEIRDiseaseModel class >> submodelName [
 	^ 'SEIR'
 ]
 
+{ #category : #converting }
+CMIDAIRSEIRDiseaseModel >> asPresenter [
+
+	^ CMIDAIRSEIRDiseaseModelPresenter on: self
+]
+
 { #category : #accessing }
 CMIDAIRSEIRDiseaseModel >> beta_exposed [
 

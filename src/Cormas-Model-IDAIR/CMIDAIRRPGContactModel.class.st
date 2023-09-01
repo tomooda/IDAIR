@@ -27,14 +27,7 @@ CMIDAIRRPGContactModel >> addPlayer: aCMIDAIRCitizen named: aString [
 { #category : #converting }
 CMIDAIRRPGContactModel >> asPresenter [
 
-	^ SpNotebookPresenter new
-		  addPage: (SpNotebookPage
-				   title: 'Settings'
-				   provider: [ CMIDAIRRPGContactModelPresenter on: self ]);
-		  addPage: (SpNotebookPage
-				   title: 'Play'
-				   provider: [ CMIDAIRRPGActionPresenter on: self ]);
-		  yourself
+	^ CMIDAIRRPGContactModelPresenter on: self
 ]
 
 { #category : #accessing }
