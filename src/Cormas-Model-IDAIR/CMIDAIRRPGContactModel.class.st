@@ -65,10 +65,6 @@ CMIDAIRRPGContactModel >> defaultCitizenActionsAndFactors [
 		  at: 'Seek health care' put: #( 1.0 1.0 );
 		  at: 'Getting facemask to wear' put: #( 0.5 1.0 );
 		  at: 'Getting vaccinated' put: #( #beVaccinated 1.0 );
-		  at: 'You need a test kit' put: #( 1.0 1.0 );
-		  at: 'Your test is positive' put: #( #beExposed 1.0 );
-		  at: 'Your symptom is severe' put: #( #beSevereSymptom
-			     1.0 );
 		  yourself
 ]
 

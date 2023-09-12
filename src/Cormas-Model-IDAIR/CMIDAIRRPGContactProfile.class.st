@@ -34,6 +34,12 @@ CMIDAIRRPGContactProfile >> actionName: aString [
 ]
 
 { #category : #accessing }
+CMIDAIRRPGContactProfile >> beVaccinated [
+
+	self immuneFactor: 0.1
+]
+
+{ #category : #accessing }
 CMIDAIRRPGContactProfile >> immuneFactor [
 
 	^ immuneFactor

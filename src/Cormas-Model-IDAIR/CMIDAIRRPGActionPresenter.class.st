@@ -35,7 +35,7 @@ CMIDAIRRPGActionPresenter class >> defaultSpec [
 									    add: #citizenActionNoButton;
 									    yourself)
 							   expand: false))
-			 width: 300;
+			 width: 400;
 			 add: ' ' asPresenter width: 20;
 			 add: #barChart width: 100).
 
@@ -81,7 +81,7 @@ CMIDAIRRPGActionPresenter >> citizenPlay: aString factor: aNumberOrSymbol [
 	self citizen ifNotNil: [ :citizen | 
 		citizen contactProfile actionName: aString.
 		aNumberOrSymbol isSymbol
-			ifTrue: [ citizen perform: aNumberOrSymbol asSymbol ]
+			ifTrue: [ citizen contactProfile perform: aNumberOrSymbol asSymbol ]
 			ifFalse: [ 
 			citizen contactProfile actionFactor: aNumberOrSymbol asFloat ].
 		playerList refresh ]

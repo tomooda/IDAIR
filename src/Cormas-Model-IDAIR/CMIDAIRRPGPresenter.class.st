@@ -78,7 +78,7 @@ CMIDAIRRPGPresenter >> initializePresenters [
 CMIDAIRRPGPresenter >> initializeWindow: aSpWindowPresenter [
 
 	super initializeWindow: aSpWindowPresenter.
-	aSpWindowPresenter initialExtent: 700 @ 600
+	aSpWindowPresenter initialExtent: 800 @ 600
 ]
 
 { #category : #operations }
