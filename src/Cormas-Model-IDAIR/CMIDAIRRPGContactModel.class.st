@@ -78,7 +78,7 @@ CMIDAIRRPGContactModel >> defaultContactProfileClass [
 CMIDAIRRPGContactModel >> defaultPolicyMakerActionsAndFactors [
 
 	^ OrderedDictionary new
-		  at: 'Wear a facemask' put: 1.0;
+		  at: 'Wear a facemask' put: 0.8;
 		  at: 'Close the border' put: 0.7;
 		  at: 'Social distancing level 1' put: 0.9;
 		  at: 'Social distancing level 2' put: 0.8;
