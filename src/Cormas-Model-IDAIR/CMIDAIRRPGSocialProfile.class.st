@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #accessing }
+CMIDAIRRPGSocialProfile >> clearRound [
+
+	factor := 1.0
+]
+
+{ #category : #accessing }
 CMIDAIRRPGSocialProfile >> factor [
 
 	^ factor

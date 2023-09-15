@@ -12,6 +12,10 @@ CMIDAIRRPGMuppetContactProfile >> actionFactor: aNumber [
 ]
 
 { #category : #accessing }
+CMIDAIRRPGMuppetContactProfile >> clearRound [
+]
+
+{ #category : #accessing }
 CMIDAIRRPGMuppetContactProfile >> immuneFactor: aNumber [
 ]
 

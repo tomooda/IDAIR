@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'immuneFactor',
 		'actionFactor',
-		'actionName'
+		'actionName',
+		'wellbeingPoints'
 	],
 	#category : #'Cormas-Model-IDAIR-Contact-RPG'
 }
@@ -34,9 +35,22 @@ CMIDAIRRPGContactProfile >> actionName: aString [
 ]
 
 { #category : #accessing }
+CMIDAIRRPGContactProfile >> addToWellbeingPoints: anInteger [
+
+	wellbeingPoints := wellbeingPoints + anInteger
+]
+
+{ #category : #accessing }
 CMIDAIRRPGContactProfile >> beVaccinated [
 
 	self immuneFactor: 0.1
+]
+
+{ #category : #accessing }
+CMIDAIRRPGContactProfile >> clearRound [
+
+	actionFactor := 1.0.
+	actionName := ''
 ]
 
 { #category : #accessing }
@@ -57,7 +71,8 @@ CMIDAIRRPGContactProfile >> initialize [
 	super initialize.
 	immuneFactor := 1.0.
 	actionFactor := 1.0.
-	actionName := ''
+	actionName := ''.
+	wellbeingPoints := 0
 ]
 
 { #category : #testing }
@@ -89,4 +104,10 @@ CMIDAIRRPGContactProfile >> player: aCMIDAIRCitizen [
 CMIDAIRRPGContactProfile >> probabilityFromPrior: aNumber [
 
 	^ aNumber * immuneFactor * actionFactor
+]
+
+{ #category : #accessing }
+CMIDAIRRPGContactProfile >> wellbeingPoints [
+
+	^ wellbeingPoints
 ]

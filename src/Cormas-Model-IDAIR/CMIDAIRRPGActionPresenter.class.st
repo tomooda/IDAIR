@@ -87,6 +87,27 @@ CMIDAIRRPGActionPresenter >> citizenPlay: aString factor: aNumberOrSymbol [
 		playerList refresh ]
 ]
 
+{ #category : #operations }
+CMIDAIRRPGActionPresenter >> citizenPlay: aString factor: aNumberOrSymbol wellbeing: anInteger [
+
+	self citizen ifNotNil: [ :citizen | 
+		citizen contactProfile
+			actionName: aString;
+			addToWellbeingPoints: anInteger.
+		aNumberOrSymbol isSymbol
+			ifTrue: [ citizen contactProfile perform: aNumberOrSymbol asSymbol ]
+			ifFalse: [ 
+			citizen contactProfile actionFactor: aNumberOrSymbol asFloat ].
+		playerList refresh ]
+]
+
+{ #category : #operations }
+CMIDAIRRPGActionPresenter >> clearRound [
+
+	self model ifNotNil: #clearRound.
+	playerList refresh
+]
+
 { #category : #accessing }
 CMIDAIRRPGActionPresenter >> diseaseDynamicsAndPopulation [
 
@@ -138,10 +159,16 @@ CMIDAIRRPGActionPresenter >> drawBarChart: aCanvas [
 CMIDAIRRPGActionPresenter >> initializePresenters [
 
 	playerList := self newTable
+		              beResizable;
 		              addColumn:
-			              (SpStringTableColumn
-				               title: 'name'
-				               evaluated: [ :assoc | assoc key ]);
+			              ((SpStringTableColumn
+				                title: 'name'
+				                evaluated: [ :assoc | assoc key ]) width: 140);
+		              addColumn: ((SpStringTableColumn
+				                title: 'well-being'
+				                evaluated: [ :assoc | 
+					                assoc value contactProfile wellbeingPoints
+						                printString ]) width: 70);
 		              addColumn: (SpStringTableColumn
 				               title: 'action'
 				               evaluated: [ :assoc | 
@@ -201,7 +228,10 @@ CMIDAIRRPGActionPresenter >> playCitizenActionNo [
 CMIDAIRRPGActionPresenter >> playCitizenActionYes [
 
 	citizenActionList selectedItem ifNotNil: [ :assoc | 
-		self citizenPlay: assoc key, ' - YES' factor: assoc value first ]
+		self
+			citizenPlay: assoc key , ' - YES'
+			factor: assoc value first
+			wellbeing: assoc value third ]
 ]
 
 { #category : #operations }

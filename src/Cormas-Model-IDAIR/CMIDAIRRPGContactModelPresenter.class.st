@@ -30,7 +30,8 @@ CMIDAIRRPGContactModelPresenter >> defaultSpec [
 									  whenNumberChangedDo: [ :value | 
 										  self model citizenActionsAndFactors at: action put: { 
 													  value.
-													  (self model citizenActionsAndFactors at: action) second } ];
+													  (self model citizenActionsAndFactors at: action) second.
+													  (self model citizenActionsAndFactors at: action) third } ];
 									  yourself ])
 					 width: 100;
 					 add: (factors second isSymbol
@@ -43,8 +44,20 @@ CMIDAIRRPGContactModelPresenter >> defaultSpec [
 									  whenNumberChangedDo: [ :value | 
 										  self model citizenActionsAndFactors at: action put: { 
 													  (self model citizenActionsAndFactors at: action) first.
-													  value } ];
+													  value.
+													  (self model citizenActionsAndFactors at: action) third } ];
 									  yourself ])
+					 width: 100;
+					 add: (self newNumberInput
+							  beInteger;
+							  number: factors third;
+							  climbRate: 1;
+							  whenNumberChangedDo: [ :value | 
+								  self model citizenActionsAndFactors at: action put: { 
+											  (self model citizenActionsAndFactors at: action) first.
+											  (self model citizenActionsAndFactors at: action) second.
+											  value } ];
+							  yourself)
 					 width: 100;
 					 yourself)
 			expand: false ].

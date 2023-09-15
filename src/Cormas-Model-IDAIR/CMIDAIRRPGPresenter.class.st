@@ -7,7 +7,8 @@ Class {
 		'daysField',
 		'daysLabel',
 		'runButton',
-		'settingsButton'
+		'settingsButton',
+		'actionPresenter'
 	],
 	#category : #'Cormas-Model-IDAIR-Contact-RPG'
 }
@@ -40,7 +41,7 @@ CMIDAIRRPGPresenter >> initializePresenters [
 		            addPage: (self newNotebookPage
 				             title: 'Play';
 				             presenterProvider: [ 
-					             CMIDAIRRPGActionPresenter on: self model ];
+					             actionPresenter := CMIDAIRRPGActionPresenter on: self model ];
 				             yourself);
 		            addPage: (self newNotebookPage
 				             title: 'Population chart';
@@ -115,7 +116,8 @@ CMIDAIRRPGPresenter >> runSimulation [
 							progress value: count // step ] ] ].
 			daysLabel label: (model cormasModel timeStep * model daysPerStep 
 					 printShowingDecimalPlaces: 2).
-			chart ifNotNil: [ chart newMaxX: model cormasModel timeStep ] ] ]
+			chart ifNotNil: [ chart newMaxX: model cormasModel timeStep ].
+			actionPresenter ifNotNil: #clearRound ] ]
 ]
 
 { #category : #accessing }

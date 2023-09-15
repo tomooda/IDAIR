@@ -42,29 +42,37 @@ CMIDAIRRPGContactModel >> citizenActionsAndFactorsDo: aBlock [
 	citizenActionsAndFactors keysAndValuesDo: aBlock
 ]
 
+{ #category : #actions }
+CMIDAIRRPGContactModel >> clearRound [
+
+	self namesAndPlayersDo: [ :name :player | 
+		player contactProfile clearRound ].
+	socialProfile clearRound
+]
+
 { #category : #defaults }
 CMIDAIRRPGContactModel >> defaultCitizenActionsAndFactors [
 
 	^ OrderedDictionary new
-		  at: 'Go to a Bar' put: #( 2.5 1.0 );
-		  at: 'Go to a wedding' put: #( 1.1 1.0 );
-		  at: 'Go to a ceremony' put: #( 1.1 1.0 );
-		  at: 'Go to the hospital' put: #( 1.0 1.0 );
-		  at: 'Earn a living' put: #( 1.2 0.7 );
-		  at: 'Buy basic living necessities' put: #( 1.0 0.5 );
-		  at: 'Business trip' put: #( 2.0 1.0 );
-		  at: 'Travel abroad to study' put: #( 1.0 1.0 );
-		  at: 'Work out at a gym' put: #( 1.5 1.0 );
-		  at: 'Bring family to the hospital' put: #( 1.0 1.0 );
-		  at: 'Go to school' put: #( 1.0 0.5 );
-		  at: 'Field trip' put: #( 0.5 1.0 );
-		  at: 'Communication by talking' put: #( 1.5 1.0 );
-		  at: 'Shopping' put: #( 1.5 0.8 );
-		  at: 'Regular health checkup' put: #( 1.0 1.0 );
-		  at: 'Getting monthly medication' put: #( 1.0 1.0 );
-		  at: 'Seek health care' put: #( 1.0 1.0 );
-		  at: 'Getting facemask to wear' put: #( 0.5 1.0 );
-		  at: 'Getting vaccinated' put: #( #beVaccinated 1.0 );
+		  at: 'Go to a bar' put: #( 2.5 1.0 15);
+		  at: 'Go to a wedding' put: #( 1.1 1.0 15);
+		  at: 'Go to a ceremony' put: #( 1.1 1.0 10);
+		  at: 'Go to the hospital' put: #( 1.0 1.0 5);
+		  at: 'Earn a living' put: #( 1.2 0.7 15);
+		  at: 'Buy basic living necessities' put: #( 1.0 0.5 15);
+		  at: 'Business trip' put: #( 2.0 1.0 10);
+		  at: 'Travel abroad to study' put: #( 1.0 1.0 5);
+		  at: 'Work out at a gym' put: #( 1.5 1.0 5);
+		  at: 'Bring family to the hospital' put: #( 1.0 1.0 5);
+		  at: 'Go to school' put: #( 1.0 0.5 5);
+		  at: 'Field trip' put: #( 0.5 1.0 5);
+		  at: 'Communication by talking' put: #( 1.5 1.0 5);
+		  at: 'Shopping' put: #( 1.5 0.8 5);
+		  at: 'Regular health checkup' put: #( 1.0 1.0 5);
+		  at: 'Getting monthly medication' put: #( 1.0 1.0 5);
+		  at: 'Seek health care' put: #( 1.0 1.0 5);
+		  at: 'Getting facemask to wear' put: #( 0.5 1.0 0);
+		  "at: 'Getting vaccinated' put: #( #beVaccinated 1.0 0);"
 		  yourself
 ]
 
