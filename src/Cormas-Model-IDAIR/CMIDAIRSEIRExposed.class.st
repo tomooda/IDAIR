@@ -21,7 +21,7 @@ CMIDAIRSEIRExposed >> beta [
 { #category : #accessing }
 CMIDAIRSEIRExposed >> color [
 
-	^ Color yellow darker alpha: 0.5
+	^ Color yellow darker
 ]
 
 { #category : #accessing }
@@ -105,7 +105,7 @@ CMIDAIRSEIRExposed >> name [
 { #category : #accessing }
 CMIDAIRSEIRExposed >> next [
 
-	^ CMIDAIRSEIRIll newFrom: self
+	^ CMIDAIRSEIRMildSymptom newFrom: self
 ]
 
 { #category : #accessing }

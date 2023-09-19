@@ -47,7 +47,7 @@ CMIDAIRSEIRDiseaseDynamics >> beExposed [
 { #category : #actions }
 CMIDAIRSEIRDiseaseDynamics >> beHospitalized [
 
-	^ CMIDAIRSEIRHospitalized newFrom: self
+	^ self
 ]
 
 { #category : #actions }

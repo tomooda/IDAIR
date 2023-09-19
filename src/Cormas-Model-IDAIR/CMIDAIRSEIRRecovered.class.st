@@ -13,7 +13,7 @@ CMIDAIRSEIRRecovered >> beta [
 { #category : #accessing }
 CMIDAIRSEIRRecovered >> color [
 
-	^ Color blue alpha: 0.1
+	^ Color blue
 ]
 
 { #category : #accessing }

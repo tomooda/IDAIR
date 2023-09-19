@@ -13,7 +13,7 @@ CMIDAIRSEIRSusceptible >> beta [
 { #category : #accessing }
 CMIDAIRSEIRSusceptible >> color [
 
-	^ Color green alpha: 0.1
+	^ Color green
 ]
 
 { #category : #accessing }

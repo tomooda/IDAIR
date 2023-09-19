@@ -1,25 +1,41 @@
 Class {
 	#name : #CMIDAIRSEIRIll,
 	#superclass : #CMIDAIRSEIRDiseaseDynamics,
+	#instVars : [
+		'hospitalized'
+	],
 	#category : #'Cormas-Model-IDAIR-Disease-SEIR'
 }
 
-{ #category : #accessing }
-CMIDAIRSEIRIll >> beta [
+{ #category : #testing }
+CMIDAIRSEIRIll class >> isAbstract [
 
-	^ self modelParameterAt: #beta_ill
+	^ self = CMIDAIRSEIRIll
 ]
 
-{ #category : #accessing }
-CMIDAIRSEIRIll >> color [
+{ #category : #actions }
+CMIDAIRSEIRIll >> beHospitalized [
 
-	^ Color red alpha: 0.8
+	hospitalized := true
+]
+
+{ #category : #actions }
+CMIDAIRSEIRIll >> beUnhospitalized [
+
+	hospitalized := false
 ]
 
 { #category : #accessing }
 CMIDAIRSEIRIll >> inCommunity [
 
 	^ self
+]
+
+{ #category : #initialization }
+CMIDAIRSEIRIll >> initialize [
+
+	super initialize.
+	hospitalized := false
 ]
 
 { #category : #testing }
@@ -37,7 +53,7 @@ CMIDAIRSEIRIll >> isDead [
 { #category : #testing }
 CMIDAIRSEIRIll >> isHospitalized [
 
-	^ false
+	^ hospitalized
 ]
 
 { #category : #testing }
@@ -49,7 +65,7 @@ CMIDAIRSEIRIll >> isICUed [
 { #category : #testing }
 CMIDAIRSEIRIll >> isInCommunity [
 
-	^ true
+	^ self isHospitalized not
 ]
 
 { #category : #testing }
@@ -98,10 +114,4 @@ CMIDAIRSEIRIll >> name [
 CMIDAIRSEIRIll >> next [
 
 	^ CMIDAIRSEIRRecovered newFrom: self
-]
-
-{ #category : #accessing }
-CMIDAIRSEIRIll >> tau [
-
-	^ self modelParameterAt: #tau_ill
 ]

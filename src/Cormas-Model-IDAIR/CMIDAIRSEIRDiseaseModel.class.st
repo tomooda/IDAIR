@@ -3,10 +3,13 @@ Class {
 	#superclass : #CMIDAIRDiseaseModel,
 	#instVars : [
 		'beta_exposed',
-		'beta_ill',
+		'beta_mild',
+		'beta_severe',
+		'beta_recovering',
 		'tau_exposed',
-		'tau_ill',
-		'tau_hospitalized',
+		'tau_mild',
+		'tau_severe',
+		'tau_recovering',
 		'tau_recovered'
 	],
 	#category : #'Cormas-Model-IDAIR-Disease-SEIR'
@@ -36,15 +39,39 @@ CMIDAIRSEIRDiseaseModel >> beta_exposed: aNumber [
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> beta_ill [
+CMIDAIRSEIRDiseaseModel >> beta_mild [
 
-	^ beta_ill
+	^ beta_mild
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> beta_ill: aNumber [
+CMIDAIRSEIRDiseaseModel >> beta_mild: aNumber [
 
-	beta_ill := aNumber
+	beta_mild := aNumber
+]
+
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseModel >> beta_recovering [
+
+	^ beta_recovering
+]
+
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseModel >> beta_recovering: aNumber [
+
+	beta_recovering := aNumber
+]
+
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseModel >> beta_severe [
+
+	^ beta_severe
+]
+
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseModel >> beta_severe: aNumber [
+
+	beta_severe := aNumber
 ]
 
 { #category : #defaults }
@@ -58,10 +85,13 @@ CMIDAIRSEIRDiseaseModel >> initialize [
 
 	super initialize.
 	beta_exposed := 0.5.
-	beta_ill := 1.5.
-	tau_exposed := 6.0.
-	tau_ill := 10.0.
-	tau_hospitalized := 15.0.
+	beta_mild := 1.0.
+	beta_severe := 2.0.
+	beta_recovering := 0.2.
+	tau_exposed := 3.0.
+	tau_mild := 10.0.
+	tau_severe := 20.0.
+	tau_recovering := 5.0.
 	tau_recovered := 100.0
 ]
 
@@ -78,27 +108,15 @@ CMIDAIRSEIRDiseaseModel >> tau_exposed: aNumber [
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> tau_hospitalized [
+CMIDAIRSEIRDiseaseModel >> tau_mild [
 
-	^ tau_hospitalized
+	^ tau_mild
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> tau_hospitalized: aNumber [
+CMIDAIRSEIRDiseaseModel >> tau_mild: aNumber [
 
-	tau_hospitalized := aNumber
-]
-
-{ #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> tau_ill [
-
-	^ tau_ill
-]
-
-{ #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> tau_ill: aNumber [
-
-	tau_ill := aNumber
+	tau_mild := aNumber
 ]
 
 { #category : #accessing }
@@ -111,4 +129,28 @@ CMIDAIRSEIRDiseaseModel >> tau_recovered [
 CMIDAIRSEIRDiseaseModel >> tau_recovered: aNumber [
 
 	tau_recovered := aNumber
+]
+
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseModel >> tau_recovering [
+
+	^ tau_recovering
+]
+
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseModel >> tau_recovering: aNumber [
+
+	tau_recovering := aNumber
+]
+
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseModel >> tau_severe [
+
+	^ tau_severe
+]
+
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseModel >> tau_severe: aNumber [
+
+	tau_severe := aNumber
 ]
