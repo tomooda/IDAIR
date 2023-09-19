@@ -71,7 +71,7 @@ CMIDAIRSEIRDead >> isRecovered [
 ]
 
 { #category : #testing }
-CMIDAIRSEIRDead >> isSusceptive [
+CMIDAIRSEIRDead >> isSusceptible [
 
 	^ false
 ]

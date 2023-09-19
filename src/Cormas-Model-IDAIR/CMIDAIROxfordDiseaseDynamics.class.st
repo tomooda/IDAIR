@@ -59,9 +59,9 @@ CMIDAIROxfordDiseaseDynamics >> beRecovered [
 ]
 
 { #category : #transitioning }
-CMIDAIROxfordDiseaseDynamics >> beSusceptive [
+CMIDAIROxfordDiseaseDynamics >> beSusceptible [
 
-	^ CMIDAIROxfordSusceptive newFrom: self
+	^ CMIDAIROxfordSusceptible newFrom: self
 ]
 
 { #category : #transitioning }
@@ -179,7 +179,7 @@ CMIDAIROxfordDiseaseDynamics >> isSevereSymptom [
 ]
 
 { #category : #testing }
-CMIDAIROxfordDiseaseDynamics >> isSusceptive [
+CMIDAIROxfordDiseaseDynamics >> isSusceptible [
 
 	^ false
 ]

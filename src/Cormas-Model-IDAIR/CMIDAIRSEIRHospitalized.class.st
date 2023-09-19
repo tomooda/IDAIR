@@ -71,7 +71,7 @@ CMIDAIRSEIRHospitalized >> isRecovered [
 ]
 
 { #category : #testing }
-CMIDAIRSEIRHospitalized >> isSusceptive [
+CMIDAIRSEIRHospitalized >> isSusceptible [
 
 	^ false
 ]

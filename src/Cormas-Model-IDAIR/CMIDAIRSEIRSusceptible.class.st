@@ -1,107 +1,107 @@
 Class {
-	#name : #CMIDAIRSEIRSusceptive,
+	#name : #CMIDAIRSEIRSusceptible,
 	#superclass : #CMIDAIRSEIRDiseaseDynamics,
 	#category : #'Cormas-Model-IDAIR-Disease-SEIR'
 }
 
 { #category : #accessing }
-CMIDAIRSEIRSusceptive >> beta [
+CMIDAIRSEIRSusceptible >> beta [
 
 	^ 0.0
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRSusceptive >> color [
+CMIDAIRSEIRSusceptible >> color [
 
 	^ Color green alpha: 0.1
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRSusceptive >> inCommunity [
+CMIDAIRSEIRSusceptible >> inCommunity [
 
 	^ self
 ]
 
 { #category : #testing }
-CMIDAIRSEIRSusceptive >> isAsymptomatic [
+CMIDAIRSEIRSusceptible >> isAsymptomatic [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRSusceptive >> isDead [
+CMIDAIRSEIRSusceptible >> isDead [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRSusceptive >> isHospitalized [
+CMIDAIRSEIRSusceptible >> isHospitalized [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRSusceptive >> isICUed [
+CMIDAIRSEIRSusceptible >> isICUed [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRSusceptive >> isInCommunity [
+CMIDAIRSEIRSusceptible >> isInCommunity [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRSEIRSusceptive >> isInfected [
+CMIDAIRSEIRSusceptible >> isInfected [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRSusceptive >> isQuarrantined [
+CMIDAIRSEIRSusceptible >> isQuarrantined [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRSusceptive >> isRecovered [
+CMIDAIRSEIRSusceptible >> isRecovered [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRSusceptive >> isSusceptive [
+CMIDAIRSEIRSusceptible >> isSusceptible [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRSEIRSusceptive >> isSymptomatic [
+CMIDAIRSEIRSusceptible >> isSymptomatic [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRSusceptive >> isTransmissible [
+CMIDAIRSEIRSusceptible >> isTransmissible [
 
 	^ false
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRSusceptive >> name [
+CMIDAIRSEIRSusceptible >> name [
 
-	^ 'susceptive'
+	^ 'susceptible'
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRSusceptive >> next [
+CMIDAIRSEIRSusceptible >> next [
 
 	^ self
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRSusceptive >> tau [
+CMIDAIRSEIRSusceptible >> tau [
 
 	^ Float infinity
 ]

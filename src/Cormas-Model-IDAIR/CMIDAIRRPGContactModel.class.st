@@ -172,7 +172,7 @@ CMIDAIRRPGContactModel >> step: anInteger [
 		p := socialProfile probabilityFromPrior:
 			     totalBeta / numberOfCitizensInCommunity * self daysPerStep.
 		self cormasModel theCitizens do: [ :citizen | 
-			(citizen isSusceptive and: [ 
+			(citizen isSusceptible and: [ 
 				 self random <= (self probabilityForCitizen: citizen prior: p) ]) 
 				ifTrue: [ citizen beExposed ] ] ]
 ]

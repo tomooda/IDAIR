@@ -29,7 +29,7 @@ CMIDAIRVietnamDiseaseS >> isInCommunity [
 ]
 
 { #category : #testing }
-CMIDAIRVietnamDiseaseS >> isSusceptive [
+CMIDAIRVietnamDiseaseS >> isSusceptible [
 
 	^ true
 ]

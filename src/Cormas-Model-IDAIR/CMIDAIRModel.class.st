@@ -51,7 +51,7 @@ CMIDAIRModel class >> colorOfProbe_numberOfRecovered [
 ]
 
 { #category : #probes }
-CMIDAIRModel class >> colorOfProbe_numberOfSusceptive [
+CMIDAIRModel class >> colorOfProbe_numberOfSusceptible [
 	^ Color green
 ]
 
@@ -394,13 +394,13 @@ CMIDAIRModel >> numberOfRecovered [
 ]
 
 { #category : #probes }
-CMIDAIRModel >> numberOfSusceptive [
+CMIDAIRModel >> numberOfSusceptible [
 
 	<probe>
 	| num |
 	num := 0.
 	self theCitizens do: [ :citizen | 
-		citizen diseaseDynamics isSusceptive ifTrue: [ num := num + 1 ] ].
+		citizen diseaseDynamics isSusceptible ifTrue: [ num := num + 1 ] ].
 	^ num
 ]
 

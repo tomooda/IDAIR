@@ -1,11 +1,11 @@
 Class {
-	#name : #CMIDAIROxfordSusceptive,
+	#name : #CMIDAIROxfordSusceptible,
 	#superclass : #CMIDAIROxfordDiseaseDynamics,
 	#category : #'Cormas-Model-IDAIR-Disease-Oxford'
 }
 
 { #category : #transitioning }
-CMIDAIROxfordSusceptive >> beExposed [
+CMIDAIROxfordSusceptible >> beExposed [
 
 	| p |
 	p := self random.
@@ -17,61 +17,61 @@ CMIDAIROxfordSusceptive >> beExposed [
 ]
 
 { #category : #accessing }
-CMIDAIROxfordSusceptive >> beta [
+CMIDAIROxfordSusceptible >> beta [
 
 	^ 0.0
 ]
 
 { #category : #accessing }
-CMIDAIROxfordSusceptive >> color [
+CMIDAIROxfordSusceptible >> color [
 
 	^ self modelParameterAt: #healthyColor
 ]
 
 { #category : #accessing }
-CMIDAIROxfordSusceptive >> inCommunity [
+CMIDAIROxfordSusceptible >> inCommunity [
 
 	^ self
 ]
 
 { #category : #testing }
-CMIDAIROxfordSusceptive >> isActive [
+CMIDAIROxfordSusceptible >> isActive [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIROxfordSusceptive >> isInCommunity [
+CMIDAIROxfordSusceptible >> isInCommunity [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIROxfordSusceptive >> isSusceptive [
+CMIDAIROxfordSusceptible >> isSusceptible [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIROxfordSusceptive >> isTransmissible [
+CMIDAIROxfordSusceptible >> isTransmissible [
 
 	^ false
 ]
 
 { #category : #accessing }
-CMIDAIROxfordSusceptive >> name [
+CMIDAIROxfordSusceptible >> name [
 
 	^ 'healthy'
 ]
 
 { #category : #actions }
-CMIDAIROxfordSusceptive >> step [
+CMIDAIROxfordSusceptible >> step [
 
 	^ self
 ]
 
 { #category : #accessing }
-CMIDAIROxfordSusceptive >> tau [
+CMIDAIROxfordSusceptible >> tau [
 
 	^ Float infinity
 ]

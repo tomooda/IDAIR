@@ -16,7 +16,7 @@ Class {
 CMIDAIRSEIRDiseaseModelPresenter class >> defaultSpec [
 
 	^ SpBoxLayout newVertical
-		  add: 'Susceptive' asPresenter expand: false;
+		  add: 'Susceptible' asPresenter expand: false;
 		  add: (SpBoxLayout newHorizontal
 				   add: 'Exposed' asPresenter width: 100;
 				   add: 'duration ' expand: false;

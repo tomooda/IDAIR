@@ -42,9 +42,9 @@ CMIDAIRCitizen >> beHospitalized [
 ]
 
 { #category : #'transitioning-disease' }
-CMIDAIRCitizen >> beSusceptive [
+CMIDAIRCitizen >> beSusceptible [
 
-	self diseaseDynamics: self diseaseDynamics beSusceptive
+	self diseaseDynamics: self diseaseDynamics beSusceptible
 ]
 
 { #category : #'accessing-disease' }
@@ -194,9 +194,9 @@ CMIDAIRCitizen >> isRecovered [
 ]
 
 { #category : #testing }
-CMIDAIRCitizen >> isSusceptive [
+CMIDAIRCitizen >> isSusceptible [
 
-	^ self diseaseDynamics isSusceptive
+	^ self diseaseDynamics isSusceptible
 ]
 
 { #category : #testing }

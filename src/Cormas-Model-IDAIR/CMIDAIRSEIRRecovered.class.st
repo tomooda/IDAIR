@@ -71,7 +71,7 @@ CMIDAIRSEIRRecovered >> isRecovered [
 ]
 
 { #category : #testing }
-CMIDAIRSEIRRecovered >> isSusceptive [
+CMIDAIRSEIRRecovered >> isSusceptible [
 
 	^ false
 ]
@@ -97,7 +97,7 @@ CMIDAIRSEIRRecovered >> name [
 { #category : #accessing }
 CMIDAIRSEIRRecovered >> next [
 
-	^ CMIDAIRSEIRSusceptive newFrom: self
+	^ CMIDAIRSEIRSusceptible newFrom: self
 ]
 
 { #category : #accessing }

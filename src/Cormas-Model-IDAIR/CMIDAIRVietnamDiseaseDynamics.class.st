@@ -118,7 +118,7 @@ CMIDAIRVietnamDiseaseDynamics >> beHospitalized [
 ]
 
 { #category : #transitioning }
-CMIDAIRVietnamDiseaseDynamics >> beSusceptive [
+CMIDAIRVietnamDiseaseDynamics >> beSusceptible [
 
 	^ CMIDAIRVietnamDiseaseS newFrom: self
 ]
@@ -184,7 +184,7 @@ CMIDAIRVietnamDiseaseDynamics >> isRecovered [
 ]
 
 { #category : #testing }
-CMIDAIRVietnamDiseaseDynamics >> isSusceptive [
+CMIDAIRVietnamDiseaseDynamics >> isSusceptible [
 
 	^ false
 ]

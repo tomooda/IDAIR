@@ -79,7 +79,7 @@ CMIDAIRSEIRExposed >> isRecovered [
 ]
 
 { #category : #testing }
-CMIDAIRSEIRExposed >> isSusceptive [
+CMIDAIRSEIRExposed >> isSusceptible [
 
 	^ false
 ]

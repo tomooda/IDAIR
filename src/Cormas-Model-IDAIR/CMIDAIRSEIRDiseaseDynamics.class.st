@@ -11,7 +11,7 @@ Class {
 CMIDAIRSEIRDiseaseDynamics class >> colors [
 
 	^ OrderedDictionary new
-		  at: 'susceptive' put: Color green;
+		  at: 'susceptible' put: Color green;
 		  at: 'exposed' put: Color yellow;
 		  at: 'ill' put: Color red;
 		  at: 'hospitalized' put: Color gray;
@@ -51,9 +51,9 @@ CMIDAIRSEIRDiseaseDynamics >> beHospitalized [
 ]
 
 { #category : #actions }
-CMIDAIRSEIRDiseaseDynamics >> beSusceptive [
+CMIDAIRSEIRDiseaseDynamics >> beSusceptible [
 
-	^ CMIDAIRSEIRSusceptive newFrom: self
+	^ CMIDAIRSEIRSusceptible newFrom: self
 ]
 
 { #category : #accessing }

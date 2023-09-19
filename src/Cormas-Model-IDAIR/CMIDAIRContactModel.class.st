@@ -56,12 +56,12 @@ CMIDAIRContactModel >> numberOfCitizensInICU [
 ]
 
 { #category : #'accessing-population' }
-CMIDAIRContactModel >> numberOfSusceptive [
+CMIDAIRContactModel >> numberOfSusceptible [
 
 	| num |
 	num := 0.
 	self cormasModel theCitizens do: [ :citizen | 
-		citizen isSusceptive ifTrue: [ num := num + 1 ] ].
+		citizen isSusceptible ifTrue: [ num := num + 1 ] ].
 	^ num
 ]
 
@@ -101,7 +101,7 @@ CMIDAIRContactModel >> step: anInteger [
 			      max: 0.0) * totalBeta / numberOfCitizensInCommunity
 		     * self daysPerStep.
 		self cormasModel theCitizens do: [ :citizen | 
-			(citizen isSusceptive and: [ 
+			(citizen isSusceptible and: [ 
 				 self random <= (self probabilityForCitizen: citizen prior: p) ]) 
 				ifTrue: [ citizen beExposed ] ] ]
 ]

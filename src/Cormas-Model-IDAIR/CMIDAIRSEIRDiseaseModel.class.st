@@ -50,7 +50,7 @@ CMIDAIRSEIRDiseaseModel >> beta_ill: aNumber [
 { #category : #defaults }
 CMIDAIRSEIRDiseaseModel >> defaultDiseaseDynamicsClass [
 
-	^ CMIDAIRSEIRSusceptive
+	^ CMIDAIRSEIRSusceptible
 ]
 
 { #category : #initialization }

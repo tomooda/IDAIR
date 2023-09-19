@@ -55,7 +55,7 @@ CMIDAIRDiseaseDynamics >> beHospitalized [
 ]
 
 { #category : #testing }
-CMIDAIRDiseaseDynamics >> beSusceptive [
+CMIDAIRDiseaseDynamics >> beSusceptible [
 
 	^ self subclassResponsibility
 ]
@@ -151,7 +151,7 @@ CMIDAIRDiseaseDynamics >> isRecovered [
 ]
 
 { #category : #testing }
-CMIDAIRDiseaseDynamics >> isSusceptive [
+CMIDAIRDiseaseDynamics >> isSusceptible [
 
 	^ self subclassResponsibility
 ]
