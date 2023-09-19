@@ -10,7 +10,9 @@ Class {
 		'tau_mild',
 		'tau_severe',
 		'tau_recovering',
-		'tau_recovered'
+		'tau_recovered',
+		'p_severe',
+		'p_dead'
 	],
 	#category : #'Cormas-Model-IDAIR-Disease-SEIR'
 }
@@ -34,6 +36,8 @@ CMIDAIRSEIRDiseaseModelPresenter class >> defaultSpec [
 				   add: #tau_mild width: 100;
 				   add: '  spread ' expand: false;
 				   add: #beta_mild width: 100;
+				   add: '  p_worsen / day ' expand: false;
+				   add: #p_severe width: 100;
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
@@ -42,6 +46,8 @@ CMIDAIRSEIRDiseaseModelPresenter class >> defaultSpec [
 				   add: #tau_severe width: 100;
 				   add: '  spread ' expand: false;
 				   add: #beta_severe width: 100;
+				   add: '  p_dead / day ' expand: false;
+				   add: #p_dead width: 100;
 				   yourself)
 		  expand: false;
 		  add: (SpBoxLayout newHorizontal
@@ -113,7 +119,17 @@ CMIDAIRSEIRDiseaseModelPresenter >> initializePresenters [
 		                 whenNumberChangedDo: [ :value | 
 			                 self model ifNotNil: [ :m | 
 					                 m tau_recovered: value ] ];
-		                 yourself
+		                 yourself.
+	p_severe := self newNumberInput
+		            beFloat;
+		            whenNumberChangedDo: [ :value | 
+			            self model ifNotNil: [ :m | m p_severe value ] ];
+		            yourself.
+	p_dead := self newNumberInput
+		          beFloat;
+		          whenNumberChangedDo: [ :value | 
+			          self model ifNotNil: [ :m | m p_dead value ] ];
+		          yourself
 ]
 
 { #category : #initialization }
@@ -124,8 +140,12 @@ CMIDAIRSEIRDiseaseModelPresenter >> modelChanged [
 		beta_exposed number: m beta_exposed.
 		beta_mild number: m beta_mild.
 		beta_severe number: m beta_severe.
+		beta_recovering number: m beta_recovering.
 		tau_exposed number: m tau_exposed.
+		tau_recovering number: m tau_recovering.
 		tau_mild number: m tau_mild.
 		tau_severe number: m tau_severe.
-		tau_recovered number: m tau_recovered ]
+		tau_recovered number: m tau_recovered.
+		p_severe number: m p_severe.
+		p_dead number: m p_dead ]
 ]

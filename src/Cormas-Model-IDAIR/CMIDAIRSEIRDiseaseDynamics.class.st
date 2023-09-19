@@ -13,7 +13,9 @@ CMIDAIRSEIRDiseaseDynamics class >> colors [
 	^ OrderedDictionary new
 		  at: 'susceptible' put: Color green;
 		  at: 'exposed' put: Color yellow;
-		  at: 'ill' put: Color red;
+		  at: 'mild' put: (Color red mixed: 0.5 with: Color yellow);
+		  at: 'severe' put: Color red;
+		  at: 'recovering' put: (Color red mixed: 0.5 with: Color blue);
 		  at: 'hospitalized' put: Color gray;
 		  at: 'recovered' put: Color blue;
 		  at: 'dead' put: Color black;
@@ -48,6 +50,18 @@ CMIDAIRSEIRDiseaseDynamics >> beExposed [
 CMIDAIRSEIRDiseaseDynamics >> beHospitalized [
 
 	^ self
+]
+
+{ #category : #actions }
+CMIDAIRSEIRDiseaseDynamics >> beMildSymptom [
+
+	^ CMIDAIRSEIRMildSymptom newFrom: self
+]
+
+{ #category : #actions }
+CMIDAIRSEIRDiseaseDynamics >> beSevereSymptom [
+
+	^ CMIDAIRSEIRSevereSymptom newFrom: self
 ]
 
 { #category : #actions }

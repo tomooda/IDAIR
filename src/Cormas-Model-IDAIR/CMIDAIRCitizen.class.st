@@ -42,6 +42,18 @@ CMIDAIRCitizen >> beHospitalized [
 ]
 
 { #category : #'transitioning-disease' }
+CMIDAIRCitizen >> beMildSymptom [
+
+	self diseaseDynamics: self diseaseDynamics beMildSymptom
+]
+
+{ #category : #'transitioning-disease' }
+CMIDAIRCitizen >> beSevereSymptom [
+
+	self diseaseDynamics: self diseaseDynamics beSevereSymptom
+]
+
+{ #category : #'transitioning-disease' }
 CMIDAIRCitizen >> beSusceptible [
 
 	self diseaseDynamics: self diseaseDynamics beSusceptible

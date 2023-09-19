@@ -3,6 +3,7 @@ Class {
 	#superclass : #SpPresenterWithModel,
 	#instVars : [
 		'notebook',
+		'citizensChart',
 		'chart',
 		'daysField',
 		'daysLabel',
@@ -41,7 +42,8 @@ CMIDAIRRPGPresenter >> initializePresenters [
 		            addPage: (self newNotebookPage
 				             title: 'Play';
 				             presenterProvider: [ 
-					             actionPresenter := CMIDAIRRPGActionPresenter on: self model ];
+					             actionPresenter := CMIDAIRRPGActionPresenter on:
+							                                self model ];
 				             yourself);
 		            addPage: (self newNotebookPage
 				             title: 'Population chart';
@@ -54,7 +56,14 @@ CMIDAIRRPGPresenter >> initializePresenters [
 					             chart optionsPresenter probesMinMaxOptionsPresenter
 						             fixMaxCheckPresenter state: true.
 					             chart ];
-				             yourself).
+				             yourself);
+		            addPage: (self newNotebookPage
+				             title: 'Players status chart';
+				             presenterProvider: [ 
+					             citizensChart := CMIDAIRRPGPlayersChartPresenter 
+						                              on: self model ];
+				             yourself);
+		            yourself.
 	daysLabel := self newLabel
 		             label: '0.0';
 		             yourself.
@@ -117,6 +126,7 @@ CMIDAIRRPGPresenter >> runSimulation [
 			daysLabel label: (model cormasModel timeStep * model daysPerStep 
 					 printShowingDecimalPlaces: 2).
 			chart ifNotNil: [ chart newMaxX: model cormasModel timeStep ].
+			citizensChart ifNotNil: [ citizensChart refresh ].
 			actionPresenter ifNotNil: #clearRound ] ]
 ]
 

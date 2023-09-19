@@ -10,7 +10,9 @@ Class {
 		'tau_mild',
 		'tau_severe',
 		'tau_recovering',
-		'tau_recovered'
+		'tau_recovered',
+		'p_severe',
+		'p_dead'
 	],
 	#category : #'Cormas-Model-IDAIR-Disease-SEIR'
 }
@@ -92,7 +94,33 @@ CMIDAIRSEIRDiseaseModel >> initialize [
 	tau_mild := 10.0.
 	tau_severe := 20.0.
 	tau_recovering := 5.0.
-	tau_recovered := 100.0
+	tau_recovered := 100.0.
+	p_severe := 0.01.
+	p_dead := 0.01
+]
+
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseModel >> p_dead [
+
+	^ p_dead
+]
+
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseModel >> p_dead: aNumber [
+
+	^ p_dead := aNumber
+]
+
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseModel >> p_severe [
+
+	^ p_severe
+]
+
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseModel >> p_severe: aNumber [
+
+	p_severe := aNumber
 ]
 
 { #category : #accessing }

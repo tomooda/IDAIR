@@ -53,7 +53,7 @@ CMIDAIRSEIRIll >> isDead [
 { #category : #testing }
 CMIDAIRSEIRIll >> isHospitalized [
 
-	^ hospitalized
+	^ hospitalized ifNil: [ hospitalized := true ]
 ]
 
 { #category : #testing }
@@ -102,16 +102,4 @@ CMIDAIRSEIRIll >> isSymptomatic [
 CMIDAIRSEIRIll >> isTransmissible [
 
 	^ true
-]
-
-{ #category : #accessing }
-CMIDAIRSEIRIll >> name [
-
-	^ 'ill'
-]
-
-{ #category : #accessing }
-CMIDAIRSEIRIll >> next [
-
-	^ CMIDAIRSEIRRecovered newFrom: self
 ]

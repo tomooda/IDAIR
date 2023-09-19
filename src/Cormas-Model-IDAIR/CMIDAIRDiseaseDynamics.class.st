@@ -54,6 +54,18 @@ CMIDAIRDiseaseDynamics >> beHospitalized [
 	^ self subclassResponsibility
 ]
 
+{ #category : #actions }
+CMIDAIRDiseaseDynamics >> beMildSymptom [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #actions }
+CMIDAIRDiseaseDynamics >> beSevereSymptom [
+
+	^ self subclassResponsibility
+]
+
 { #category : #testing }
 CMIDAIRDiseaseDynamics >> beSusceptible [
 
