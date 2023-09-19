@@ -72,7 +72,7 @@ CMIDAIRRPGContactProfile >> initialize [
 	immuneFactor := 1.0.
 	actionFactor := 1.0.
 	actionName := ''.
-	wellbeingPoints := 0
+	wellbeingPoints := 20
 ]
 
 { #category : #testing }
