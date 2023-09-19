@@ -40,7 +40,9 @@ CMIDAIRDiseaseModel >> initializers [
 	^ { 
 		  ('Susceptible' -> [ :citizen | citizen beSusceptible ]).
 		  ('Exposed' -> [ :citizen | citizen beExposed ]).
-		  ('Asymptomatic' -> [ :citizen | citizen beAsymptomatic ]).
+		  ('Mild' -> [ :citizen | citizen beMildSymptom ]).
+		  ('Severe' -> [ :citizen | citizen beSevereSymptom ]).
+		  ('Recovered' -> [ :citizen | citizen beRecovered ]).
 		  ('Dead' -> [ :citizen | citizen beDead ]) }
 ]
 
