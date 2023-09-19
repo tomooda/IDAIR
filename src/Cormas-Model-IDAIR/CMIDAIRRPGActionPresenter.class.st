@@ -76,18 +76,6 @@ CMIDAIRRPGActionPresenter >> citizen [
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> citizenPlay: aString factor: aNumberOrSymbol [
-
-	self citizen ifNotNil: [ :citizen | 
-		citizen contactProfile actionName: aString.
-		aNumberOrSymbol isSymbol
-			ifTrue: [ citizen contactProfile perform: aNumberOrSymbol asSymbol ]
-			ifFalse: [ 
-			citizen contactProfile actionFactor: aNumberOrSymbol asFloat ].
-		playerList refresh ]
-]
-
-{ #category : #operations }
 CMIDAIRRPGActionPresenter >> citizenPlay: aString factor: aNumberOrSymbol wellbeing: anInteger [
 
 	self citizen ifNotNil: [ :citizen | 
@@ -221,7 +209,10 @@ CMIDAIRRPGActionPresenter >> modelChanged [
 CMIDAIRRPGActionPresenter >> playCitizenActionNo [
 
 	citizenActionList selectedItem ifNotNil: [ :assoc | 
-		self citizenPlay: assoc key, ' - NO' factor: assoc value second ]
+		self
+			citizenPlay: assoc key , ' - NO'
+			factor: assoc value second
+			wellbeing: assoc value third negated ]
 ]
 
 { #category : #operations }
