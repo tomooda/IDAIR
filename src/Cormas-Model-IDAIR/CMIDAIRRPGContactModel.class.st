@@ -66,13 +66,12 @@ CMIDAIRRPGContactModel >> defaultCitizenActionsAndFactors [
 		  at: 'Bring family to the hospital' put: #( 1.0 1.0 5);
 		  at: 'Go to school' put: #( 1.0 0.5 5);
 		  at: 'Field trip' put: #( 0.5 1.0 5);
-		  at: 'Communication by talking' put: #( 1.5 1.0 5);
+		  at: 'Face to face chat' put: #( 1.5 1.0 5);
 		  at: 'Shopping' put: #( 1.5 0.8 5);
 		  at: 'Regular health checkup' put: #( 1.0 1.0 5);
 		  at: 'Getting monthly medication' put: #( 1.0 1.0 5);
 		  at: 'Seek health care' put: #( 1.0 1.0 5);
 		  at: 'Getting facemask to wear' put: #( 0.5 1.0 0);
-		  "at: 'Getting vaccinated' put: #( #beVaccinated 1.0 0);"
 		  yourself
 ]
 
