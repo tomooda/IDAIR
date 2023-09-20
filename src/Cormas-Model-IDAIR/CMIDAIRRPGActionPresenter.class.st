@@ -3,7 +3,6 @@ Class {
 	#superclass : #SpPresenterWithModel,
 	#instVars : [
 		'playerList',
-		'barChart',
 		'citizenActionList',
 		'policyMakerActionList',
 		'citizenActionYesButton',
@@ -35,13 +34,12 @@ CMIDAIRRPGActionPresenter class >> defaultSpec [
 									    add: #citizenActionNoButton;
 									    yourself)
 							   expand: false))
-			 width: 400;
-			 add: ' ' asPresenter width: 20;
-			 add: #barChart width: 100).
+			 width: 350;
+			 add: ' ' asPresenter width: 20).
 
 	policyMakerSpec := SpBoxLayout newVertical
 		                   add: (SpBoxLayout newHorizontal
-				                    add: 'Policy Maker''s Actions' asPresenter
+				                    add: 'Policymaker''s Actions' asPresenter
 				                    width: 200)
 		                   height: self labelHeight + 5;
 		                   yourself.
@@ -152,19 +150,12 @@ CMIDAIRRPGActionPresenter >> initializePresenters [
 			              ((SpStringTableColumn
 				                title: 'name'
 				                evaluated: [ :assoc | assoc key ]) width: 140);
-		              addColumn: ((SpStringTableColumn
-				                title: 'well-being'
-				                evaluated: [ :assoc | 
-					                assoc value contactProfile wellbeingPoints
-						                printString ]) width: 70);
 		              addColumn: (SpStringTableColumn
 				               title: 'action'
 				               evaluated: [ :assoc | 
 					               assoc value contactProfile actionName ]);
 		              whenSelectionChangedDo: [ self playerChanged ];
 		              yourself.
-	barChart := self newRoassal script: [ :canvas | 
-		            self drawBarChart: canvas ].
 	citizenActionList := self newList
 		                     display: [ :assoc | assoc key ];
 		                     yourself.
@@ -196,9 +187,6 @@ CMIDAIRRPGActionPresenter >> initializeWindow: aSpWindowPresenter [
 CMIDAIRRPGActionPresenter >> modelChanged [
 
 	super modelChanged.
-	self model cormasModel projectAnnouncer
-		when: CMTimeChangedAnnouncement
-		do: [ :announcement | barChart refresh ].
 	self
 		updatePlayerList;
 		updateCitizenActionList;
@@ -235,7 +223,7 @@ CMIDAIRRPGActionPresenter >> playPolicyMakerAction [
 { #category : #updating }
 CMIDAIRRPGActionPresenter >> playerChanged [
 
-	barChart refresh
+	
 ]
 
 { #category : #accessing }
