@@ -245,15 +245,17 @@ CMIDAIRRPGActionPresenter >> playerName [
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> policyMakerPlay: aNumberOrSymbol [
+CMIDAIRRPGActionPresenter >> policyMakerPlay: anArrayOfNumberOrSymbol [
 
 	self model ifNotNil: [ :contactModel | 
-		aNumberOrSymbol isSymbol
-			ifTrue: [ contactModel perform: aNumberOrSymbol asSymbol ]
+		anArrayOfNumberOrSymbol isSymbol
+			ifTrue: [ contactModel perform: anArrayOfNumberOrSymbol asSymbol ]
 			ifFalse: [ 
 				self askEffectiveRate ifNotNil: [ :rate | 
-					contactModel socialProfile factor:
-						aNumberOrSymbol asFloat ** rate ] ] ]
+					contactModel socialProfile transientFactor:
+						anArrayOfNumberOrSymbol first asFloat ** rate.
+					contactModel socialProfile multiplyCummulativeFactor:
+						anArrayOfNumberOrSymbol second asFloat ** rate ] ] ]
 ]
 
 { #category : #api }

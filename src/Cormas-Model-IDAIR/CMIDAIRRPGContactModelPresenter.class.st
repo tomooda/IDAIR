@@ -66,23 +66,39 @@ CMIDAIRRPGContactModelPresenter >> defaultSpec [
 		                   add: (SpBoxLayout newHorizontal
 				                    add: 'Policy Maker''s Action' asPresenter
 				                    width: 200;
-				                    add: 'Factor' asPresenter width: 100)
+				                    add: 'Transient factor' asPresenter
+				                    width: 100;
+				                    add: 'Cummulative factor' asPresenter
+				                    width: 100)
 		                   height: self class labelHeight + 5;
 		                   yourself.
-	self model policyMakerActionsAndFactorsDo: [ :action :factor | 
+	self model policyMakerActionsAndFactorsDo: [ :action :factors | 
 		policyMakerSpec
 			add: (SpBoxLayout newHorizontal
 					 add: action asString asPresenter width: 200;
-					 add: (factor isSymbol
-							  ifTrue: [ factor asString asPresenter ]
+					 add: (factors isSymbol
+							  ifTrue: [ factors asString asPresenter ]
 							  ifFalse: [ 
 								  self newNumberInput
 									  beFloat;
-									  number: factor;
+									  number: factors first;
 									  climbRate: 0.1;
 									  whenNumberChangedDo: [ :value | 
-										  self model policyMakerActionsAndFactors
-											  at: action
+										  (self model policyMakerActionsAndFactors at: action)
+											  at: 1
+											  put: value ];
+									  yourself ])
+					 width: 100;
+					 add: (factors isSymbol
+							  ifTrue: [ '-' asPresenter ]
+							  ifFalse: [ 
+								  self newNumberInput
+									  beFloat;
+									  number: factors second;
+									  climbRate: 0.1;
+									  whenNumberChangedDo: [ :value | 
+										  (self model policyMakerActionsAndFactors at: action)
+											  at: 2
 											  put: value ];
 									  yourself ])
 					 width: 100;
