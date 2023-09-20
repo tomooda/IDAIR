@@ -53,7 +53,7 @@ CMIDAIRSEIRIll >> isDead [
 { #category : #testing }
 CMIDAIRSEIRIll >> isHospitalized [
 
-	^ hospitalized ifNil: [ hospitalized := true ]
+	^ hospitalized ifNil: [ hospitalized := false ]
 ]
 
 { #category : #testing }

@@ -12,7 +12,12 @@ Class {
 		'tau_recovering',
 		'tau_recovered',
 		'p_severe',
-		'p_dead'
+		'p_dead',
+		'numberOfNewMild',
+		'numberOfNewSevere',
+		'numberOfNewRecovering',
+		'numberOfNewRecovered',
+		'numberOfNewDead'
 	],
 	#category : #'Cormas-Model-IDAIR-Disease-SEIR'
 }
@@ -82,6 +87,36 @@ CMIDAIRSEIRDiseaseModel >> defaultDiseaseDynamicsClass [
 	^ CMIDAIRSEIRSusceptible
 ]
 
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseModel >> incrementNewDead [
+
+	numberOfNewDead := numberOfNewDead + 1
+]
+
+{ #category : #counting }
+CMIDAIRSEIRDiseaseModel >> incrementNewMild [
+
+	numberOfNewMild := numberOfNewMild + 1
+]
+
+{ #category : #counting }
+CMIDAIRSEIRDiseaseModel >> incrementNewRecovered [
+
+	numberOfNewRecovered := numberOfNewRecovered + 1
+]
+
+{ #category : #counting }
+CMIDAIRSEIRDiseaseModel >> incrementNewRecovering [
+
+	numberOfNewRecovering := numberOfNewRecovering + 1
+]
+
+{ #category : #counting }
+CMIDAIRSEIRDiseaseModel >> incrementNewSevere [
+
+	numberOfNewSevere := numberOfNewSevere + 1
+]
+
 { #category : #initialization }
 CMIDAIRSEIRDiseaseModel >> initialize [
 
@@ -96,7 +131,43 @@ CMIDAIRSEIRDiseaseModel >> initialize [
 	tau_recovering := 5.0.
 	tau_recovered := 100.0.
 	p_severe := 0.01.
-	p_dead := 0.01
+	p_dead := 0.01.
+	self initializeRound
+]
+
+{ #category : #initialization }
+CMIDAIRSEIRDiseaseModel >> initializeRound [
+
+	super initializeRound.
+	numberOfNewMild := 0.
+	numberOfNewSevere := 0.
+	numberOfNewRecovering := 0.
+	numberOfNewRecovered := 0.
+	numberOfNewDead := 0
+]
+
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseModel >> numberOfNewMild [
+
+	^ numberOfNewMild
+]
+
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseModel >> numberOfNewRecovered [
+
+	^ numberOfNewRecovered
+]
+
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseModel >> numberOfNewRecovering [
+
+	^ numberOfNewRecovering
+]
+
+{ #category : #accessing }
+CMIDAIRSEIRDiseaseModel >> numberOfNewSevere [
+
+	^ numberOfNewSevere
 ]
 
 { #category : #accessing }

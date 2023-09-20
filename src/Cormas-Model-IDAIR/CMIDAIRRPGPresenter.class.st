@@ -110,6 +110,9 @@ CMIDAIRRPGPresenter >> retrieveSpec: aSelector [
 CMIDAIRRPGPresenter >> runSimulation [
 
 	self model ifNotNil: [ :model | 
+		model cormasModel
+			submodelAt: #disease
+			do: [ :diseaseModel | diseaseModel initializeRound ].
 		daysField number ifNotNil: [ :days | 
 			'Simulating...'
 				displayProgressFrom: 0

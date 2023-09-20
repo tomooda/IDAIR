@@ -4,6 +4,15 @@ Class {
 	#category : #'Cormas-Model-IDAIR-Disease-SEIR'
 }
 
+{ #category : #'instance creation' }
+CMIDAIRSEIRDead class >> newFrom: aCMIDAIRSEIRDiseaseDynamics [
+
+	aCMIDAIRSEIRDiseaseDynamics citizen cormasModel
+		submodelAt: #disease
+		do: [ :diseaseModel | diseaseModel incrementNewDead ].
+	^ super newFrom: aCMIDAIRSEIRDiseaseDynamics
+]
+
 { #category : #accessing }
 CMIDAIRSEIRDead >> beta [
 

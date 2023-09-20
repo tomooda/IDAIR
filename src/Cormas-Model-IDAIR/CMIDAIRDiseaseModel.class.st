@@ -34,6 +34,10 @@ CMIDAIRDiseaseModel >> init [
 	
 ]
 
+{ #category : #control }
+CMIDAIRDiseaseModel >> initializeRound [
+]
+
 { #category : #accessing }
 CMIDAIRDiseaseModel >> initializers [
 
