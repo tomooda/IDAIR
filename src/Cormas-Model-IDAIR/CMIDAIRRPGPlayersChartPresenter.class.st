@@ -116,6 +116,13 @@ CMIDAIRRPGPlayersChartPresenter >> initializePresenters [
 		                yourself
 ]
 
+{ #category : #initialization }
+CMIDAIRRPGPlayersChartPresenter >> modelChanged [
+
+	super modelChanged.
+	self updateNewPatients
+]
+
 { #category : #enumerating }
 CMIDAIRRPGPlayersChartPresenter >> playersDo: aBlock [
 
@@ -128,6 +135,12 @@ CMIDAIRRPGPlayersChartPresenter >> playersDo: aBlock [
 CMIDAIRRPGPlayersChartPresenter >> refresh [
 
 	roassal refresh.
+	self updateNewPatients
+]
+
+{ #category : #initialization }
+CMIDAIRRPGPlayersChartPresenter >> updateNewPatients [
+
 	self model cormasModel submodelAt: #disease do: [ :diseaseModel | 
 		newMild number: diseaseModel numberOfNewMild.
 		newSevere number: diseaseModel numberOfNewSevere.
