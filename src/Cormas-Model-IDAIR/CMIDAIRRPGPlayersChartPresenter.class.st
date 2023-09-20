@@ -74,7 +74,9 @@ CMIDAIRRPGPlayersChartPresenter >> drawBarChart: aCanvas [
 					 integer;
 					 yourself);
 			addDecoration: (RSChartTitleDecoration new
-					 title: name;
+					 title:
+						 name , '(' , citizen contactProfile wellbeingPoints printString
+						 , ')';
 					 fontSize: 10).
 		aCanvas addShape: (RSComposite new shapes: chart build shapes) ].
 	RSHorizontalLineLayout on: aCanvas shapes.
