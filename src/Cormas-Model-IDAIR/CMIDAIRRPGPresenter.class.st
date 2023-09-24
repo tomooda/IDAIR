@@ -11,7 +11,7 @@ Class {
 		'settingsButton',
 		'actionPresenter'
 	],
-	#category : #'Cormas-Model-IDAIR-Contact-RPG'
+	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
 
 { #category : #specs }
@@ -110,6 +110,8 @@ CMIDAIRRPGPresenter >> retrieveSpec: aSelector [
 CMIDAIRRPGPresenter >> runSimulation [
 
 	self model ifNotNil: [ :model | 
+		model cormasModel theCitizens do: [ :citizen | 
+			citizen contactProfile executeAction ].
 		model cormasModel
 			submodelAt: #disease
 			do: [ :diseaseModel | diseaseModel initializeRound ].

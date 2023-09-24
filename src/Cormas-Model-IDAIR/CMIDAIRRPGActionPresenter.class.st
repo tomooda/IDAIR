@@ -9,7 +9,7 @@ Class {
 		'citizenActionNoButton',
 		'policyMakerActionButton'
 	],
-	#category : #'Cormas-Model-IDAIR-Contact-RPG'
+	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
 
 { #category : #specs }
@@ -74,16 +74,10 @@ CMIDAIRRPGActionPresenter >> citizen [
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> citizenPlay: aString factor: aNumberOrSymbol wellbeing: anInteger [
+CMIDAIRRPGActionPresenter >> citizenPlay: action [
 
 	self citizen ifNotNil: [ :citizen | 
-		citizen contactProfile
-			actionName: aString;
-			addToWellbeingPoints: anInteger.
-		aNumberOrSymbol isSymbol
-			ifTrue: [ citizen contactProfile perform: aNumberOrSymbol asSymbol ]
-			ifFalse: [ 
-			citizen contactProfile actionFactor: aNumberOrSymbol asFloat ].
+		citizen contactProfile action: action.
 		playerList refresh ]
 ]
 
@@ -157,7 +151,7 @@ CMIDAIRRPGActionPresenter >> initializePresenters [
 		              whenSelectionChangedDo: [ self playerChanged ];
 		              yourself.
 	citizenActionList := self newList
-		                     display: [ :assoc | assoc key ];
+		                     display: [ :assoc | assoc name ];
 		                     yourself.
 	citizenActionYesButton := self newButton
 		                          label: 'YES';
@@ -196,21 +190,15 @@ CMIDAIRRPGActionPresenter >> modelChanged [
 { #category : #operations }
 CMIDAIRRPGActionPresenter >> playCitizenActionNo [
 
-	citizenActionList selectedItem ifNotNil: [ :assoc | 
-		self
-			citizenPlay: assoc key , ' - NO'
-			factor: assoc value second
-			wellbeing: assoc value third negated ]
+	citizenActionList selectedItem ifNotNil: [ :action | 
+		self citizenPlay: action forNo ]
 ]
 
 { #category : #operations }
 CMIDAIRRPGActionPresenter >> playCitizenActionYes [
 
-	citizenActionList selectedItem ifNotNil: [ :assoc | 
-		self
-			citizenPlay: assoc key , ' - YES'
-			factor: assoc value first
-			wellbeing: assoc value third ]
+	citizenActionList selectedItem ifNotNil: [ :action | 
+		self citizenPlay: action forYes ]
 ]
 
 { #category : #operations }
@@ -263,8 +251,7 @@ CMIDAIRRPGActionPresenter >> title [
 { #category : #updating }
 CMIDAIRRPGActionPresenter >> updateCitizenActionList [
 
-	citizenActionList items:
-		self model citizenActionsAndFactors associations
+	citizenActionList items: CMIDAIRRPGCitizenAction all
 ]
 
 { #category : #updating }
