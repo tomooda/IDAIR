@@ -16,6 +16,12 @@ CMIDAIRRPGAction class >> name: aString [
 ]
 
 { #category : #accessing }
+CMIDAIRRPGAction >> actionName [
+
+	^ name
+]
+
+{ #category : #accessing }
 CMIDAIRRPGAction >> name [
 
 	^ name
@@ -25,6 +31,12 @@ CMIDAIRRPGAction >> name [
 CMIDAIRRPGAction >> name: aString [
 
 	name := aString
+]
+
+{ #category : #accessing }
+CMIDAIRRPGAction >> postfix [
+
+	^ ''
 ]
 
 { #category : #accessing }

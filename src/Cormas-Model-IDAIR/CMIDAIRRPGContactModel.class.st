@@ -3,9 +3,9 @@ Class {
 	#superclass : #CMIDAIRContactModel,
 	#instVars : [
 		'socialProfile',
-		'citizenActionsAndFactors',
-		'policyMakerActionsAndFactors',
-		'players'
+		'players',
+		'citizenActions',
+		'policymakerActions'
 	],
 	#category : #'Cormas-Model-IDAIR-Contact-RPG'
 }
@@ -31,15 +31,15 @@ CMIDAIRRPGContactModel >> asPresenter [
 ]
 
 { #category : #accessing }
-CMIDAIRRPGContactModel >> citizenActionsAndFactors [
+CMIDAIRRPGContactModel >> citizenActions [
 
-	^ citizenActionsAndFactors
+	^ citizenActions
 ]
 
 { #category : #enumerating }
-CMIDAIRRPGContactModel >> citizenActionsAndFactorsDo: aBlock [
+CMIDAIRRPGContactModel >> citizenActionsDo: aBlock [
 
-	citizenActionsAndFactors keysAndValuesDo: aBlock
+	citizenActions do: aBlock
 ]
 
 { #category : #actions }
@@ -51,28 +51,9 @@ CMIDAIRRPGContactModel >> clearRound [
 ]
 
 { #category : #defaults }
-CMIDAIRRPGContactModel >> defaultCitizenActionsAndFactors [
+CMIDAIRRPGContactModel >> defaultCitizenActions [
 
-	^ OrderedDictionary new
-		  at: 'Go to a bar' put: #( 2.5 1.0 15);
-		  at: 'Go to a wedding' put: #( 2.5 1.0 15);
-		  at: 'Go to a ceremony' put: #( 2.5 1.0 10);
-		  at: 'Go to the hospital' put: #( 1.5 1.0 5);
-		  at: 'Earn a living' put: #( 1.5 1.0 15);
-		  at: 'Buy basic living necessities' put: #( 1.5 1.0 15);
-		  at: 'Business trip' put: #( 2.0 1.0 10);
-		  at: 'Travel abroad to study' put: #( 2.0 1.0 5);
-		  at: 'Work out at a gym' put: #( 1.5 1.0 5);
-		  at: 'Bring family to the hospital' put: #( 1.5 1.0 5);
-		  at: 'Go to school' put: #( 1.0 1.0 5);
-		  at: 'Field trip' put: #( 1.0 1.0 5);
-		  at: 'Face to face chat' put: #( 2.0 1.0 5);
-		  at: 'Shopping' put: #( 2.0 1.0 5);
-		  at: 'Regular health checkup' put: #( 1.5 1.0 5);
-		  at: 'Getting monthly medication' put: #( 1.5 1.0 5);
-		  at: 'Seek health care' put: #( 1.5 1.0 5);
-		  at: 'Getting facemask to wear' put: #( 0.5 1.0 0);
-		  yourself
+	^ CMIDAIRRPGCitizenAction all
 ]
 
 { #category : #'accessing-contact' }
@@ -82,23 +63,9 @@ CMIDAIRRPGContactModel >> defaultContactProfileClass [
 ]
 
 { #category : #defaults }
-CMIDAIRRPGContactModel >> defaultPolicyMakerActionsAndFactors [
+CMIDAIRRPGContactModel >> defaultPolicymakerActions [
 
-	^ OrderedDictionary new
-		  at: 'Wear a facemask' put: { 0.8. 1.0 };
-		  at: 'Issue treatment guideline' put: { 1.0. 0.8 };
-		  at: 'Vaccination to 25% people' put: { 1.0. 0.75 };
-		  at: 'Vaccination to 50% people' put: { 1.0. 0.5 };
-		  at: 'Vaccination to 75% people' put: { 1.0. 0.25 };
-		  at: 'Vaccination to 100% people' put: { 1.0. 0.01 };
-		  at: 'Close the border' put: { 0.7. 1.0 };
-		  at: 'Social distancing level 1' put: { 0.9. 1.0 };
-		  at: 'Social distancing level 2' put: { 0.8. 1.0 };
-		  at: 'Social distancing level 3' put: { 0.75. 1.0 };
-		  at: 'Social distancing level 4' put: { 0.7. 1.0 };
-		  at: 'Social distancing level 5' put: { 0.65. 1.0 };
-		  at: 'Lockdown' put: { 0.5. 1.0 };
-		  yourself
+	^ CMIDAIRRPGPolicymakerAction all
 ]
 
 { #category : #'initialize-release' }
@@ -112,8 +79,8 @@ CMIDAIRRPGContactModel >> initialize [
 
 	super initialize.
 	socialProfile := CMIDAIRRPGSocialProfile new.
-	citizenActionsAndFactors := self defaultCitizenActionsAndFactors.
-	policyMakerActionsAndFactors := self defaultPolicyMakerActionsAndFactors.
+	citizenActions := self defaultCitizenActions.
+	policymakerActions := self defaultPolicymakerActions.
 	players := OrderedDictionary new
 ]
 
@@ -142,15 +109,15 @@ CMIDAIRRPGContactModel >> players [
 ]
 
 { #category : #accessing }
-CMIDAIRRPGContactModel >> policyMakerActionsAndFactors [
+CMIDAIRRPGContactModel >> policymakerActions [
 
-	^ policyMakerActionsAndFactors
+	^ policymakerActions
 ]
 
 { #category : #enumerating }
-CMIDAIRRPGContactModel >> policyMakerActionsAndFactorsDo: aBlock [
+CMIDAIRRPGContactModel >> policymakerActionsDo: aBlock [
 
-	policyMakerActionsAndFactors keysAndValuesDo: aBlock
+	policymakerActions do: aBlock
 ]
 
 { #category : #accessing }

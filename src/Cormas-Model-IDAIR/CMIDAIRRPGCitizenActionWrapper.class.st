@@ -14,6 +14,12 @@ CMIDAIRRPGCitizenActionWrapper class >> on: aCMIDAIRRPGCitizenAction [
 ]
 
 { #category : #accessing }
+CMIDAIRRPGCitizenActionWrapper >> actionName [
+
+	^ citizenAction name
+]
+
+{ #category : #accessing }
 CMIDAIRRPGCitizenActionWrapper >> citizenAction [
 
 	^ citizenAction

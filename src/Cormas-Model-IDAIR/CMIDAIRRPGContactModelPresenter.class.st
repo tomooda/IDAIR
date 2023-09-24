@@ -12,51 +12,28 @@ CMIDAIRRPGContactModelPresenter >> defaultSpec [
 	citizenSpec := SpBoxLayout newVertical
 		               add: (SpBoxLayout newHorizontal
 				                add: 'Citizen''s Action' asPresenter width: 200;
-				                add: 'YES' asPresenter width: 100;
-				                add: 'NO' asPresenter width: 100)
+				                add: 'Personal contact factor' asPresenter
+				                width: 100;
+				                add: 'Well-being points' asPresenter width: 100)
 		               height: self class labelHeight + 5;
 		               yourself.
-	self model citizenActionsAndFactorsDo: [ :action :factors | 
+	self model citizenActionsDo: [ :action | 
 		citizenSpec
 			add: (SpBoxLayout newHorizontal
-					 add: action asString asPresenter width: 200;
-					 add: (factors first isSymbol
-							  ifTrue: [ factors first asString asPresenter ]
-							  ifFalse: [ 
-								  self newNumberInput
-									  beFloat;
-									  number: factors first;
-									  climbRate: 0.1;
-									  whenNumberChangedDo: [ :value | 
-										  self model citizenActionsAndFactors at: action put: { 
-													  value.
-													  (self model citizenActionsAndFactors at: action) second.
-													  (self model citizenActionsAndFactors at: action) third } ];
-									  yourself ])
-					 width: 100;
-					 add: (factors second isSymbol
-							  ifTrue: [ factors second asString asPresenter ]
-							  ifFalse: [ 
-								  self newNumberInput
-									  beFloat;
-									  number: factors second;
-									  climbRate: 0.1;
-									  whenNumberChangedDo: [ :value | 
-										  self model citizenActionsAndFactors at: action put: { 
-													  (self model citizenActionsAndFactors at: action) first.
-													  value.
-													  (self model citizenActionsAndFactors at: action) third } ];
-									  yourself ])
+					 add: action name asPresenter width: 200;
+					 add: (self newNumberInput
+							  beFloat;
+							  number: action contactFactor;
+							  climbRate: 0.1;
+							  whenNumberChangedDo: [ :value | action contactFactor: value ];
+							  yourself)
 					 width: 100;
 					 add: (self newNumberInput
 							  beInteger;
-							  number: factors third;
+							  number: action wellbeingPoints;
 							  climbRate: 1;
 							  whenNumberChangedDo: [ :value | 
-								  self model citizenActionsAndFactors at: action put: { 
-											  (self model citizenActionsAndFactors at: action) first.
-											  (self model citizenActionsAndFactors at: action) second.
-											  value } ];
+								  action wellbeingPoints: value ];
 							  yourself)
 					 width: 100;
 					 yourself)
@@ -72,35 +49,25 @@ CMIDAIRRPGContactModelPresenter >> defaultSpec [
 				                    width: 100)
 		                   height: self class labelHeight + 5;
 		                   yourself.
-	self model policyMakerActionsAndFactorsDo: [ :action :factors | 
+	self model policymakerActionsDo: [ :action | 
 		policyMakerSpec
 			add: (SpBoxLayout newHorizontal
-					 add: action asString asPresenter width: 200;
-					 add: (factors isSymbol
-							  ifTrue: [ factors asString asPresenter ]
-							  ifFalse: [ 
-								  self newNumberInput
-									  beFloat;
-									  number: factors first;
-									  climbRate: 0.1;
-									  whenNumberChangedDo: [ :value | 
-										  (self model policyMakerActionsAndFactors at: action)
-											  at: 1
-											  put: value ];
-									  yourself ])
+					 add: action name asPresenter width: 200;
+					 add: (self newNumberInput
+							  beFloat;
+							  number: action transientFactor;
+							  climbRate: 0.1;
+							  whenNumberChangedDo: [ :value | 
+								  action transientFactor: value ];
+							  yourself)
 					 width: 100;
-					 add: (factors isSymbol
-							  ifTrue: [ '-' asPresenter ]
-							  ifFalse: [ 
-								  self newNumberInput
-									  beFloat;
-									  number: factors second;
-									  climbRate: 0.1;
-									  whenNumberChangedDo: [ :value | 
-										  (self model policyMakerActionsAndFactors at: action)
-											  at: 2
-											  put: value ];
-									  yourself ])
+					 add: (self newNumberInput
+							  beFloat;
+							  number: action cummulativeFactor;
+							  climbRate: 0.1;
+							  whenNumberChangedDo: [ :value | 
+								  action cummulativeFactor: value ];
+							  yourself)
 					 width: 100;
 					 yourself)
 			expand: false ].

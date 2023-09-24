@@ -38,7 +38,13 @@ CMIDAIRRPGContactProfile >> actionFactor: aNumber [
 { #category : #accessing }
 CMIDAIRRPGContactProfile >> actionName [
 
-	^ action ifNotNil: #name ifNil: [ '' ]
+	^ action ifNotNil: #actionName ifNil: [ '' ]
+]
+
+{ #category : #accessing }
+CMIDAIRRPGContactProfile >> actionPostfix [
+
+	^ action ifNotNil: #postfix ifNil: [ '' ]
 ]
 
 { #category : #accessing }

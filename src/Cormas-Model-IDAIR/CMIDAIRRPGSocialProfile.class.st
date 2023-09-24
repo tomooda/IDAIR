@@ -3,21 +3,35 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'transientFactor',
-		'cummulativeFactor'
+		'cummulativeFactor',
+		'action'
 	],
 	#category : #'Cormas-Model-IDAIR-Contact-RPG'
 }
 
 { #category : #accessing }
+CMIDAIRRPGSocialProfile >> action: aCMIDAIRPolicymakerAction [
+
+	action := aCMIDAIRPolicymakerAction
+]
+
+{ #category : #accessing }
 CMIDAIRRPGSocialProfile >> clearRound [
 
-	transientFactor := 1.0
+	transientFactor := 1.0.
+	action := nil
 ]
 
 { #category : #accessing }
 CMIDAIRRPGSocialProfile >> cummulativeFactor [
 
 	^ cummulativeFactor
+]
+
+{ #category : #operations }
+CMIDAIRRPGSocialProfile >> executeAction [
+
+	action ifNotNil: [ action execute: self ]
 ]
 
 { #category : #accessing }
