@@ -33,6 +33,30 @@ CMIDAIRRPGLocationModel >> baseColorFor: aCMIDAIRLocation [
 	^ color
 ]
 
+{ #category : #private }
+CMIDAIRRPGLocationModel >> computeHospitalRectangles [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #private }
+CMIDAIRRPGLocationModel >> computeSuburbanRectangles [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #private }
+CMIDAIRRPGLocationModel >> computeUrbanRectangles [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #'class access' }
+CMIDAIRRPGLocationModel >> defaultLocationDynamicsClass [
+
+	^ CMIDAIRRPGLocationDynamics
+]
+
 { #category : #accessing }
 CMIDAIRRPGLocationModel >> extent [
 
@@ -52,10 +76,38 @@ CMIDAIRRPGLocationModel >> hospitalColor: aColor [
 	hospitalColor := aColor
 ]
 
+{ #category : #accessing }
+CMIDAIRRPGLocationModel >> hospitalRectangles [
+
+	^ hospitalRectangles ifNil: [ 
+		  hospitalRectangles := self computeHospitalRectangles ]
+]
+
 { #category : #enumerating }
 CMIDAIRRPGLocationModel >> hospitalRectanglesDo: aBlock [
 
 	^ self subclassResponsibility
+]
+
+{ #category : #initialization }
+CMIDAIRRPGLocationModel >> initialize [
+
+	super initialize.
+	urbanColor := Color blue mixed: 0.2 with: Color white.
+	suburbanColor := Color green mixed: 0.2 with: Color white.
+	hospitalColor := Color red mixed: 0.1 with: Color white
+]
+
+{ #category : #accessing }
+CMIDAIRRPGLocationModel >> rectangleForDesignator: aSymbol player: aCMIDAIRCitizen [
+
+	| index |
+	index := aCMIDAIRCitizen contactProfile playerIndex.
+	index = 0 ifTrue: [ index := 6 atRandom ].
+	aSymbol = #urban ifTrue: [ ^ self urbanRectangles at: index ].
+	aSymbol = #suburban ifTrue: [ ^ self suburbanRectangles at: index ].
+	aSymbol = #hospital ifTrue: [ ^ self hospitalRectangles at: index ].
+	^ nil
 ]
 
 { #category : #enumerating }
@@ -82,6 +134,13 @@ CMIDAIRRPGLocationModel >> suburbanColor: aColor [
 	suburbanColor := aColor
 ]
 
+{ #category : #accessing }
+CMIDAIRRPGLocationModel >> suburbanRectangles [
+
+	^ suburbanRectangles ifNil: [ 
+		  suburbanRectangles := self computeSuburbanRectangles ]
+]
+
 { #category : #enumerating }
 CMIDAIRRPGLocationModel >> suburbanRectanglesDo: aBlock [
 
@@ -98,6 +157,11 @@ CMIDAIRRPGLocationModel >> urbanColor [
 CMIDAIRRPGLocationModel >> urbanColor: aColor [
 
 	urbanColor := aColor
+]
+
+{ #category : #accessing }
+CMIDAIRRPGLocationModel >> urbanRectangles [
+	^ urbanRectangles ifNil: [ urbanRectangles := self computeUrbanRectangles ]
 ]
 
 { #category : #enumerating }

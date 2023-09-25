@@ -14,6 +14,12 @@ CMIDAIRLocation >> baseColor [
 ]
 
 { #category : #'accessing-colors' }
+CMIDAIRLocation >> color [
+
+	^ self baseColor
+]
+
+{ #category : #'accessing-colors' }
 CMIDAIRLocation >> createBaseColor [
 
 	self cormasModel
@@ -22,10 +28,29 @@ CMIDAIRLocation >> createBaseColor [
 	^ Color white
 ]
 
+{ #category : #pov }
+CMIDAIRLocation >> defaultPov [
+
+	<pov>
+	^ self baseColor
+]
+
 { #category : #testing }
 CMIDAIRLocation >> hasInfected [
 
 	^ (self occupants: CMIDAIRCitizen) anySatisfy: #isInfected
+]
+
+{ #category : #accessing }
+CMIDAIRLocation >> infectionRate [
+
+	| total infected |
+	total := 0.
+	infected := 0.
+	(self occupants: CMIDAIRCitizen) do: [ :citizen | 
+		citizen isInfected ifTrue: [ infected := infected + 1 ].
+		total := total + 1 ].
+	^ infected asFloat / total asFloat
 ]
 
 { #category : #initialization }
@@ -33,6 +58,16 @@ CMIDAIRLocation >> initialize [
 
 	super initialize.
 	
+]
+
+{ #category : #accessing }
+CMIDAIRLocation >> numberOfInfected [
+
+	| infected |
+	infected := 0.
+	(self occupants: CMIDAIRCitizen) do: [ :citizen | 
+		citizen isInfected ifTrue: [ infected := infected + 1 ] ].
+	^ infected
 ]
 
 { #category : #pov }

@@ -5,7 +5,8 @@ Class {
 		'diseaseDynamics',
 		'contactProfile',
 		'resourceDynamics',
-		'home'
+		'home',
+		'locationDynamics'
 	],
 	#category : #'Cormas-Model-IDAIR-Core'
 }
@@ -84,6 +85,12 @@ CMIDAIRCitizen >> contactProfile: aCMIDAIRContactProfile [
 		self changed ]
 ]
 
+{ #category : #accessing }
+CMIDAIRCitizen >> coordinates: aPoint [
+
+	
+]
+
 { #category : #events }
 CMIDAIRCitizen >> deadAction [
 
@@ -100,6 +107,12 @@ CMIDAIRCitizen >> defaultContactProfileClass [
 CMIDAIRCitizen >> defaultDiseaseDynamicsClass [
 
 	^ self cormasModel defaultDiseaseDynamicsClass
+]
+
+{ #category : #'accessing-location' }
+CMIDAIRCitizen >> defaultLocationDynamicsClass [
+
+	^ self cormasModel defaultLocationDynamicsClass
 ]
 
 { #category : #'accessing-resource' }
@@ -221,6 +234,19 @@ CMIDAIRCitizen >> isSymptomatic [
 CMIDAIRCitizen >> isTransmissible [
 
 	^ self diseaseDynamics isTransmissible
+]
+
+{ #category : #'accessing-location' }
+CMIDAIRCitizen >> locationDynamics [
+
+	^ locationDynamics ifNil: [ 
+		  locationDynamics := self defaultLocationDynamicsClass on: self ]
+]
+
+{ #category : #'accessing-location' }
+CMIDAIRCitizen >> locationDynamics: aCMIDAIRLocationDynamics [
+
+	locationDynamics := aCMIDAIRLocationDynamics
 ]
 
 { #category : #pov }

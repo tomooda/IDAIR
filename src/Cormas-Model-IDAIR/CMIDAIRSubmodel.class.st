@@ -91,7 +91,7 @@ CMIDAIRSubmodel >> random [
 { #category : #control }
 CMIDAIRSubmodel >> step: anInteger [
 
-	^ self subclassResponsibility
+
 ]
 
 { #category : #accessing }

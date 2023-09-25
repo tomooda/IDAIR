@@ -204,6 +204,14 @@ CMIDAIRModel >> defaultDiseaseDynamicsClass [
 		  do: [ :diseaseModel | diseaseModel defaultDiseaseDynamicsClass ]
 ]
 
+{ #category : #defaults }
+CMIDAIRModel >> defaultLocationDynamicsClass [
+
+	^ self
+		  submodelAt: #location
+		  do: [ :locationModel | locationModel defaultLocationDynamicsClass ]
+]
+
 { #category : #'user interfaces' }
 CMIDAIRModel >> ifGUI: aBlock [
 
@@ -214,14 +222,17 @@ CMIDAIRModel >> ifGUI: aBlock [
 CMIDAIRModel >> init [
 
 	self
-		createGridLines: 20
-		columns: 20
+		createGridLines: 12
+		columns: 12
 		neighbourhood: 8
 		closed: false.
 	initializer ifNotNil: [ initializer value: self ].
-	self
-		displayPov: #defaultPov of: CMIDAIRLocation;
+"	self
+		displayPov: #pov of: CMIDAIRLocation;
 		displayPov: #diseasePov of: CMIDAIRCitizen.
+	self halt.
+	CMR3SpacePresenter openFor: self projectManager.
+	self projectAnnouncer announce: CMSChangePoVAnnouncement new"
 	"self createN: 1000 randomlyLocatedEntities: CMIDAIRCitizen.
 	1 to: 10 do: [ :index | (self theCitizens at: index) beAsymptomatic ]"
 ]
@@ -301,6 +312,7 @@ CMIDAIRModel >> loadDefaultSubmodels [
 
 	self addSubmodel: (CMIDAIRSEIRDiseaseModel on: self).
 	self addSubmodel: (CMIDAIRRPGContactModel on: self).
+	self addSubmodel: (CMIDAIRRPGLocationModelFor6 on: self).
 	self addSubmodel: (CMIDAIRMobiResourceModel on: self).
 	self addSubmodel: (CMIDAIRSimpleTimeModel on: self)
 ]

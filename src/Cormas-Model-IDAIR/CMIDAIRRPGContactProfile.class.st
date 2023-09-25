@@ -119,6 +119,15 @@ CMIDAIRRPGContactProfile >> player: aCMIDAIRCitizen [
 ]
 
 { #category : #accessing }
+CMIDAIRRPGContactProfile >> playerIndex [
+
+	self citizen cormasModel
+		submodelAt: #contact
+		do: [ :contactModel | ^ contactModel playerIndexOf: citizen ].
+	^ 0
+]
+
+{ #category : #accessing }
 CMIDAIRRPGContactProfile >> probabilityFromPrior: aNumber [
 
 	^ aNumber * immuneFactor * actionFactor

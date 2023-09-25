@@ -63,7 +63,12 @@ CMIDAIRRPGPresenter >> initializePresenters [
 					             citizensChart := CMIDAIRRPGPlayersChartPresenter 
 						                              on: self model ];
 				             yourself);
-		            yourself.
+		            addPage: (self newNotebookPage
+				             title: 'Map';
+				             presenterProvider: [ 
+					             map := CMIDAIRRPGMapPresenter on:
+							                    self model cormasModel ];
+				             yourself) yourself.
 	daysLabel := self newLabel
 		             label: '0.0';
 		             yourself.

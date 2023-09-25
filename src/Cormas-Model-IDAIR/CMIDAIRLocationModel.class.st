@@ -22,6 +22,12 @@ CMIDAIRLocationModel >> baseColorFor: aCMIDAIRLocation [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'class access' }
+CMIDAIRLocationModel >> defaultLocationDynamicsClass [
+
+	^ self subclassResponsibility
+]
+
 { #category : #'initialize-release' }
 CMIDAIRLocationModel >> init [
 

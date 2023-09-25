@@ -51,6 +51,12 @@ CMIDAIRRPGMuppetContactProfile >> player: aCMIDAIRCitizen [
 ]
 
 { #category : #accessing }
+CMIDAIRRPGMuppetContactProfile >> playerIndex [
+
+	^ player contactProfile playerIndex
+]
+
+{ #category : #accessing }
 CMIDAIRRPGMuppetContactProfile >> probabilityFromPrior: aNumber [
 
 	| context |
