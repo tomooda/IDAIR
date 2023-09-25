@@ -12,7 +12,20 @@ CMIDAIRRPGMuppetContactProfile >> actionFactor: aNumber [
 ]
 
 { #category : #accessing }
+CMIDAIRRPGMuppetContactProfile >> addToWellbeingPoints: anInteger [
+
+	
+]
+
+{ #category : #accessing }
 CMIDAIRRPGMuppetContactProfile >> clearRound [
+]
+
+{ #category : #actions }
+CMIDAIRRPGMuppetContactProfile >> executeAction [
+
+	player contactProfile action ifNotNil: [ :action | 
+		action execute: self citizen ]
 ]
 
 { #category : #accessing }
@@ -35,6 +48,12 @@ CMIDAIRRPGMuppetContactProfile >> player [
 CMIDAIRRPGMuppetContactProfile >> player: aCMIDAIRCitizen [
 
 	player := aCMIDAIRCitizen
+]
+
+{ #category : #accessing }
+CMIDAIRRPGMuppetContactProfile >> playerIndex [
+
+	^ player contactProfile playerIndex
 ]
 
 { #category : #accessing }

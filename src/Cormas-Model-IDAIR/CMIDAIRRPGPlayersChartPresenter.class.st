@@ -9,7 +9,7 @@ Class {
 		'newRecovered',
 		'newDead'
 	],
-	#category : #'Cormas-Model-IDAIR-Contact-RPG'
+	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
 
 { #category : #specs }

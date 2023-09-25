@@ -9,9 +9,10 @@ Class {
 		'daysLabel',
 		'runButton',
 		'settingsButton',
-		'actionPresenter'
+		'actionPresenter',
+		'map'
 	],
-	#category : #'Cormas-Model-IDAIR-Contact-RPG'
+	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
 
 { #category : #specs }
@@ -63,7 +64,12 @@ CMIDAIRRPGPresenter >> initializePresenters [
 					             citizensChart := CMIDAIRRPGPlayersChartPresenter 
 						                              on: self model ];
 				             yourself);
-		            yourself.
+		            addPage: (self newNotebookPage
+				             title: 'Map';
+				             presenterProvider: [ 
+					             map := CMIDAIRRPGMapPresenter on:
+							                    self model cormasModel ];
+				             yourself) yourself.
 	daysLabel := self newLabel
 		             label: '0.0';
 		             yourself.
@@ -110,6 +116,8 @@ CMIDAIRRPGPresenter >> retrieveSpec: aSelector [
 CMIDAIRRPGPresenter >> runSimulation [
 
 	self model ifNotNil: [ :model | 
+		model cormasModel theCitizens do: [ :citizen | 
+			citizen contactProfile executeAction ].
 		model cormasModel
 			submodelAt: #disease
 			do: [ :diseaseModel | diseaseModel initializeRound ].
@@ -129,7 +137,8 @@ CMIDAIRRPGPresenter >> runSimulation [
 			daysLabel label: (model cormasModel timeStep * model daysPerStep 
 					 printShowingDecimalPlaces: 2).
 			chart ifNotNil: [ chart newMaxX: model cormasModel timeStep ].
-			citizensChart ifNotNil: [ citizensChart refresh ].
+			citizensChart ifNotNil: #refresh.
+			map ifNotNil: #refresh.
 			actionPresenter ifNotNil: #clearRound ] ]
 ]
 

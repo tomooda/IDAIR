@@ -9,7 +9,7 @@ Class {
 		'citizenActionNoButton',
 		'policyMakerActionButton'
 	],
-	#category : #'Cormas-Model-IDAIR-Contact-RPG'
+	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
 
 { #category : #specs }
@@ -74,16 +74,10 @@ CMIDAIRRPGActionPresenter >> citizen [
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> citizenPlay: aString factor: aNumberOrSymbol wellbeing: anInteger [
+CMIDAIRRPGActionPresenter >> citizenPlay: action [
 
 	self citizen ifNotNil: [ :citizen | 
-		citizen contactProfile
-			actionName: aString;
-			addToWellbeingPoints: anInteger.
-		aNumberOrSymbol isSymbol
-			ifTrue: [ citizen contactProfile perform: aNumberOrSymbol asSymbol ]
-			ifFalse: [ 
-			citizen contactProfile actionFactor: aNumberOrSymbol asFloat ].
+		citizen contactProfile action: action.
 		playerList refresh ]
 ]
 
@@ -150,14 +144,24 @@ CMIDAIRRPGActionPresenter >> initializePresenters [
 			              ((SpStringTableColumn
 				                title: 'name'
 				                evaluated: [ :assoc | assoc key ]) width: 140);
+		              addColumn: ((SpStringTableColumn
+				                title: 'wbp'
+				                evaluated: [ :assoc | 
+					                assoc value contactProfile wellbeingPoints
+						                printString ]) width: 80);
 		              addColumn: (SpStringTableColumn
 				               title: 'action'
 				               evaluated: [ :assoc | 
 					               assoc value contactProfile actionName ]);
+		              addColumn: ((SpStringTableColumn
+				                title: ''
+				                evaluated: [ :assoc | 
+					                assoc value contactProfile actionPostfix ]) 
+				               width: 50);
 		              whenSelectionChangedDo: [ self playerChanged ];
 		              yourself.
 	citizenActionList := self newList
-		                     display: [ :assoc | assoc key ];
+		                     display: [ :assoc | assoc name ];
 		                     yourself.
 	citizenActionYesButton := self newButton
 		                          label: 'YES';
@@ -168,11 +172,11 @@ CMIDAIRRPGActionPresenter >> initializePresenters [
 		                         action: [ self playCitizenActionNo ];
 		                         yourself.
 	policyMakerActionList := self newList
-		                         display: [ :assoc | assoc key ];
+		                         display: [ :action | action name ];
 		                         yourself.
 	policyMakerActionButton := self newButton
 		                           label: 'YES';
-		                           action: [ self playPolicyMakerAction ];
+		                           action: [ self playPolicymakerAction ];
 		                           yourself
 ]
 
@@ -196,28 +200,22 @@ CMIDAIRRPGActionPresenter >> modelChanged [
 { #category : #operations }
 CMIDAIRRPGActionPresenter >> playCitizenActionNo [
 
-	citizenActionList selectedItem ifNotNil: [ :assoc | 
-		self
-			citizenPlay: assoc key , ' - NO'
-			factor: assoc value second
-			wellbeing: assoc value third negated ]
+	citizenActionList selectedItem ifNotNil: [ :action | 
+		self citizenPlay: action forNo ]
 ]
 
 { #category : #operations }
 CMIDAIRRPGActionPresenter >> playCitizenActionYes [
 
-	citizenActionList selectedItem ifNotNil: [ :assoc | 
-		self
-			citizenPlay: assoc key , ' - YES'
-			factor: assoc value first
-			wellbeing: assoc value third ]
+	citizenActionList selectedItem ifNotNil: [ :action | 
+		self citizenPlay: action forYes ]
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> playPolicyMakerAction [
+CMIDAIRRPGActionPresenter >> playPolicymakerAction [
 
-	policyMakerActionList selectedItem ifNotNil: [ :assoc | 
-		self policyMakerPlay: assoc value ]
+	policyMakerActionList selectedItem ifNotNil: [ :action | 
+		self policymakerPlay: action ]
 ]
 
 { #category : #updating }
@@ -233,7 +231,7 @@ CMIDAIRRPGActionPresenter >> playerName [
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> policyMakerPlay: anArrayOfNumberOrSymbol [
+CMIDAIRRPGActionPresenter >> policymakerPlay: anArrayOfNumberOrSymbol [
 
 	self model ifNotNil: [ :contactModel | 
 		anArrayOfNumberOrSymbol isSymbol
@@ -263,8 +261,7 @@ CMIDAIRRPGActionPresenter >> title [
 { #category : #updating }
 CMIDAIRRPGActionPresenter >> updateCitizenActionList [
 
-	citizenActionList items:
-		self model citizenActionsAndFactors associations
+	citizenActionList items: self model citizenActions
 ]
 
 { #category : #updating }
@@ -279,5 +276,5 @@ CMIDAIRRPGActionPresenter >> updatePlayerList [
 CMIDAIRRPGActionPresenter >> updatePolicyMakerActionList [
 
 	policyMakerActionList items:
-		self model policyMakerActionsAndFactors associations
+		self model policymakerActions
 ]

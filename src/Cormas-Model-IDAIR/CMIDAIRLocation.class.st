@@ -2,15 +2,37 @@ Class {
 	#name : #CMIDAIRLocation,
 	#superclass : #CMSpatialEntityElement,
 	#instVars : [
-		'visited'
+		'baseColor'
 	],
 	#category : #'Cormas-Model-IDAIR-Core'
 }
 
-{ #category : #accessing }
-CMIDAIRLocation >> clearVisited [
+{ #category : #'accessing-colors' }
+CMIDAIRLocation >> baseColor [
 
-	visited := false
+	^ baseColor ifNil: [ baseColor := self createBaseColor ]
+]
+
+{ #category : #'accessing-colors' }
+CMIDAIRLocation >> color [
+
+	^ self baseColor
+]
+
+{ #category : #'accessing-colors' }
+CMIDAIRLocation >> createBaseColor [
+
+	self cormasModel
+		submodelAt: #location
+		do: [ :locationModel | ^ locationModel baseColorFor: self ].
+	^ Color white
+]
+
+{ #category : #pov }
+CMIDAIRLocation >> defaultPov [
+
+	<pov>
+	^ self baseColor
 ]
 
 { #category : #testing }
@@ -20,73 +42,43 @@ CMIDAIRLocation >> hasInfected [
 ]
 
 { #category : #accessing }
-CMIDAIRLocation >> homeColor [
+CMIDAIRLocation >> infectionRate [
 
-	^ Color white
-]
-
-{ #category : #accessing }
-CMIDAIRLocation >> hospitalColor [
-
-	^ Color red mixed: 0.05 with: Color white
-]
-
-{ #category : #controlling }
-CMIDAIRLocation >> ifHome: aBlock [
-
-	self isHome ifTrue: aBlock
-]
-
-{ #category : #controlling }
-CMIDAIRLocation >> ifHospital: aBlock [
-
-	self isHospital ifTrue: aBlock
+	| total infected |
+	total := 0.
+	infected := 0.
+	(self occupants: CMIDAIRCitizen) do: [ :citizen | 
+		citizen isInfected ifTrue: [ infected := infected + 1 ].
+		total := total + 1 ].
+	^ infected asFloat / total asFloat
 ]
 
 { #category : #initialization }
 CMIDAIRLocation >> initialize [
 
 	super initialize.
-	visited := false
-]
-
-{ #category : #testing }
-CMIDAIRLocation >> isHome [
-
-	^ self isHospital not
-]
-
-{ #category : #testing }
-CMIDAIRLocation >> isHospital [
-
-	^ self numCol > self spaceModel line
+	
 ]
 
 { #category : #accessing }
-CMIDAIRLocation >> isVisited [
+CMIDAIRLocation >> numberOfInfected [
 
-	^ visited
+	| infected |
+	infected := 0.
+	(self occupants: CMIDAIRCitizen) do: [ :citizen | 
+		citizen isInfected ifTrue: [ infected := infected + 1 ] ].
+	^ infected
 ]
 
 { #category : #pov }
 CMIDAIRLocation >> pov [
 
 	<pov>
-	self ifHospital: [ ^ self hospitalColor ].
-	self hasInfected ifTrue: [ ^ Color red alpha: 0.2 ].
-	self isVisited ifTrue: [ 
-		^ Color blue alpha: 0.2 ].
-	^ Color white
+	^ self defaultPov
 ]
 
 { #category : #enumerating }
 CMIDAIRLocation >> residentsDo: aBlock [
 
 	^ self subclassResponsibility
-]
-
-{ #category : #accessing }
-CMIDAIRLocation >> setVisited [
-
-	visited := true
 ]

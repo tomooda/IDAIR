@@ -4,11 +4,24 @@ Class {
 	#instVars : [
 		'immuneFactor',
 		'actionFactor',
+		'action',
 		'actionName',
 		'wellbeingPoints'
 	],
 	#category : #'Cormas-Model-IDAIR-Contact-RPG'
 }
+
+{ #category : #accessing }
+CMIDAIRRPGContactProfile >> action [
+
+	^ action
+]
+
+{ #category : #accessing }
+CMIDAIRRPGContactProfile >> action: aCMIDAIRRPGCitizenAction [
+
+	action := aCMIDAIRRPGCitizenAction
+]
 
 { #category : #accessing }
 CMIDAIRRPGContactProfile >> actionFactor [
@@ -25,13 +38,13 @@ CMIDAIRRPGContactProfile >> actionFactor: aNumber [
 { #category : #accessing }
 CMIDAIRRPGContactProfile >> actionName [
 
-	^ actionName
+	^ action ifNotNil: #actionName ifNil: [ '' ]
 ]
 
 { #category : #accessing }
-CMIDAIRRPGContactProfile >> actionName: aString [
+CMIDAIRRPGContactProfile >> actionPostfix [
 
-	actionName := aString
+	^ action ifNotNil: #postfix ifNil: [ '' ]
 ]
 
 { #category : #accessing }
@@ -50,7 +63,13 @@ CMIDAIRRPGContactProfile >> beVaccinated [
 CMIDAIRRPGContactProfile >> clearRound [
 
 	actionFactor := 1.0.
-	actionName := ''
+	action := nil
+]
+
+{ #category : #operatoins }
+CMIDAIRRPGContactProfile >> executeAction [
+
+	action ifNotNil: [ action execute: self citizen ]
 ]
 
 { #category : #accessing }
@@ -71,7 +90,6 @@ CMIDAIRRPGContactProfile >> initialize [
 	super initialize.
 	immuneFactor := 1.0.
 	actionFactor := 1.0.
-	actionName := ''.
 	wellbeingPoints := 20
 ]
 
@@ -98,6 +116,15 @@ CMIDAIRRPGContactProfile >> player: aCMIDAIRCitizen [
 		                 yourself.
 	citizen contactProfile: muppetProfile.
 	^ muppetProfile
+]
+
+{ #category : #accessing }
+CMIDAIRRPGContactProfile >> playerIndex [
+
+	self citizen cormasModel
+		submodelAt: #contact
+		do: [ :contactModel | ^ contactModel playerIndexOf: citizen ].
+	^ 0
 ]
 
 { #category : #accessing }
