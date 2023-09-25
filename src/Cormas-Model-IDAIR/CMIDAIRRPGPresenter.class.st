@@ -9,7 +9,8 @@ Class {
 		'daysLabel',
 		'runButton',
 		'settingsButton',
-		'actionPresenter'
+		'actionPresenter',
+		'map'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
@@ -116,6 +117,7 @@ CMIDAIRRPGPresenter >> runSimulation [
 
 	self model ifNotNil: [ :model | 
 		model cormasModel theCitizens do: [ :citizen | 
+			citizen locationDynamics finishMove.
 			citizen contactProfile executeAction ].
 		model cormasModel
 			submodelAt: #disease
@@ -136,7 +138,8 @@ CMIDAIRRPGPresenter >> runSimulation [
 			daysLabel label: (model cormasModel timeStep * model daysPerStep 
 					 printShowingDecimalPlaces: 2).
 			chart ifNotNil: [ chart newMaxX: model cormasModel timeStep ].
-			citizensChart ifNotNil: [ citizensChart refresh ].
+			citizensChart ifNotNil: #refresh.
+			map ifNotNil: #refresh.
 			actionPresenter ifNotNil: #clearRound ] ]
 ]
 

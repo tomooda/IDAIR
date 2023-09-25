@@ -4,7 +4,11 @@ Class {
 	#instVars : [
 		'urbanColor',
 		'suburbanColor',
-		'hospitalColor'
+		'hospitalColor',
+		'hospitalRectangles',
+		'suburbanRectangles',
+		'urbanRectangles',
+		'outRectangles'
 	],
 	#category : #'Cormas-Model-IDAIR-Location-RPG'
 }
@@ -19,22 +23,25 @@ CMIDAIRRPGLocationModel class >> submodelName [
 CMIDAIRRPGLocationModel >> baseColorFor: aCMIDAIRLocation [
 
 	| point color |
-	point := aCMIDAIRLocation center.
+	point := aCMIDAIRLocation coordinates.
 	color := Color white.
 	self urbanRectanglesDo: [ :rect | 
-		(rect containsPoint: point) ifTrue: [ 
-			color := self urbanColor mixed: 0.3 with: color ] ].
+		(rect containsPoint: point) ifTrue: [ color := self urbanColor ] ].
 	self suburbanRectanglesDo: [ :rect | 
-		(rect containsPoint: point) ifTrue: [ 
-			color := self suburbanColor mixed: 0.2 with: color ] ].
+		(rect containsPoint: point) ifTrue: [ color := self suburbanColor ] ].
 	self hospitalRectanglesDo: [ :rect | 
-		(rect containsPoint: point) ifTrue: [ 
-			color := self hospitalColor mixed: 0.2 with: color ] ].
+		(rect containsPoint: point) ifTrue: [ color := self hospitalColor ] ].
 	^ color
 ]
 
 { #category : #private }
 CMIDAIRRPGLocationModel >> computeHospitalRectangles [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #private }
+CMIDAIRRPGLocationModel >> computeOutRectangles [
 
 	^ self subclassResponsibility
 ]
@@ -86,16 +93,23 @@ CMIDAIRRPGLocationModel >> hospitalRectangles [
 { #category : #enumerating }
 CMIDAIRRPGLocationModel >> hospitalRectanglesDo: aBlock [
 
-	^ self subclassResponsibility
+	self hospitalRectangles do: aBlock
 ]
 
 { #category : #initialization }
 CMIDAIRRPGLocationModel >> initialize [
 
 	super initialize.
-	urbanColor := Color blue mixed: 0.2 with: Color white.
-	suburbanColor := Color green mixed: 0.2 with: Color white.
+	urbanColor := Color blue mixed: 0.1 with: Color white.
+	suburbanColor := Color green mixed: 0.1 with: Color white.
 	hospitalColor := Color red mixed: 0.1 with: Color white
+]
+
+{ #category : #accessing }
+CMIDAIRRPGLocationModel >> outRectangles [
+
+	^ outRectangles ifNil: [ 
+		  outRectangles := self computeOutRectangles ]
 ]
 
 { #category : #accessing }
@@ -107,7 +121,7 @@ CMIDAIRRPGLocationModel >> rectangleForDesignator: aSymbol player: aCMIDAIRCitiz
 	aSymbol = #urban ifTrue: [ ^ self urbanRectangles at: index ].
 	aSymbol = #suburban ifTrue: [ ^ self suburbanRectangles at: index ].
 	aSymbol = #hospital ifTrue: [ ^ self hospitalRectangles at: index ].
-	^ nil
+	^ self outRectangles at: index
 ]
 
 { #category : #enumerating }
@@ -144,7 +158,7 @@ CMIDAIRRPGLocationModel >> suburbanRectangles [
 { #category : #enumerating }
 CMIDAIRRPGLocationModel >> suburbanRectanglesDo: aBlock [
 
-	^ self subclassResponsibility
+	self suburbanRectangles do: aBlock
 ]
 
 { #category : #accessing }
@@ -161,11 +175,13 @@ CMIDAIRRPGLocationModel >> urbanColor: aColor [
 
 { #category : #accessing }
 CMIDAIRRPGLocationModel >> urbanRectangles [
-	^ urbanRectangles ifNil: [ urbanRectangles := self computeUrbanRectangles ]
+
+	^ urbanRectangles ifNil: [ 
+		  urbanRectangles := self computeUrbanRectangles ]
 ]
 
 { #category : #enumerating }
 CMIDAIRRPGLocationModel >> urbanRectanglesDo: aBlock [
 
-	^ self subclassResponsibility
+	self urbanRectangles do: aBlock
 ]

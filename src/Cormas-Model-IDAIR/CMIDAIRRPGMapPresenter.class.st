@@ -16,19 +16,33 @@ CMIDAIRRPGMapPresenter class >> defaultSpec [
 { #category : #drawing }
 CMIDAIRRPGMapPresenter >> drawMap: aCanvas [
 
-	aCanvas color: Color transparent.
+	| shapes |
+	aCanvas color: Color white.
 	self model theLocations do: [ :location | 
 		aCanvas addShape: (RSBox new
 				 position: location coordinates;
 				 color: location color;
 				 extent: 1 @ 1;
 				 yourself) ].
-	self model theCitizens do: [ :citizen | 
-		aCanvas addShape: (RSBox new
-				 position: citizen locationDynamics position;
-				 color: citizen diseaseDynamics color;
-				 extent: 0.1 @ 0.1;
-				 yourself) ].
+	shapes := self model theCitizens collect: [ :citizen | 
+		          RSCircle new
+			          position:
+				          (citizen locationDynamics oldPosition ifNil: [ 
+						           citizen locationDynamics position ]);
+			          color: citizen diseaseDynamics color;
+			          radius: 0.05;
+			          model: citizen;
+			          yourself ].
+	aCanvas addAll: shapes.
+
+
+	aCanvas newAnimation
+		duration: 1 second;
+		easing: RSEasingInterpolator backOut;
+		onStepDo: [ :t | 
+			shapes do: [ :shape | 
+					shape position: (shape model locationDynamics positionAtT: t) ] ].
+
 	RSZoomToFitCanvasInteraction new zoomToFitOnStart: aCanvas
 ]
 

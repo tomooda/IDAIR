@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'locationDesignators',
 		'rectangle',
-		'locationFactor'
+		'locationFactor',
+		'oldPosition'
 	],
 	#classVars : [
 		'RandomGenerator'
@@ -24,6 +25,12 @@ CMIDAIRRPGLocationDynamics class >> on: aCMIDAIRCitizen [
 CMIDAIRRPGLocationDynamics class >> randomGenerator [
 
 	^ RandomGenerator ifNil: [ RandomGenerator := Random new ]
+]
+
+{ #category : #accessing }
+CMIDAIRRPGLocationDynamics >> finishMove [
+
+	oldPosition := self position
 ]
 
 { #category : #initialization }
@@ -51,7 +58,7 @@ CMIDAIRRPGLocationDynamics >> locationFactor [
 
 	^ locationFactor ifNil: [ 
 		  | r x y |
-		  r := self random.
+		  r := self random sqrt.
 		  x := self random - 0.5 * r + 0.5.
 		  y := self random - 0.5 * r + 0.5.
 		  locationFactor := x @ y ]
@@ -61,6 +68,13 @@ CMIDAIRRPGLocationDynamics >> locationFactor [
 CMIDAIRRPGLocationDynamics >> locationFactor: aPoint [
 
 	locationFactor := aPoint
+]
+
+{ #category : #accessing }
+CMIDAIRRPGLocationDynamics >> oldPosition [
+
+	rectangle ifNil: [ self updatePosition ].
+	^ oldPosition
 ]
 
 { #category : #accessing }
@@ -81,6 +95,16 @@ CMIDAIRRPGLocationDynamics >> position [
 	rectangle ifNil: [ self updatePosition ].
 	^ self rectangle origin - (0.5 @ 0.5)
 	  + (self rectangle extent * self locationFactor)
+]
+
+{ #category : #accessing }
+CMIDAIRRPGLocationDynamics >> positionAtT: aNumber [
+
+	| t p0 v |
+	t := aNumber min: 1.0 max: 0.0.
+	p0 := self oldPosition.
+	v := self position - p0.
+	^ v * t + p0
 ]
 
 { #category : #accessing }
@@ -117,15 +141,16 @@ CMIDAIRRPGLocationDynamics >> updatePosition [
 		submodelAt: #location
 		do: [ :locationModel | 
 			rectangle ifNotNil: [ 
-				| oldPosition |
 				oldPosition := self position.
 				(locationDesignators anySatisfy: [ :designator | 
 					 (locationModel
 						  rectangleForDesignator: designator
-						  player: citizen) containsPoint: oldPosition ]) ifTrue: [ ^ self ] ].
+						  player: citizen) containsPoint: oldPosition ]) ifTrue: [ 
+					^ self ] ].
 			rectangle := locationModel
 				             rectangleForDesignator: locationDesignators atRandom
 				             player: citizen.
+			oldPosition ifNil: [ oldPosition := self position ].
 			citizen coordinates: self position floor ]
 ]
 

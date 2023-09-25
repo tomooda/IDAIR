@@ -42,7 +42,7 @@ CMIDAIRRPGCitizenAction class >> bringFamilyToHospital [
 		  contactFactor: 1.5
 		  wellbeingPoints: 5
 		  locationsForYes: { #hospital }
-		  locationsForNo: { #residential }
+		  locationsForNo: { #suburban }
 ]
 
 { #category : #constants }
@@ -53,7 +53,7 @@ CMIDAIRRPGCitizenAction class >> businessTrip [
 		  contactFactor: 2.0
 		  wellbeingPoints: 10
 		  locationsForYes: { #out }
-		  locationsForNo: { #residential . #business}
+		  locationsForNo: { #suburban . #urban}
 ]
 
 { #category : #constants }
@@ -63,8 +63,8 @@ CMIDAIRRPGCitizenAction class >> buyBasic [
 		  name: 'Buy basic living necessities'
 		  contactFactor: 1.5
 		  wellbeingPoints: 15
-		  locationsForYes: { #residential . #commercial }
-		  locationsForNo: { #residential }
+		  locationsForYes: { #suburban . #urban }
+		  locationsForNo: { #suburban }
 ]
 
 { #category : #constants }
@@ -74,8 +74,8 @@ CMIDAIRRPGCitizenAction class >> earnLiving [
 		  name: 'Earn a living'
 		  contactFactor: 1.5
 		  wellbeingPoints: 15
-		  locationsForYes: { #business }
-		  locationsForNo: { #residential }
+		  locationsForYes: { #urban }
+		  locationsForNo: { #suburban }
 ]
 
 { #category : #constants }
@@ -85,8 +85,8 @@ CMIDAIRRPGCitizenAction class >> faceToFace [
 		  name: 'Face to face chat'
 		  contactFactor: 2.0
 		  wellbeingPoints: 5
-		  locationsForYes: { #business . #commercial }
-		  locationsForNo: { #residential }
+		  locationsForYes: { #urban. #suburban }
+		  locationsForNo: { #urban. #suburban }
 ]
 
 { #category : #constants }
@@ -97,7 +97,7 @@ CMIDAIRRPGCitizenAction class >> fieldTrip [
 		  contactFactor: 1.0
 		  wellbeingPoints: 5
 		  locationsForYes: { #out }
-		  locationsForNo: { #residential }
+		  locationsForNo: { #urban. #suburban }
 ]
 
 { #category : #constants }
@@ -107,8 +107,8 @@ CMIDAIRRPGCitizenAction class >> gettingFacemask [
 		  name: 'Getting facemask to wear'
 		  contactFactor: 0.5
 		  wellbeingPoints: 5
-		  locationsForYes: { #commercial }
-		  locationsForNo: { #residential }
+		  locationsForYes: { #urban. #suburban }
+		  locationsForNo: { #urban. #suburban }
 ]
 
 { #category : #constants }
@@ -118,8 +118,8 @@ CMIDAIRRPGCitizenAction class >> gettingMonthlyMedication [
 		  name: 'Getting monthly medication'
 		  contactFactor: 1.5
 		  wellbeingPoints: 5
-		  locationsForYes: { #hospital . #commercial }
-		  locationsForNo: { #residential }
+		  locationsForYes: { #hospital . #urban . #suburban }
+		  locationsForNo: { #urban . #suburban }
 ]
 
 { #category : #constants }
@@ -129,8 +129,8 @@ CMIDAIRRPGCitizenAction class >> goToBar [
 		  name: 'Go to bar'
 		  contactFactor: 2.5
 		  wellbeingPoints: 15
-		  locationsForYes: { #commercial }
-		  locationsForNo: { #residential }
+		  locationsForYes: { #urban }
+		  locationsForNo: { #suburban }
 ]
 
 { #category : #constants }
@@ -140,8 +140,8 @@ CMIDAIRRPGCitizenAction class >> goToCeremony [
 		  name: 'Go to a ceremony'
 		  contactFactor: 2.5
 		  wellbeingPoints: 10
-		  locationsForYes: { #commercial }
-		  locationsForNo: { #residential }
+		  locationsForYes: { #urban }
+		  locationsForNo: { #suburban }
 ]
 
 { #category : #constants }
@@ -152,7 +152,7 @@ CMIDAIRRPGCitizenAction class >> goToHospital [
 		  contactFactor: 1.5
 		  wellbeingPoints: 5
 		  locationsForYes: { #hospital }
-		  locationsForNo: { #residential }
+		  locationsForNo: { #suburban }
 ]
 
 { #category : #constants }
@@ -162,8 +162,8 @@ CMIDAIRRPGCitizenAction class >> goToSchool [
 		  name: 'Go to school'
 		  contactFactor: 1.0
 		  wellbeingPoints: 5
-		  locationsForYes: { #residential }
-		  locationsForNo: { #residential }
+		  locationsForYes: { #suburban }
+		  locationsForNo: { #suburban }
 ]
 
 { #category : #constants }
@@ -173,8 +173,8 @@ CMIDAIRRPGCitizenAction class >> goToWedding [
 		  name: 'Go to a wedding'
 		  contactFactor: 2.5
 		  wellbeingPoints: 15
-		  locationsForYes: { #commercial }
-		  locationsForNo: { #residential }
+		  locationsForYes: { #urban }
+		  locationsForNo: { #suburban }
 ]
 
 { #category : #'instance creation' }
@@ -196,7 +196,7 @@ CMIDAIRRPGCitizenAction class >> regularHealthCheckup [
 		  contactFactor: 1.5
 		  wellbeingPoints: 5
 		  locationsForYes: { #hospital }
-		  locationsForNo: { #residential }
+		  locationsForNo: { #suburban . #urban }
 ]
 
 { #category : #constants }
@@ -207,7 +207,7 @@ CMIDAIRRPGCitizenAction class >> seekHealthcare [
 		  contactFactor: 1.5
 		  wellbeingPoints: 5
 		  locationsForYes: { #hospital  }
-		  locationsForNo: { #residential }
+		  locationsForNo: { #suburban }
 ]
 
 { #category : #constants }
@@ -217,8 +217,8 @@ CMIDAIRRPGCitizenAction class >> shopping [
 		  name: 'Shopping'
 		  contactFactor: 2.0
 		  wellbeingPoints: 5
-		  locationsForYes: { #commercial }
-		  locationsForNo: { #residential }
+		  locationsForYes: { #urban }
+		  locationsForNo: { #suburban }
 ]
 
 { #category : #constants }
@@ -229,7 +229,7 @@ CMIDAIRRPGCitizenAction class >> travelAbroad [
 		  contactFactor: 1.5
 		  wellbeingPoints: 15
 		  locationsForYes: { #out }
-		  locationsForNo: { #residential . #business}
+		  locationsForNo: { #suburban . #urban}
 ]
 
 { #category : #constants }
@@ -239,8 +239,8 @@ CMIDAIRRPGCitizenAction class >> workout [
 		  name: 'Work out at a gym'
 		  contactFactor: 1.5
 		  wellbeingPoints: 5
-		  locationsForYes: { #commercial }
-		  locationsForNo: { #residential }
+		  locationsForYes: { #urban }
+		  locationsForNo: { #suburban }
 ]
 
 { #category : #accessing }

@@ -33,20 +33,17 @@ CMIDAIRModelPresenter class >> defaultSpec [
 CMIDAIRModelPresenter class >> launch [
 
 	<example>
-	| cormasModel |
+	| cormasModel initializer |
 	cormasModel := CMIDAIRModel new
 		               loadDefaultSubmodels;
 		               yourself.
-	(CMIDAIRModelSubmodelsPresenter on: cormasModel) openDialogWithSpec 
-		okAction: [ 
-			| initializer |
-			(initializer := CMIDAIRModelInitializationPresenter on: cormasModel)
-				openDialogWithSpec okAction: [ 
-				cormasModel initializer: initializer.
-				cormasModel activeInit: #init.
-				cormasModel activeControl: #step:.
-				cormasModel initSimulation.
-				cormasModel openGUI ] ]
+	(initializer := CMIDAIRRPGInitializationPresenter on: cormasModel)
+		openDialogWithSpec okAction: [ 
+		cormasModel initializer: initializer.
+		cormasModel activeInit: #init.
+		cormasModel activeControl: #step:.
+		cormasModel initSimulation.
+		cormasModel openGUI ]
 ]
 
 { #category : #private }

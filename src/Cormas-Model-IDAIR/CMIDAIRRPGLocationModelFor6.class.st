@@ -21,6 +21,22 @@ CMIDAIRRPGLocationModelFor6 >> computeHospitalRectangles [
 ]
 
 { #category : #private }
+CMIDAIRRPGLocationModelFor6 >> computeOutRectangles [
+
+	| extent width height |
+	extent := self extent.
+	width := extent x / 3.
+	height := extent y / 3.
+	^ { 
+		  (width * 3 + 1 @ 1 extent: width / 2 @ height).
+		  (width * 3 + 1 @ 1 extent: width / 2 @ height).
+		  (width * 3 + 1 @ 1 extent: width / 2 @ height).
+		  (width * 3 + 1 @ 1 extent: width / 2 @ height).
+		  (width * 3 + 1 @ 1 extent: width / 2 @ height).
+		  (width * 3 + 1 @ 1 extent: width / 2 @ height) }
+]
+
+{ #category : #private }
 CMIDAIRRPGLocationModelFor6 >> computeSuburbanRectangles [
 
 	| extent width height |
@@ -50,11 +66,4 @@ CMIDAIRRPGLocationModelFor6 >> computeUrbanRectangles [
 		  (width + 1 @ (height + 1) extent: width @ height).
 		  (width + 1 @ (height + 1) extent: width @ height).
 		  (width + 1 @ (height + 1) extent: width @ height) }
-]
-
-{ #category : #enumerating }
-CMIDAIRRPGLocationModelFor6 >> hospitalRectanglesDo: aBlock [
-
-	^ self cormasModel spaceModel in: [ :space | 
-		  space column @ space line ]
 ]

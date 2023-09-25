@@ -42,7 +42,8 @@ CMIDAIRRPGCitizenActionWrapper >> execute: aCMIDAIRCitizen [
 
 	aCMIDAIRCitizen contactProfile
 		actionFactor: self contactFactor;
-		addToWellbeingPoints: self wellbeingPoints
+		addToWellbeingPoints: self wellbeingPoints.
+	aCMIDAIRCitizen locationDynamics locationDesignators: self locations
 ]
 
 { #category : #accessing }
