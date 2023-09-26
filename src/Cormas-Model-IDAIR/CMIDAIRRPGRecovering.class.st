@@ -1,11 +1,11 @@
 Class {
-	#name : #CMIDAIRSEIRRecovering,
-	#superclass : #CMIDAIRSEIRIll,
-	#category : #'Cormas-Model-IDAIR-Disease-SEIR'
+	#name : #CMIDAIRRPGRecovering,
+	#superclass : #CMIDAIRRPGIll,
+	#category : #'Cormas-Model-IDAIR-Disease-RPG'
 }
 
 { #category : #'instance creation' }
-CMIDAIRSEIRRecovering class >> newFrom: aCMIDAIRSEIRDiseaseDynamics [
+CMIDAIRRPGRecovering class >> newFrom: aCMIDAIRSEIRDiseaseDynamics [
 
 	aCMIDAIRSEIRDiseaseDynamics citizen cormasModel
 		submodelAt: #disease
@@ -14,31 +14,31 @@ CMIDAIRSEIRRecovering class >> newFrom: aCMIDAIRSEIRDiseaseDynamics [
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRRecovering >> beta [
+CMIDAIRRPGRecovering >> beta [
 
 	^ self modelParameterAt: #beta_recovering
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRRecovering >> color [
+CMIDAIRRPGRecovering >> color [
 
 	^ Color red mixed: 0.5 with: Color blue
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRRecovering >> name [
+CMIDAIRRPGRecovering >> name [
 
 	^ 'recovering'
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRRecovering >> next [
+CMIDAIRRPGRecovering >> next [
 
-	^ CMIDAIRSEIRRecovered newFrom: self
+	^ CMIDAIRRPGRecovered newFrom: self
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRRecovering >> tau [
+CMIDAIRRPGRecovering >> tau [
 
 	^ self modelParameterAt: #tau_recovering
 ]

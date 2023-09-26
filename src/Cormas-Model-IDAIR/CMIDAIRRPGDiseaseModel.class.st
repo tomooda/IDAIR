@@ -1,5 +1,5 @@
 Class {
-	#name : #CMIDAIRSEIRDiseaseModel,
+	#name : #CMIDAIRRPGDiseaseModel,
 	#superclass : #CMIDAIRDiseaseModel,
 	#instVars : [
 		'beta_exposed',
@@ -19,106 +19,106 @@ Class {
 		'numberOfNewRecovered',
 		'numberOfNewDead'
 	],
-	#category : #'Cormas-Model-IDAIR-Disease-SEIR'
+	#category : #'Cormas-Model-IDAIR-Disease-RPG'
 }
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel class >> submodelName [
-	^ 'SEIR'
+CMIDAIRRPGDiseaseModel class >> submodelName [
+	^ 'RPG'
 ]
 
 { #category : #converting }
-CMIDAIRSEIRDiseaseModel >> asPresenter [
+CMIDAIRRPGDiseaseModel >> asPresenter [
 
-	^ CMIDAIRSEIRDiseaseModelPresenter on: self
+	^ CMIDAIRRPGDiseaseModelPresenter on: self
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> beta_exposed [
+CMIDAIRRPGDiseaseModel >> beta_exposed [
 
 	^ beta_exposed
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> beta_exposed: aNumber [
+CMIDAIRRPGDiseaseModel >> beta_exposed: aNumber [
 
 	beta_exposed := aNumber
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> beta_mild [
+CMIDAIRRPGDiseaseModel >> beta_mild [
 
 	^ beta_mild
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> beta_mild: aNumber [
+CMIDAIRRPGDiseaseModel >> beta_mild: aNumber [
 
 	beta_mild := aNumber
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> beta_recovering [
+CMIDAIRRPGDiseaseModel >> beta_recovering [
 
 	^ beta_recovering
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> beta_recovering: aNumber [
+CMIDAIRRPGDiseaseModel >> beta_recovering: aNumber [
 
 	beta_recovering := aNumber
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> beta_severe [
+CMIDAIRRPGDiseaseModel >> beta_severe [
 
 	^ beta_severe
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> beta_severe: aNumber [
+CMIDAIRRPGDiseaseModel >> beta_severe: aNumber [
 
 	beta_severe := aNumber
 ]
 
 { #category : #defaults }
-CMIDAIRSEIRDiseaseModel >> defaultDiseaseDynamicsClass [
+CMIDAIRRPGDiseaseModel >> defaultDiseaseDynamicsClass [
 
-	^ CMIDAIRSEIRSusceptible
+	^ CMIDAIRRPGSusceptible
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> incrementNewDead [
+CMIDAIRRPGDiseaseModel >> incrementNewDead [
 
 	numberOfNewDead := numberOfNewDead + 1
 ]
 
 { #category : #counting }
-CMIDAIRSEIRDiseaseModel >> incrementNewMild [
+CMIDAIRRPGDiseaseModel >> incrementNewMild [
 
 	numberOfNewMild := numberOfNewMild + 1
 ]
 
 { #category : #counting }
-CMIDAIRSEIRDiseaseModel >> incrementNewRecovered [
+CMIDAIRRPGDiseaseModel >> incrementNewRecovered [
 
 	numberOfNewRecovered := numberOfNewRecovered + 1
 ]
 
 { #category : #counting }
-CMIDAIRSEIRDiseaseModel >> incrementNewRecovering [
+CMIDAIRRPGDiseaseModel >> incrementNewRecovering [
 
 	numberOfNewRecovering := numberOfNewRecovering + 1
 ]
 
 { #category : #counting }
-CMIDAIRSEIRDiseaseModel >> incrementNewSevere [
+CMIDAIRRPGDiseaseModel >> incrementNewSevere [
 
 	numberOfNewSevere := numberOfNewSevere + 1
 ]
 
 { #category : #initialization }
-CMIDAIRSEIRDiseaseModel >> initialize [
+CMIDAIRRPGDiseaseModel >> initialize [
 
 	super initialize.
 	beta_exposed := 0.5.
@@ -136,7 +136,7 @@ CMIDAIRSEIRDiseaseModel >> initialize [
 ]
 
 { #category : #initialization }
-CMIDAIRSEIRDiseaseModel >> initializeRound [
+CMIDAIRRPGDiseaseModel >> initializeRound [
 
 	super initializeRound.
 	numberOfNewMild := 0.
@@ -147,109 +147,115 @@ CMIDAIRSEIRDiseaseModel >> initializeRound [
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> numberOfNewMild [
+CMIDAIRRPGDiseaseModel >> numberOfNewDead [
+
+	^ numberOfNewDead
+]
+
+{ #category : #accessing }
+CMIDAIRRPGDiseaseModel >> numberOfNewMild [
 
 	^ numberOfNewMild
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> numberOfNewRecovered [
+CMIDAIRRPGDiseaseModel >> numberOfNewRecovered [
 
 	^ numberOfNewRecovered
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> numberOfNewRecovering [
+CMIDAIRRPGDiseaseModel >> numberOfNewRecovering [
 
 	^ numberOfNewRecovering
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> numberOfNewSevere [
+CMIDAIRRPGDiseaseModel >> numberOfNewSevere [
 
 	^ numberOfNewSevere
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> p_dead [
+CMIDAIRRPGDiseaseModel >> p_dead [
 
 	^ p_dead
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> p_dead: aNumber [
+CMIDAIRRPGDiseaseModel >> p_dead: aNumber [
 
 	^ p_dead := aNumber
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> p_severe [
+CMIDAIRRPGDiseaseModel >> p_severe [
 
 	^ p_severe
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> p_severe: aNumber [
+CMIDAIRRPGDiseaseModel >> p_severe: aNumber [
 
 	p_severe := aNumber
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> tau_exposed [
+CMIDAIRRPGDiseaseModel >> tau_exposed [
 
 	^ tau_exposed
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> tau_exposed: aNumber [
+CMIDAIRRPGDiseaseModel >> tau_exposed: aNumber [
 
 	tau_exposed := aNumber
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> tau_mild [
+CMIDAIRRPGDiseaseModel >> tau_mild [
 
 	^ tau_mild
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> tau_mild: aNumber [
+CMIDAIRRPGDiseaseModel >> tau_mild: aNumber [
 
 	tau_mild := aNumber
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> tau_recovered [
+CMIDAIRRPGDiseaseModel >> tau_recovered [
 
 	^ tau_recovered
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> tau_recovered: aNumber [
+CMIDAIRRPGDiseaseModel >> tau_recovered: aNumber [
 
 	tau_recovered := aNumber
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> tau_recovering [
+CMIDAIRRPGDiseaseModel >> tau_recovering [
 
 	^ tau_recovering
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> tau_recovering: aNumber [
+CMIDAIRRPGDiseaseModel >> tau_recovering: aNumber [
 
 	tau_recovering := aNumber
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> tau_severe [
+CMIDAIRRPGDiseaseModel >> tau_severe [
 
 	^ tau_severe
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseModel >> tau_severe: aNumber [
+CMIDAIRRPGDiseaseModel >> tau_severe: aNumber [
 
 	tau_severe := aNumber
 ]

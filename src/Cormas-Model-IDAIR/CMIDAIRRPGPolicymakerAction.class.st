@@ -24,7 +24,9 @@ CMIDAIRRPGPolicymakerAction class >> all [
 		  self socialDistancing3.
 		  self socialDistancing4.
 		  self socialDistancing5.
-		  self lockdown }
+		  self lockdown.
+		  CMIDAIRRPGHospitalAction increase1ICU2RB.
+		  CMIDAIRRPGHospitalAction increase2ICU4RB }
 ]
 
 { #category : #constants }
@@ -131,6 +133,19 @@ CMIDAIRRPGPolicymakerAction class >> vaccination75 [
 ]
 
 { #category : #accessing }
+CMIDAIRRPGPolicymakerAction >> askEffectiveRate [
+
+	(UIManager default
+		 request: 'Effective rate among citizens?'
+		 initialAnswer: '1.0') ifNotNil: [ :answer | 
+		[ 
+		| rate |
+		rate := answer asFloat.
+		(rate between: 0.0 and: 1.0) ifTrue: [ ^ rate ] ] ].
+	^ nil
+]
+
+{ #category : #accessing }
 CMIDAIRRPGPolicymakerAction >> cummulativeFactor [
 
 	^ cummulativeFactor
@@ -143,11 +158,13 @@ CMIDAIRRPGPolicymakerAction >> cummulativeFactor: aNumber [
 ]
 
 { #category : #execution }
-CMIDAIRRPGPolicymakerAction >> execute: aCMIDAIRRPGSocialProfile [
+CMIDAIRRPGPolicymakerAction >> execute: aCMIDAIRContactModel [
 
-	aCMIDAIRRPGSocialProfile
-		transientFactor: transientFactor;
-		multiplyCummulativeFactor: cummulativeFactor
+	self askEffectiveRate ifNotNil: [ :rate | 
+		aCMIDAIRContactModel socialProfile transientFactor:
+			self transientFactor ** rate.
+		aCMIDAIRContactModel socialProfile multiplyCummulativeFactor:
+			self cummulativeFactor ** rate ]
 ]
 
 { #category : #initialization }
@@ -156,6 +173,12 @@ CMIDAIRRPGPolicymakerAction >> initialize [
 	super initialize.
 	transientFactor := 1.0.
 	cummulativeFactor := 1.0
+]
+
+{ #category : #testing }
+CMIDAIRRPGPolicymakerAction >> isContactAction [
+
+	^ true
 ]
 
 { #category : #accessing }

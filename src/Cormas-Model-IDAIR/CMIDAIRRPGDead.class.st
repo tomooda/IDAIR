@@ -1,11 +1,11 @@
 Class {
-	#name : #CMIDAIRSEIRDead,
-	#superclass : #CMIDAIRSEIRDiseaseDynamics,
-	#category : #'Cormas-Model-IDAIR-Disease-SEIR'
+	#name : #CMIDAIRRPGDead,
+	#superclass : #CMIDAIRRPGDiseaseDynamics,
+	#category : #'Cormas-Model-IDAIR-Disease-RPG'
 }
 
 { #category : #'instance creation' }
-CMIDAIRSEIRDead class >> newFrom: aCMIDAIRSEIRDiseaseDynamics [
+CMIDAIRRPGDead class >> newFrom: aCMIDAIRSEIRDiseaseDynamics [
 
 	aCMIDAIRSEIRDiseaseDynamics citizen cormasModel
 		submodelAt: #disease
@@ -14,103 +14,103 @@ CMIDAIRSEIRDead class >> newFrom: aCMIDAIRSEIRDiseaseDynamics [
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDead >> beta [
+CMIDAIRRPGDead >> beta [
 
 	^ 0.0
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDead >> color [
+CMIDAIRRPGDead >> color [
 
 	^ Color black
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDead >> inCommunity [
+CMIDAIRRPGDead >> inCommunity [
 
 	^ self
 ]
 
 { #category : #testing }
-CMIDAIRSEIRDead >> isAsymptomatic [
+CMIDAIRRPGDead >> isAsymptomatic [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRDead >> isDead [
+CMIDAIRRPGDead >> isDead [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRSEIRDead >> isHospitalized [
+CMIDAIRRPGDead >> isHospitalized [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRDead >> isICUed [
+CMIDAIRRPGDead >> isICUed [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRDead >> isInCommunity [
+CMIDAIRRPGDead >> isInCommunity [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRDead >> isInfected [
+CMIDAIRRPGDead >> isInfected [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRDead >> isQuarrantined [
+CMIDAIRRPGDead >> isQuarrantined [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRDead >> isRecovered [
+CMIDAIRRPGDead >> isRecovered [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRDead >> isSusceptible [
+CMIDAIRRPGDead >> isSusceptible [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRDead >> isSymptomatic [
+CMIDAIRRPGDead >> isSymptomatic [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRDead >> isTransmissible [
+CMIDAIRRPGDead >> isTransmissible [
 
 	^ false
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDead >> name [
+CMIDAIRRPGDead >> name [
 
 	^ 'dead'
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDead >> next [
+CMIDAIRRPGDead >> next [
 
 	^ self
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDead >> tau [
+CMIDAIRRPGDead >> tau [
 
 	^ Float infinity
 ]

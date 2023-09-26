@@ -58,6 +58,12 @@ CMIDAIRCitizenResourceDynamics >> citizenQuarrantined [
 ]
 
 { #category : #operations }
+CMIDAIRCitizenResourceDynamics >> citizenRecovered [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #operations }
 CMIDAIRCitizenResourceDynamics >> citizenReleased [
 
 	^ self subclassResponsibility

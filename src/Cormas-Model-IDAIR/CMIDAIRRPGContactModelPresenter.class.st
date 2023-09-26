@@ -50,27 +50,28 @@ CMIDAIRRPGContactModelPresenter >> defaultSpec [
 		                   height: self class labelHeight + 5;
 		                   yourself.
 	self model policymakerActionsDo: [ :action | 
-		policyMakerSpec
-			add: (SpBoxLayout newHorizontal
-					 add: action name asPresenter width: 200;
-					 add: (self newNumberInput
-							  beFloat;
-							  number: action transientFactor;
-							  climbRate: 0.1;
-							  whenNumberChangedDo: [ :value | 
-								  action transientFactor: value ];
-							  yourself)
-					 width: 100;
-					 add: (self newNumberInput
-							  beFloat;
-							  number: action cummulativeFactor;
-							  climbRate: 0.1;
-							  whenNumberChangedDo: [ :value | 
-								  action cummulativeFactor: value ];
-							  yourself)
-					 width: 100;
-					 yourself)
-			expand: false ].
+		action isContactAction ifTrue: [ 
+			policyMakerSpec
+				add: (SpBoxLayout newHorizontal
+						 add: action name asPresenter width: 200;
+						 add: (self newNumberInput
+								  beFloat;
+								  number: action transientFactor;
+								  climbRate: 0.1;
+								  whenNumberChangedDo: [ :value | 
+									  action transientFactor: value ];
+								  yourself)
+						 width: 100;
+						 add: (self newNumberInput
+								  beFloat;
+								  number: action cummulativeFactor;
+								  climbRate: 0.1;
+								  whenNumberChangedDo: [ :value | 
+									  action cummulativeFactor: value ];
+								  yourself)
+						 width: 100;
+						 yourself)
+				expand: false ] ].
 
 	^ SpBoxLayout newHorizontal
 		  add: citizenSpec expand: false;

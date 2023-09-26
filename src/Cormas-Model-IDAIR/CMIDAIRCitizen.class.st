@@ -154,6 +154,7 @@ CMIDAIRCitizen >> event: aSymbol [
 	aSymbol = #ICUed ifTrue: [ ^ self ICUedAction ].
 	aSymbol = #quarrantined ifTrue: [ ^ self quarrantinedAction ].
 	aSymbol = #released ifTrue: [ ^ self releasedAction ].
+	aSymbol = #recovered ifTrue: [ ^ self recoveredAction ].
 	aSymbol = #dead ifTrue: [ ^ self deadAction ]
 ]
 
@@ -263,6 +264,12 @@ CMIDAIRCitizen >> quarrantinedAction [
 ]
 
 { #category : #events }
+CMIDAIRCitizen >> recoveredAction [
+
+	self resourceDynamics citizenRecovered
+]
+
+{ #category : #events }
 CMIDAIRCitizen >> releasedAction [
 
 	self resourceDynamics citizenReleased.
@@ -312,6 +319,9 @@ CMIDAIRCitizen >> triggerEvent: aCMIDAIRDiseaseDynamics [
 	(diseaseDynamics isHospitalized and: [ 
 		 oldDiseaseDynamics isHospitalized not ]) ifTrue: [ 
 		^ self event: #hospitalized ].
+	(diseaseDynamics isRecovered and: [ 
+		 oldDiseaseDynamics isRecovered not ]) ifTrue: [ 
+		^ self event: #recovered ].
 	(diseaseDynamics isICUed and: [ oldDiseaseDynamics isICUed not ]) 
 		ifTrue: [ ^ self event: #ICUed ].
 	(diseaseDynamics isQuarrantined and: [ 

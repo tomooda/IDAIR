@@ -5,9 +5,12 @@ Class {
 		'playerList',
 		'citizenActionList',
 		'policyMakerActionList',
+		'hospitalManagerActionList',
 		'citizenActionYesButton',
 		'citizenActionNoButton',
-		'policyMakerActionButton'
+		'policyMakerActionButton',
+		'hospitalManagerActionButton',
+		'gamePresenter'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
@@ -16,7 +19,7 @@ Class {
 CMIDAIRRPGActionPresenter class >> defaultSpec [
 
 	<script: 'CMIDAIRRPGContactModel new asPresenter openWithSpec'>
-	| citizenSpec policyMakerSpec |
+	| citizenSpec policyMakerSpec hospitalManagerSpec |
 	citizenSpec := SpBoxLayout newVertical
 		               add: (SpBoxLayout newHorizontal
 				                add: 'Citizen''s Actions' asPresenter
@@ -34,37 +37,36 @@ CMIDAIRRPGActionPresenter class >> defaultSpec [
 									    add: #citizenActionNoButton;
 									    yourself)
 							   expand: false))
-			 width: 350;
-			 add: ' ' asPresenter width: 20).
+			 width: 350).
 
 	policyMakerSpec := SpBoxLayout newVertical
 		                   add: (SpBoxLayout newHorizontal
 				                    add: 'Policymaker''s Actions' asPresenter
 				                    width: 200)
 		                   height: self labelHeight + 5;
+		                   add: #policyMakerActionList;
+		                   add: #policyMakerActionButton expand: false;
 		                   yourself.
-	policyMakerSpec
-		add: #policyMakerActionList;
-		add: #policyMakerActionButton expand: false.
+
+	hospitalManagerSpec := SpBoxLayout newVertical
+		                       add: (SpBoxLayout newHorizontal
+				                        add:
+					                        'Hospital Manager''s Actions' asPresenter
+				                        width: 200)
+		                       height: self labelHeight + 5;
+		                       add: #hospitalManagerActionList;
+		                       add: #hospitalManagerActionButton
+		                       expand: false;
+		                       yourself.
+
 	^ SpBoxLayout newVertical
 		  add: (SpBoxLayout newHorizontal
 				   add: citizenSpec expand: false;
-				   add: '    ' asPresenter width: 50;
-				   add: policyMakerSpec expand: false);
+				   add: '    ' asPresenter width: 10;
+				   add: policyMakerSpec expand: false;
+				   add: '    ' asPresenter width: 10;
+				   add: hospitalManagerSpec expand: false);
 		  yourself
-]
-
-{ #category : #operations }
-CMIDAIRRPGActionPresenter >> askEffectiveRate [
-
-	(UIManager default
-		 request: 'Effective rate among citizens?'
-		 initialAnswer: '1.0') ifNotNil: [ :answer | 
-		[ 
-		| rate |
-		rate := answer asFloat.
-		(rate between: 0.0 and: 1.0) ifTrue: [ ^ rate ] ] ].
-	^ nil
 ]
 
 { #category : #accessing }
@@ -135,6 +137,23 @@ CMIDAIRRPGActionPresenter >> drawBarChart: aCanvas [
 			RSZoomToFitCanvasInteraction new zoomToFitOnStart: aCanvas ] ]
 ]
 
+{ #category : #accessing }
+CMIDAIRRPGActionPresenter >> gamePresenter: aCMIDAIRRPGPresenter [
+
+	gamePresenter := aCMIDAIRRPGPresenter
+]
+
+{ #category : #operations }
+CMIDAIRRPGActionPresenter >> hospitalManagerPlay: aCMIDAIRRPGAction [
+
+	self model ifNotNil: [ :contactModel | 
+		contactModel cormasModel
+			submodelAt: #resource
+			do: [ :resourceModel | 
+				aCMIDAIRRPGAction execute: resourceModel.
+				gamePresenter ifNotNil: #updateResources ] ]
+]
+
 { #category : #initialization }
 CMIDAIRRPGActionPresenter >> initializePresenters [
 
@@ -148,7 +167,7 @@ CMIDAIRRPGActionPresenter >> initializePresenters [
 				                title: 'wbp'
 				                evaluated: [ :assoc | 
 					                assoc value contactProfile wellbeingPoints
-						                printString ]) width: 80);
+						                printString ]) width: 40);
 		              addColumn: (SpStringTableColumn
 				               title: 'action'
 				               evaluated: [ :assoc | 
@@ -177,6 +196,13 @@ CMIDAIRRPGActionPresenter >> initializePresenters [
 	policyMakerActionButton := self newButton
 		                           label: 'YES';
 		                           action: [ self playPolicymakerAction ];
+		                           yourself.
+	hospitalManagerActionList := self newList
+		                         display: [ :action | action name ];
+		                         yourself.
+	hospitalManagerActionButton := self newButton
+		                           label: 'YES';
+		                           action: [ self playHospitalManagerAction ];
 		                           yourself
 ]
 
@@ -194,7 +220,8 @@ CMIDAIRRPGActionPresenter >> modelChanged [
 	self
 		updatePlayerList;
 		updateCitizenActionList;
-		updatePolicyMakerActionList
+		updatePolicyMakerActionList;
+		updateHospitalManagerActionList
 ]
 
 { #category : #operations }
@@ -209,6 +236,13 @@ CMIDAIRRPGActionPresenter >> playCitizenActionYes [
 
 	citizenActionList selectedItem ifNotNil: [ :action | 
 		self citizenPlay: action forYes ]
+]
+
+{ #category : #operations }
+CMIDAIRRPGActionPresenter >> playHospitalManagerAction [
+
+	hospitalManagerActionList selectedItem ifNotNil: [ :action | 
+		self hospitalManagerPlay: action ]
 ]
 
 { #category : #operations }
@@ -231,17 +265,16 @@ CMIDAIRRPGActionPresenter >> playerName [
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> policymakerPlay: anArrayOfNumberOrSymbol [
+CMIDAIRRPGActionPresenter >> policymakerPlay: aCMIDAIRRPGAction [
 
 	self model ifNotNil: [ :contactModel | 
-		anArrayOfNumberOrSymbol isSymbol
-			ifTrue: [ contactModel perform: anArrayOfNumberOrSymbol asSymbol ]
+		aCMIDAIRRPGAction isContactAction
+			ifTrue: [ aCMIDAIRRPGAction execute: contactModel ]
 			ifFalse: [ 
-				self askEffectiveRate ifNotNil: [ :rate | 
-					contactModel socialProfile transientFactor:
-						anArrayOfNumberOrSymbol first asFloat ** rate.
-					contactModel socialProfile multiplyCummulativeFactor:
-						anArrayOfNumberOrSymbol second asFloat ** rate ] ] ]
+				contactModel cormasModel
+					submodelAt: #resource
+					do: [ :resourceModel | aCMIDAIRRPGAction execute: resourceModel ].
+				gamePresenter ifNotNil: #updateResources ] ]
 ]
 
 { #category : #api }
@@ -262,6 +295,12 @@ CMIDAIRRPGActionPresenter >> title [
 CMIDAIRRPGActionPresenter >> updateCitizenActionList [
 
 	citizenActionList items: self model citizenActions
+]
+
+{ #category : #updating }
+CMIDAIRRPGActionPresenter >> updateHospitalManagerActionList [
+
+	hospitalManagerActionList items: self model hospitalManagerActions
 ]
 
 { #category : #updating }

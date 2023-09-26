@@ -11,7 +11,7 @@ Class {
 		'mildSymptomPopulationField',
 		'severeSymptomPopulationField'
 	],
-	#category : #'Cormas-Model-IDAIR-UI'
+	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
 
 { #category : #specs }
@@ -85,14 +85,14 @@ CMIDAIRRPGInitializationPresenter >> initializePresenters [
 		                    yourself.
 	mildSymptomPopulationField := self newNumberInput
 		                              beInteger;
-		                              number: 10;
-		                              maximum: 20;
+		                              number: 7;
+		                              maximum: 10;
 		                              minimum: 0;
 		                              yourself.
 	severeSymptomPopulationField := self newNumberInput
 		                                beInteger;
-		                                number: 10;
-		                                maximum: 20;
+		                                number: 3;
+		                                maximum: 10;
 		                                minimum: 0;
 		                                yourself
 ]

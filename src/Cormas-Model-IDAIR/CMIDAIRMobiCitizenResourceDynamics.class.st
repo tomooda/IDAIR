@@ -40,6 +40,12 @@ CMIDAIRMobiCitizenResourceDynamics >> citizenQuarrantined [
 ]
 
 { #category : #operations }
+CMIDAIRMobiCitizenResourceDynamics >> citizenRecovered [
+
+	
+]
+
+{ #category : #operations }
 CMIDAIRMobiCitizenResourceDynamics >> citizenReleased [
 
 	self hasBed ifTrue: [ self resourceModel releaseBed: self citizen ].

@@ -1,14 +1,14 @@
 Class {
-	#name : #CMIDAIRSEIRDiseaseDynamics,
+	#name : #CMIDAIRRPGDiseaseDynamics,
 	#superclass : #CMIDAIRDiseaseDynamics,
 	#instVars : [
 		'duration'
 	],
-	#category : #'Cormas-Model-IDAIR-Disease-SEIR'
+	#category : #'Cormas-Model-IDAIR-Disease-RPG'
 }
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseDynamics class >> colors [
+CMIDAIRRPGDiseaseDynamics class >> colors [
 
 	^ OrderedDictionary new
 		  at: 'susceptible' put: Color green;
@@ -23,80 +23,80 @@ CMIDAIRSEIRDiseaseDynamics class >> colors [
 ]
 
 { #category : #testing }
-CMIDAIRSEIRDiseaseDynamics class >> isAbstract [
+CMIDAIRRPGDiseaseDynamics class >> isAbstract [
 
-	^ self = CMIDAIRSEIRDiseaseDynamics
+	^ self = CMIDAIRRPGDiseaseDynamics
 ]
 
 { #category : #actions }
-CMIDAIRSEIRDiseaseDynamics >> beAsymptomatic [
+CMIDAIRRPGDiseaseDynamics >> beAsymptomatic [
 
-	^ CMIDAIRSEIRExposed newFrom: self
+	^ CMIDAIRRPGExposed newFrom: self
 ]
 
 { #category : #actions }
-CMIDAIRSEIRDiseaseDynamics >> beDead [
+CMIDAIRRPGDiseaseDynamics >> beDead [
 
-	^ CMIDAIRSEIRDead newFrom: self
+	^ CMIDAIRRPGDead newFrom: self
 ]
 
 { #category : #actions }
-CMIDAIRSEIRDiseaseDynamics >> beExposed [
+CMIDAIRRPGDiseaseDynamics >> beExposed [
 
-	^ CMIDAIRSEIRExposed newFrom: self
+	^ CMIDAIRRPGExposed newFrom: self
 ]
 
 { #category : #actions }
-CMIDAIRSEIRDiseaseDynamics >> beHospitalized [
+CMIDAIRRPGDiseaseDynamics >> beHospitalized [
 
 	^ self
 ]
 
 { #category : #actions }
-CMIDAIRSEIRDiseaseDynamics >> beMildSymptom [
+CMIDAIRRPGDiseaseDynamics >> beMildSymptom [
 
-	^ CMIDAIRSEIRMildSymptom newFrom: self
+	^ CMIDAIRRPGMildSymptom newFrom: self
 ]
 
 { #category : #actions }
-CMIDAIRSEIRDiseaseDynamics >> beSevereSymptom [
+CMIDAIRRPGDiseaseDynamics >> beSevereSymptom [
 
-	^ CMIDAIRSEIRSevereSymptom newFrom: self
+	^ CMIDAIRRPGSevereSymptom newFrom: self
 ]
 
 { #category : #actions }
-CMIDAIRSEIRDiseaseDynamics >> beSusceptible [
+CMIDAIRRPGDiseaseDynamics >> beSusceptible [
 
-	^ CMIDAIRSEIRSusceptible newFrom: self
+	^ CMIDAIRRPGSusceptible newFrom: self
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseDynamics >> duration [
+CMIDAIRRPGDiseaseDynamics >> duration [
 
 	^ duration
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseDynamics >> duration: aNumber [
+CMIDAIRRPGDiseaseDynamics >> duration: aNumber [
 
 	^ duration := aNumber
 ]
 
 { #category : #initialization }
-CMIDAIRSEIRDiseaseDynamics >> initialize [
+CMIDAIRRPGDiseaseDynamics >> initialize [
 
 	super initialize.
 	duration := 0.0
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRDiseaseDynamics >> next [
+CMIDAIRRPGDiseaseDynamics >> next [
 
 	^ self subclassResponsibility
 ]
 
 { #category : #control }
-CMIDAIRSEIRDiseaseDynamics >> step [
+CMIDAIRRPGDiseaseDynamics >> step [
 
 	(duration := duration + self daysPerStep) >= self tau ifTrue: [ 
 		^ self next ]

@@ -1,5 +1,5 @@
 Class {
-	#name : #CMIDAIRSEIRDiseaseModelPresenter,
+	#name : #CMIDAIRRPGDiseaseModelPresenter,
 	#superclass : #SpPresenterWithModel,
 	#instVars : [
 		'beta_exposed',
@@ -14,11 +14,11 @@ Class {
 		'p_severe',
 		'p_dead'
 	],
-	#category : #'Cormas-Model-IDAIR-Disease-SEIR'
+	#category : #'Cormas-Model-IDAIR-Disease-RPG'
 }
 
 { #category : #specs }
-CMIDAIRSEIRDiseaseModelPresenter class >> defaultSpec [
+CMIDAIRRPGDiseaseModelPresenter class >> defaultSpec [
 
 	^ SpBoxLayout newVertical
 		  add: 'Susceptible' asPresenter expand: false;
@@ -69,7 +69,7 @@ CMIDAIRSEIRDiseaseModelPresenter class >> defaultSpec [
 ]
 
 { #category : #initialization }
-CMIDAIRSEIRDiseaseModelPresenter >> initializePresenters [
+CMIDAIRRPGDiseaseModelPresenter >> initializePresenters [
 
 	super initializePresenters.
 	beta_exposed := self newNumberInput
@@ -133,7 +133,7 @@ CMIDAIRSEIRDiseaseModelPresenter >> initializePresenters [
 ]
 
 { #category : #initialization }
-CMIDAIRSEIRDiseaseModelPresenter >> modelChanged [
+CMIDAIRRPGDiseaseModelPresenter >> modelChanged [
 
 	super modelChanged.
 	self model ifNotNil: [ :m | 

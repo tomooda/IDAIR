@@ -310,10 +310,10 @@ CMIDAIRModel >> isHeadless: aBoolean [
 { #category : #initialization }
 CMIDAIRModel >> loadDefaultSubmodels [
 
-	self addSubmodel: (CMIDAIRSEIRDiseaseModel on: self).
+	self addSubmodel: (CMIDAIRRPGDiseaseModel on: self).
 	self addSubmodel: (CMIDAIRRPGContactModel on: self).
 	self addSubmodel: (CMIDAIRRPGLocationModelFor6 on: self).
-	self addSubmodel: (CMIDAIRMobiResourceModel on: self).
+	self addSubmodel: (CMIDAIRRPGResourceModel on: self).
 	self addSubmodel: (CMIDAIRSimpleTimeModel on: self)
 ]
 

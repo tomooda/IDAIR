@@ -43,8 +43,10 @@ CMIDAIRRPGPresenter >> initializePresenters [
 		            addPage: (self newNotebookPage
 				             title: 'Play';
 				             presenterProvider: [ 
-					             actionPresenter := CMIDAIRRPGActionPresenter on:
-							                                self model ];
+					             actionPresenter := (CMIDAIRRPGActionPresenter on:
+							                                 self model)
+						                                gamePresenter: self;
+						                                yourself ];
 				             yourself);
 		            addPage: (self newNotebookPage
 				             title: 'Population chart';
@@ -146,4 +148,10 @@ CMIDAIRRPGPresenter >> runSimulation [
 { #category : #accessing }
 CMIDAIRRPGPresenter >> title [
 	^ 'IDAIR RPG Actions'
+]
+
+{ #category : #operations }
+CMIDAIRRPGPresenter >> updateResources [
+
+	citizensChart ifNotNil: #refresh
 ]

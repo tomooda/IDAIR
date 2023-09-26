@@ -64,14 +64,11 @@ CMIDAIRModelPresenter >> initializePresenters [
 	notebook := self newNotebook.
 	self model ifNotNil: [ :cormasModel | 
 		cormasModel submodelsInOrderDo: [ :submodel | 
-			notebook addPage: (self newNotebookPage
-					 title: submodel submodelCategoryName asString;
-					 presenterProvider: [ submodel asPresenter ];
-					 yourself) ].
-		notebook addPage: (self newNotebookPage
-				 title: 'Population Chart';
-				 presenterProvider: [ chart := cormasModel chartPresenter ];
-				 yourself) ].
+			submodel asPresenter ifNotNil: [ :presenter | 
+				notebook addPage: (self newNotebookPage
+						 title: submodel submodelCategoryName asString;
+						 presenterProvider: [ presenter ];
+						 yourself) ] ] ].
 	daysLabel := self newLabel
 		             label: '0.0';
 		             yourself.

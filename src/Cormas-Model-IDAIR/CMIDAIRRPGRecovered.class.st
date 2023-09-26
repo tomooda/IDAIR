@@ -1,11 +1,11 @@
 Class {
-	#name : #CMIDAIRSEIRRecovered,
-	#superclass : #CMIDAIRSEIRDiseaseDynamics,
-	#category : #'Cormas-Model-IDAIR-Disease-SEIR'
+	#name : #CMIDAIRRPGRecovered,
+	#superclass : #CMIDAIRRPGDiseaseDynamics,
+	#category : #'Cormas-Model-IDAIR-Disease-RPG'
 }
 
 { #category : #'instance creation' }
-CMIDAIRSEIRRecovered class >> newFrom: aCMIDAIRSEIRDiseaseDynamics [
+CMIDAIRRPGRecovered class >> newFrom: aCMIDAIRSEIRDiseaseDynamics [
 
 	aCMIDAIRSEIRDiseaseDynamics citizen cormasModel
 		submodelAt: #disease
@@ -14,103 +14,103 @@ CMIDAIRSEIRRecovered class >> newFrom: aCMIDAIRSEIRDiseaseDynamics [
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRRecovered >> beta [
+CMIDAIRRPGRecovered >> beta [
 
 	^ 0.0
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRRecovered >> color [
+CMIDAIRRPGRecovered >> color [
 
 	^ Color blue
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRRecovered >> inCommunity [
+CMIDAIRRPGRecovered >> inCommunity [
 
 	^ self
 ]
 
 { #category : #testing }
-CMIDAIRSEIRRecovered >> isAsymptomatic [
+CMIDAIRRPGRecovered >> isAsymptomatic [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRRecovered >> isDead [
+CMIDAIRRPGRecovered >> isDead [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRRecovered >> isHospitalized [
+CMIDAIRRPGRecovered >> isHospitalized [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRRecovered >> isICUed [
+CMIDAIRRPGRecovered >> isICUed [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRRecovered >> isInCommunity [
+CMIDAIRRPGRecovered >> isInCommunity [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRSEIRRecovered >> isInfected [
+CMIDAIRRPGRecovered >> isInfected [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRRecovered >> isQuarrantined [
+CMIDAIRRPGRecovered >> isQuarrantined [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRRecovered >> isRecovered [
+CMIDAIRRPGRecovered >> isRecovered [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRSEIRRecovered >> isSusceptible [
+CMIDAIRRPGRecovered >> isSusceptible [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRRecovered >> isSymptomatic [
+CMIDAIRRPGRecovered >> isSymptomatic [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRRecovered >> isTransmissible [
+CMIDAIRRPGRecovered >> isTransmissible [
 
 	^ false
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRRecovered >> name [
+CMIDAIRRPGRecovered >> name [
 
 	^ 'recovered'
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRRecovered >> next [
+CMIDAIRRPGRecovered >> next [
 
-	^ CMIDAIRSEIRSusceptible newFrom: self
+	^ CMIDAIRRPGSusceptible newFrom: self
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRRecovered >> tau [
+CMIDAIRRPGRecovered >> tau [
 
 	^ self modelParameterAt: #tau_recovered
 ]

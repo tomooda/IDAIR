@@ -19,6 +19,12 @@ CMIDAIRRPGLocationModel class >> submodelName [
 	^ 'RPG'
 ]
 
+{ #category : #converting }
+CMIDAIRRPGLocationModel >> asPresenter [
+
+	^ nil
+]
+
 { #category : #accessing }
 CMIDAIRRPGLocationModel >> baseColorFor: aCMIDAIRLocation [
 

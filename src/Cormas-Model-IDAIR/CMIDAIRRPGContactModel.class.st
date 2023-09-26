@@ -5,7 +5,8 @@ Class {
 		'socialProfile',
 		'players',
 		'citizenActions',
-		'policymakerActions'
+		'policymakerActions',
+		'hospitalManagerActions'
 	],
 	#category : #'Cormas-Model-IDAIR-Contact-RPG'
 }
@@ -63,9 +64,21 @@ CMIDAIRRPGContactModel >> defaultContactProfileClass [
 ]
 
 { #category : #defaults }
+CMIDAIRRPGContactModel >> defaultHospitalManagerActions [
+
+	^ CMIDAIRRPGHospitalAction all
+]
+
+{ #category : #defaults }
 CMIDAIRRPGContactModel >> defaultPolicymakerActions [
 
 	^ CMIDAIRRPGPolicymakerAction all
+]
+
+{ #category : #accessing }
+CMIDAIRRPGContactModel >> hospitalManagerActions [
+
+	^ hospitalManagerActions
 ]
 
 { #category : #'initialize-release' }
@@ -81,6 +94,7 @@ CMIDAIRRPGContactModel >> initialize [
 	socialProfile := CMIDAIRRPGSocialProfile new.
 	citizenActions := self defaultCitizenActions.
 	policymakerActions := self defaultPolicymakerActions.
+	hospitalManagerActions := self defaultHospitalManagerActions.
 	players := OrderedDictionary new
 ]
 

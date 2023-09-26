@@ -7,7 +7,11 @@ Class {
 		'newSevere',
 		'newRecovering',
 		'newRecovered',
-		'newDead'
+		'newDead',
+		'occupiedBeds',
+		'numBeds',
+		'occupiedICUs',
+		'numICUs'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
@@ -18,28 +22,51 @@ CMIDAIRRPGPlayersChartPresenter class >> defaultSpec [
 	^ SpBoxLayout newVertical
 		  add: #roassal;
 		  add: (SpBoxLayout newHorizontal
-				   add: 'new mild symptoms' asPresenter width: 200;
-				   add: #newMild width: 100;
-				   yourself)
-		  expand: false;
-		  add: (SpBoxLayout newHorizontal
-				   add: 'new severe symptoms' asPresenter width: 200;
-				   add: #newSevere width: 100;
-				   yourself)
-		  expand: false;
-		  add: (SpBoxLayout newHorizontal
-				   add: 'new recovering to mild' asPresenter width: 200;
-				   add: #newRecovering width: 100;
-				   yourself)
-		  expand: false;
-		  add: (SpBoxLayout newHorizontal
-				   add: 'new recovered patients' asPresenter width: 200;
-				   add: #newRecovered width: 100;
-				   yourself)
-		  expand: false;
-		  add: (SpBoxLayout newHorizontal
-				   add: 'new deaths' asPresenter width: 200;
-				   add: #newDead width: 100;
+				   add: (SpBoxLayout newVertical
+						    add: (SpBoxLayout newHorizontal
+								     add: 'new mild symptoms' asPresenter width: 200;
+								     add: #newMild width: 100;
+								     yourself)
+						    expand: false;
+						    add: (SpBoxLayout newHorizontal
+								     add: 'new severe symptoms' asPresenter width: 200;
+								     add: #newSevere width: 100;
+								     yourself)
+						    expand: false;
+						    add: (SpBoxLayout newHorizontal
+								     add: 'new recovering to mild' asPresenter width: 200;
+								     add: #newRecovering width: 100;
+								     yourself)
+						    expand: false;
+						    add: (SpBoxLayout newHorizontal
+								     add: 'new recovered patients' asPresenter width: 200;
+								     add: #newRecovered width: 100;
+								     yourself)
+						    expand: false;
+						    add: (SpBoxLayout newHorizontal
+								     add: 'new deaths' asPresenter width: 200;
+								     add: #newDead width: 100;
+								     yourself)
+						    expand: false;
+						    yourself)
+				   expand: true;
+				   add: (SpBoxLayout newVertical
+						    add: (SpBoxLayout newHorizontal
+								     add: 'Regular Beds ' width: 100;
+								     add: #occupiedBeds expand: false;
+								     add: ' / ' expand: false;
+								     add: #numBeds expand: false;
+								     yourself)
+						    expand: false;
+						    add: (SpBoxLayout newHorizontal
+								     add: 'ICU Beds   ' width: 100;
+								     add: #occupiedICUs expand: false;
+								     add: ' / ' expand: false;
+								     add: #numICUs expand: false;
+								     yourself)
+						    expand: false;
+						    yourself)
+				   expand: true;
 				   yourself)
 		  expand: false;
 		  yourself
@@ -110,9 +137,21 @@ CMIDAIRRPGPlayersChartPresenter >> initializePresenters [
 		                number: 0;
 		                yourself.
 	newDead := self newNumberInput
-		                disable;
-		                beInteger;
-		                number: 0;
+		           disable;
+		           beInteger;
+		           number: 0;
+		           yourself.
+	numBeds := self newLabel
+		           label: '?';
+		           yourself.
+	occupiedBeds := self newLabel
+		                label: '0';
+		                yourself.
+	numICUs := self newLabel
+		           label: '?';
+		           yourself.
+	occupiedICUs := self newLabel
+		                label: '0';
 		                yourself
 ]
 
@@ -120,7 +159,8 @@ CMIDAIRRPGPlayersChartPresenter >> initializePresenters [
 CMIDAIRRPGPlayersChartPresenter >> modelChanged [
 
 	super modelChanged.
-	self updateNewPatients
+	self updateNewPatients.
+	self updateResources
 ]
 
 { #category : #enumerating }
@@ -135,7 +175,9 @@ CMIDAIRRPGPlayersChartPresenter >> playersDo: aBlock [
 CMIDAIRRPGPlayersChartPresenter >> refresh [
 
 	roassal refresh.
-	self updateNewPatients
+	self
+		updateNewPatients;
+		updateResources
 ]
 
 { #category : #initialization }
@@ -145,5 +187,16 @@ CMIDAIRRPGPlayersChartPresenter >> updateNewPatients [
 		newMild number: diseaseModel numberOfNewMild.
 		newSevere number: diseaseModel numberOfNewSevere.
 		newRecovering number: diseaseModel numberOfNewRecovering.
-		newRecovered number: diseaseModel numberOfNewRecovered ]
+		newRecovered number: diseaseModel numberOfNewRecovered.
+		newDead number: diseaseModel numberOfNewDead ]
+]
+
+{ #category : #initialization }
+CMIDAIRRPGPlayersChartPresenter >> updateResources [
+
+	self model cormasModel submodelAt: #resource do: [ :resourceModel | 
+		numBeds label: resourceModel numBeds printString.
+		occupiedBeds label: resourceModel occupiedBeds printString.
+		numICUs label: resourceModel numICUs printString.
+		occupiedICUs label: resourceModel occupiedICUs printString ]
 ]

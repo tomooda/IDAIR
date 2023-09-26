@@ -1,105 +1,105 @@
 Class {
-	#name : #CMIDAIRSEIRIll,
-	#superclass : #CMIDAIRSEIRDiseaseDynamics,
+	#name : #CMIDAIRRPGIll,
+	#superclass : #CMIDAIRRPGDiseaseDynamics,
 	#instVars : [
 		'hospitalized'
 	],
-	#category : #'Cormas-Model-IDAIR-Disease-SEIR'
+	#category : #'Cormas-Model-IDAIR-Disease-RPG'
 }
 
 { #category : #testing }
-CMIDAIRSEIRIll class >> isAbstract [
+CMIDAIRRPGIll class >> isAbstract [
 
-	^ self = CMIDAIRSEIRIll
+	^ self = CMIDAIRRPGIll
 ]
 
 { #category : #actions }
-CMIDAIRSEIRIll >> beHospitalized [
+CMIDAIRRPGIll >> beHospitalized [
 
 	hospitalized := true
 ]
 
 { #category : #actions }
-CMIDAIRSEIRIll >> beUnhospitalized [
+CMIDAIRRPGIll >> beUnhospitalized [
 
 	hospitalized := false
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRIll >> inCommunity [
+CMIDAIRRPGIll >> inCommunity [
 
 	^ self
 ]
 
 { #category : #initialization }
-CMIDAIRSEIRIll >> initialize [
+CMIDAIRRPGIll >> initialize [
 
 	super initialize.
 	hospitalized := false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRIll >> isAsymptomatic [
+CMIDAIRRPGIll >> isAsymptomatic [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRIll >> isDead [
+CMIDAIRRPGIll >> isDead [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRIll >> isHospitalized [
+CMIDAIRRPGIll >> isHospitalized [
 
 	^ hospitalized ifNil: [ hospitalized := false ]
 ]
 
 { #category : #testing }
-CMIDAIRSEIRIll >> isICUed [
+CMIDAIRRPGIll >> isICUed [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRIll >> isInCommunity [
+CMIDAIRRPGIll >> isInCommunity [
 
 	^ self isHospitalized not
 ]
 
 { #category : #testing }
-CMIDAIRSEIRIll >> isInfected [
+CMIDAIRRPGIll >> isInfected [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRSEIRIll >> isQuarrantined [
+CMIDAIRRPGIll >> isQuarrantined [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRIll >> isRecovered [
+CMIDAIRRPGIll >> isRecovered [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRIll >> isSusceptible [
+CMIDAIRRPGIll >> isSusceptible [
 
 	^ false
 ]
 
 { #category : #testing }
-CMIDAIRSEIRIll >> isSymptomatic [
+CMIDAIRRPGIll >> isSymptomatic [
 
 	^ true
 ]
 
 { #category : #testing }
-CMIDAIRSEIRIll >> isTransmissible [
+CMIDAIRRPGIll >> isTransmissible [
 
 	^ true
 ]

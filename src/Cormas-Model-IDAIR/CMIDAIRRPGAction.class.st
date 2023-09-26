@@ -21,6 +21,12 @@ CMIDAIRRPGAction >> actionName [
 	^ name
 ]
 
+{ #category : #testing }
+CMIDAIRRPGAction >> isContactAction [
+
+	^ false
+]
+
 { #category : #accessing }
 CMIDAIRRPGAction >> name [
 

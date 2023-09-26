@@ -1,11 +1,11 @@
 Class {
-	#name : #CMIDAIRSEIRSevereSymptom,
-	#superclass : #CMIDAIRSEIRIll,
-	#category : #'Cormas-Model-IDAIR-Disease-SEIR'
+	#name : #CMIDAIRRPGSevereSymptom,
+	#superclass : #CMIDAIRRPGIll,
+	#category : #'Cormas-Model-IDAIR-Disease-RPG'
 }
 
 { #category : #'instance creation' }
-CMIDAIRSEIRSevereSymptom class >> newFrom: aCMIDAIRSEIRDiseaseDynamics [
+CMIDAIRRPGSevereSymptom class >> newFrom: aCMIDAIRSEIRDiseaseDynamics [
 
 	aCMIDAIRSEIRDiseaseDynamics citizen cormasModel
 		submodelAt: #disease
@@ -14,45 +14,45 @@ CMIDAIRSEIRSevereSymptom class >> newFrom: aCMIDAIRSEIRDiseaseDynamics [
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRSevereSymptom >> beta [
+CMIDAIRRPGSevereSymptom >> beta [
 
 	^ self modelParameterAt: #beta_severe
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRSevereSymptom >> color [
+CMIDAIRRPGSevereSymptom >> color [
 
 	^ Color red
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRSevereSymptom >> name [
+CMIDAIRRPGSevereSymptom >> name [
 
 	^ 'severe'
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRSevereSymptom >> next [
+CMIDAIRRPGSevereSymptom >> next [
 
-	^ CMIDAIRSEIRRecovering newFrom: self
+	^ CMIDAIRRPGRecovering newFrom: self
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRSevereSymptom >> p_dead [
+CMIDAIRRPGSevereSymptom >> p_dead [
 
 	^ self modelParameterAt: #p_dead
 ]
 
 { #category : #stepping }
-CMIDAIRSEIRSevereSymptom >> step [
+CMIDAIRRPGSevereSymptom >> step [
 
 	1.0 - (1.0 - self p_dead ** self daysPerStep) >= self random ifTrue: [ 
-		^ CMIDAIRSEIRDead newFrom: self ].
+		^ CMIDAIRRPGDead newFrom: self ].
 	^ super step
 ]
 
 { #category : #accessing }
-CMIDAIRSEIRSevereSymptom >> tau [
+CMIDAIRRPGSevereSymptom >> tau [
 
 	^ self modelParameterAt: #tau_severe
 ]
