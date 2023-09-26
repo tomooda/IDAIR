@@ -75,8 +75,8 @@ CMIDAIRRPGResourceModel >> init [
 CMIDAIRRPGResourceModel >> initialize [
 
 	super initialize.
-	numICUs := 2.0.
-	numBeds := 10.0.
+	numICUs := 4.
+	numBeds := 10.
 	occupiedBeds := 0.
 	occupiedICUs := 0
 ]
@@ -136,15 +136,15 @@ CMIDAIRRPGResourceModel >> occupiedICUs: anInteger [
 ]
 
 { #category : #operations }
-CMIDAIRRPGResourceModel >> occupyBed [
+CMIDAIRRPGResourceModel >> occupyBed: anInteger [
 
-	numBeds > occupiedBeds ifTrue: [ occupiedBeds := occupiedBeds + 1 ]
+	occupiedBeds := occupiedBeds + anInteger min: numBeds
 ]
 
 { #category : #operations }
-CMIDAIRRPGResourceModel >> occupyICU [
+CMIDAIRRPGResourceModel >> occupyICU: anInteger [
 
-	numICUs > occupiedICUs ifTrue: [ occupiedICUs := occupiedICUs + 1 ]
+	occupiedICUs := occupiedICUs + anInteger min: numICUs
 ]
 
 { #category : #accessing }

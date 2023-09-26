@@ -18,17 +18,21 @@ CMIDAIRRPGHospitalAction class >> all [
 { #category : #constants }
 CMIDAIRRPGHospitalAction class >> assignICU [
 
-	^ self
-		  name: 'Take 1 ICU bed'
-		  block: [ :resourceModel | resourceModel occupyICU ]
+	^ self name: 'Take ICU beds' block: [ :resourceModel | 
+		  (UIManager default
+			   request: 'Number of ICU beds?'
+			   initialAnswer: '1') ifNotNil: [ :answer | 
+			  answer asInteger ifNotNil: [ :num | resourceModel occupyICU: num ] ] ]
 ]
 
 { #category : #constants }
 CMIDAIRRPGHospitalAction class >> assignRegularBed [
 
-	^ self
-		  name: 'Take 1 regular bed'
-		  block: [ :resourceModel | resourceModel occupyBed ]
+	^ self name: 'Take ICU beds' block: [ :resourceModel | 
+		  (UIManager default
+			   request: 'Number of regular beds?'
+			   initialAnswer: '1') ifNotNil: [ :answer | 
+			  answer asInteger ifNotNil: [ :num | resourceModel occupyBed: num ] ] ]
 ]
 
 { #category : #constants }

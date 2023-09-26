@@ -35,25 +35,25 @@ CMIDAIRRPGResourceModelPresenter >> initializePresenters [
 
 	super initializePresenters.
 	numICUs := self newNumberInput
-		           beFloat;
+		           beInteger;
 		           climbRate: 1.0;
 		           whenNumberChangedDo: [ :value | 
 			           self model ifNotNil: [ :m | m numICUs: value ] ];
 		           yourself.
 	numBeds := self newNumberInput
-		           beFloat;
+		           beInteger;
 		           climbRate: 1.0;
 		           whenNumberChangedDo: [ :value | 
 			           self model ifNotNil: [ :m | m numBeds: value ] ];
 		           yourself.
 	occupiedICUs := self newNumberInput
-		                beFloat;
+		                beInteger;
 		                climbRate: 1.0;
 		                whenNumberChangedDo: [ :value | 
 			                self model ifNotNil: [ :m | m occupiedICUs: value ] ];
 		                yourself.
 	occupiedBeds := self newNumberInput
-		                beFloat;
+		                beInteger;
 		                climbRate: 1.0;
 		                whenNumberChangedDo: [ :value | 
 			                self model ifNotNil: [ :m | m occupiedBeds: value ] ];
