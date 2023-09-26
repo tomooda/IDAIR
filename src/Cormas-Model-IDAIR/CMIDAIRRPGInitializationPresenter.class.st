@@ -179,7 +179,7 @@ CMIDAIRRPGInitializationPresenter >> value: aCMIDAIRModel [
 				               createN: population
 				               randomlyLocatedEntities: CMIDAIRCitizen
 				               playerName: ''.
-			newCitizens do: [ :citizen | citizen beMildSymptom ].
+			newCitizens do: [ :citizen | citizen beSevereSymptom ].
 			totalPopulation := totalPopulation + population ] ].
 	1000 - totalPopulation in: [ :population | 
 		population > 0 ifTrue: [ 
