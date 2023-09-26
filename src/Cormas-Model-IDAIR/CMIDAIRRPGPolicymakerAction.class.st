@@ -14,6 +14,7 @@ CMIDAIRRPGPolicymakerAction class >> all [
 	^ { 
 		  self facemask.
 		  self treatmentGuideline.
+		  self openQuarrantineCamp.
 		  self vaccination25.
 		  self vaccination50.
 		  self vaccination75.
@@ -70,6 +71,12 @@ CMIDAIRRPGPolicymakerAction class >> name: aString transientFactor: aNumber cumm
 		  transientFactor: aNumber;
 		  cummulativeFactor: anotherNumber;
 		  yourself
+]
+
+{ #category : #constants }
+CMIDAIRRPGPolicymakerAction class >> openQuarrantineCamp [
+
+	^ self name: 'Open quarantine camp' cummulativeFactor: 0.8
 ]
 
 { #category : #constants }
