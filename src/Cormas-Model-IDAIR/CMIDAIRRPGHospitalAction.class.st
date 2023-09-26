@@ -28,7 +28,7 @@ CMIDAIRRPGHospitalAction class >> assignICU [
 { #category : #constants }
 CMIDAIRRPGHospitalAction class >> assignRegularBed [
 
-	^ self name: 'Take ICU beds' block: [ :resourceModel | 
+	^ self name: 'Take regular beds' block: [ :resourceModel | 
 		  (UIManager default
 			   request: 'Number of regular beds?'
 			   initialAnswer: '1') ifNotNil: [ :answer | 
