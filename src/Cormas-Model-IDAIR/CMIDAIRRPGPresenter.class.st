@@ -4,13 +4,14 @@ Class {
 	#instVars : [
 		'notebook',
 		'citizensChart',
-		'chart',
+		'medicalChart',
 		'daysField',
 		'daysLabel',
 		'runButton',
 		'settingsButton',
 		'actionPresenter',
-		'map'
+		'map',
+		'populationChart'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
@@ -51,19 +52,25 @@ CMIDAIRRPGPresenter >> initializePresenters [
 		            addPage: (self newNotebookPage
 				             title: 'Population chart';
 				             presenterProvider: [ 
-					             chart := self model cormasModel chartPresenter.
-					             chart optionsPresenter probesMinMaxOptionsPresenter
+					             populationChart := self model cormasModel chartPresenter.
+					             populationChart optionsPresenter probesMinMaxOptionsPresenter
 						             fixMaxInputPresenter text:
 							             self model cormasModel theCitizens size
 								             printString.
-					             chart optionsPresenter probesMinMaxOptionsPresenter
+					             populationChart optionsPresenter probesMinMaxOptionsPresenter
 						             fixMaxCheckPresenter state: true.
-					             chart ];
+					             populationChart ];
 				             yourself);
 		            addPage: (self newNotebookPage
-				             title: 'Players status chart';
+				             title: 'Citizens status chart';
 				             presenterProvider: [ 
-					             citizensChart := CMIDAIRRPGPlayersChartPresenter 
+					             citizensChart := CMIDAIRRPGCitizenChartPresenter 
+						                              on: self model ];
+				             yourself);
+		            addPage: (self newNotebookPage
+				             title: 'Medical status chart';
+				             presenterProvider: [ 
+					             citizensChart := CMIDAIRRPGMedicalChartPresenter 
 						                              on: self model ];
 				             yourself);
 		            addPage: (self newNotebookPage
@@ -139,8 +146,9 @@ CMIDAIRRPGPresenter >> runSimulation [
 							progress value: count // step ] ] ].
 			daysLabel label: (model cormasModel timeStep * model daysPerStep 
 					 printShowingDecimalPlaces: 2).
-			chart ifNotNil: [ chart newMaxX: model cormasModel timeStep ].
+			populationChart ifNotNil: [ populationChart newMaxX: model cormasModel timeStep ].
 			citizensChart ifNotNil: #refresh.
+			medicalChart ifNotNil: #refresh.
 			map ifNotNil: #refresh.
 			actionPresenter ifNotNil: #clearRound ] ]
 ]
