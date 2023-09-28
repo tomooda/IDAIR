@@ -15,6 +15,7 @@ Class {
 		'p_dead',
 		'numberOfNewMild',
 		'numberOfNewSevere',
+		'numberOfNewWorsened',
 		'numberOfNewRecovering',
 		'numberOfNewRecovered',
 		'numberOfNewDead'
@@ -117,6 +118,12 @@ CMIDAIRRPGDiseaseModel >> incrementNewSevere [
 	numberOfNewSevere := numberOfNewSevere + 1
 ]
 
+{ #category : #counting }
+CMIDAIRRPGDiseaseModel >> incrementNewWorsened [
+
+	numberOfNewWorsened := numberOfNewWorsened + 1
+]
+
 { #category : #initialization }
 CMIDAIRRPGDiseaseModel >> initialize [
 
@@ -129,7 +136,7 @@ CMIDAIRRPGDiseaseModel >> initialize [
 	tau_mild := 10.0.
 	tau_severe := 20.0.
 	tau_recovering := 5.0.
-	tau_recovered := 100.0.
+	tau_recovered := 9999.0.
 	p_severe := 0.01.
 	p_dead := 0.01.
 	self initializeRound
@@ -141,6 +148,7 @@ CMIDAIRRPGDiseaseModel >> initializeRound [
 	super initializeRound.
 	numberOfNewMild := 0.
 	numberOfNewSevere := 0.
+	numberOfNewWorsened := 0.
 	numberOfNewRecovering := 0.
 	numberOfNewRecovered := 0.
 	numberOfNewDead := 0
@@ -174,6 +182,12 @@ CMIDAIRRPGDiseaseModel >> numberOfNewRecovering [
 CMIDAIRRPGDiseaseModel >> numberOfNewSevere [
 
 	^ numberOfNewSevere
+]
+
+{ #category : #accessing }
+CMIDAIRRPGDiseaseModel >> numberOfNewWorsened [
+
+	^ numberOfNewWorsened
 ]
 
 { #category : #accessing }

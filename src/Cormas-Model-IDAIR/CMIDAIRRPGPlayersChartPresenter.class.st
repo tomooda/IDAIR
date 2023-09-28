@@ -11,7 +11,8 @@ Class {
 		'occupiedBeds',
 		'numBeds',
 		'occupiedICUs',
-		'numICUs'
+		'numICUs',
+		'newWorsened'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
@@ -31,6 +32,11 @@ CMIDAIRRPGPlayersChartPresenter class >> defaultSpec [
 						    add: (SpBoxLayout newHorizontal
 								     add: 'new severe symptoms' asPresenter width: 200;
 								     add: #newSevere width: 100;
+								     yourself)
+						    expand: false;
+						    add: (SpBoxLayout newHorizontal
+								     add: 'new worsened symptoms' asPresenter width: 200;
+								     add: #newWorsened width: 100;
 								     yourself)
 						    expand: false;
 						    add: (SpBoxLayout newHorizontal
@@ -75,38 +81,50 @@ CMIDAIRRPGPlayersChartPresenter class >> defaultSpec [
 { #category : #drawing }
 CMIDAIRRPGPlayersChartPresenter >> drawBarChart: aCanvas [
 
-	aCanvas color: Color transparent.
-
-	self model namesAndPlayersDo: [ :name :citizen | 
-		| histogram chart |
-		histogram := OrderedDictionary new.
-		citizen diseaseDynamics class colors keysDo: [ :dynamics | 
-			histogram at: dynamics put: 0 ].
-		citizen cormasModel theCitizens do: [ :c | 
-			c contactProfile player == citizen ifTrue: [ 
-				| dynamics |
-				dynamics := c diseaseDynamics name.
-				histogram at: dynamics put: (histogram at: dynamics) + 1 ] ].
-		chart := RSChart new.
-		chart extent: 60 @ 400.
-		chart maxValueY: histogram values sum.
-		chart colors:
-			(NSScale ordinal range: citizen diseaseDynamics class colors values).
-		histogram values inject: 0 into: [ :bottom :value | 
-			(chart barHeights: { value }) bottom: { bottom }.
-			bottom + value ].
-		chart
-			addDecoration: (RSVerticalTick new
-					 fontSize: 12;
-					 integer;
-					 yourself);
-			addDecoration: (RSChartTitleDecoration new
-					 title:
-						 name , '(' , citizen contactProfile wellbeingPoints printString
-						 , ')';
-					 fontSize: 10).
-		aCanvas addShape: (RSComposite new shapes: chart build shapes) ].
-	RSHorizontalLineLayout on: aCanvas shapes.
+	| names patients deaths chart legends |
+	names := self model players keys asArray.
+	patients := Array new: names size withAll: 0.
+	deaths := Array new: names size withAll: 0.
+	self model cormasModel theCitizens do: [ :citizen | 
+		| playerIndex |
+		playerIndex := citizen contactProfile playerIndex.
+		playerIndex > 0 ifTrue: [ 
+			citizen diseaseDynamics isSusceptible not ifTrue: [ 
+				citizen diseaseDynamics isDead
+					ifTrue: [ 
+					deaths at: playerIndex put: (deaths at: playerIndex) + 1 ]
+					ifFalse: [ 
+					patients at: playerIndex put: (patients at: playerIndex) + 1 ] ] ] ].
+	aCanvas color: Color white.
+	chart := RSChart new.
+	chart extent: names size * 80 @ 100.
+	chart colors: (NSScale ordinal range: { 
+				 (Color red mixed: 0.3 with: Color white).
+				 Color black }).
+	chart barHeights: patients.
+	(chart barHeights: deaths) bottom: patients.
+	chart addDecoration: (RSHorizontalTick new
+			 fromNames: names;
+			 fontSize: 12).
+	chart
+		addDecoration: (RSVerticalTick new
+				 fontSize: 12;
+				 integer;
+				 yourself);
+		addDecoration: RSVerticalTick new integer;
+		ylabel: 'Risk (%)';
+		title: 'Cummulated risk of each player''s actions'.
+	aCanvas addShape: (RSComposite new shapes: chart build shapes).
+	legends := RSLegend new.
+	legends layout horizontal.
+	#( Infection Death ) doWithIndex: [ :legendLabel :index | 
+		legends
+			text: legendLabel
+			withBoxColor: (chart plots at: index) computeColor ].
+	aCanvas addShape: (RSComposite new shapes: legends build shapes).
+	RSHorizontalLineLayout new
+		alignBottom;
+		applyOn: aCanvas shapes.
 	RSZoomToFitCanvasInteraction new zoomToFitOnStart: aCanvas
 ]
 
@@ -122,6 +140,11 @@ CMIDAIRRPGPlayersChartPresenter >> initializePresenters [
 		           number: 0;
 		           yourself.
 	newSevere := self newNumberInput
+		             disable;
+		             beInteger;
+		             number: 0;
+		             yourself.
+	newWorsened := self newNumberInput
 		             disable;
 		             beInteger;
 		             number: 0;
@@ -186,6 +209,7 @@ CMIDAIRRPGPlayersChartPresenter >> updateNewPatients [
 	self model cormasModel submodelAt: #disease do: [ :diseaseModel | 
 		newMild number: diseaseModel numberOfNewMild.
 		newSevere number: diseaseModel numberOfNewSevere.
+		newWorsened number: diseaseModel numberOfNewWorsened.
 		newRecovering number: diseaseModel numberOfNewRecovering.
 		newRecovered number: diseaseModel numberOfNewRecovered.
 		newDead number: diseaseModel numberOfNewDead ]

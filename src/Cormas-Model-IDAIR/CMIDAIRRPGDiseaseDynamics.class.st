@@ -11,13 +11,12 @@ Class {
 CMIDAIRRPGDiseaseDynamics class >> colors [
 
 	^ OrderedDictionary new
-		  at: 'susceptible' put: Color green;
-		  at: 'exposed' put: Color yellow;
-		  at: 'mild' put: (Color red mixed: 0.5 with: Color yellow);
+		  at: 'exposed' put: Color red;
+		  at: 'mild' put: Color red;
 		  at: 'severe' put: Color red;
-		  at: 'recovering' put: (Color red mixed: 0.5 with: Color blue);
-		  at: 'hospitalized' put: Color gray;
-		  at: 'recovered' put: Color blue;
+		  at: 'recovering' put: Color red;
+		  at: 'hospitalized' put: Color red;
+		  at: 'recovered' put: Color red;
 		  at: 'dead' put: Color black;
 		  yourself
 ]
