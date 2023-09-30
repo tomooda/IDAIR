@@ -88,6 +88,18 @@ CMIDAIRRPGDiseaseDynamics >> initialize [
 	duration := 0.0
 ]
 
+{ #category : #testing }
+CMIDAIRRPGDiseaseDynamics >> isMildSymptom [
+
+	^ false
+]
+
+{ #category : #testing }
+CMIDAIRRPGDiseaseDynamics >> isSevereSymptom [
+
+	^ false
+]
+
 { #category : #accessing }
 CMIDAIRRPGDiseaseDynamics >> next [
 

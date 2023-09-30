@@ -25,6 +25,12 @@ CMIDAIRRPGRecovering >> color [
 	^ Color red mixed: 0.5 with: Color blue
 ]
 
+{ #category : #testing }
+CMIDAIRRPGRecovering >> isMildSymptom [
+
+	^ true
+]
+
 { #category : #accessing }
 CMIDAIRRPGRecovering >> name [
 

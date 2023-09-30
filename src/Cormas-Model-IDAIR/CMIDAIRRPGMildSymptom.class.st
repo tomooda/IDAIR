@@ -25,6 +25,12 @@ CMIDAIRRPGMildSymptom >> color [
 	^ Color red mixed: 0.5 with: Color yellow
 ]
 
+{ #category : #testing }
+CMIDAIRRPGMildSymptom >> isMildSymptom [
+
+	^ true
+]
+
 { #category : #accessing }
 CMIDAIRRPGMildSymptom >> name [
 

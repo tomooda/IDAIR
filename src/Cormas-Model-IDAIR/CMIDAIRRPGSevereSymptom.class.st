@@ -9,7 +9,10 @@ CMIDAIRRPGSevereSymptom class >> newFrom: aCMIDAIRSEIRDiseaseDynamics [
 
 	aCMIDAIRSEIRDiseaseDynamics citizen cormasModel
 		submodelAt: #disease
-		do: [ :diseaseModel | diseaseModel incrementNewSevere ].
+		do: [ :diseaseModel | 
+			aCMIDAIRSEIRDiseaseDynamics isMildSymptom
+				ifTrue: [ diseaseModel incrementNewWorsened ]
+				ifFalse: [ diseaseModel incrementNewSevere ] ].
 	^ super newFrom: aCMIDAIRSEIRDiseaseDynamics
 ]
 
@@ -23,6 +26,12 @@ CMIDAIRRPGSevereSymptom >> beta [
 CMIDAIRRPGSevereSymptom >> color [
 
 	^ Color red
+]
+
+{ #category : #testing }
+CMIDAIRRPGSevereSymptom >> isSevereSymptom [
+
+	^ true
 ]
 
 { #category : #accessing }

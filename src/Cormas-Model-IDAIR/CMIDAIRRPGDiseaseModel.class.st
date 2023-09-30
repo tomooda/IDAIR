@@ -138,7 +138,7 @@ CMIDAIRRPGDiseaseModel >> initialize [
 	tau_recovering := 5.0.
 	tau_recovered := 9999.0.
 	p_severe := 0.01.
-	p_dead := 0.01.
+	p_dead := 0.001.
 	self initializeRound
 ]
 
