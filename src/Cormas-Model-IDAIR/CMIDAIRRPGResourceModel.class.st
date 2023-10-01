@@ -5,7 +5,9 @@ Class {
 		'numICUs',
 		'numBeds',
 		'occupiedICUs',
-		'occupiedBeds'
+		'occupiedBeds',
+		'historyOfOccupiedICUs',
+		'historyOfOccupiedBeds'
 	],
 	#category : #'Cormas-Model-IDAIR-Resource-RPG'
 }
@@ -58,6 +60,18 @@ CMIDAIRRPGResourceModel >> defaultCitizenResourceDynamicsClass [
 	^ CMIDAIRRPGCitizenResourceDynamics
 ]
 
+{ #category : #accessing }
+CMIDAIRRPGResourceModel >> historyOfOccupiedBeds [
+
+	^ historyOfOccupiedBeds
+]
+
+{ #category : #accessing }
+CMIDAIRRPGResourceModel >> historyOfOccupiedICUs [
+
+	^ historyOfOccupiedICUs
+]
+
 { #category : #operations }
 CMIDAIRRPGResourceModel >> increaseBeds: anInteger ICUs: anotherInteger [
 
@@ -78,7 +92,9 @@ CMIDAIRRPGResourceModel >> initialize [
 	numICUs := 4.
 	numBeds := 10.
 	occupiedBeds := 0.
-	occupiedICUs := 0
+	occupiedICUs := 0.
+	historyOfOccupiedBeds := OrderedCollection new.
+	historyOfOccupiedICUs := OrderedCollection new
 ]
 
 { #category : #accessing }
@@ -147,10 +163,24 @@ CMIDAIRRPGResourceModel >> occupyICU: anInteger [
 	occupiedICUs := occupiedICUs + anInteger min: numICUs
 ]
 
+{ #category : #operations }
+CMIDAIRRPGResourceModel >> recordHistory [
+
+	historyOfOccupiedBeds add: occupiedBeds.
+	historyOfOccupiedICUs add: occupiedICUs
+]
+
 { #category : #accessing }
 CMIDAIRRPGResourceModel >> socialPreventionResourceFactor [
 
 	^ 1.0
+]
+
+{ #category : #accessing }
+CMIDAIRRPGResourceModel >> step: anInteger [
+
+	super step: anInteger.
+	self recordHistory
 ]
 
 { #category : #control }

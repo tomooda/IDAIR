@@ -52,14 +52,8 @@ CMIDAIRRPGPresenter >> initializePresenters [
 		            addPage: (self newNotebookPage
 				             title: 'Population chart';
 				             presenterProvider: [ 
-					             populationChart := self model cormasModel chartPresenter.
-					             populationChart optionsPresenter probesMinMaxOptionsPresenter
-						             fixMaxInputPresenter text:
-							             self model cormasModel theCitizens size
-								             printString.
-					             populationChart optionsPresenter probesMinMaxOptionsPresenter
-						             fixMaxCheckPresenter state: true.
-					             populationChart ];
+					             populationChart := CMIDAIRRPGPopulationChartPresenter 
+						                                on: self model cormasModel ];
 				             yourself);
 		            addPage: (self newNotebookPage
 				             title: 'Citizens status chart';
@@ -146,7 +140,7 @@ CMIDAIRRPGPresenter >> runSimulation [
 							progress value: count // step ] ] ].
 			daysLabel label: (model cormasModel timeStep * model daysPerStep 
 					 printShowingDecimalPlaces: 2).
-			populationChart ifNotNil: [ populationChart newMaxX: model cormasModel timeStep ].
+			populationChart ifNotNil: [ populationChart refresh ].
 			citizensChart ifNotNil: #refresh.
 			medicalChart ifNotNil: #refresh.
 			map ifNotNil: #refresh.

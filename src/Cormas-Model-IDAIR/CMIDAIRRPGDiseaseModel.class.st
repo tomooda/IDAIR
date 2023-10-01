@@ -92,9 +92,28 @@ CMIDAIRRPGDiseaseModel >> defaultDiseaseDynamicsClass [
 	^ CMIDAIRRPGSusceptible
 ]
 
-{ #category : #'round management' }
-CMIDAIRRPGDiseaseModel >> finalizeRound [
-	self recordHistory
+{ #category : #accessing }
+CMIDAIRRPGDiseaseModel >> historyOfDead [
+
+	^ historyOfDead
+]
+
+{ #category : #accessing }
+CMIDAIRRPGDiseaseModel >> historyOfInfected [
+
+	^ historyOfInfected
+]
+
+{ #category : #accessing }
+CMIDAIRRPGDiseaseModel >> historyOfRecovered [
+
+	^ historyOfRecovered
+]
+
+{ #category : #accessing }
+CMIDAIRRPGDiseaseModel >> historyOfSusceptive [
+
+	^ historyOfSusceptive
 ]
 
 { #category : #accessing }
@@ -274,6 +293,13 @@ CMIDAIRRPGDiseaseModel >> recordHistory [
 	historyOfInfected add: self numberOfInfected.
 	historyOfRecovered add: self numberOfRecovered.
 	historyOfDead add: self numberOfDead
+]
+
+{ #category : #accessing }
+CMIDAIRRPGDiseaseModel >> step: anInteger [
+
+	super step: anInteger.
+	self recordHistory
 ]
 
 { #category : #accessing }

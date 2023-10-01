@@ -12,8 +12,7 @@ Class {
 		'numBeds',
 		'occupiedICUs',
 		'numICUs',
-		'newWorsened',
-		'bedsChart'
+		'newWorsened'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
@@ -24,66 +23,6 @@ CMIDAIRRPGMedicalChartPresenter class >> defaultSpec [
 	^ SpBoxLayout newVertical
 		  add: #patientsChart expand: true;
 		  yourself
-]
-
-{ #category : #specs }
-CMIDAIRRPGMedicalChartPresenter class >> defaultSpec2 [
-
-	^ SpBoxLayout newVertical
-		  add: #patientsChart expand: true;
-		  add: (SpBoxLayout newHorizontal
-				   add: (SpBoxLayout newVertical
-						    add: (SpBoxLayout newHorizontal
-								     add: 'new mild symptoms' asPresenter width: 200;
-								     add: #newMild width: 100;
-								     yourself)
-						    expand: false;
-						    add: (SpBoxLayout newHorizontal
-								     add: 'new severe symptoms' asPresenter width: 200;
-								     add: #newSevere width: 100;
-								     yourself)
-						    expand: false;
-						    add: (SpBoxLayout newHorizontal
-								     add: 'new worsened symptoms' asPresenter width: 200;
-								     add: #newWorsened width: 100;
-								     yourself)
-						    expand: false;
-						    add: (SpBoxLayout newHorizontal
-								     add: 'new recovering to mild' asPresenter width: 200;
-								     add: #newRecovering width: 100;
-								     yourself)
-						    expand: false;
-						    add: (SpBoxLayout newHorizontal
-								     add: 'new recovered patients' asPresenter width: 200;
-								     add: #newRecovered width: 100;
-								     yourself)
-						    expand: false;
-						    add: (SpBoxLayout newHorizontal
-								     add: 'new deaths' asPresenter width: 200;
-								     add: #newDead width: 100;
-								     yourself)
-						    expand: false;
-						    yourself)
-				   expand: true;
-				   add: (SpBoxLayout newVertical
-						    add: (SpBoxLayout newHorizontal
-								     add: 'Regular Beds ' width: 100;
-								     add: #occupiedBeds expand: false;
-								     add: ' / ' expand: false;
-								     add: #numBeds expand: false;
-								     yourself)
-						    expand: false;
-						    add: (SpBoxLayout newHorizontal
-								     add: 'ICU Beds   ' width: 100;
-								     add: #occupiedICUs expand: false;
-								     add: ' / ' expand: false;
-								     add: #numICUs expand: false;
-								     yourself)
-						    expand: false;
-						    yourself)
-				   expand: true;
-				   yourself)
-		  expand: false
 ]
 
 { #category : #accessing }
@@ -220,8 +159,8 @@ CMIDAIRRPGMedicalChartPresenter >> drawPatientsChart: aCanvas [
 	chart := RSChart new.
 	chart extent: 400 @ 80.
 	chart colors: (NSScale ordinal range: { 
-				 (Color blue mixed: 0.4 with: Color white).
-				 (Color blue mixed: 0.4 with: Color black) }).
+				 Color lightGray.
+				 Color darkGray }).
 
 	chart addPlot: (plot := CMIDAIRRSBedsPlot new
 			         x1: { 
@@ -255,8 +194,6 @@ CMIDAIRRPGMedicalChartPresenter >> initializePresenters [
 	super initializePresenters.
 	patientsChart := self newRoassal script: [ :canvas | 
 		                 self drawPatientsChart: canvas ].
-	bedsChart := self newRoassal script: [ :canvas | 
-		             self drawBedsChart: canvas ].
 	newMild := 0.
 	newSevere := 0.
 	newWorsened := 0.
@@ -291,8 +228,7 @@ CMIDAIRRPGMedicalChartPresenter >> refresh [
 	self
 		updateNewPatients;
 		updateResources.
-	patientsChart refresh.
-	bedsChart refresh
+	patientsChart refresh
 ]
 
 { #category : #initialization }
