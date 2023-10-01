@@ -18,7 +18,11 @@ Class {
 		'numberOfNewWorsened',
 		'numberOfNewRecovering',
 		'numberOfNewRecovered',
-		'numberOfNewDead'
+		'numberOfNewDead',
+		'historyOfSusceptive',
+		'historyOfInfected',
+		'historyOfRecovered',
+		'historyOfDead'
 	],
 	#category : #'Cormas-Model-IDAIR-Disease-RPG'
 }
@@ -88,6 +92,11 @@ CMIDAIRRPGDiseaseModel >> defaultDiseaseDynamicsClass [
 	^ CMIDAIRRPGSusceptible
 ]
 
+{ #category : #'round management' }
+CMIDAIRRPGDiseaseModel >> finalizeRound [
+	self recordHistory
+]
+
 { #category : #accessing }
 CMIDAIRRPGDiseaseModel >> incrementNewDead [
 
@@ -139,10 +148,14 @@ CMIDAIRRPGDiseaseModel >> initialize [
 	tau_recovered := 9999.0.
 	p_severe := 0.01.
 	p_dead := 0.001.
+	historyOfSusceptive := OrderedCollection new.
+	historyOfInfected := OrderedCollection new.
+	historyOfRecovered := OrderedCollection new.
+	historyOfDead := OrderedCollection new.
 	self initializeRound
 ]
 
-{ #category : #initialization }
+{ #category : #'round management' }
 CMIDAIRRPGDiseaseModel >> initializeRound [
 
 	super initializeRound.
@@ -152,6 +165,26 @@ CMIDAIRRPGDiseaseModel >> initializeRound [
 	numberOfNewRecovering := 0.
 	numberOfNewRecovered := 0.
 	numberOfNewDead := 0
+]
+
+{ #category : #accessing }
+CMIDAIRRPGDiseaseModel >> numberOfDead [
+
+	| num |
+	num := 0.
+	self cormasModel theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isDead ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #accessing }
+CMIDAIRRPGDiseaseModel >> numberOfInfected [
+
+	| num |
+	num := 0.
+	self cormasModel theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isInfected ifTrue: [ num := num + 1 ] ].
+	^ num
 ]
 
 { #category : #accessing }
@@ -191,6 +224,26 @@ CMIDAIRRPGDiseaseModel >> numberOfNewWorsened [
 ]
 
 { #category : #accessing }
+CMIDAIRRPGDiseaseModel >> numberOfRecovered [
+
+	| num |
+	num := 0.
+	self cormasModel theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isRecovered ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #accessing }
+CMIDAIRRPGDiseaseModel >> numberOfSusceptible [
+
+	| num |
+	num := 0.
+	self cormasModel theCitizens do: [ :citizen | 
+		citizen isSusceptible ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #accessing }
 CMIDAIRRPGDiseaseModel >> p_dead [
 
 	^ p_dead
@@ -212,6 +265,15 @@ CMIDAIRRPGDiseaseModel >> p_severe [
 CMIDAIRRPGDiseaseModel >> p_severe: aNumber [
 
 	p_severe := aNumber
+]
+
+{ #category : #accessing }
+CMIDAIRRPGDiseaseModel >> recordHistory [
+
+	historyOfSusceptive add: self numberOfSusceptible.
+	historyOfInfected add: self numberOfInfected.
+	historyOfRecovered add: self numberOfRecovered.
+	historyOfDead add: self numberOfDead
 ]
 
 { #category : #accessing }

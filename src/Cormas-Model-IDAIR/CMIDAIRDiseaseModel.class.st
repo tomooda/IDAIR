@@ -28,13 +28,17 @@ CMIDAIRDiseaseModel >> defaultDiseaseDynamicsClass [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'round management' }
+CMIDAIRDiseaseModel >> finalizeRound [
+]
+
 { #category : #initialization }
 CMIDAIRDiseaseModel >> init [
 
 	
 ]
 
-{ #category : #control }
+{ #category : #'round management' }
 CMIDAIRDiseaseModel >> initializeRound [
 ]
 
