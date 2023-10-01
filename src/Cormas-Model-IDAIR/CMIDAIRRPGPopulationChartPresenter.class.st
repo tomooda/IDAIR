@@ -32,8 +32,8 @@ CMIDAIRRPGPopulationChartPresenter class >> deadIcon [
 CMIDAIRRPGPopulationChartPresenter class >> defaultSpec [
 
 	^ SpBoxLayout newHorizontal
+		  add: #populationChart expand: true;
 		  add: (SpBoxLayout newVertical
-				   vAlignEnd;
 				   add: (SpBoxLayout newHorizontal
 						    vAlignCenter;
 						    add: #susceptibleCheckbox width: 16;
@@ -73,7 +73,6 @@ CMIDAIRRPGPopulationChartPresenter class >> defaultSpec [
 				   add: '' asPresenter expand: false;
 				   yourself)
 		  expand: false;
-		  add: #populationChart expand: true;
 		  yourself
 ]
 
