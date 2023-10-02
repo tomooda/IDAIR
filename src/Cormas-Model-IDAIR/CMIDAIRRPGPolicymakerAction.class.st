@@ -147,10 +147,9 @@ CMIDAIRRPGPolicymakerAction >> askEffectiveRate [
 	(UIManager default
 		 request: 'Effective rate among citizens?'
 		 initialAnswer: '1.0') ifNotNil: [ :answer | 
-		[ 
 		| rate |
 		rate := answer asFloat.
-		(rate between: 0.0 and: 1.0) ifTrue: [ ^ rate ] ] ].
+		(rate between: 0.0 and: 1.0) ifTrue: [ ^ rate ] ].
 	^ nil
 ]
 
@@ -173,7 +172,9 @@ CMIDAIRRPGPolicymakerAction >> execute: aCMIDAIRContactModel [
 		aCMIDAIRContactModel socialProfile transientFactor:
 			self transientFactor ** rate.
 		aCMIDAIRContactModel socialProfile multiplyCummulativeFactor:
-			self cummulativeFactor ** rate ]
+			self cummulativeFactor ** rate.
+		aCMIDAIRContactModel cormasModel recordHistory:
+			(self name , '(' , rate printString , ')') asText ]
 ]
 
 { #category : #initialization }

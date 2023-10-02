@@ -100,6 +100,7 @@ CMIDAIRRPGActionPresenter >> citizenPlay: action [
 CMIDAIRRPGActionPresenter >> clearRound [
 
 	self model ifNotNil: #clearRound.
+	self model cormasModel nextHistory.
 	playerList refresh
 ]
 
@@ -313,6 +314,12 @@ CMIDAIRRPGActionPresenter >> pollPolicymakerAction [
 	policyMakerActionList selectedItem ifNotNil: [ :action | 
 		pendingPolicymakerActionList items:
 			pendingPolicymakerActionList items , { action } ]
+]
+
+{ #category : #operations }
+CMIDAIRRPGActionPresenter >> recordHistory: aText [
+
+	self model cormasModel recordHistory: aText
 ]
 
 { #category : #operations }

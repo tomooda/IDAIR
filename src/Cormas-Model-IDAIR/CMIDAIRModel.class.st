@@ -7,7 +7,7 @@ Class {
 		'submodels',
 		'isHeadless',
 		'initializer',
-		'theCommunityHealthcareWorkers'
+		'history'
 	],
 	#category : #'Cormas-Model-IDAIR-Core'
 }
@@ -212,6 +212,14 @@ CMIDAIRModel >> defaultLocationDynamicsClass [
 		  do: [ :locationModel | locationModel defaultLocationDynamicsClass ]
 ]
 
+{ #category : #history }
+CMIDAIRModel >> historyAt: anInteger [
+
+	^ (anInteger between: 1 and: history size)
+		  ifTrue: [ String cr asText join: (history at: anInteger) ]
+		  ifFalse: [ Text new ]
+]
+
 { #category : #'user interfaces' }
 CMIDAIRModel >> ifGUI: aBlock [
 
@@ -278,7 +286,8 @@ CMIDAIRModel >> initialize [
 
 	super initialize.
 	submodels := Dictionary new.
-	isHeadless := false
+	isHeadless := false.
+	history := OrderedCollection with: OrderedCollection new
 ]
 
 { #category : #initialization }
@@ -315,6 +324,12 @@ CMIDAIRModel >> loadDefaultSubmodels [
 	self addSubmodel: (CMIDAIRRPGLocationModelFor6 on: self).
 	self addSubmodel: (CMIDAIRRPGResourceModel on: self).
 	self addSubmodel: (CMIDAIRSimpleTimeModel on: self)
+]
+
+{ #category : #history }
+CMIDAIRModel >> nextHistory [
+
+	history add: OrderedCollection new
 ]
 
 { #category : #probes }
@@ -438,6 +453,12 @@ CMIDAIRModel >> openGUI [
 		self asPresenter openWithSpec ]
 ]
 
+{ #category : #history }
+CMIDAIRModel >> recordHistory: aText [
+
+	history last add: aText asText
+]
+
 { #category : #removing }
 CMIDAIRModel >> removeDestroyedEntities [
 
@@ -491,20 +512,6 @@ CMIDAIRModel >> theCitizens [
 CMIDAIRModel >> theCitizens: aCollectionOfCMIDAIRCitizen [
 
 	theCitizens := aCollectionOfCMIDAIRCitizen
-]
-
-{ #category : #accessing }
-CMIDAIRModel >> theCommunityHealthcareWorkers [
-
-	^ theCommunityHealthcareWorkers
-		  ifNil: [ theCommunityHealthcareWorkers := OrderedCollection new ]
-		  ifNotNil: [ theCommunityHealthcareWorkers ]
-]
-
-{ #category : #accessing }
-CMIDAIRModel >> theCommunityHealthcareWorkers: aCollectionOfCMIDAIRCommunityHealthcareWorker [
-
-	theCommunityHealthcareWorkers := aCollectionOfCMIDAIRCommunityHealthcareWorker
 ]
 
 { #category : #accessing }

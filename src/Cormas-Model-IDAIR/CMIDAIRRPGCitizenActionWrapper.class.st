@@ -43,7 +43,11 @@ CMIDAIRRPGCitizenActionWrapper >> execute: aCMIDAIRCitizen [
 	aCMIDAIRCitizen contactProfile
 		actionFactor: self contactFactor;
 		addToWellbeingPoints: self wellbeingPoints.
-	aCMIDAIRCitizen locationDynamics locationDesignators: self locations
+	aCMIDAIRCitizen locationDynamics locationDesignators: self locations.
+	aCMIDAIRCitizen contactProfile isMuppetContactProfile ifFalse: [ 
+		aCMIDAIRCitizen cormasModel recordHistory:
+			(aCMIDAIRCitizen contactProfile playerName , ': ') asText allBold
+			, self name asText ]
 ]
 
 { #category : #accessing }

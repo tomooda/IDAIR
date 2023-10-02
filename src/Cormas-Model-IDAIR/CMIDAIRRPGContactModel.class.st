@@ -116,6 +116,12 @@ CMIDAIRRPGContactModel >> playerIndexOf: aCMIDAIRCitizen [
 ]
 
 { #category : #accessing }
+CMIDAIRRPGContactModel >> playerNameOf: aCMIDAIRCitizen [
+
+	^ players keyAtValue: aCMIDAIRCitizen ifAbsent: [  ]
+]
+
+{ #category : #accessing }
 CMIDAIRRPGContactModel >> playerNamed: aString [
 
 	^ players at: aString ifAbsent: [ nil ]

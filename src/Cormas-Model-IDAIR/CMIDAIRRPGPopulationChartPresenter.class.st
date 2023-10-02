@@ -8,7 +8,11 @@ Class {
 		'recoveredCheckbox',
 		'deadCheckbox',
 		'occupiedBedsCheckbox',
-		'occupiedICUsCheckbox'
+		'occupiedICUsCheckbox',
+		'decDayButton',
+		'incDayButton',
+		'dayField',
+		'historyText'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
@@ -31,8 +35,9 @@ CMIDAIRRPGPopulationChartPresenter class >> deadIcon [
 { #category : #specs }
 CMIDAIRRPGPopulationChartPresenter class >> defaultSpec [
 
-	^ SpBoxLayout newHorizontal
-		  add: #populationChart expand: true;
+	^ SpPanedLayout newHorizontal
+		  positionOfSlider: 0.75;
+		  add: #populationChart;
 		  add: (SpBoxLayout newVertical
 				   add: (SpBoxLayout newHorizontal
 						    vAlignCenter;
@@ -71,8 +76,15 @@ CMIDAIRRPGPopulationChartPresenter class >> defaultSpec [
 						    add: ' Occupied regular beds ' asPresenter)
 				   expand: false;
 				   add: '' asPresenter expand: false;
-				   yourself)
-		  expand: false;
+				   add: (SpBoxLayout newHorizontal
+						    vAlignCenter;
+						    add: #decDayButton width: self buttonHeight;
+						    add: #dayField width: 100;
+						    add: #incDayButton width: self buttonHeight;
+						    yourself)
+				   expand: false;
+				   add: #historyText;
+				   yourself);
 		  yourself
 ]
 
@@ -160,7 +172,7 @@ CMIDAIRRPGPopulationChartPresenter >> deadColor [
 { #category : #drawing }
 CMIDAIRRPGPopulationChartPresenter >> drawPopulationChart: aCanvas [
 
-	| chart daysPerStep |
+	| chart daysPerStep day |
 	aCanvas color: Color white.
 	chart := RSChart new.
 	chart container: aCanvas.
@@ -214,8 +226,12 @@ CMIDAIRRPGPopulationChartPresenter >> drawPopulationChart: aCanvas [
 				 yourself);
 		xlabel: 'Time (day)';
 		title: 'Course of the situation'.
-	chart plots ifEmpty: [ 
-		chart addPlot: (RSLinePlot new x: { 0 } y: { 0 }) ].
+	chart plots
+		ifNotEmpty: [ :plots | 
+			day := dayField number.
+			day * daysPerStep <= plots first xValues last ifTrue: [ 
+				chart addDecoration: (RSXMarkerDecoration new value: day) ] ]
+		ifEmpty: [ chart addPlot: (RSLinePlot new x: { 0 } y: { 0 }) ].
 	chart build.
 	RSZoomToFitCanvasInteraction new zoomToFitOnStart: aCanvas
 ]
@@ -256,7 +272,37 @@ CMIDAIRRPGPopulationChartPresenter >> initializePresenters [
 	occupiedICUsCheckbox := self newCheckBox
 		                        state: true;
 		                        whenChangedDo: [ self refresh ];
-		                        yourself
+		                        yourself.
+	decDayButton := self newButton
+		                label: '<';
+		                action: [ 
+			                dayField number:
+					                (dayField number - 1 // 7 - 1 * 7 + 1 max: 1) ];
+		                yourself.
+	incDayButton := self newButton
+		                label: '>';
+		                action: [ 
+			                dayField number:
+					                dayField number - 1 // 7 + 1 * 7 + 1 ];
+		                yourself.
+	dayField := self newNumberInput
+		            beInteger;
+		            number: 1;
+		            climbRate: 7;
+		            whenNumberChangedDo: [ :day | 
+			            populationChart refresh.
+			            historyText text:
+					            (self model historyAt: day - 1 // 7 + 1) ];
+		            yourself.
+	historyText := self newText
+]
+
+{ #category : #accessing }
+CMIDAIRRPGPopulationChartPresenter >> modelChanged [
+
+	super modelChanged.
+	self model ifNotNil: [ :model | 
+		dayField text: (model timeStep + 1) printString ]
 ]
 
 { #category : #'accessing-color' }
@@ -280,7 +326,8 @@ CMIDAIRRPGPopulationChartPresenter >> recoveredColor [
 { #category : #accessing }
 CMIDAIRRPGPopulationChartPresenter >> refresh [
 
-	populationChart refresh
+	populationChart refresh.
+	dayField text: (self model timeStep + 1) printString
 ]
 
 { #category : #'accessing-color' }
