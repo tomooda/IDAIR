@@ -27,25 +27,27 @@ CMIDAIRRPGPolicymakerAction class >> all [
 		  self socialDistancing5.
 		  self lockdown.
 		  CMIDAIRRPGHospitalAction increase1ICU2RB.
-		  CMIDAIRRPGHospitalAction increase2ICU4RB }
+		  CMIDAIRRPGHospitalAction increase2ICU4RB } asSortedCollection: [ 
+		  :less 
+		  :more | less name <= more name ]
 ]
 
 { #category : #constants }
 CMIDAIRRPGPolicymakerAction class >> closeBorder [
 
-	^ self name: 'Close the border' transientFactor: 0.7
+	^ self name: 'ID:34 Close the border' transientFactor: 0.7
 ]
 
 { #category : #constants }
 CMIDAIRRPGPolicymakerAction class >> facemask [
 
-	^ self name: 'Wear a facemask' transientFactor: 0.8
+	^ self name: 'ID:35 Wear a facemask' transientFactor: 0.8
 ]
 
 { #category : #constants }
 CMIDAIRRPGPolicymakerAction class >> lockdown [
 
-	^ self name: 'Lockdown' transientFactor: 0.5
+	^ self name: 'ID:32 Lockdown' transientFactor: 0.5
 ]
 
 { #category : #'instance creation' }
@@ -76,67 +78,67 @@ CMIDAIRRPGPolicymakerAction class >> name: aString transientFactor: aNumber cumm
 { #category : #constants }
 CMIDAIRRPGPolicymakerAction class >> openQuarrantineCamp [
 
-	^ self name: 'Open quarantine camp' cummulativeFactor: 0.8
+	^ self name: 'ID:33 Quarantine' cummulativeFactor: 0.8
 ]
 
 { #category : #constants }
 CMIDAIRRPGPolicymakerAction class >> socialDistancing1 [
 
-	^ self name: 'Social distancing level 1' transientFactor: 0.9
+	^ self name: 'ID:27 Social distancing level 1' transientFactor: 0.9
 ]
 
 { #category : #constants }
 CMIDAIRRPGPolicymakerAction class >> socialDistancing2 [
 
-	^ self name: 'Social distancing level 2' transientFactor: 0.8
+	^ self name: 'ID:28 Social distancing level 2' transientFactor: 0.8
 ]
 
 { #category : #constants }
 CMIDAIRRPGPolicymakerAction class >> socialDistancing3 [
 
-	^ self name: 'Social distancing level 3' transientFactor: 0.75
+	^ self name: 'ID:29 Social distancing level 3' transientFactor: 0.75
 ]
 
 { #category : #constants }
 CMIDAIRRPGPolicymakerAction class >> socialDistancing4 [
 
-	^ self name: 'Social distancing level 4' transientFactor: 0.7
+	^ self name: 'ID:30 Social distancing level 4' transientFactor: 0.7
 ]
 
 { #category : #constants }
 CMIDAIRRPGPolicymakerAction class >> socialDistancing5 [
 
-	^ self name: 'Social distancing level 5' transientFactor: 0.65
+	^ self name: 'ID:31 Social distancing level 5' transientFactor: 0.65
 ]
 
 { #category : #constants }
 CMIDAIRRPGPolicymakerAction class >> treatmentGuideline [
 
-	^ self name: 'Issue treatment guideline' cummulativeFactor: 0.8
+	^ self name: 'ID:22 Issue treatment guidelines' cummulativeFactor: 0.8
 ]
 
 { #category : #constants }
 CMIDAIRRPGPolicymakerAction class >> vaccination100 [
 
-	^ self name: 'Vaccination to 100% people' cummulativeFactor: 0.01
+	^ self name: 'ID:26 Provide vaccine to 100% of population' cummulativeFactor: 0.01
 ]
 
 { #category : #constants }
 CMIDAIRRPGPolicymakerAction class >> vaccination25 [
 
-	^ self name: 'Vaccination to 25% people' cummulativeFactor: 0.75
+	^ self name: 'ID:23 Provide vaccine to 25% of population' cummulativeFactor: 0.75
 ]
 
 { #category : #constants }
 CMIDAIRRPGPolicymakerAction class >> vaccination50 [
 
-	^ self name: 'Vaccination to 50% people' cummulativeFactor: 0.5
+	^ self name: 'ID:24 Provide vaccine to 50% of population' cummulativeFactor: 0.5
 ]
 
 { #category : #constants }
 CMIDAIRRPGPolicymakerAction class >> vaccination75 [
 
-	^ self name: 'Vaccination to 75% people' cummulativeFactor: 0.25
+	^ self name: 'ID:25 Provide vaccine to 75% of population' cummulativeFactor: 0.25
 ]
 
 { #category : #accessing }

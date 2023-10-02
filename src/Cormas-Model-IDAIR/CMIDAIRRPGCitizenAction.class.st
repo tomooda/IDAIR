@@ -30,15 +30,15 @@ CMIDAIRRPGCitizenAction class >> all [
 		  self shopping.
 		  self regularHealthCheckup.
 		  self gettingMonthlyMedication.
-		  self seekHealthcare.
-		  self gettingFacemask }
+		  self seekHealthcare } asSortedCollection: [ :less :more | 
+		  less name <= more name ]
 ]
 
 { #category : #constants }
 CMIDAIRRPGCitizenAction class >> bringFamilyToHospital [
 
 	^ self
-		  name: 'Bring family to the hospital'
+		  name: 'ID:02 Bring family to the hospital'
 		  contactFactor: 1.5
 		  wellbeingPoints: 5
 		  locationsForYes: { #hospital }
@@ -49,7 +49,7 @@ CMIDAIRRPGCitizenAction class >> bringFamilyToHospital [
 CMIDAIRRPGCitizenAction class >> businessTrip [
 
 	^ self
-		  name: 'Business trip'
+		  name: 'ID:01 Business trip'
 		  contactFactor: 2.0
 		  wellbeingPoints: 10
 		  locationsForYes: { #out }
@@ -60,7 +60,7 @@ CMIDAIRRPGCitizenAction class >> businessTrip [
 CMIDAIRRPGCitizenAction class >> buyBasic [
 
 	^ self
-		  name: 'Buy basic living necessities'
+		  name: 'ID:03 Buy basic living necessities'
 		  contactFactor: 1.5
 		  wellbeingPoints: 15
 		  locationsForYes: { #suburban . #urban }
@@ -71,7 +71,7 @@ CMIDAIRRPGCitizenAction class >> buyBasic [
 CMIDAIRRPGCitizenAction class >> earnLiving [
 
 	^ self
-		  name: 'Earn a living'
+		  name: 'ID:04 Earn a living'
 		  contactFactor: 1.5
 		  wellbeingPoints: 15
 		  locationsForYes: { #urban }
@@ -82,7 +82,7 @@ CMIDAIRRPGCitizenAction class >> earnLiving [
 CMIDAIRRPGCitizenAction class >> faceToFace [
 
 	^ self
-		  name: 'Face to face chat'
+		  name: 'ID:05 Face to face chat'
 		  contactFactor: 2.0
 		  wellbeingPoints: 5
 		  locationsForYes: { #urban. #suburban }
@@ -93,7 +93,7 @@ CMIDAIRRPGCitizenAction class >> faceToFace [
 CMIDAIRRPGCitizenAction class >> fieldTrip [
 
 	^ self
-		  name: 'Field trip'
+		  name: 'ID:06 Field trip'
 		  contactFactor: 1.0
 		  wellbeingPoints: 5
 		  locationsForYes: { #out }
@@ -115,7 +115,7 @@ CMIDAIRRPGCitizenAction class >> gettingFacemask [
 CMIDAIRRPGCitizenAction class >> gettingMonthlyMedication [
 
 	^ self
-		  name: 'Getting monthly medication'
+		  name: 'ID:07 Getting monthly medication'
 		  contactFactor: 1.5
 		  wellbeingPoints: 5
 		  locationsForYes: { #hospital . #urban . #suburban }
@@ -126,7 +126,7 @@ CMIDAIRRPGCitizenAction class >> gettingMonthlyMedication [
 CMIDAIRRPGCitizenAction class >> goToBar [
 
 	^ self
-		  name: 'Go to bar'
+		  name: 'ID:08 Go to bar'
 		  contactFactor: 2.5
 		  wellbeingPoints: 15
 		  locationsForYes: { #urban }
@@ -137,7 +137,7 @@ CMIDAIRRPGCitizenAction class >> goToBar [
 CMIDAIRRPGCitizenAction class >> goToCeremony [
 
 	^ self
-		  name: 'Go to a ceremony'
+		  name: 'ID:09 Go to a ceremony'
 		  contactFactor: 2.5
 		  wellbeingPoints: 10
 		  locationsForYes: { #urban }
@@ -148,7 +148,7 @@ CMIDAIRRPGCitizenAction class >> goToCeremony [
 CMIDAIRRPGCitizenAction class >> goToHospital [
 
 	^ self
-		  name: 'Go to the hospital'
+		  name: 'ID:12 Go to the hospital'
 		  contactFactor: 1.5
 		  wellbeingPoints: 5
 		  locationsForYes: { #hospital }
@@ -159,7 +159,7 @@ CMIDAIRRPGCitizenAction class >> goToHospital [
 CMIDAIRRPGCitizenAction class >> goToSchool [
 
 	^ self
-		  name: 'Go to school'
+		  name: 'ID:11 Go to school'
 		  contactFactor: 1.0
 		  wellbeingPoints: 5
 		  locationsForYes: { #suburban }
@@ -170,7 +170,7 @@ CMIDAIRRPGCitizenAction class >> goToSchool [
 CMIDAIRRPGCitizenAction class >> goToWedding [
 
 	^ self
-		  name: 'Go to a wedding'
+		  name: 'ID:10 Go to a wedding'
 		  contactFactor: 2.5
 		  wellbeingPoints: 15
 		  locationsForYes: { #urban }
@@ -192,7 +192,7 @@ CMIDAIRRPGCitizenAction class >> name: aString contactFactor: aNumber wellbeingP
 CMIDAIRRPGCitizenAction class >> regularHealthCheckup [
 
 	^ self
-		  name: 'Regular health checkup'
+		  name: 'ID:13 Regular health checkup'
 		  contactFactor: 1.5
 		  wellbeingPoints: 5
 		  locationsForYes: { #hospital }
@@ -203,7 +203,7 @@ CMIDAIRRPGCitizenAction class >> regularHealthCheckup [
 CMIDAIRRPGCitizenAction class >> seekHealthcare [
 
 	^ self
-		  name: 'Seek health care'
+		  name: 'ID:14 Seek health care'
 		  contactFactor: 1.5
 		  wellbeingPoints: 5
 		  locationsForYes: { #hospital  }
@@ -214,7 +214,7 @@ CMIDAIRRPGCitizenAction class >> seekHealthcare [
 CMIDAIRRPGCitizenAction class >> shopping [
 
 	^ self
-		  name: 'Shopping'
+		  name: 'ID:15 Shopping'
 		  contactFactor: 2.0
 		  wellbeingPoints: 5
 		  locationsForYes: { #urban }
@@ -225,7 +225,7 @@ CMIDAIRRPGCitizenAction class >> shopping [
 CMIDAIRRPGCitizenAction class >> travelAbroad [
 
 	^ self
-		  name: 'Travel abroad to study'
+		  name: 'ID:16 Travel abroad to study'
 		  contactFactor: 1.5
 		  wellbeingPoints: 15
 		  locationsForYes: { #out }
@@ -236,7 +236,7 @@ CMIDAIRRPGCitizenAction class >> travelAbroad [
 CMIDAIRRPGCitizenAction class >> workout [
 
 	^ self
-		  name: 'Work out at a gym'
+		  name: 'ID:17 Work out at a gym'
 		  contactFactor: 1.5
 		  wellbeingPoints: 5
 		  locationsForYes: { #urban }

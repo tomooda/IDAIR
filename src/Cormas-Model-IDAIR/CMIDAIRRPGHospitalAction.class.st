@@ -12,13 +12,14 @@ CMIDAIRRPGHospitalAction class >> all [
 
 	^ { 
 		  self assignRegularBed.
-		  self assignICU }
+		  self assignICU } asSortedCollection: [ :less :more | 
+		  less name <= more name ]
 ]
 
 { #category : #constants }
 CMIDAIRRPGHospitalAction class >> assignICU [
 
-	^ self name: 'Take ICU beds' block: [ :resourceModel | 
+	^ self name: 'ID:18 Occupy 1 ICU bed' block: [ :resourceModel | 
 		  (UIManager default
 			   request: 'Number of ICU beds?'
 			   initialAnswer: '1') ifNotNil: [ :answer | 
@@ -28,7 +29,7 @@ CMIDAIRRPGHospitalAction class >> assignICU [
 { #category : #constants }
 CMIDAIRRPGHospitalAction class >> assignRegularBed [
 
-	^ self name: 'Take regular beds' block: [ :resourceModel | 
+	^ self name: 'ID:19 Occupy 1 regular bed' block: [ :resourceModel | 
 		  (UIManager default
 			   request: 'Number of regular beds?'
 			   initialAnswer: '1') ifNotNil: [ :answer | 
@@ -39,7 +40,7 @@ CMIDAIRRPGHospitalAction class >> assignRegularBed [
 CMIDAIRRPGHospitalAction class >> increase1ICU2RB [
 
 	^ self
-		  name: 'Increase treatment capacity(1ICU+2RB)'
+		  name: 'ID:20 Increase bed capacity(1ICU+2RB)'
 		  block: [ :resourceModel | resourceModel increaseBeds: 2 ICUs: 1 ]
 ]
 
@@ -47,7 +48,7 @@ CMIDAIRRPGHospitalAction class >> increase1ICU2RB [
 CMIDAIRRPGHospitalAction class >> increase2ICU4RB [
 
 	^ self
-		  name: 'Increase treatment capacity(2ICU+4RB)'
+		  name: 'ID:21 Increase bed capacity(2ICU+4RB)'
 		  block: [ :resourceModel | resourceModel increaseBeds: 4 ICUs: 2 ]
 ]
 

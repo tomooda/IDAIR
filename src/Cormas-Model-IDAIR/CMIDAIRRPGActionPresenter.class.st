@@ -41,7 +41,6 @@ CMIDAIRRPGActionPresenter class >> defaultSpec [
 									    yourself)
 							   expand: false))
 			 width: 350).
-
 	policyMakerSpec := SpBoxLayout newVertical
 		                   add: (SpBoxLayout newHorizontal
 				                    add: 'Policymaker''s Actions' asPresenter
@@ -77,9 +76,9 @@ CMIDAIRRPGActionPresenter class >> defaultSpec [
 		  add: (SpBoxLayout newHorizontal
 				   add: citizenSpec expand: false;
 				   add: '    ' asPresenter width: 10;
-				   add: policyMakerSpec expand: false;
+				   add: hospitalManagerSpec expand: false;
 				   add: '    ' asPresenter width: 10;
-				   add: hospitalManagerSpec expand: false);
+				   add: policyMakerSpec expand: false);
 		  yourself
 ]
 
