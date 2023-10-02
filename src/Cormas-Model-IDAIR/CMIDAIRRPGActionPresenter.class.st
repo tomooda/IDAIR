@@ -10,6 +10,9 @@ Class {
 		'citizenActionNoButton',
 		'policyMakerActionButton',
 		'hospitalManagerActionButton',
+		'pendingPolicymakerActionList',
+		'executePendingPolicymakerActionButton',
+		'removePendingPolicymakerActionButton',
 		'gamePresenter'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
@@ -44,6 +47,17 @@ CMIDAIRRPGActionPresenter class >> defaultSpec [
 				                    add: 'Policymaker''s Actions' asPresenter
 				                    width: 200)
 		                   height: self labelHeight + 5;
+		                   add: 'Waiting for poll' expand: false;
+		                   add: #pendingPolicymakerActionList
+		                   height: self inputTextHeight * 5;
+		                   add: (SpBoxLayout newHorizontal
+				                    add: #removePendingPolicymakerActionButton
+				                    width: 50;
+				                    add: #executePendingPolicymakerActionButton
+				                    expand: true)
+		                   expand: false;
+		                   add: '' asPresenter expand: false;
+		                   add: 'New actions' expand: false;
 		                   add: #policyMakerActionList;
 		                   add: #policyMakerActionButton expand: false;
 		                   yourself.
@@ -194,16 +208,31 @@ CMIDAIRRPGActionPresenter >> initializePresenters [
 		                         display: [ :action | action name ];
 		                         yourself.
 	policyMakerActionButton := self newButton
-		                           label: 'YES';
-		                           action: [ self playPolicymakerAction ];
+		                           label: 'Poll';
+		                           action: [ self pollPolicymakerAction ];
 		                           yourself.
 	hospitalManagerActionList := self newList
-		                         display: [ :action | action name ];
-		                         yourself.
+		                             display: [ :action | action name ];
+		                             yourself.
 	hospitalManagerActionButton := self newButton
-		                           label: 'YES';
-		                           action: [ self playHospitalManagerAction ];
-		                           yourself
+		                               label: 'YES';
+		                               action: [ 
+			                               self playHospitalManagerAction ];
+		                               yourself.
+	pendingPolicymakerActionList := self newList
+		                                display: [ :action | action name ];
+		                                yourself.
+	executePendingPolicymakerActionButton := self newButton
+		                                         label: 'Yes';
+		                                         action: [ 
+			                                         self playPolicymakerAction ];
+		                                         yourself.
+	removePendingPolicymakerActionButton := self newButton
+		                                        label: 'Cancel';
+		                                        action: [ 
+			                                        self
+				                                        removePendingPolicymakerAction ];
+		                                        yourself
 ]
 
 { #category : #initialization }
@@ -248,8 +277,10 @@ CMIDAIRRPGActionPresenter >> playHospitalManagerAction [
 { #category : #operations }
 CMIDAIRRPGActionPresenter >> playPolicymakerAction [
 
-	policyMakerActionList selectedItem ifNotNil: [ :action | 
-		self policymakerPlay: action ]
+	pendingPolicymakerActionList selectedItem ifNotNil: [ :action | 
+		self policymakerPlay: action.
+		pendingPolicymakerActionList items:
+			(pendingPolicymakerActionList items copyWithout: action) ]
 ]
 
 { #category : #updating }
@@ -275,6 +306,22 @@ CMIDAIRRPGActionPresenter >> policymakerPlay: aCMIDAIRRPGAction [
 					submodelAt: #resource
 					do: [ :resourceModel | aCMIDAIRRPGAction execute: resourceModel ].
 				gamePresenter ifNotNil: #updateResources ] ]
+]
+
+{ #category : #operations }
+CMIDAIRRPGActionPresenter >> pollPolicymakerAction [
+
+	policyMakerActionList selectedItem ifNotNil: [ :action | 
+		pendingPolicymakerActionList items:
+			pendingPolicymakerActionList items , { action } ]
+]
+
+{ #category : #operations }
+CMIDAIRRPGActionPresenter >> removePendingPolicymakerAction [
+
+	pendingPolicymakerActionList selectedItem ifNotNil: [ :action | 
+		pendingPolicymakerActionList items:
+			(pendingPolicymakerActionList items copyWithout: action) ]
 ]
 
 { #category : #api }
