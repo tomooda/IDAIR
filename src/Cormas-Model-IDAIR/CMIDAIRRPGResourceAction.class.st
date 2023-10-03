@@ -1,5 +1,5 @@
 Class {
-	#name : #CMIDAIRRPGHospitalAction,
+	#name : #CMIDAIRRPGResourceAction,
 	#superclass : #CMIDAIRRPGAction,
 	#instVars : [
 		'block'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #constants }
-CMIDAIRRPGHospitalAction class >> all [
+CMIDAIRRPGResourceAction class >> all [
 
 	^ { 
 		  self assignRegularBed.
@@ -17,7 +17,7 @@ CMIDAIRRPGHospitalAction class >> all [
 ]
 
 { #category : #constants }
-CMIDAIRRPGHospitalAction class >> assignICU [
+CMIDAIRRPGResourceAction class >> assignICU [
 
 	^ self name: 'ID:18 Occupy 1 ICU bed' block: [ :resourceModel | 
 		  (UIManager default
@@ -29,7 +29,7 @@ CMIDAIRRPGHospitalAction class >> assignICU [
 ]
 
 { #category : #constants }
-CMIDAIRRPGHospitalAction class >> assignRegularBed [
+CMIDAIRRPGResourceAction class >> assignRegularBed [
 
 	^ self name: 'ID:19 Occupy 1 regular bed' block: [ :resourceModel | 
 		  (UIManager default
@@ -41,7 +41,7 @@ CMIDAIRRPGHospitalAction class >> assignRegularBed [
 ]
 
 { #category : #constants }
-CMIDAIRRPGHospitalAction class >> increase1ICU2RB [
+CMIDAIRRPGResourceAction class >> increase1ICU2RB [
 
 	^ self
 		  name: 'ID:20 Increase bed capacity(1ICU+2RB)'
@@ -51,7 +51,7 @@ CMIDAIRRPGHospitalAction class >> increase1ICU2RB [
 ]
 
 { #category : #constants }
-CMIDAIRRPGHospitalAction class >> increase2ICU4RB [
+CMIDAIRRPGResourceAction class >> increase2ICU4RB [
 
 	^ self
 		  name: 'ID:21 Increase bed capacity(2ICU+4RB)'
@@ -61,7 +61,7 @@ CMIDAIRRPGHospitalAction class >> increase2ICU4RB [
 ]
 
 { #category : #'instance creation' }
-CMIDAIRRPGHospitalAction class >> name: aString block: aBlock [
+CMIDAIRRPGResourceAction class >> name: aString block: aBlock [
 
 	^ (self name: aString)
 		  block: aBlock;
@@ -69,19 +69,19 @@ CMIDAIRRPGHospitalAction class >> name: aString block: aBlock [
 ]
 
 { #category : #accessing }
-CMIDAIRRPGHospitalAction >> block [
+CMIDAIRRPGResourceAction >> block [
 
 	^ block
 ]
 
 { #category : #accessing }
-CMIDAIRRPGHospitalAction >> block: aBlock [
+CMIDAIRRPGResourceAction >> block: aBlock [
 
 	block := aBlock
 ]
 
 { #category : #execution }
-CMIDAIRRPGHospitalAction >> execute: aCMIDAIRRPGResourceModel [
+CMIDAIRRPGResourceAction >> execute: aCMIDAIRRPGResourceModel [
 
 	(block value: aCMIDAIRRPGResourceModel) ifNotNil: [ :string | 
 		aCMIDAIRRPGResourceModel cormasModel recordHistory:

@@ -66,13 +66,13 @@ CMIDAIRRPGContactModel >> defaultContactProfileClass [
 { #category : #defaults }
 CMIDAIRRPGContactModel >> defaultHospitalManagerActions [
 
-	^ CMIDAIRRPGHospitalAction all
+	^ CMIDAIRRPGResourceAction all
 ]
 
 { #category : #defaults }
 CMIDAIRRPGContactModel >> defaultPolicymakerActions [
 
-	^ CMIDAIRRPGPolicymakerAction all
+	^ CMIDAIRRPGSocialAction all
 ]
 
 { #category : #accessing }

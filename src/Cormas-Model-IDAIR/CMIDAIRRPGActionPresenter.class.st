@@ -208,7 +208,7 @@ CMIDAIRRPGActionPresenter >> initializePresenters [
 		                         display: [ :action | action name ];
 		                         yourself.
 	policyMakerActionButton := self newButton
-		                           label: 'Poll';
+		                           label: 'Yes';
 		                           action: [ self pollPolicymakerAction ];
 		                           yourself.
 	hospitalManagerActionList := self newList
@@ -223,7 +223,7 @@ CMIDAIRRPGActionPresenter >> initializePresenters [
 		                                display: [ :action | action name ];
 		                                yourself.
 	executePendingPolicymakerActionButton := self newButton
-		                                         label: 'Yes';
+		                                         label: 'Poll';
 		                                         action: [ 
 			                                         self playPolicymakerAction ];
 		                                         yourself.
@@ -299,7 +299,7 @@ CMIDAIRRPGActionPresenter >> playerName [
 CMIDAIRRPGActionPresenter >> policymakerPlay: aCMIDAIRRPGAction [
 
 	self model ifNotNil: [ :contactModel | 
-		aCMIDAIRRPGAction isContactAction
+		aCMIDAIRRPGAction isSocialAction
 			ifTrue: [ aCMIDAIRRPGAction execute: contactModel ]
 			ifFalse: [ 
 				contactModel cormasModel
@@ -312,8 +312,11 @@ CMIDAIRRPGActionPresenter >> policymakerPlay: aCMIDAIRRPGAction [
 CMIDAIRRPGActionPresenter >> pollPolicymakerAction [
 
 	policyMakerActionList selectedItem ifNotNil: [ :action | 
-		pendingPolicymakerActionList items:
-			pendingPolicymakerActionList items , { action } ]
+		action isSocialAction
+			ifTrue: [ 
+				pendingPolicymakerActionList items:
+					pendingPolicymakerActionList items , { action } ]
+			ifFalse: [ self policymakerPlay: action ] ]
 ]
 
 { #category : #operations }

@@ -22,7 +22,7 @@ CMIDAIRRPGAction >> actionName [
 ]
 
 { #category : #testing }
-CMIDAIRRPGAction >> isContactAction [
+CMIDAIRRPGAction >> isSocialAction [
 
 	^ false
 ]

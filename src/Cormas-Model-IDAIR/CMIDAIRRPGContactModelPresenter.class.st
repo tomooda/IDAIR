@@ -50,7 +50,7 @@ CMIDAIRRPGContactModelPresenter >> defaultSpec [
 		                   height: self class labelHeight + 5;
 		                   yourself.
 	self model policymakerActionsDo: [ :action | 
-		action isContactAction ifTrue: [ 
+		action isSocialAction ifTrue: [ 
 			policyMakerSpec
 				add: (SpBoxLayout newHorizontal
 						 add: action name asPresenter width: 200;

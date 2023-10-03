@@ -1,5 +1,5 @@
 Class {
-	#name : #CMIDAIRRPGPolicymakerAction,
+	#name : #CMIDAIRRPGSocialAction,
 	#superclass : #CMIDAIRRPGAction,
 	#instVars : [
 		'transientFactor',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #constants }
-CMIDAIRRPGPolicymakerAction class >> all [
+CMIDAIRRPGSocialAction class >> all [
 
 	^ { 
 		  self facemask.
@@ -26,32 +26,32 @@ CMIDAIRRPGPolicymakerAction class >> all [
 		  self socialDistancing4.
 		  self socialDistancing5.
 		  self lockdown.
-		  CMIDAIRRPGHospitalAction increase1ICU2RB.
-		  CMIDAIRRPGHospitalAction increase2ICU4RB } asSortedCollection: [ 
+		  CMIDAIRRPGResourceAction increase1ICU2RB.
+		  CMIDAIRRPGResourceAction increase2ICU4RB } asSortedCollection: [ 
 		  :less 
 		  :more | less name <= more name ]
 ]
 
 { #category : #constants }
-CMIDAIRRPGPolicymakerAction class >> closeBorder [
+CMIDAIRRPGSocialAction class >> closeBorder [
 
 	^ self name: 'ID:34 Close the border' transientFactor: 0.7
 ]
 
 { #category : #constants }
-CMIDAIRRPGPolicymakerAction class >> facemask [
+CMIDAIRRPGSocialAction class >> facemask [
 
 	^ self name: 'ID:35 Wear a facemask' transientFactor: 0.8
 ]
 
 { #category : #constants }
-CMIDAIRRPGPolicymakerAction class >> lockdown [
+CMIDAIRRPGSocialAction class >> lockdown [
 
 	^ self name: 'ID:32 Lockdown' transientFactor: 0.5
 ]
 
 { #category : #'instance creation' }
-CMIDAIRRPGPolicymakerAction class >> name: aString cummulativeFactor: aNumber [
+CMIDAIRRPGSocialAction class >> name: aString cummulativeFactor: aNumber [
 
 	^ (self name: aString)
 		  cummulativeFactor: aNumber;
@@ -59,7 +59,7 @@ CMIDAIRRPGPolicymakerAction class >> name: aString cummulativeFactor: aNumber [
 ]
 
 { #category : #'instance creation' }
-CMIDAIRRPGPolicymakerAction class >> name: aString transientFactor: aNumber [
+CMIDAIRRPGSocialAction class >> name: aString transientFactor: aNumber [
 
 	^ (self name: aString)
 		  transientFactor: aNumber;
@@ -67,7 +67,7 @@ CMIDAIRRPGPolicymakerAction class >> name: aString transientFactor: aNumber [
 ]
 
 { #category : #'instance creation' }
-CMIDAIRRPGPolicymakerAction class >> name: aString transientFactor: aNumber cummulativeFactor: anotherNumber [
+CMIDAIRRPGSocialAction class >> name: aString transientFactor: aNumber cummulativeFactor: anotherNumber [
 
 	^ (self name: aString)
 		  transientFactor: aNumber;
@@ -76,109 +76,111 @@ CMIDAIRRPGPolicymakerAction class >> name: aString transientFactor: aNumber cumm
 ]
 
 { #category : #constants }
-CMIDAIRRPGPolicymakerAction class >> openQuarrantineCamp [
+CMIDAIRRPGSocialAction class >> openQuarrantineCamp [
 
 	^ self name: 'ID:33 Quarantine' cummulativeFactor: 0.8
 ]
 
 { #category : #constants }
-CMIDAIRRPGPolicymakerAction class >> socialDistancing1 [
+CMIDAIRRPGSocialAction class >> socialDistancing1 [
 
 	^ self name: 'ID:27 Social distancing level 1' transientFactor: 0.9
 ]
 
 { #category : #constants }
-CMIDAIRRPGPolicymakerAction class >> socialDistancing2 [
+CMIDAIRRPGSocialAction class >> socialDistancing2 [
 
 	^ self name: 'ID:28 Social distancing level 2' transientFactor: 0.8
 ]
 
 { #category : #constants }
-CMIDAIRRPGPolicymakerAction class >> socialDistancing3 [
+CMIDAIRRPGSocialAction class >> socialDistancing3 [
 
 	^ self name: 'ID:29 Social distancing level 3' transientFactor: 0.75
 ]
 
 { #category : #constants }
-CMIDAIRRPGPolicymakerAction class >> socialDistancing4 [
+CMIDAIRRPGSocialAction class >> socialDistancing4 [
 
 	^ self name: 'ID:30 Social distancing level 4' transientFactor: 0.7
 ]
 
 { #category : #constants }
-CMIDAIRRPGPolicymakerAction class >> socialDistancing5 [
+CMIDAIRRPGSocialAction class >> socialDistancing5 [
 
 	^ self name: 'ID:31 Social distancing level 5' transientFactor: 0.65
 ]
 
 { #category : #constants }
-CMIDAIRRPGPolicymakerAction class >> treatmentGuideline [
+CMIDAIRRPGSocialAction class >> treatmentGuideline [
 
 	^ self name: 'ID:22 Issue treatment guidelines' cummulativeFactor: 0.8
 ]
 
 { #category : #constants }
-CMIDAIRRPGPolicymakerAction class >> vaccination100 [
+CMIDAIRRPGSocialAction class >> vaccination100 [
 
 	^ self name: 'ID:26 Provide vaccine to 100% of population' cummulativeFactor: 0.01
 ]
 
 { #category : #constants }
-CMIDAIRRPGPolicymakerAction class >> vaccination25 [
+CMIDAIRRPGSocialAction class >> vaccination25 [
 
 	^ self name: 'ID:23 Provide vaccine to 25% of population' cummulativeFactor: 0.75
 ]
 
 { #category : #constants }
-CMIDAIRRPGPolicymakerAction class >> vaccination50 [
+CMIDAIRRPGSocialAction class >> vaccination50 [
 
 	^ self name: 'ID:24 Provide vaccine to 50% of population' cummulativeFactor: 0.5
 ]
 
 { #category : #constants }
-CMIDAIRRPGPolicymakerAction class >> vaccination75 [
+CMIDAIRRPGSocialAction class >> vaccination75 [
 
 	^ self name: 'ID:25 Provide vaccine to 75% of population' cummulativeFactor: 0.25
 ]
 
 { #category : #accessing }
-CMIDAIRRPGPolicymakerAction >> askEffectiveRate [
+CMIDAIRRPGSocialAction >> askEffectiveRate: anInteger [
 
-	(UIManager default
-		 request: 'Effective rate among citizens?'
-		 initialAnswer: '1.0') ifNotNil: [ :answer | 
-		| rate |
-		rate := answer asFloat.
-		(rate between: 0.0 and: 1.0) ifTrue: [ ^ rate ] ].
+	((UIManager default
+		  request: 'Complient citizens'
+		  initialAnswer: anInteger printString) ifNotNil: #asInteger) 
+		ifNotNil: [ :answer | 
+			| rate |
+			rate := answer asFloat / anInteger.
+			(rate between: 0.0 and: 1.0) ifTrue: [ ^ rate ] ].
 	^ nil
 ]
 
 { #category : #accessing }
-CMIDAIRRPGPolicymakerAction >> cummulativeFactor [
+CMIDAIRRPGSocialAction >> cummulativeFactor [
 
 	^ cummulativeFactor
 ]
 
 { #category : #accessing }
-CMIDAIRRPGPolicymakerAction >> cummulativeFactor: aNumber [
+CMIDAIRRPGSocialAction >> cummulativeFactor: aNumber [
 
 	cummulativeFactor := aNumber
 ]
 
 { #category : #execution }
-CMIDAIRRPGPolicymakerAction >> execute: aCMIDAIRContactModel [
+CMIDAIRRPGSocialAction >> execute: aCMIDAIRContactModel [
 
-	self askEffectiveRate ifNotNil: [ :rate | 
+	(self askEffectiveRate: aCMIDAIRContactModel players size) ifNotNil: [ 
+		:rate | 
 		aCMIDAIRContactModel socialProfile transientFactor:
 			self transientFactor ** rate.
 		aCMIDAIRContactModel socialProfile multiplyCummulativeFactor:
 			self cummulativeFactor ** rate.
 		aCMIDAIRContactModel cormasModel recordHistory:
-			(self name , '(' , rate printString , ')') asText ]
+			(self name , '(' , (self printRate: rate) , ')') asText ]
 ]
 
 { #category : #initialization }
-CMIDAIRRPGPolicymakerAction >> initialize [
+CMIDAIRRPGSocialAction >> initialize [
 
 	super initialize.
 	transientFactor := 1.0.
@@ -186,19 +188,27 @@ CMIDAIRRPGPolicymakerAction >> initialize [
 ]
 
 { #category : #testing }
-CMIDAIRRPGPolicymakerAction >> isContactAction [
+CMIDAIRRPGSocialAction >> isSocialAction [
 
 	^ true
 ]
 
+{ #category : #private }
+CMIDAIRRPGSocialAction >> printRate: aFloat [
+
+	| str |
+	str := aFloat printString.
+	^ str first: (5 min: str size)
+]
+
 { #category : #accessing }
-CMIDAIRRPGPolicymakerAction >> transientFactor [
+CMIDAIRRPGSocialAction >> transientFactor [
 
 	^ transientFactor
 ]
 
 { #category : #accessing }
-CMIDAIRRPGPolicymakerAction >> transientFactor: aNumber [
+CMIDAIRRPGSocialAction >> transientFactor: aNumber [
 
 	transientFactor := aNumber
 ]

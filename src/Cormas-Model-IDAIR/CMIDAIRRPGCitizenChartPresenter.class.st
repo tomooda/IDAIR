@@ -53,9 +53,8 @@ CMIDAIRRPGCitizenChartPresenter >> drawRiskChart: aCanvas [
 				 fontSize: 12;
 				 integer;
 				 yourself);
-		addDecoration: RSVerticalTick new integer;
 		ylabel: 'Risk (%)';
-		title: 'Cummulated risk of each player''s actions'.
+		title: 'Simulated risk of each player''s actions'.
 	chart build.
 	legends := RSLegend new.
 	legends container: aCanvas.

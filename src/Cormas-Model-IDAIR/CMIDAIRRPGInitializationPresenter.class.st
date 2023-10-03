@@ -85,14 +85,14 @@ CMIDAIRRPGInitializationPresenter >> initializePresenters [
 		                    yourself.
 	mildSymptomPopulationField := self newNumberInput
 		                              beInteger;
-		                              number: 7;
-		                              maximum: 10;
+		                              number: 70;
+		                              maximum: 100;
 		                              minimum: 0;
 		                              yourself.
 	severeSymptomPopulationField := self newNumberInput
 		                                beInteger;
-		                                number: 3;
-		                                maximum: 10;
+		                                number: 30;
+		                                maximum: 100;
 		                                minimum: 0;
 		                                yourself
 ]

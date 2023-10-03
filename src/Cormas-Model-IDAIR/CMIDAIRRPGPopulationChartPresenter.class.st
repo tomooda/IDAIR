@@ -182,38 +182,50 @@ CMIDAIRRPGPopulationChartPresenter >> drawPopulationChart: aCanvas [
 		susceptibleCheckbox state ifTrue: [ 
 			diseaseModel historyOfSusceptive ifNotEmpty: [ :history | 
 				chart addPlot: (RSLinePlot new
-						 x: (1 to: history size * daysPerStep by: daysPerStep)
+						 x:
+							 (1 to: history size * daysPerStep + 1 - (daysPerStep * 0.5)
+							  by: daysPerStep)
 						 y: history;
 						 color: self susceptibleColor) ] ].
 		infectedCheckbox state ifTrue: [ 
 			diseaseModel historyOfInfected ifNotEmpty: [ :history | 
 				chart addPlot: (RSLinePlot new
-						 x: (1 to: history size * daysPerStep by: daysPerStep)
+						 x:
+							 (1 to: history size * daysPerStep + 1 - (daysPerStep * 0.5)
+							  by: daysPerStep)
 						 y: history;
 						 color: self infectedColor) ] ].
 		recoveredCheckbox state ifTrue: [ 
 			diseaseModel historyOfRecovered ifNotEmpty: [ :history | 
 				chart addPlot: (RSLinePlot new
-						 x: (1 to: history size * daysPerStep by: daysPerStep)
+						 x:
+							 (1 to: history size * daysPerStep + 1 - (daysPerStep * 0.5)
+							  by: daysPerStep)
 						 y: history;
 						 color: self recoveredColor) ] ].
 		deadCheckbox state ifTrue: [ 
 			diseaseModel historyOfDead ifNotEmpty: [ :history | 
 				chart addPlot: (RSLinePlot new
-						 x: (1 to: history size * daysPerStep by: daysPerStep)
+						 x:
+							 (1 to: history size * daysPerStep + 1 - (daysPerStep * 0.5)
+							  by: daysPerStep)
 						 y: history;
 						 color: self deadColor) ] ] ].
 	self model submodelAt: #resource do: [ :resourceModel | 
 		occupiedBedsCheckbox state ifTrue: [ 
 			resourceModel historyOfOccupiedBeds ifNotEmpty: [ :history | 
 				chart addPlot: (RSLinePlot new
-						 x: (1 to: history size * daysPerStep by: daysPerStep)
+						 x:
+							 (1 to: history size * daysPerStep + 1 - (daysPerStep * 0.5)
+							  by: daysPerStep)
 						 y: history;
 						 color: self occupiedBedsColor) ] ].
 		occupiedICUsCheckbox state ifTrue: [ 
 			resourceModel historyOfOccupiedICUs ifNotEmpty: [ :history | 
 				chart addPlot: (RSLinePlot new
-						 x: (1 to: history size * daysPerStep by: daysPerStep)
+						 x:
+							 (1 to: history size * daysPerStep + 1 - (daysPerStep * 0.5)
+							  by: daysPerStep)
 						 y: history;
 						 color: self occupiedICUsColor) ] ] ].
 	chart addDecoration: (RSVerticalTick new
@@ -327,7 +339,8 @@ CMIDAIRRPGPopulationChartPresenter >> recoveredColor [
 CMIDAIRRPGPopulationChartPresenter >> refresh [
 
 	populationChart refresh.
-	dayField text: (self model timeStep + 1) printString
+	dayField text:
+		(self model timeStep * self model daysPerStep + 1) printString
 ]
 
 { #category : #'accessing-color' }
