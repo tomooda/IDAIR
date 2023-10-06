@@ -50,6 +50,12 @@ CMIDAIRRPGCitizenActionWrapper >> execute: aCMIDAIRCitizen [
 			, self name asText ]
 ]
 
+{ #category : #testing }
+CMIDAIRRPGCitizenActionWrapper >> isImmediateAction [
+
+	^ citizenAction isImmediateAction
+]
+
 { #category : #accessing }
 CMIDAIRRPGCitizenActionWrapper >> locations [
 
