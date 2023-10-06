@@ -577,7 +577,7 @@ CMIDAIRModel >> openGUI [
 	self ifGUI: [ 
 		self submodelAt: #contact do: [ :submodel | 
 			(submodel isKindOf: CMIDAIRRPGContactModel) ifTrue: [ 
-				(CMIDAIRRPGPresenter on: submodel) openWithSpec.
+				(CMIDAIRRPGPresenter on: submodel) openWithSpec maximize.
 				^ self ] ].
 		self asPresenter openWithSpec ]
 ]

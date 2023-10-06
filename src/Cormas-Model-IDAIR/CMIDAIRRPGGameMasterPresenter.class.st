@@ -1,5 +1,5 @@
 Class {
-	#name : #CMIDAIRRPGActionPresenter,
+	#name : #CMIDAIRRPGGameMasterPresenter,
 	#superclass : #SpPresenterWithModel,
 	#instVars : [
 		'playerList',
@@ -21,7 +21,7 @@ Class {
 }
 
 { #category : #specs }
-CMIDAIRRPGActionPresenter class >> defaultSpec [
+CMIDAIRRPGGameMasterPresenter class >> defaultSpec [
 
 	<script: 'CMIDAIRRPGContactModel new asPresenter openWithSpec'>
 	| citizenSpec policyMakerSpec hospitalManagerSpec |
@@ -31,18 +31,17 @@ CMIDAIRRPGActionPresenter class >> defaultSpec [
 				                width: 200)
 		               height: self labelHeight + 5;
 		               yourself.
-	citizenSpec add: (SpBoxLayout newHorizontal
-			 add: (SpPanedLayout newVertical
-					  positionOfSlider: 0.5;
-					  add: #playerList;
-					  add: (SpBoxLayout newVertical
-							   add: #citizenActionList;
-							   add: (SpBoxLayout newHorizontal
-									    add: #citizenActionYesButton;
-									    add: #citizenActionNoButton;
-									    yourself)
-							   expand: false))
-			 width: 300).
+	citizenSpec add:
+		(SpBoxLayout newHorizontal add: (SpPanedLayout newVertical
+				  positionOfSlider: 0.5;
+				  add: #playerList;
+				  add: (SpBoxLayout newVertical
+						   add: #citizenActionList;
+						   add: (SpBoxLayout newHorizontal
+								    add: #citizenActionYesButton;
+								    add: #citizenActionNoButton;
+								    yourself)
+						   expand: false))).
 	policyMakerSpec := SpBoxLayout newVertical
 		                   add: (SpBoxLayout newHorizontal
 				                    add: 'Policymaker''s Actions' asPresenter
@@ -74,25 +73,28 @@ CMIDAIRRPGActionPresenter class >> defaultSpec [
 		                       expand: false;
 		                       yourself.
 
-	^ SpBoxLayout newHorizontal
-		  add: citizenSpec expand: false;
-		  add: '    ' asPresenter width: 10;
-		  add: hospitalManagerSpec expand: false;
-		  add: '    ' asPresenter width: 10;
-		  add: policyMakerSpec expand: false;
-		  add: '    ' asPresenter width: 10;
+	^ SpPanedLayout newHorizontal
+		  positionOfSlider: 0.7;
+		  add: (SpBoxLayout newHorizontal
+				   add: citizenSpec expand: true;
+				   add: '    ' asPresenter width: 10;
+				   add: hospitalManagerSpec expand: true;
+				   add: '    ' asPresenter width: 10;
+				   add: policyMakerSpec expand: true;
+				   add: '    ' asPresenter width: 10;
+				   yourself);
 		  add: #gameMasterChart;
 		  yourself
 ]
 
 { #category : #accessing }
-CMIDAIRRPGActionPresenter >> citizen [
+CMIDAIRRPGGameMasterPresenter >> citizen [
 
 	^ playerList selectedItem ifNotNil: #value
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> citizenPlay: action [
+CMIDAIRRPGGameMasterPresenter >> citizenPlay: action [
 
 	self citizen ifNotNil: [ :citizen | 
 		action isImmediateAction
@@ -103,7 +105,7 @@ CMIDAIRRPGActionPresenter >> citizenPlay: action [
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> clearRound [
+CMIDAIRRPGGameMasterPresenter >> clearRound [
 
 	self model ifNotNil: #clearRound.
 	self model cormasModel nextHistory.
@@ -112,13 +114,13 @@ CMIDAIRRPGActionPresenter >> clearRound [
 ]
 
 { #category : #accessing }
-CMIDAIRRPGActionPresenter >> cormasModel [
+CMIDAIRRPGGameMasterPresenter >> cormasModel [
 
 	^ self model cormasModel
 ]
 
 { #category : #accessing }
-CMIDAIRRPGActionPresenter >> diseaseDynamicsAndPopulation [
+CMIDAIRRPGGameMasterPresenter >> diseaseDynamicsAndPopulation [
 
 	^ self citizen
 		  ifNotNil: [ :citizen | 
@@ -136,7 +138,7 @@ CMIDAIRRPGActionPresenter >> diseaseDynamicsAndPopulation [
 ]
 
 { #category : #drawing }
-CMIDAIRRPGActionPresenter >> drawGameMasterChart: aCanvas [
+CMIDAIRRPGGameMasterPresenter >> drawGameMasterChart: aCanvas [
 
 	| charts chart |
 	aCanvas color: Color white.
@@ -162,13 +164,13 @@ CMIDAIRRPGActionPresenter >> drawGameMasterChart: aCanvas [
 ]
 
 { #category : #accessing }
-CMIDAIRRPGActionPresenter >> gamePresenter: aCMIDAIRRPGPresenter [
+CMIDAIRRPGGameMasterPresenter >> gamePresenter: aCMIDAIRRPGPresenter [
 
 	gamePresenter := aCMIDAIRRPGPresenter
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> hospitalManagerPlay: aCMIDAIRRPGAction [
+CMIDAIRRPGGameMasterPresenter >> hospitalManagerPlay: aCMIDAIRRPGAction [
 
 	self model ifNotNil: [ :contactModel | 
 		contactModel cormasModel
@@ -180,7 +182,7 @@ CMIDAIRRPGActionPresenter >> hospitalManagerPlay: aCMIDAIRRPGAction [
 ]
 
 { #category : #initialization }
-CMIDAIRRPGActionPresenter >> initializePresenters [
+CMIDAIRRPGGameMasterPresenter >> initializePresenters [
 
 	playerList := self newTable
 		              beResizable;
@@ -249,14 +251,14 @@ CMIDAIRRPGActionPresenter >> initializePresenters [
 ]
 
 { #category : #initialization }
-CMIDAIRRPGActionPresenter >> initializeWindow: aSpWindowPresenter [
+CMIDAIRRPGGameMasterPresenter >> initializeWindow: aSpWindowPresenter [
 
 	super initializeWindow: aSpWindowPresenter.
 	aSpWindowPresenter initialExtent: 680 @ 600
 ]
 
 { #category : #accessing }
-CMIDAIRRPGActionPresenter >> modelChanged [
+CMIDAIRRPGGameMasterPresenter >> modelChanged [
 
 	super modelChanged.
 	self
@@ -267,28 +269,28 @@ CMIDAIRRPGActionPresenter >> modelChanged [
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> playCitizenActionNo [
+CMIDAIRRPGGameMasterPresenter >> playCitizenActionNo [
 
 	citizenActionList selectedItem ifNotNil: [ :action | 
 		self citizenPlay: action forNo ]
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> playCitizenActionYes [
+CMIDAIRRPGGameMasterPresenter >> playCitizenActionYes [
 
 	citizenActionList selectedItem ifNotNil: [ :action | 
 		self citizenPlay: action forYes ]
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> playHospitalManagerAction [
+CMIDAIRRPGGameMasterPresenter >> playHospitalManagerAction [
 
 	hospitalManagerActionList selectedItem ifNotNil: [ :action | 
 		self hospitalManagerPlay: action ]
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> playPolicymakerAction [
+CMIDAIRRPGGameMasterPresenter >> playPolicymakerAction [
 
 	pendingPolicymakerActionList selectedItem ifNotNil: [ :action | 
 		self policymakerPlay: action.
@@ -297,19 +299,19 @@ CMIDAIRRPGActionPresenter >> playPolicymakerAction [
 ]
 
 { #category : #updating }
-CMIDAIRRPGActionPresenter >> playerChanged [
+CMIDAIRRPGGameMasterPresenter >> playerChanged [
 
 	
 ]
 
 { #category : #accessing }
-CMIDAIRRPGActionPresenter >> playerName [
+CMIDAIRRPGGameMasterPresenter >> playerName [
 
 	^ playerList selectedItem ifNotNil: #key
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> policymakerPlay: aCMIDAIRRPGAction [
+CMIDAIRRPGGameMasterPresenter >> policymakerPlay: aCMIDAIRRPGAction [
 
 	self model ifNotNil: [ :contactModel | 
 		aCMIDAIRRPGAction isSocialAction
@@ -323,7 +325,7 @@ CMIDAIRRPGActionPresenter >> policymakerPlay: aCMIDAIRRPGAction [
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> pollPolicymakerAction [
+CMIDAIRRPGGameMasterPresenter >> pollPolicymakerAction [
 
 	policyMakerActionList selectedItem ifNotNil: [ :action | 
 		action isSocialAction
@@ -334,13 +336,13 @@ CMIDAIRRPGActionPresenter >> pollPolicymakerAction [
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> recordHistory: aText [
+CMIDAIRRPGGameMasterPresenter >> recordHistory: aText [
 
 	self model cormasModel recordHistory: aText
 ]
 
 { #category : #operations }
-CMIDAIRRPGActionPresenter >> removePendingPolicymakerAction [
+CMIDAIRRPGGameMasterPresenter >> removePendingPolicymakerAction [
 
 	pendingPolicymakerActionList selectedItem ifNotNil: [ :action | 
 		pendingPolicymakerActionList items:
@@ -348,7 +350,7 @@ CMIDAIRRPGActionPresenter >> removePendingPolicymakerAction [
 ]
 
 { #category : #api }
-CMIDAIRRPGActionPresenter >> retrieveSpec: aSelector [
+CMIDAIRRPGGameMasterPresenter >> retrieveSpec: aSelector [
 
 	| spec |
 	spec := self perform: aSelector.
@@ -357,30 +359,30 @@ CMIDAIRRPGActionPresenter >> retrieveSpec: aSelector [
 ]
 
 { #category : #accessing }
-CMIDAIRRPGActionPresenter >> title [
+CMIDAIRRPGGameMasterPresenter >> title [
 	^ 'IDAIR RPG Actions'
 ]
 
 { #category : #updating }
-CMIDAIRRPGActionPresenter >> updateChart [
+CMIDAIRRPGGameMasterPresenter >> updateChart [
 
 	gameMasterChart refresh
 ]
 
 { #category : #updating }
-CMIDAIRRPGActionPresenter >> updateCitizenActionList [
+CMIDAIRRPGGameMasterPresenter >> updateCitizenActionList [
 
 	citizenActionList items: self model citizenActions
 ]
 
 { #category : #updating }
-CMIDAIRRPGActionPresenter >> updateHospitalManagerActionList [
+CMIDAIRRPGGameMasterPresenter >> updateHospitalManagerActionList [
 
 	hospitalManagerActionList items: self model hospitalManagerActions
 ]
 
 { #category : #updating }
-CMIDAIRRPGActionPresenter >> updatePlayerList [
+CMIDAIRRPGGameMasterPresenter >> updatePlayerList [
 
 	playerList items: (self model
 			 ifNotNil: [ :model | model players associations ]
@@ -388,7 +390,7 @@ CMIDAIRRPGActionPresenter >> updatePlayerList [
 ]
 
 { #category : #updating }
-CMIDAIRRPGActionPresenter >> updatePolicyMakerActionList [
+CMIDAIRRPGGameMasterPresenter >> updatePolicyMakerActionList [
 
 	policyMakerActionList items:
 		self model policymakerActions

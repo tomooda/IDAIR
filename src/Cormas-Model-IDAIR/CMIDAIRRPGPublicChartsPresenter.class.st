@@ -39,7 +39,7 @@ CMIDAIRRPGPublicChartsPresenter class >> deadIcon [
 CMIDAIRRPGPublicChartsPresenter class >> defaultSpec [
 
 	^ SpPanedLayout newVertical
-		  positionOfSlider: 0.6;
+		  positionOfSlider: 0.7;
 		  add: (SpPanedLayout newHorizontal
 				   positionOfSlider: 0.7;
 				   add: (SpPanedLayout newHorizontal

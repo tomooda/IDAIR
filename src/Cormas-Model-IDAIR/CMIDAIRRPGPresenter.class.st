@@ -44,7 +44,7 @@ CMIDAIRRPGPresenter >> initializePresenters [
 		            addPage: (self newNotebookPage
 				             title: 'Game Master';
 				             presenterProvider: [ 
-					             actionPresenter := (CMIDAIRRPGActionPresenter on:
+					             actionPresenter := (CMIDAIRRPGGameMasterPresenter on:
 							                                 self model)
 						                                gamePresenter: self;
 						                                yourself ];

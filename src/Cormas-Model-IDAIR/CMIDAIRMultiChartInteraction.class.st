@@ -42,6 +42,13 @@ CMIDAIRMultiChartInteraction >> moveFrom: fromShape to: toShape [
 			canvas signalUpdate ]"
 ]
 
+{ #category : #hooks }
+CMIDAIRMultiChartInteraction >> onShape: aCanvas [
+
+	super onShape: aCanvas.
+	aCanvas when: RSExtentChangedEvent do: [ aCanvas zoomToFit ]
+]
+
 { #category : #events }
 CMIDAIRMultiChartInteraction >> processKeyDown: evt [
 
