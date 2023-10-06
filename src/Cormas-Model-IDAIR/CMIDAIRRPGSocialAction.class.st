@@ -41,7 +41,7 @@ CMIDAIRRPGSocialAction class >> closeBorder [
 { #category : #constants }
 CMIDAIRRPGSocialAction class >> facemask [
 
-	^ self name: 'ID:35 Wear a facemask' transientFactor: 0.8
+	^ self name: 'ID:35 Wear a facemask' transientFactor: 1.0
 ]
 
 { #category : #constants }

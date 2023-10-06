@@ -29,6 +29,12 @@ CMIDAIRRPGMuppetContactProfile >> executeAction [
 ]
 
 { #category : #accessing }
+CMIDAIRRPGMuppetContactProfile >> facemaskFactor: aNumber [
+
+	
+]
+
+{ #category : #accessing }
 CMIDAIRRPGMuppetContactProfile >> immuneFactor: aNumber [
 ]
 

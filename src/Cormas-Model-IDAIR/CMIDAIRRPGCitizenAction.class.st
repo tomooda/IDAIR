@@ -31,6 +31,7 @@ CMIDAIRRPGCitizenAction class >> all [
 		  self regularHealthCheckup.
 		  self gettingMonthlyMedication.
 		  self seekHealthcare.
+		  CMIDAIRRPGFacemaskAction facemasked.
 		  CMIDAIRRPGVaccinationAction vaccinated } asSortedCollection: [ 
 		  :less 
 		  :more | less name <= more name ]
