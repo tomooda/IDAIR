@@ -106,6 +106,12 @@ CMIDAIRRPGDiseaseDynamics >> next [
 	^ self subclassResponsibility
 ]
 
+{ #category : #actions }
+CMIDAIRRPGDiseaseDynamics >> randomDuration [
+
+	duration := self random * self tau
+]
+
 { #category : #control }
 CMIDAIRRPGDiseaseDynamics >> step [
 

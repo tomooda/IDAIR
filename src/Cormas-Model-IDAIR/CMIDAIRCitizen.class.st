@@ -263,6 +263,12 @@ CMIDAIRCitizen >> quarrantinedAction [
 	self resourceDynamics citizenQuarrantined
 ]
 
+{ #category : #'accessing-disease' }
+CMIDAIRCitizen >> randomDuration [
+
+	^ self diseaseDynamics randomDuration
+]
+
 { #category : #events }
 CMIDAIRCitizen >> recoveredAction [
 

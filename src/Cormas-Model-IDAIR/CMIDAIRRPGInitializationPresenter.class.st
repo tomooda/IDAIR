@@ -85,14 +85,14 @@ CMIDAIRRPGInitializationPresenter >> initializePresenters [
 		                    yourself.
 	mildSymptomPopulationField := self newNumberInput
 		                              beInteger;
-		                              number: 70;
-		                              maximum: 100;
+		                              number: 7;
+		                              maximum: 10;
 		                              minimum: 0;
 		                              yourself.
 	severeSymptomPopulationField := self newNumberInput
 		                                beInteger;
-		                                number: 30;
-		                                maximum: 100;
+		                                number: 3;
+		                                maximum: 10;
 		                                minimum: 0;
 		                                yourself
 ]
@@ -170,7 +170,10 @@ CMIDAIRRPGInitializationPresenter >> value: aCMIDAIRModel [
 				               createN: population
 				               randomlyLocatedEntities: CMIDAIRCitizen
 				               playerName: ''.
-			newCitizens do: [ :citizen | citizen beMildSymptom ].
+			newCitizens do: [ :citizen | 
+				citizen
+					beMildSymptom;
+					randomDuration ].
 			totalPopulation := totalPopulation + population ] ].
 	severeSymptomPopulationField number in: [ :population | 
 		population > 0 ifTrue: [ 
@@ -179,7 +182,10 @@ CMIDAIRRPGInitializationPresenter >> value: aCMIDAIRModel [
 				               createN: population
 				               randomlyLocatedEntities: CMIDAIRCitizen
 				               playerName: ''.
-			newCitizens do: [ :citizen | citizen beSevereSymptom ].
+			newCitizens do: [ :citizen | 
+				citizen
+					beSevereSymptom;
+					randomDuration ].
 			totalPopulation := totalPopulation + population ] ].
 	1000 - totalPopulation in: [ :population | 
 		population > 0 ifTrue: [ 

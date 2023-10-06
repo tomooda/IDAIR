@@ -205,6 +205,12 @@ CMIDAIRDiseaseDynamics >> random [
 ]
 
 { #category : #actions }
+CMIDAIRDiseaseDynamics >> randomDuration [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #actions }
 CMIDAIRDiseaseDynamics >> step [
 
 	^ self subclassResponsibility

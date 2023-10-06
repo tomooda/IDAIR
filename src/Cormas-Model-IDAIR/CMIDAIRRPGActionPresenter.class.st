@@ -122,35 +122,6 @@ CMIDAIRRPGActionPresenter >> diseaseDynamicsAndPopulation [
 		  ifNil: [ OrderedDictionary new ]
 ]
 
-{ #category : #drawing }
-CMIDAIRRPGActionPresenter >> drawBarChart: aCanvas [
-
-	aCanvas color: Color transparent.
-
-	self diseaseDynamicsAndPopulation ifNotNil: [ :amounts | 
-		amounts ifNotEmpty: [ 
-			| chart |
-			chart := RSChart new.
-			chart extent: 60 @ 400.
-			chart container: aCanvas.
-			chart maxValueY: amounts values sum.
-			chart colors: (NSScale ordinal range:
-					 self citizen diseaseDynamics class colors values).
-			amounts values inject: 0 into: [ :bottom :value | 
-				(chart barHeights: { value }) bottom: { bottom }.
-				bottom + value ].
-			chart addDecoration: (RSVerticalTick new
-					 fontSize: 12;
-					 integer;
-					 yourself).
-			"chart addDecoration: (RSChartTitleDecoration new
-					 title: (self playerName ifNil: [ '-' ]);
-					 fontSize: 12;
-					 yourself)."
-			chart build.
-			RSZoomToFitCanvasInteraction new zoomToFitOnStart: aCanvas ] ]
-]
-
 { #category : #accessing }
 CMIDAIRRPGActionPresenter >> gamePresenter: aCMIDAIRRPGPresenter [
 

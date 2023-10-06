@@ -123,10 +123,22 @@ CMIDAIRModel >> beHeadless [
 	self isHeadless: true
 ]
 
+{ #category : #'charts-dimensions' }
+CMIDAIRModel >> chartHeight [
+
+	^ 150
+]
+
 { #category : #'user interfaces' }
 CMIDAIRModel >> chartPresenter [
 
 	^ CMIDAIRChartPresenter on: self
+]
+
+{ #category : #'charts-dimensions' }
+CMIDAIRModel >> chartWidth [
+
+	^ 200
 ]
 
 { #category : #'instance creation - agents & objects' }
@@ -174,10 +186,56 @@ CMIDAIRModel >> createN: anInteger randomlyLocatedEntities: aClass playerName: a
 	^ citizens
 ]
 
+{ #category : #'accessing-population' }
+CMIDAIRModel >> currentNumberOfDead [
+
+	| num |
+	num := 0.
+	self theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isDead ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #'accessing-population' }
+CMIDAIRModel >> currentNumberOfMildSymptom [
+
+	| num |
+	num := 0.
+	self theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isMildSymptom ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #'accessing-population' }
+CMIDAIRModel >> currentNumberOfRecovered [
+
+	| num |
+	num := 0.
+	self theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isRecovered ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #'accessing-population' }
+CMIDAIRModel >> currentNumberOfSevereSymptom [
+
+	| num |
+	num := 0.
+	self theCitizens do: [ :citizen | 
+		citizen diseaseDynamics isSevereSymptom ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
 { #category : #accessing }
 CMIDAIRModel >> daysPerStep [
 
 	^ self submodelAt: #time do: [ :timeModel | timeModel daysPerStep ]
+]
+
+{ #category : #'charts-colors' }
+CMIDAIRModel >> deadColor [
+
+	^ Color black
 ]
 
 { #category : #defaults }
@@ -224,6 +282,12 @@ CMIDAIRModel >> historyAt: anInteger [
 CMIDAIRModel >> ifGUI: aBlock [
 
 	^ self isHeadless ifFalse: aBlock
+]
+
+{ #category : #'charts-colors' }
+CMIDAIRModel >> infectedColor [
+
+	^ Color red
 ]
 
 { #category : #initialization }
@@ -324,6 +388,12 @@ CMIDAIRModel >> loadDefaultSubmodels [
 	self addSubmodel: (CMIDAIRRPGLocationModelFor6 on: self).
 	self addSubmodel: (CMIDAIRRPGResourceModel on: self).
 	self addSubmodel: (CMIDAIRSimpleTimeModel on: self)
+]
+
+{ #category : #'charts-dimensions' }
+CMIDAIRModel >> longChartWidth [
+
+	^ 400
 ]
 
 { #category : #history }
@@ -442,6 +512,18 @@ CMIDAIRModel >> numberOfSymptomatic [
 	^ num
 ]
 
+{ #category : #'charts-colors' }
+CMIDAIRModel >> occupiedBedsColor [
+
+	^ Color lightGray
+]
+
+{ #category : #'charts-colors' }
+CMIDAIRModel >> occupiedICUsColor [
+
+	^ Color darkGray
+]
+
 { #category : #'user interfaces' }
 CMIDAIRModel >> openGUI [
 
@@ -453,16 +535,204 @@ CMIDAIRModel >> openGUI [
 		self asPresenter openWithSpec ]
 ]
 
+{ #category : #charts }
+CMIDAIRModel >> patientsChart [
+
+	^ self submodelAt: #disease do: [ :diseaseModel | 
+		  | chart barPlot susceptibleBar recoveredBar mildBar severeBar deathBar shapes shape shape2 newMild newSevere newRecovered newWorsened newRecovering newDead |
+		  newMild := diseaseModel numberOfNewMild.
+		  newSevere := diseaseModel numberOfNewSevere.
+		  newWorsened := diseaseModel numberOfNewWorsened.
+		  newRecovering := diseaseModel numberOfNewRecovering.
+		  newRecovered := diseaseModel numberOfNewRecovered.
+		  newDead := diseaseModel numberOfNewDead.
+		  chart := RSChart new.
+		  chart extent: self chartWidth - 50 @ self chartHeight.
+		  chart colors: (NSScale ordinal range: { Color black }).
+		  barPlot := (chart barWidths: { 
+					              self currentNumberOfDead.
+					              self currentNumberOfSevereSymptom.
+					              self currentNumberOfMildSymptom.
+					              self currentNumberOfRecovered.
+					              0 })
+			             barSize: 10;
+			             yourself.
+		  chart addDecoration: (RSVerticalTick new
+				   fromNames:
+					   { 'Death'. 'Severe symptom'. 'Mild symptom'. 'Recovered'.
+					   '' };
+				   fontSize: 10).
+		  chart
+			  addDecoration: (RSHorizontalTick new
+					   fontSize: 12;
+					   integer;
+					   yourself);
+			  title: 'Current number of cases'.
+		  shapes := chart build shapes.
+		  susceptibleBar := barPlot bars fifth.
+		  recoveredBar := barPlot bars fourth.
+		  mildBar := barPlot bars third.
+		  severeBar := barPlot bars second.
+		  deathBar := barPlot bars first.
+		  susceptibleBar color: Color transparent.
+		  recoveredBar color: Color blue.
+		  mildBar color: Color orange.
+		  severeBar color: Color red.
+		  deathBar color: Color black.
+		  shapes add: (shape := RSArrowedLine new
+				            startPoint: mildBar encompassingRectangle left + 20
+					            @ susceptibleBar encompassingRectangle bottom;
+				            endPoint: mildBar encompassingRectangle left + 20
+					            @ mildBar encompassingRectangle top;
+				            width: 2).
+		  shapes add: (shape := RSLabel new
+				            text: newMild printString;
+				            translateMiddleLeftTo:
+					            shape encompassingRectangle right + 5
+					            @ (recoveredBar encompassingRectangle bottom
+						             + mildBar encompassingRectangle top * 0.5)).
+		  shapes add: (shape := RSArrowedLine new
+				            startPoint: shape encompassingRectangle right + 10
+					            @ susceptibleBar encompassingRectangle bottom;
+				            endPoint: shape encompassingRectangle right + 10
+					            @ severeBar encompassingRectangle top;
+				            width: 2).
+		  shapes add: (shape2 := shape := RSLabel new
+				                      text: newSevere printString;
+				                      translateMiddleLeftTo:
+					                      shape encompassingRectangle right + 5
+					                      @ (mildBar encompassingRectangle bottom
+						                       + severeBar encompassingRectangle top
+						                       * 0.5)).
+		  shapes add: (shape := RSArrowedLine new
+				            startPoint: shape encompassingRectangle right + 10
+					            @ mildBar encompassingRectangle top;
+				            endPoint: shape encompassingRectangle right + 10
+					            @ recoveredBar encompassingRectangle bottom;
+				            width: 2).
+		  shapes add: (RSLabel new
+				   text: newRecovered printString;
+				   translateMiddleLeftTo:
+					   shape encompassingRectangle rightCenter + (5 @ 0)).
+		  shapes add: (shape := RSArrowedLine new
+				            startPoint: shape2 encompassingRectangle right + 10
+					            @ mildBar encompassingRectangle bottom;
+				            endPoint: shape2 encompassingRectangle right + 10
+					            @ severeBar encompassingRectangle top;
+				            width: 2).
+		  shapes add: (shape := RSLabel new
+				            text: newWorsened printString;
+				            translateMiddleLeftTo:
+					            shape encompassingRectangle rightCenter + (5 @ 0)).
+		  shapes add: (shape := RSArrowedLine new
+				            startPoint: shape encompassingRectangle right + 10
+					            @ severeBar encompassingRectangle top;
+				            endPoint: shape encompassingRectangle right + 10
+					            @ mildBar encompassingRectangle bottom;
+				            width: 2).
+		  shapes add: (shape := RSLabel new
+				            text: newRecovering printString;
+				            translateMiddleLeftTo:
+					            shape encompassingRectangle rightCenter + (5 @ 0)).
+		  shapes add: (shape := RSArrowedLine new
+				            startPoint: deathBar encompassingRectangle left + 20
+					            @ severeBar encompassingRectangle bottom;
+				            endPoint: deathBar encompassingRectangle left + 20
+					            @ deathBar encompassingRectangle top;
+				            width: 2).
+		  shapes add: (shape := RSLabel new
+				            text: newDead printString;
+				            translateMiddleLeftTo:
+					            shape encompassingRectangle rightCenter + (5 @ 0)).
+		  RSComposite new shapes: shapes ]
+]
+
+{ #category : #charts }
+CMIDAIRModel >> populationChart [
+
+	| chart daysPerStep |
+	chart := RSChart new.
+	chart extent: self chartWidth @ self chartHeight.
+	daysPerStep := self daysPerStep.
+	self submodelAt: #disease do: [ :diseaseModel | 
+		diseaseModel historyOfInfected ifNotEmpty: [ :historyOfInfected | 
+			chart addPlot: (RSLinePlot new
+					 x:
+						 (1 to:
+							  historyOfInfected size * daysPerStep + 1
+							  - (daysPerStep * 0.5) by: daysPerStep)
+					 y: historyOfInfected;
+					 color: self infectedColor) ].
+		diseaseModel historyOfRecovered ifNotEmpty: [ :historyOfRecovered | 
+			chart addPlot: (RSLinePlot new
+					 x:
+						 (1 to:
+							  historyOfRecovered size * daysPerStep + 1
+							  - (daysPerStep * 0.5) by: daysPerStep)
+					 y: historyOfRecovered;
+					 color: self recoveredColor) ].
+		diseaseModel historyOfDead ifNotEmpty: [ :historyOfDead | 
+			chart addPlot: (RSLinePlot new
+					 x:
+						 (1 to:
+							  historyOfDead size * daysPerStep + 1 - (daysPerStep * 0.5)
+						  by: daysPerStep)
+					 y: historyOfDead;
+					 color: self deadColor) ] ].
+	self submodelAt: #resource do: [ :resourceModel | 
+		resourceModel historyOfOccupiedBeds ifNotEmpty: [ 
+			:historyOfOccupiedBeds | 
+			chart addPlot: (RSLinePlot new
+					 x: (1 to:
+							  historyOfOccupiedBeds size * daysPerStep + 1
+							  - (daysPerStep * 0.5) by: daysPerStep)
+					 y: historyOfOccupiedBeds;
+					 color: self occupiedBedsColor) ].
+		resourceModel historyOfOccupiedICUs ifNotEmpty: [ 
+			:historyOfOccupiedICUs | 
+			chart addPlot: (RSLinePlot new
+					 x: (1 to:
+							  historyOfOccupiedICUs size * daysPerStep + 1
+							  - (daysPerStep * 0.5) by: daysPerStep)
+					 y: historyOfOccupiedICUs;
+					 color: self occupiedICUsColor) ] ].
+	chart addDecoration: (RSVerticalTick new
+			 integer;
+			 fontSize: 12).
+	chart
+		addDecoration: (RSHorizontalTick new
+				 fontSize: 12;
+				 integer;
+				 yourself);
+		xlabel: 'Time (day)';
+		title: 'Course of the situation'.
+	chart plots ifEmpty: [ 
+		chart addPlot: (RSLinePlot new x: { 0 } y: { 0 }) ].
+	^ RSComposite new shapes: chart build shapes
+]
+
 { #category : #history }
 CMIDAIRModel >> recordHistory: aText [
 
 	history last add: aText asText
 ]
 
+{ #category : #'charts-colors' }
+CMIDAIRModel >> recoveredColor [
+
+	^ Color blue
+]
+
 { #category : #removing }
 CMIDAIRModel >> removeDestroyedEntities [
 
 	"don't remove dead entities because we want to count dead people."
+]
+
+{ #category : #'charts-dimensions' }
+CMIDAIRModel >> shortChartHeight [
+
+	^ 80
 ]
 
 { #category : #accessing }
@@ -500,6 +770,12 @@ CMIDAIRModel >> submodelsInOrderDo: aBlock [
 		 less order <= more order ]) do: aBlock
 ]
 
+{ #category : #'charts-dimensions' }
+CMIDAIRModel >> tallChartHeight [
+
+	^ 200
+]
+
 { #category : #accessing }
 CMIDAIRModel >> theCitizens [
 
@@ -526,4 +802,31 @@ CMIDAIRModel >> theLocations [
 CMIDAIRModel >> theLocations: aCollectionOfCMIDAIRLocation [
 
 	theLocations := aCollectionOfCMIDAIRLocation
+]
+
+{ #category : #charts }
+CMIDAIRModel >> wellbeingPointsChart [
+
+	^ self submodelAt: #contact do: [ :contactModel | 
+		  | names wellbeings chart |
+		  names := contactModel players keys asArray.
+		  wellbeings := (contactModel players values collect: [ :citizen | 
+			                 citizen contactProfile wellbeingPoints ]) asArray.
+		  chart := RSChart new.
+		  chart extent: self chartWidth @ self shortChartHeight.
+		  chart colors:
+			  (NSScale ordinal range:
+				   { (Color blue mixed: 0.3 with: Color white) }).
+		  (chart barHeights: wellbeings) barSize: 30.
+		  chart addDecoration: (RSHorizontalTick new
+				   fromNames: names;
+				   fontSize: 12).
+		  chart
+			  addDecoration: (RSVerticalTick new
+					   fontSize: 12;
+					   integer;
+					   yourself);
+			  ylabel: 'points';
+			  title: 'Well-being points'.
+		  RSComposite new shapes: chart build shapes ]
 ]
