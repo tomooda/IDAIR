@@ -13,7 +13,9 @@ Class {
 		'pendingPolicymakerActionList',
 		'executePendingPolicymakerActionButton',
 		'removePendingPolicymakerActionButton',
-		'gamePresenter'
+		'gamePresenter',
+		'gameMasterChart',
+		'gameMasterChartInteraction'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
@@ -40,7 +42,7 @@ CMIDAIRRPGActionPresenter class >> defaultSpec [
 									    add: #citizenActionNoButton;
 									    yourself)
 							   expand: false))
-			 width: 350).
+			 width: 300).
 	policyMakerSpec := SpBoxLayout newVertical
 		                   add: (SpBoxLayout newHorizontal
 				                    add: 'Policymaker''s Actions' asPresenter
@@ -72,13 +74,14 @@ CMIDAIRRPGActionPresenter class >> defaultSpec [
 		                       expand: false;
 		                       yourself.
 
-	^ SpBoxLayout newVertical
-		  add: (SpBoxLayout newHorizontal
-				   add: citizenSpec expand: false;
-				   add: '    ' asPresenter width: 10;
-				   add: hospitalManagerSpec expand: false;
-				   add: '    ' asPresenter width: 10;
-				   add: policyMakerSpec expand: false);
+	^ SpBoxLayout newHorizontal
+		  add: citizenSpec expand: false;
+		  add: '    ' asPresenter width: 10;
+		  add: hospitalManagerSpec expand: false;
+		  add: '    ' asPresenter width: 10;
+		  add: policyMakerSpec expand: false;
+		  add: '    ' asPresenter width: 10;
+		  add: #gameMasterChart;
 		  yourself
 ]
 
@@ -101,7 +104,14 @@ CMIDAIRRPGActionPresenter >> clearRound [
 
 	self model ifNotNil: #clearRound.
 	self model cormasModel nextHistory.
-	playerList refresh
+	playerList refresh.
+	gameMasterChart refresh
+]
+
+{ #category : #accessing }
+CMIDAIRRPGActionPresenter >> cormasModel [
+
+	^ self model cormasModel
 ]
 
 { #category : #accessing }
@@ -122,6 +132,32 @@ CMIDAIRRPGActionPresenter >> diseaseDynamicsAndPopulation [
 		  ifNil: [ OrderedDictionary new ]
 ]
 
+{ #category : #drawing }
+CMIDAIRRPGActionPresenter >> drawGameMasterChart: aCanvas [
+
+	| charts chart |
+	aCanvas color: Color white.
+	charts := { 
+		          self cormasModel patientsChart.
+		          self cormasModel hospitalChart.
+		          self cormasModel wellbeingChart.
+		          self cormasModel populationChart }.
+	RSVerticalLineLayout new
+		alignCenter;
+		gapSize: 10;
+		on: charts.
+	aCanvas addAll: charts.
+	gameMasterChartInteraction ifNil: [ 
+		gameMasterChartInteraction := CMIDAIRMultiChartInteraction new ].
+	aCanvas @ gameMasterChartInteraction.
+	chart := charts
+		         at: gameMasterChartInteraction currentShapeIndex
+		         ifAbsent: [ aCanvas ].
+	aCanvas camera
+		zoomToFit: chart extent
+		rectangle: chart encompassingRectangle
+]
+
 { #category : #accessing }
 CMIDAIRRPGActionPresenter >> gamePresenter: aCMIDAIRRPGPresenter [
 
@@ -136,7 +172,8 @@ CMIDAIRRPGActionPresenter >> hospitalManagerPlay: aCMIDAIRRPGAction [
 			submodelAt: #resource
 			do: [ :resourceModel | 
 				aCMIDAIRRPGAction execute: resourceModel.
-				gamePresenter ifNotNil: #updateResources ] ]
+				gamePresenter ifNotNil: #updateResources.
+				gameMasterChart refresh ] ]
 ]
 
 { #category : #initialization }
@@ -147,7 +184,7 @@ CMIDAIRRPGActionPresenter >> initializePresenters [
 		              addColumn:
 			              ((SpStringTableColumn
 				                title: 'name'
-				                evaluated: [ :assoc | assoc key ]) width: 140);
+				                evaluated: [ :assoc | assoc key ]) width: 110);
 		              addColumn: ((SpStringTableColumn
 				                title: 'wbp'
 				                evaluated: [ :assoc | 
@@ -203,7 +240,9 @@ CMIDAIRRPGActionPresenter >> initializePresenters [
 		                                        action: [ 
 			                                        self
 				                                        removePendingPolicymakerAction ];
-		                                        yourself
+		                                        yourself.
+	gameMasterChart := self newRoassal script: [ :canvas | 
+		                    self drawGameMasterChart: canvas ]
 ]
 
 { #category : #initialization }
@@ -276,7 +315,8 @@ CMIDAIRRPGActionPresenter >> policymakerPlay: aCMIDAIRRPGAction [
 				contactModel cormasModel
 					submodelAt: #resource
 					do: [ :resourceModel | aCMIDAIRRPGAction execute: resourceModel ].
-				gamePresenter ifNotNil: #updateResources ] ]
+				gamePresenter ifNotNil: #updateResources.
+				gameMasterChart refresh ] ]
 ]
 
 { #category : #operations }
@@ -316,6 +356,12 @@ CMIDAIRRPGActionPresenter >> retrieveSpec: aSelector [
 { #category : #accessing }
 CMIDAIRRPGActionPresenter >> title [
 	^ 'IDAIR RPG Actions'
+]
+
+{ #category : #updating }
+CMIDAIRRPGActionPresenter >> updateChart [
+
+	gameMasterChart refresh
 ]
 
 { #category : #updating }

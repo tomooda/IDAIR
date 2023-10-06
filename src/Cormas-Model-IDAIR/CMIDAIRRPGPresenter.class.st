@@ -42,7 +42,7 @@ CMIDAIRRPGPresenter >> initializePresenters [
 
 	notebook := self newNotebook
 		            addPage: (self newNotebookPage
-				             title: 'Play';
+				             title: 'Game Master';
 				             presenterProvider: [ 
 					             actionPresenter := (CMIDAIRRPGActionPresenter on:
 							                                 self model)
@@ -50,29 +50,12 @@ CMIDAIRRPGPresenter >> initializePresenters [
 						                                yourself ];
 				             yourself);
 		            addPage: (self newNotebookPage
-				             title: 'Population chart';
+				             title: 'Public View';
 				             presenterProvider: [ 
-					             populationChart := CMIDAIRRPGPopulationChartPresenter 
+					             populationChart := CMIDAIRRPGPublicChartsPresenter 
 						                                on: self model cormasModel ];
 				             yourself);
-		            addPage: (self newNotebookPage
-				             title: 'Citizens status chart';
-				             presenterProvider: [ 
-					             citizensChart := CMIDAIRRPGCitizenChartPresenter 
-						                              on: self model ];
-				             yourself);
-		            addPage: (self newNotebookPage
-				             title: 'Medical status chart';
-				             presenterProvider: [ 
-					             citizensChart := CMIDAIRRPGMedicalChartPresenter 
-						                              on: self model ];
-				             yourself);
-		            addPage: (self newNotebookPage
-				             title: 'Map';
-				             presenterProvider: [ 
-					             map := CMIDAIRRPGMapPresenter on:
-							                    self model cormasModel ];
-				             yourself) yourself.
+		            yourself.
 	daysLabel := self newLabel
 		             label: '0.0';
 		             yourself.
@@ -97,7 +80,7 @@ CMIDAIRRPGPresenter >> initializePresenters [
 CMIDAIRRPGPresenter >> initializeWindow: aSpWindowPresenter [
 
 	super initializeWindow: aSpWindowPresenter.
-	aSpWindowPresenter initialExtent: 800 @ 600
+	aSpWindowPresenter initialExtent: 1024 @ 600
 ]
 
 { #category : #operations }

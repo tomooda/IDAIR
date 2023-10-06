@@ -278,6 +278,38 @@ CMIDAIRModel >> historyAt: anInteger [
 		  ifFalse: [ Text new ]
 ]
 
+{ #category : #charts }
+CMIDAIRModel >> hospitalChart [
+
+	^ self submodelAt: #resource do: [ :resourceModel | 
+		  | chart plot |
+		  chart := RSChart new.
+		  chart extent: self chartWidth @ self shortChartHeight.
+		  chart colors: (NSScale ordinal range: { 
+					   Color lightGray.
+					   Color darkGray }).
+
+		  chart addPlot: (plot := CMIDAIRRSBedsPlot new
+				           x1: { 
+						           resourceModel numBeds.
+						           resourceModel numICUs }
+				           x2: { 
+						           resourceModel occupiedBeds.
+						           resourceModel occupiedICUs }
+				           y: (1 to: 2);
+				           yourself).
+		  chart addDecoration: (RSHorizontalTick new
+				   integer;
+				   fontSize: 12;
+				   numberOfTicks: 10).
+		  chart
+			  addDecoration: (RSVerticalTick new
+					   fromNames: { 'Regular beds'. 'ICU beds' };
+					   fontSize: 12);
+			  title: 'Current status of hospital beds'.
+		  RSComposite new shapes: chart build shapes ]
+]
+
 { #category : #'user interfaces' }
 CMIDAIRModel >> ifGUI: aBlock [
 
@@ -394,6 +426,28 @@ CMIDAIRModel >> loadDefaultSubmodels [
 CMIDAIRModel >> longChartWidth [
 
 	^ 400
+]
+
+{ #category : #charts }
+CMIDAIRModel >> map [
+
+	| shapes |
+	shapes := OrderedCollection new.
+	self theLocations do: [ :location | 
+		shapes add: (RSBox new
+				 position: location coordinates * 10;
+				 color: location color;
+				 extent: 10 @ 10;
+				 yourself) ].
+	self theCitizens do: [ :citizen | 
+		shapes add: (RSCircle new
+				 position: (citizen locationDynamics oldPosition ifNil: [ 
+							  citizen locationDynamics position ]) * 10;
+				 color: citizen diseaseDynamics color;
+				 radius: 0.5;
+				 model: citizen;
+				 yourself) ].
+	^ RSComposite new shapes: shapes
 ]
 
 { #category : #history }
@@ -652,7 +706,7 @@ CMIDAIRModel >> populationChart [
 
 	| chart daysPerStep |
 	chart := RSChart new.
-	chart extent: self chartWidth @ self chartHeight.
+	chart extent: self chartWidth @ self shortChartHeight.
 	daysPerStep := self daysPerStep.
 	self submodelAt: #disease do: [ :diseaseModel | 
 		diseaseModel historyOfInfected ifNotEmpty: [ :historyOfInfected | 
@@ -805,7 +859,7 @@ CMIDAIRModel >> theLocations: aCollectionOfCMIDAIRLocation [
 ]
 
 { #category : #charts }
-CMIDAIRModel >> wellbeingPointsChart [
+CMIDAIRModel >> wellbeingChart [
 
 	^ self submodelAt: #contact do: [ :contactModel | 
 		  | names wellbeings chart |

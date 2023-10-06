@@ -1,5 +1,5 @@
 Class {
-	#name : #CMIDAIRRPGPopulationChartPresenter,
+	#name : #CMIDAIRRPGPublicChartsPresenter,
 	#superclass : #SpPresenterWithModel,
 	#instVars : [
 		'populationChart',
@@ -12,19 +12,22 @@ Class {
 		'decDayButton',
 		'incDayButton',
 		'dayField',
-		'historyText'
+		'historyText',
+		'wellbeingChart',
+		'hospitalChart',
+		'map'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter class >> deadColor [
+CMIDAIRRPGPublicChartsPresenter class >> deadColor [
 
 	^ Color black
 ]
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter class >> deadIcon [
+CMIDAIRRPGPublicChartsPresenter class >> deadIcon [
 
 	| form |
 	form := Form extent: 16 @ 16 depth: 32.
@@ -33,69 +36,77 @@ CMIDAIRRPGPopulationChartPresenter class >> deadIcon [
 ]
 
 { #category : #specs }
-CMIDAIRRPGPopulationChartPresenter class >> defaultSpec [
+CMIDAIRRPGPublicChartsPresenter class >> defaultSpec [
 
-	^ SpPanedLayout newHorizontal
-		  positionOfSlider: 0.75;
-		  add: #populationChart;
-		  add: (SpBoxLayout newVertical
-				   add: (SpBoxLayout newHorizontal
-						    vAlignCenter;
-						    add: #susceptibleCheckbox width: 16;
-						    add: self susceptibleIcon asPresenter expand: false;
-						    add: ' Susceptible' asPresenter)
-				   expand: false;
-				   add: (SpBoxLayout newHorizontal
-						    vAlignCenter;
-						    add: #infectedCheckbox width: 16;
-						    add: self infectedIcon asPresenter expand: false;
-						    add: ' Infected' asPresenter)
-				   expand: false;
-				   add: (SpBoxLayout newHorizontal
-						    vAlignCenter;
-						    add: #recoveredCheckbox width: 16;
-						    add: self recoveredIcon asPresenter expand: false;
-						    add: ' Recovered' asPresenter)
-				   expand: false;
-				   add: (SpBoxLayout newHorizontal
-						    vAlignCenter;
-						    add: #deadCheckbox width: 16;
-						    add: self deadIcon asPresenter expand: false;
-						    add: ' Dead' asPresenter)
-				   expand: false;
-				   add: (SpBoxLayout newHorizontal
-						    vAlignCenter;
-						    add: #occupiedICUsCheckbox width: 16;
-						    add: self occupiedICUsIcon asPresenter expand: false;
-						    add: ' Occupied ICU beds' asPresenter)
-				   expand: false;
-				   add: (SpBoxLayout newHorizontal
-						    vAlignCenter;
-						    add: #occupiedBedsCheckbox width: 16;
-						    add: self occupiedBedsIcon asPresenter expand: false;
-						    add: ' Occupied regular beds ' asPresenter)
-				   expand: false;
-				   add: '' asPresenter expand: false;
-				   add: (SpBoxLayout newHorizontal
-						    vAlignCenter;
-						    add: #decDayButton width: self buttonHeight;
-						    add: #dayField width: 100;
-						    add: #incDayButton width: self buttonHeight;
-						    yourself)
-				   expand: false;
-				   add: #historyText;
-				   yourself);
-		  yourself
+	^ SpPanedLayout newVertical
+		  positionOfSlider: 0.6;
+		  add: (SpPanedLayout newHorizontal
+				   positionOfSlider: 0.7;
+				   add: (SpPanedLayout newHorizontal
+						    positionOfSlider: 0.75;
+						    add: #populationChart;
+						    add: (SpBoxLayout newVertical
+								     add: (SpBoxLayout newHorizontal
+										      vAlignCenter;
+										      add: #susceptibleCheckbox width: 16;
+										      add: self susceptibleIcon asPresenter expand: false;
+										      add: ' Susceptible' asPresenter)
+								     expand: false;
+								     add: (SpBoxLayout newHorizontal
+										      vAlignCenter;
+										      add: #infectedCheckbox width: 16;
+										      add: self infectedIcon asPresenter expand: false;
+										      add: ' Infected' asPresenter)
+								     expand: false;
+								     add: (SpBoxLayout newHorizontal
+										      vAlignCenter;
+										      add: #recoveredCheckbox width: 16;
+										      add: self recoveredIcon asPresenter expand: false;
+										      add: ' Recovered' asPresenter)
+								     expand: false;
+								     add: (SpBoxLayout newHorizontal
+										      vAlignCenter;
+										      add: #deadCheckbox width: 16;
+										      add: self deadIcon asPresenter expand: false;
+										      add: ' Dead' asPresenter)
+								     expand: false;
+								     add: (SpBoxLayout newHorizontal
+										      vAlignCenter;
+										      add: #occupiedICUsCheckbox width: 16;
+										      add: self occupiedICUsIcon asPresenter expand: false;
+										      add: ' Occupied ICU beds' asPresenter)
+								     expand: false;
+								     add: (SpBoxLayout newHorizontal
+										      vAlignCenter;
+										      add: #occupiedBedsCheckbox width: 16;
+										      add: self occupiedBedsIcon asPresenter expand: false;
+										      add: ' Occupied regular beds ' asPresenter)
+								     expand: false;
+								     add: '' asPresenter expand: false;
+								     add: (SpBoxLayout newHorizontal
+										      vAlignCenter;
+										      add: #decDayButton width: self buttonHeight;
+										      add: #dayField width: 100;
+										      add: #incDayButton width: self buttonHeight;
+										      yourself)
+								     expand: false;
+								     add: #historyText;
+								     yourself);
+						    yourself);
+				   add: #hospitalChart);
+		  add: (SpBoxLayout newHorizontal
+				   add: #wellbeingChart;
+				   add: #map)
 ]
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter class >> infectedColor [
+CMIDAIRRPGPublicChartsPresenter class >> infectedColor [
 
 	^ Color red
 ]
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter class >> infectedIcon [
+CMIDAIRRPGPublicChartsPresenter class >> infectedIcon [
 
 	| form |
 	form := Form extent: 16 @ 16 depth: 32.
@@ -104,13 +115,13 @@ CMIDAIRRPGPopulationChartPresenter class >> infectedIcon [
 ]
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter class >> occupiedBedsColor [
+CMIDAIRRPGPublicChartsPresenter class >> occupiedBedsColor [
 
 	^ Color lightGray
 ]
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter class >> occupiedBedsIcon [
+CMIDAIRRPGPublicChartsPresenter class >> occupiedBedsIcon [
 
 	| form |
 	form := Form extent: 16 @ 16 depth: 32.
@@ -119,13 +130,13 @@ CMIDAIRRPGPopulationChartPresenter class >> occupiedBedsIcon [
 ]
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter class >> occupiedICUsColor [
+CMIDAIRRPGPublicChartsPresenter class >> occupiedICUsColor [
 
 	^ Color darkGray
 ]
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter class >> occupiedICUsIcon [
+CMIDAIRRPGPublicChartsPresenter class >> occupiedICUsIcon [
 
 	| form |
 	form := Form extent: 16 @ 16 depth: 32.
@@ -134,13 +145,13 @@ CMIDAIRRPGPopulationChartPresenter class >> occupiedICUsIcon [
 ]
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter class >> recoveredColor [
+CMIDAIRRPGPublicChartsPresenter class >> recoveredColor [
 
 	^ Color blue
 ]
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter class >> recoveredIcon [
+CMIDAIRRPGPublicChartsPresenter class >> recoveredIcon [
 
 	| form |
 	form := Form extent: 16 @ 16 depth: 32.
@@ -149,13 +160,13 @@ CMIDAIRRPGPopulationChartPresenter class >> recoveredIcon [
 ]
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter class >> susceptibleColor [
+CMIDAIRRPGPublicChartsPresenter class >> susceptibleColor [
 
 	^ Color green
 ]
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter class >> susceptibleIcon [
+CMIDAIRRPGPublicChartsPresenter class >> susceptibleIcon [
 
 	| form |
 	form := Form extent: 16 @ 16 depth: 32.
@@ -164,13 +175,43 @@ CMIDAIRRPGPopulationChartPresenter class >> susceptibleIcon [
 ]
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter >> deadColor [
+CMIDAIRRPGPublicChartsPresenter >> deadColor [
 
 	^ self class deadColor
 ]
 
 { #category : #drawing }
-CMIDAIRRPGPopulationChartPresenter >> drawPopulationChart: aCanvas [
+CMIDAIRRPGPublicChartsPresenter >> drawHospitalChart: aCanvas [
+
+	| charts |
+	charts := { 
+		          self model patientsChart.
+		          self model hospitalChart }.
+	RSVerticalLineLayout new
+		alignCenter;
+		gapSize: 10;
+		on: charts.
+
+	aCanvas addAll: charts.
+	CMIDAIRZoomToFitInteraction new onShape: aCanvas
+]
+
+{ #category : #drawing }
+CMIDAIRRPGPublicChartsPresenter >> drawMap: aCanvas [
+
+	aCanvas addShape: self model map.
+	CMIDAIRZoomToFitInteraction new onShape: aCanvas
+]
+
+{ #category : #drawing }
+CMIDAIRRPGPublicChartsPresenter >> drawPatientsChart: aCanvas [
+
+	aCanvas addShape: self model patientsChart.
+	CMIDAIRZoomToFitInteraction new onShape: aCanvas
+]
+
+{ #category : #drawing }
+CMIDAIRRPGPublicChartsPresenter >> drawPopulationChart: aCanvas [
 
 	| chart daysPerStep day |
 	aCanvas color: Color white.
@@ -245,23 +286,30 @@ CMIDAIRRPGPopulationChartPresenter >> drawPopulationChart: aCanvas [
 				chart addDecoration: (RSXMarkerDecoration new value: day) ] ]
 		ifEmpty: [ chart addPlot: (RSLinePlot new x: { 0 } y: { 0 }) ].
 	chart build.
-	RSZoomToFitCanvasInteraction new zoomToFitOnStart: aCanvas
+	CMIDAIRZoomToFitInteraction new onShape: aCanvas
+]
+
+{ #category : #drawing }
+CMIDAIRRPGPublicChartsPresenter >> drawWellbeingChart: aCanvas [
+
+	aCanvas addShape: self model wellbeingChart.
+	CMIDAIRZoomToFitInteraction new onShape: aCanvas
 ]
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter >> infectedColor [
+CMIDAIRRPGPublicChartsPresenter >> infectedColor [
 
 	^ self class infectedColor
 ]
 
 { #category : #initialization }
-CMIDAIRRPGPopulationChartPresenter >> initializePresenters [
+CMIDAIRRPGPublicChartsPresenter >> initializePresenters [
 
 	super initializePresenters.
 	populationChart := self newRoassal script: [ :canvas | 
 		                   self drawPopulationChart: canvas ].
 	susceptibleCheckbox := self newCheckBox
-		                       state: true;
+		                       state: false;
 		                       color: self susceptibleColor;
 		                       whenChangedDo: [ self refresh ];
 		                       yourself.
@@ -295,7 +343,9 @@ CMIDAIRRPGPopulationChartPresenter >> initializePresenters [
 		                label: '>';
 		                action: [ 
 			                dayField number:
-					                dayField number - 1 // 7 + 1 * 7 + 1 ];
+					                (dayField number - 1 // 7 + 1 * 7 + 1 min:
+							                 self model timeStep * self model daysPerStep
+							                 + 1) ];
 		                yourself.
 	dayField := self newNumberInput
 		            beInteger;
@@ -306,11 +356,16 @@ CMIDAIRRPGPopulationChartPresenter >> initializePresenters [
 			            historyText text:
 					            (self model historyAt: day - 1 // 7 + 1) ];
 		            yourself.
-	historyText := self newText
+	historyText := self newText.
+	wellbeingChart := self newRoassal script: [ :canvas | 
+		                  self drawWellbeingChart: canvas ].
+	hospitalChart := self newRoassal script: [ :canvas | 
+		                 self drawHospitalChart: canvas ].
+	map := self newRoassal script: [ :canvas | self drawMap: canvas ]
 ]
 
 { #category : #accessing }
-CMIDAIRRPGPopulationChartPresenter >> modelChanged [
+CMIDAIRRPGPublicChartsPresenter >> modelChanged [
 
 	super modelChanged.
 	self model ifNotNil: [ :model | 
@@ -318,33 +373,37 @@ CMIDAIRRPGPopulationChartPresenter >> modelChanged [
 ]
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter >> occupiedBedsColor [
+CMIDAIRRPGPublicChartsPresenter >> occupiedBedsColor [
 
 	^ self class occupiedBedsColor
 ]
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter >> occupiedICUsColor [
+CMIDAIRRPGPublicChartsPresenter >> occupiedICUsColor [
 
 	^ self class occupiedICUsColor
 ]
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter >> recoveredColor [
+CMIDAIRRPGPublicChartsPresenter >> recoveredColor [
 
 	^ self class recoveredColor
 ]
 
 { #category : #accessing }
-CMIDAIRRPGPopulationChartPresenter >> refresh [
+CMIDAIRRPGPublicChartsPresenter >> refresh [
 
-	populationChart refresh.
 	dayField text:
-		(self model timeStep * self model daysPerStep + 1) printString
+		(self model timeStep * self model daysPerStep + 1) printString.
+	{ 
+		populationChart.
+		wellbeingChart.
+		hospitalChart.
+		map } do: #refresh
 ]
 
 { #category : #'accessing-color' }
-CMIDAIRRPGPopulationChartPresenter >> susceptibleColor [
+CMIDAIRRPGPublicChartsPresenter >> susceptibleColor [
 
 	^ self class susceptibleColor
 ]
