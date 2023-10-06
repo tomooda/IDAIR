@@ -19,7 +19,7 @@ CMIDAIRRPGMedicalAction class >> all [
 { #category : #constants }
 CMIDAIRRPGMedicalAction class >> assignICU [
 
-	^ self name: 'ID:18 Occupy 1 ICU bed' block: [ :resourceModel | 
+	^ self name: 'ID:18 Occupy ICU bed' block: [ :resourceModel | 
 		  (UIManager default
 			   request: 'Number of ICU beds?'
 			   initialAnswer: '1') ifNotNil: [ :answer | 
@@ -31,7 +31,7 @@ CMIDAIRRPGMedicalAction class >> assignICU [
 { #category : #constants }
 CMIDAIRRPGMedicalAction class >> assignRegularBed [
 
-	^ self name: 'ID:19 Occupy 1 regular bed' block: [ :resourceModel | 
+	^ self name: 'ID:19 Occupy regular bed' block: [ :resourceModel | 
 		  (UIManager default
 			   request: 'Number of regular beds?'
 			   initialAnswer: '1') ifNotNil: [ :answer | 
