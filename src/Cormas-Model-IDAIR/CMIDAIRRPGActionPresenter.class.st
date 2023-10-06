@@ -95,8 +95,11 @@ CMIDAIRRPGActionPresenter >> citizen [
 CMIDAIRRPGActionPresenter >> citizenPlay: action [
 
 	self citizen ifNotNil: [ :citizen | 
-		citizen contactProfile action: action.
-		playerList refresh ]
+		action isImmediateAction
+			ifTrue: [ action execute: citizen ]
+			ifFalse: [ 
+				citizen contactProfile action: action.
+				playerList refresh ] ]
 ]
 
 { #category : #operations }

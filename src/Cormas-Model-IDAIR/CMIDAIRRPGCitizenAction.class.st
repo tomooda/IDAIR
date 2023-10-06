@@ -30,8 +30,10 @@ CMIDAIRRPGCitizenAction class >> all [
 		  self shopping.
 		  self regularHealthCheckup.
 		  self gettingMonthlyMedication.
-		  self seekHealthcare } asSortedCollection: [ :less :more | 
-		  less name <= more name ]
+		  self seekHealthcare.
+		  CMIDAIRRPGVaccinationAction vaccinated } asSortedCollection: [ 
+		  :less 
+		  :more | less name <= more name ]
 ]
 
 { #category : #constants }
@@ -265,6 +267,12 @@ CMIDAIRRPGCitizenAction >> forNo [
 CMIDAIRRPGCitizenAction >> forYes [
 
 	^ CMIDAIRRPGCitizenActionWrapperForYes on: self
+]
+
+{ #category : #testing }
+CMIDAIRRPGCitizenAction >> isImmediateAction [
+
+	^ false
 ]
 
 { #category : #accessing }

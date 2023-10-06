@@ -7,7 +7,8 @@ Class {
 		'occupiedICUs',
 		'occupiedBeds',
 		'historyOfOccupiedICUs',
-		'historyOfOccupiedBeds'
+		'historyOfOccupiedBeds',
+		'vaccineEligibilityRate'
 	],
 	#category : #'Cormas-Model-IDAIR-Resource-RPG'
 }
@@ -93,6 +94,7 @@ CMIDAIRRPGResourceModel >> initialize [
 	numBeds := 10.
 	occupiedBeds := 0.
 	occupiedICUs := 0.
+	vaccineEligibilityRate := 0.0.
 	historyOfOccupiedBeds := OrderedCollection new.
 	historyOfOccupiedICUs := OrderedCollection new
 ]
@@ -187,4 +189,16 @@ CMIDAIRRPGResourceModel >> step: anInteger [
 CMIDAIRRPGResourceModel >> supply: anInteger [
 
 	
+]
+
+{ #category : #accessing }
+CMIDAIRRPGResourceModel >> vaccineEligibilityRate [
+
+	^ vaccineEligibilityRate
+]
+
+{ #category : #accessing }
+CMIDAIRRPGResourceModel >> vaccineEligibilityRate: aNumber [
+
+	vaccineEligibilityRate := aNumber
 ]

@@ -66,7 +66,7 @@ CMIDAIRRPGContactModel >> defaultContactProfileClass [
 { #category : #defaults }
 CMIDAIRRPGContactModel >> defaultHospitalManagerActions [
 
-	^ CMIDAIRRPGResourceAction all
+	^ CMIDAIRRPGMedicalAction all
 ]
 
 { #category : #defaults }

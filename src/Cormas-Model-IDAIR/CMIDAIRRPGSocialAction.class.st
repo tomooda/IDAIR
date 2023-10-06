@@ -15,10 +15,10 @@ CMIDAIRRPGSocialAction class >> all [
 		  self facemask.
 		  self treatmentGuideline.
 		  self openQuarrantineCamp.
-		  self vaccination25.
-		  self vaccination50.
-		  self vaccination75.
-		  self vaccination100.
+		  CMIDAIRRPGMedicalAction vaccination25.
+		  CMIDAIRRPGMedicalAction vaccination50.
+		  CMIDAIRRPGMedicalAction vaccination75.
+		  CMIDAIRRPGMedicalAction vaccination100.
 		  self closeBorder.
 		  self socialDistancing1.
 		  self socialDistancing2.
@@ -26,8 +26,8 @@ CMIDAIRRPGSocialAction class >> all [
 		  self socialDistancing4.
 		  self socialDistancing5.
 		  self lockdown.
-		  CMIDAIRRPGResourceAction increase1ICU2RB.
-		  CMIDAIRRPGResourceAction increase2ICU4RB } asSortedCollection: [ 
+		  CMIDAIRRPGMedicalAction increase1ICU2RB.
+		  CMIDAIRRPGMedicalAction increase2ICU4RB } asSortedCollection: [ 
 		  :less 
 		  :more | less name <= more name ]
 ]
@@ -115,30 +115,6 @@ CMIDAIRRPGSocialAction class >> socialDistancing5 [
 CMIDAIRRPGSocialAction class >> treatmentGuideline [
 
 	^ self name: 'ID:22 Issue treatment guidelines' cummulativeFactor: 0.8
-]
-
-{ #category : #constants }
-CMIDAIRRPGSocialAction class >> vaccination100 [
-
-	^ self name: 'ID:26 Provide vaccine to 100% of population' cummulativeFactor: 0.01
-]
-
-{ #category : #constants }
-CMIDAIRRPGSocialAction class >> vaccination25 [
-
-	^ self name: 'ID:23 Provide vaccine to 25% of population' cummulativeFactor: 0.75
-]
-
-{ #category : #constants }
-CMIDAIRRPGSocialAction class >> vaccination50 [
-
-	^ self name: 'ID:24 Provide vaccine to 50% of population' cummulativeFactor: 0.5
-]
-
-{ #category : #constants }
-CMIDAIRRPGSocialAction class >> vaccination75 [
-
-	^ self name: 'ID:25 Provide vaccine to 75% of population' cummulativeFactor: 0.25
 ]
 
 { #category : #accessing }

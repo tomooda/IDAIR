@@ -1,5 +1,5 @@
 Class {
-	#name : #CMIDAIRRPGResourceAction,
+	#name : #CMIDAIRRPGMedicalAction,
 	#superclass : #CMIDAIRRPGAction,
 	#instVars : [
 		'block'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #constants }
-CMIDAIRRPGResourceAction class >> all [
+CMIDAIRRPGMedicalAction class >> all [
 
 	^ { 
 		  self assignRegularBed.
@@ -17,7 +17,7 @@ CMIDAIRRPGResourceAction class >> all [
 ]
 
 { #category : #constants }
-CMIDAIRRPGResourceAction class >> assignICU [
+CMIDAIRRPGMedicalAction class >> assignICU [
 
 	^ self name: 'ID:18 Occupy 1 ICU bed' block: [ :resourceModel | 
 		  (UIManager default
@@ -29,7 +29,7 @@ CMIDAIRRPGResourceAction class >> assignICU [
 ]
 
 { #category : #constants }
-CMIDAIRRPGResourceAction class >> assignRegularBed [
+CMIDAIRRPGMedicalAction class >> assignRegularBed [
 
 	^ self name: 'ID:19 Occupy 1 regular bed' block: [ :resourceModel | 
 		  (UIManager default
@@ -41,7 +41,7 @@ CMIDAIRRPGResourceAction class >> assignRegularBed [
 ]
 
 { #category : #constants }
-CMIDAIRRPGResourceAction class >> increase1ICU2RB [
+CMIDAIRRPGMedicalAction class >> increase1ICU2RB [
 
 	^ self
 		  name: 'ID:20 Increase bed capacity(1ICU+2RB)'
@@ -51,7 +51,7 @@ CMIDAIRRPGResourceAction class >> increase1ICU2RB [
 ]
 
 { #category : #constants }
-CMIDAIRRPGResourceAction class >> increase2ICU4RB [
+CMIDAIRRPGMedicalAction class >> increase2ICU4RB [
 
 	^ self
 		  name: 'ID:21 Increase bed capacity(2ICU+4RB)'
@@ -61,27 +61,67 @@ CMIDAIRRPGResourceAction class >> increase2ICU4RB [
 ]
 
 { #category : #'instance creation' }
-CMIDAIRRPGResourceAction class >> name: aString block: aBlock [
+CMIDAIRRPGMedicalAction class >> name: aString block: aBlock [
 
 	^ (self name: aString)
 		  block: aBlock;
 		  yourself
 ]
 
+{ #category : #constants }
+CMIDAIRRPGMedicalAction class >> vaccination100 [
+
+	^ self
+		  name: 'ID:26 Provide vaccine to 100% of population'
+		  block: [ :resourceModel | 
+			  resourceModel vaccineEligibilityRate: 1.0.
+			  '' ]
+]
+
+{ #category : #constants }
+CMIDAIRRPGMedicalAction class >> vaccination25 [
+
+	^ self
+		  name: 'ID:23 Provide vaccine to 25% of population'
+		  block: [ :resourceModel | 
+			  resourceModel vaccineEligibilityRate: 0.25.
+			  '' ]
+]
+
+{ #category : #constants }
+CMIDAIRRPGMedicalAction class >> vaccination50 [
+
+	^ self
+		  name: 'ID:24 Provide vaccine to 50% of population'
+		  block: [ :resourceModel | 
+			  resourceModel vaccineEligibilityRate: 0.5.
+			  '' ]
+]
+
+{ #category : #constants }
+CMIDAIRRPGMedicalAction class >> vaccination75 [
+
+	^ self
+		  name: 'ID:25 Provide vaccine to 75% of population'
+		  block: [ :resourceModel | 
+			  resourceModel vaccineEligibilityRate: 0.75.
+			  '' ]
+]
+
 { #category : #accessing }
-CMIDAIRRPGResourceAction >> block [
+CMIDAIRRPGMedicalAction >> block [
 
 	^ block
 ]
 
 { #category : #accessing }
-CMIDAIRRPGResourceAction >> block: aBlock [
+CMIDAIRRPGMedicalAction >> block: aBlock [
 
 	block := aBlock
 ]
 
 { #category : #execution }
-CMIDAIRRPGResourceAction >> execute: aCMIDAIRRPGResourceModel [
+CMIDAIRRPGMedicalAction >> execute: aCMIDAIRRPGResourceModel [
 
 	(block value: aCMIDAIRRPGResourceModel) ifNotNil: [ :string | 
 		aCMIDAIRRPGResourceModel cormasModel recordHistory:
