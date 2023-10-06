@@ -50,12 +50,6 @@ CMIDAIRContactModel >> numberOfCitizensInCommunity [
 ]
 
 { #category : #'accessing-population' }
-CMIDAIRContactModel >> numberOfCitizensInICU [
-
-	^ self cormasModel numberOfCitizensInICU
-]
-
-{ #category : #'accessing-population' }
 CMIDAIRContactModel >> numberOfSusceptible [
 
 	| num |
@@ -109,8 +103,13 @@ CMIDAIRContactModel >> step: anInteger [
 { #category : #accessing }
 CMIDAIRContactModel >> totalBeta [
 
-	| totalBeta |
-	totalBeta := self cormasModel theCitizens
+	| hospitalized totalBeta |
+	hospitalized := Array new.
+	self cormasModel
+		submodelAt: #resource
+		do: [ :resource | hospitalized := resource hospitalizedPatients ].
+	totalBeta := (self cormasModel theCitizens copyWithoutAll:
+		              hospitalized)
 		             inject: 0.0
 		             into: [ :sum :citizen | 
 		             citizen beta / citizen tau + sum ].

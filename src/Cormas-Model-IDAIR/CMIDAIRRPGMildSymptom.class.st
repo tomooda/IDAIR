@@ -46,7 +46,14 @@ CMIDAIRRPGMildSymptom >> next [
 { #category : #accessing }
 CMIDAIRRPGMildSymptom >> p_severe [
 
-	^ self modelParameterAt: #p_severe
+	| p |
+	p := self modelParameterAt: #p_severe.
+	self citizen cormasModel
+		submodelAt: #resource
+		do: [ :resourceModel | 
+			(resourceModel isInICU: self citizen) ifTrue: [ ^ p * 0.2 ].
+			(resourceModel isInBed: self citizen) ifTrue: [ ^ p * 0.5 ] ].
+	^ p
 ]
 
 { #category : #stepping }

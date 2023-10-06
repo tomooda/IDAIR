@@ -4,8 +4,8 @@ Class {
 	#instVars : [
 		'numICUs',
 		'numBeds',
-		'occupiedICUs',
-		'occupiedBeds',
+		'patientsInBeds',
+		'patientsInICUs',
 		'historyOfOccupiedICUs',
 		'historyOfOccupiedBeds',
 		'vaccineEligibilityRate'
@@ -26,27 +26,39 @@ CMIDAIRRPGResourceModel >> asPresenter [
 ]
 
 { #category : #operations }
-CMIDAIRRPGResourceModel >> citizenDead [
+CMIDAIRRPGResourceModel >> assignBed: aCMIDAIRCitizen [
 
-	occupiedICUs + occupiedBeds < self cormasModel numberOfSymptomatic 
-		ifTrue: [ ^ self ].
-	occupiedBeds > 0 ifTrue: [ 
-		occupiedBeds := occupiedBeds - 1.
-		^ self ].
-	occupiedICUs > 0 ifTrue: [ 
-		occupiedICUs := occupiedICUs - 1.
-		^ self ]
+	patientsInBeds size < numBeds ifTrue: [ 
+		patientsInICUs remove: aCMIDAIRCitizen ifAbsent: [  ].
+		patientsInBeds add: aCMIDAIRCitizen ]
 ]
 
 { #category : #operations }
-CMIDAIRRPGResourceModel >> citizenRecovered [
+CMIDAIRRPGResourceModel >> assignICU: aCMIDAIRCitizen [
 
-	occupiedICUs > 0 ifTrue: [ 
-		occupiedICUs := occupiedICUs - 1.
-		^ self ].
-	occupiedBeds > 0 ifTrue: [ 
-		occupiedBeds := occupiedBeds - 1.
-		^ self ]
+	patientsInICUs size < numICUs ifTrue: [ 
+		patientsInBeds remove: aCMIDAIRCitizen ifAbsent: [  ].
+		patientsInICUs add: aCMIDAIRCitizen ]
+]
+
+{ #category : #operations }
+CMIDAIRRPGResourceModel >> checkPatientsInBeds [
+
+	patientsInBeds copy do: [ :citizen | 
+		(citizen diseaseDynamics isMildSymptom or: [ 
+			 citizen diseaseDynamics isSevereSymptom ]) ifFalse: [ 
+			patientsInBeds remove: citizen ifAbsent: [  ] ] ]
+]
+
+{ #category : #operations }
+CMIDAIRRPGResourceModel >> checkPatientsInICUs [
+
+	patientsInICUs copy do: [ :citizen | 
+		citizen diseaseDynamics isSevereSymptom ifFalse: [ 
+			patientsInICUs remove: citizen ifAbsent: [  ].
+			(citizen diseaseDynamics isMildSymptom and: [ 
+				 patientsInBeds size < numBeds ]) ifTrue: [ 
+				patientsInBeds add: citizen ] ] ]
 ]
 
 { #category : #control }
@@ -73,6 +85,12 @@ CMIDAIRRPGResourceModel >> historyOfOccupiedICUs [
 	^ historyOfOccupiedICUs
 ]
 
+{ #category : #accessing }
+CMIDAIRRPGResourceModel >> hospitalizedPatients [
+
+	^ patientsInBeds , patientsInICUs
+]
+
 { #category : #operations }
 CMIDAIRRPGResourceModel >> increaseBeds: anInteger ICUs: anotherInteger [
 
@@ -92,8 +110,8 @@ CMIDAIRRPGResourceModel >> initialize [
 	super initialize.
 	numICUs := 4.
 	numBeds := 10.
-	occupiedBeds := 0.
-	occupiedICUs := 0.
+	patientsInBeds := OrderedCollection new.
+	patientsInICUs := OrderedCollection new.
 	vaccineEligibilityRate := 0.0.
 	historyOfOccupiedBeds := OrderedCollection new.
 	historyOfOccupiedICUs := OrderedCollection new
@@ -103,6 +121,18 @@ CMIDAIRRPGResourceModel >> initialize [
 CMIDAIRRPGResourceModel >> initializers [
 
 	^ {  }
+]
+
+{ #category : #testing }
+CMIDAIRRPGResourceModel >> isInBed: aCMIDAIRCitizen [
+
+	^ patientsInBeds includes: aCMIDAIRCitizen
+]
+
+{ #category : #testing }
+CMIDAIRRPGResourceModel >> isInICU: aCMIDAIRCitizen [
+
+	^ patientsInICUs includes: aCMIDAIRCitizen
 ]
 
 { #category : #accessing }
@@ -132,44 +162,51 @@ CMIDAIRRPGResourceModel >> numICUs: aNumber [
 { #category : #accessing }
 CMIDAIRRPGResourceModel >> occupiedBeds [
 
-	^ occupiedBeds
-]
-
-{ #category : #accessing }
-CMIDAIRRPGResourceModel >> occupiedBeds: anInteger [
-
-	occupiedBeds := anInteger
+	^ patientsInBeds size
 ]
 
 { #category : #accessing }
 CMIDAIRRPGResourceModel >> occupiedICUs [
 
-	^ occupiedICUs
-]
-
-{ #category : #accessing }
-CMIDAIRRPGResourceModel >> occupiedICUs: anInteger [
-
-	occupiedICUs := anInteger
+	^ patientsInICUs size
 ]
 
 { #category : #operations }
 CMIDAIRRPGResourceModel >> occupyBed: anInteger [
 
-	occupiedBeds := occupiedBeds + anInteger min: numBeds
+	| candidates |
+	candidates := (self cormasModel theCitizens select: [ :citizen | 
+		               citizen diseaseDynamics isSevereSymptom ]) asArray
+		              shuffle
+	              , (self cormasModel theCitizens select: [ :citizen | 
+			               citizen diseaseDynamics isMildSymptom ]) asArray
+			              shuffle copyWithoutAll:
+		              patientsInBeds , patientsInICUs.
+	1 to:
+	((anInteger min: numBeds - patientsInBeds size) min: candidates size)
+	do: [ :index | self assignBed: (candidates at: index) ]
 ]
 
 { #category : #operations }
 CMIDAIRRPGResourceModel >> occupyICU: anInteger [
 
-	occupiedICUs := occupiedICUs + anInteger min: numICUs
+	| candidates |
+	candidates := ((self cormasModel theCitizens select: [ :citizen | 
+		                citizen diseaseDynamics isSevereSymptom ]) asArray
+		               shuffle copyWithoutAll: patientsInICUs)
+	              , (patientsInBeds select: [ :citizen | 
+			               citizen diseaseDynamics isSevereSymptom ]) asArray
+			              shuffle.
+	1 to:
+	((anInteger min: numICUs - patientsInICUs size) min: candidates size)
+	do: [ :index | self assignICU: (candidates at: index) ]
 ]
 
 { #category : #operations }
 CMIDAIRRPGResourceModel >> recordHistory [
 
-	historyOfOccupiedBeds add: occupiedBeds.
-	historyOfOccupiedICUs add: occupiedICUs
+	historyOfOccupiedBeds add: patientsInBeds size.
+	historyOfOccupiedICUs add: patientsInICUs size
 ]
 
 { #category : #accessing }
@@ -178,11 +215,12 @@ CMIDAIRRPGResourceModel >> socialPreventionResourceFactor [
 	^ 1.0
 ]
 
-{ #category : #accessing }
+{ #category : #control }
 CMIDAIRRPGResourceModel >> step: anInteger [
 
 	super step: anInteger.
-	self recordHistory
+	self checkPatientsInBeds.
+	self checkPatientsInICUs
 ]
 
 { #category : #control }

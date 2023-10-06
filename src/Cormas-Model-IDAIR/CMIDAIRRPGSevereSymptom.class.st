@@ -49,7 +49,14 @@ CMIDAIRRPGSevereSymptom >> next [
 { #category : #accessing }
 CMIDAIRRPGSevereSymptom >> p_dead [
 
-	^ self modelParameterAt: #p_dead
+	| p |
+	p := self modelParameterAt: #p_dead.
+	self citizen cormasModel
+		submodelAt: #resource
+		do: [ :resourceModel | 
+			(resourceModel isInICU: self citizen) ifTrue: [ ^ p * 0.2 ].
+			(resourceModel isInBed: self citizen) ifTrue: [ ^ p * 0.5 ] ].
+	^ p
 ]
 
 { #category : #stepping }

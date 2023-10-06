@@ -18,18 +18,9 @@ CMIDAIRMobiCitizenResourceDynamics >> citizenDead [
 ]
 
 { #category : #operations }
-CMIDAIRMobiCitizenResourceDynamics >> citizenHospitalized [
-
-	self hasICU ifTrue: [ self resourceModel releaseICU: self citizen ].
-	self hasBed ifFalse: [ self resourceModel occupyBed: self citizen ]
-]
-
-{ #category : #operations }
 CMIDAIRMobiCitizenResourceDynamics >> citizenICUed [
 
-	self hasBed ifTrue: [ self resourceModel releaseBed: self citizen ].
-	self hasICU ifFalse: [ self resourceModel occupyICU: self citizen ].
-	self hasICU ifFalse: [ self citizen beDead ]
+	
 ]
 
 { #category : #operations }

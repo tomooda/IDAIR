@@ -369,7 +369,8 @@ CMIDAIRRPGPublicChartsPresenter >> modelChanged [
 
 	super modelChanged.
 	self model ifNotNil: [ :model | 
-		dayField text: (model timeStep + 1) printString ]
+		dayField text:
+			(model timeStep * model daysPerStep + 1) rounded printString ]
 ]
 
 { #category : #'accessing-color' }
@@ -394,7 +395,8 @@ CMIDAIRRPGPublicChartsPresenter >> recoveredColor [
 CMIDAIRRPGPublicChartsPresenter >> refresh [
 
 	dayField text:
-		(self model timeStep * self model daysPerStep + 1) printString.
+		(self model timeStep * self model daysPerStep + 1) rounded
+			printString.
 	{ 
 		populationChart.
 		wellbeingChart.

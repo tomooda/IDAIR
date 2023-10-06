@@ -475,18 +475,11 @@ CMIDAIRModel >> numberOfCitizensInCommunity [
 	self theCitizens do: [ :citizen | 
 		citizen isInCommunity ifTrue: [ 
 			numberOfCitizensInCommunity := numberOfCitizensInCommunity + 1 ] ].
+	self submodelAt: #resource do: [ :resourceModel | 
+		numberOfCitizensInCommunity := numberOfCitizensInCommunity
+		                               - resourceModel occupiedBeds
+		                               - resourceModel occupiedICUs ].
 	^ numberOfCitizensInCommunity
-]
-
-{ #category : #'accessing-population' }
-CMIDAIRModel >> numberOfCitizensInICU [
-
-	| numberOfCitizensInICU |
-	numberOfCitizensInICU := 0.
-	self theCitizens do: [ :citizen | 
-		citizen isICUed ifTrue: [ 
-			numberOfCitizensInICU := numberOfCitizensInICU + 1 ] ].
-	^ numberOfCitizensInICU
 ]
 
 { #category : #probes }

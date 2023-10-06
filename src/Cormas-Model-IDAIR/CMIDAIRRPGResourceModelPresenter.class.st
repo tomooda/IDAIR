@@ -49,14 +49,10 @@ CMIDAIRRPGResourceModelPresenter >> initializePresenters [
 	occupiedICUs := self newNumberInput
 		                beInteger;
 		                climbRate: 1.0;
-		                whenNumberChangedDo: [ :value | 
-			                self model ifNotNil: [ :m | m occupiedICUs: value ] ];
 		                yourself.
 	occupiedBeds := self newNumberInput
 		                beInteger;
 		                climbRate: 1.0;
-		                whenNumberChangedDo: [ :value | 
-			                self model ifNotNil: [ :m | m occupiedBeds: value ] ];
 		                yourself
 ]
 

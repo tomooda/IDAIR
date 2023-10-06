@@ -5,12 +5,6 @@ Class {
 }
 
 { #category : #operations }
-CMIDAIRRPGCitizenResourceDynamics >> citizenDead [
-
-	self resourceModel citizenDead
-]
-
-{ #category : #operations }
 CMIDAIRRPGCitizenResourceDynamics >> citizenHospitalized [
 
 	
@@ -26,12 +20,6 @@ CMIDAIRRPGCitizenResourceDynamics >> citizenICUed [
 CMIDAIRRPGCitizenResourceDynamics >> citizenQuarrantined [
 
 
-]
-
-{ #category : #operations }
-CMIDAIRRPGCitizenResourceDynamics >> citizenRecovered [
-
-	self resourceModel citizenRecovered
 ]
 
 { #category : #operations }

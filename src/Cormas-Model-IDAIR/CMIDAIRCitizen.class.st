@@ -94,7 +94,7 @@ CMIDAIRCitizen >> coordinates: aPoint [
 { #category : #events }
 CMIDAIRCitizen >> deadAction [
 
-	self resourceDynamics citizenDead
+	
 ]
 
 { #category : #'accessing-contact' }
@@ -173,7 +173,7 @@ CMIDAIRCitizen >> home: aCMIDAIRLocation [
 { #category : #events }
 CMIDAIRCitizen >> hospitalizedAction [
 
-	self resourceDynamics citizenHospitalized
+	
 ]
 
 { #category : #testing }
@@ -272,7 +272,7 @@ CMIDAIRCitizen >> randomDuration [
 { #category : #events }
 CMIDAIRCitizen >> recoveredAction [
 
-	self resourceDynamics citizenRecovered
+	
 ]
 
 { #category : #events }

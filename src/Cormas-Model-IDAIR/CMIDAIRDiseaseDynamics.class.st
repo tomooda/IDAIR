@@ -103,6 +103,12 @@ CMIDAIRDiseaseDynamics >> color [
 ]
 
 { #category : #accessing }
+CMIDAIRDiseaseDynamics >> cormasModel [
+
+	^ citizen ifNotNil: #cormasModel
+]
+
+{ #category : #accessing }
 CMIDAIRDiseaseDynamics >> daysPerStep [
 
 	^ self citizen cormasModel daysPerStep
