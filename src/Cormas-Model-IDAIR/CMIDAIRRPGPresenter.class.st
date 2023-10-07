@@ -8,7 +8,8 @@ Class {
 		'runButton',
 		'settingsButton',
 		'publicChartsPresenter',
-		'gameMasterPresenter'
+		'gameMasterPresenter',
+		'openPublicChartsButton'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
@@ -28,6 +29,7 @@ CMIDAIRRPGPresenter class >> defaultSpec [
 				   add: ' days ' expand: false;
 				   add: #runButton expand: false;
 				   add: '' asPresenter expand: true;
+				   add: #openPublicChartsButton expand: false;
 				   add: #settingsButton expand: false;
 				   yourself)
 		  expand: false;
@@ -41,16 +43,16 @@ CMIDAIRRPGPresenter >> initializePresenters [
 		            addPage: (self newNotebookPage
 				             title: 'Game Master';
 				             presenterProvider: [ 
-					             gameMasterPresenter := (CMIDAIRRPGGameMasterPresenter on:
-							                                 self model)
-						                                gamePresenter: self;
-						                                yourself ];
+					             gameMasterPresenter := (CMIDAIRRPGGameMasterPresenter 
+						                                     on: self model)
+						                                    gamePresenter: self;
+						                                    yourself ];
 				             yourself);
 		            addPage: (self newNotebookPage
 				             title: 'Public View';
 				             presenterProvider: [ 
 					             publicChartsPresenter := CMIDAIRRPGPublicChartsPresenter 
-						                                on: self model cormasModel ];
+						                                      on: self model cormasModel ];
 				             yourself);
 		            yourself.
 	daysLabel := self newLabel
@@ -70,7 +72,13 @@ CMIDAIRRPGPresenter >> initializePresenters [
 	settingsButton := self newButton
 		                  icon: (Smalltalk ui iconNamed: #configuration);
 		                  action: [ self openSettings ];
-		                  yourself
+		                  yourself.
+	openPublicChartsButton := self newButton
+		                          icon:
+			                          (Smalltalk ui icons iconNamed:
+					                           #smallWindow);
+		                          action: [ self openPublicCharts ];
+		                          yourself
 ]
 
 { #category : #initialization }
@@ -78,6 +86,21 @@ CMIDAIRRPGPresenter >> initializeWindow: aSpWindowPresenter [
 
 	super initializeWindow: aSpWindowPresenter.
 	aSpWindowPresenter initialExtent: 1024 @ 600
+]
+
+{ #category : #operations }
+CMIDAIRRPGPresenter >> openPublicCharts [
+
+	notebook pages size = 2 ifTrue: [ 
+		notebook removePageAt: 2.
+		openPublicChartsButton disable.
+		publicChartsPresenter := CMIDAIRRPGPublicChartsPresenter on:
+			                         self model cormasModel.
+		publicChartsPresenter asWindow in: [ :window | 
+			window buildWithSpecLayout: publicChartsPresenter defaultSpec.
+			window withAdapterDo: [ :a | a widget openInExternalWindow ].
+			window title: 'simulation'.
+			window maximize ] ]
 ]
 
 { #category : #operations }
