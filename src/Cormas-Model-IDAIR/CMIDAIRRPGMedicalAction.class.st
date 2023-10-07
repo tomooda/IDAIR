@@ -43,7 +43,9 @@ CMIDAIRRPGMedicalAction class >> assignRegularBed [
 { #category : #constants }
 CMIDAIRRPGMedicalAction class >> facemask [
 
-	^ self name: 'ID:35 Wear a facemask' block: [ :resourceModel | '' ]
+	^ self name: 'ID:35 Wear a facemask' block: [ :resourceModel | 
+		  resourceModel facemaskPolicy: true.
+		  '' ]
 ]
 
 { #category : #constants }

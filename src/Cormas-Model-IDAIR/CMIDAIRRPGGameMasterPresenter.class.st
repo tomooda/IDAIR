@@ -101,7 +101,9 @@ CMIDAIRRPGGameMasterPresenter >> citizenPlay: action [
 			ifTrue: [ action execute: citizen ]
 			ifFalse: [ 
 				citizen contactProfile action: action.
-				playerList refresh ] ]
+				playerList refresh ].
+		gameMasterChart refresh.
+		gamePresenter updatePublicCharts ]
 ]
 
 { #category : #operations }
@@ -143,6 +145,7 @@ CMIDAIRRPGGameMasterPresenter >> drawGameMasterChart: aCanvas [
 	| charts chart |
 	aCanvas color: Color white.
 	charts := { 
+		          self cormasModel preventionChart.
 		          self cormasModel patientsChart.
 		          self cormasModel hospitalChart.
 		          self cormasModel wellbeingChart.
@@ -177,7 +180,7 @@ CMIDAIRRPGGameMasterPresenter >> hospitalManagerPlay: aCMIDAIRRPGAction [
 			submodelAt: #resource
 			do: [ :resourceModel | 
 				aCMIDAIRRPGAction execute: resourceModel.
-				gamePresenter ifNotNil: #updateResources.
+				gamePresenter ifNotNil: #updatePublicCharts.
 				gameMasterChart refresh ] ]
 ]
 
@@ -262,6 +265,7 @@ CMIDAIRRPGGameMasterPresenter >> modelChanged [
 
 	super modelChanged.
 	self
+		updateChart;
 		updatePlayerList;
 		updateCitizenActionList;
 		updatePolicyMakerActionList;
@@ -319,9 +323,9 @@ CMIDAIRRPGGameMasterPresenter >> policymakerPlay: aCMIDAIRRPGAction [
 			ifFalse: [ 
 				contactModel cormasModel
 					submodelAt: #resource
-					do: [ :resourceModel | aCMIDAIRRPGAction execute: resourceModel ].
-				gamePresenter ifNotNil: #updateResources.
-				gameMasterChart refresh ] ]
+					do: [ :resourceModel | aCMIDAIRRPGAction execute: resourceModel ] ].
+		gamePresenter ifNotNil: #updatePublicCharts.
+		gameMasterChart refresh ]
 ]
 
 { #category : #operations }

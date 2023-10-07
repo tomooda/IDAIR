@@ -3,15 +3,12 @@ Class {
 	#superclass : #SpPresenterWithModel,
 	#instVars : [
 		'notebook',
-		'citizensChart',
-		'medicalChart',
 		'daysField',
 		'daysLabel',
 		'runButton',
 		'settingsButton',
-		'actionPresenter',
-		'map',
-		'populationChart'
+		'publicChartsPresenter',
+		'gameMasterPresenter'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
@@ -44,7 +41,7 @@ CMIDAIRRPGPresenter >> initializePresenters [
 		            addPage: (self newNotebookPage
 				             title: 'Game Master';
 				             presenterProvider: [ 
-					             actionPresenter := (CMIDAIRRPGGameMasterPresenter on:
+					             gameMasterPresenter := (CMIDAIRRPGGameMasterPresenter on:
 							                                 self model)
 						                                gamePresenter: self;
 						                                yourself ];
@@ -52,7 +49,7 @@ CMIDAIRRPGPresenter >> initializePresenters [
 		            addPage: (self newNotebookPage
 				             title: 'Public View';
 				             presenterProvider: [ 
-					             populationChart := CMIDAIRRPGPublicChartsPresenter 
+					             publicChartsPresenter := CMIDAIRRPGPublicChartsPresenter 
 						                                on: self model cormasModel ];
 				             yourself);
 		            yourself.
@@ -123,11 +120,8 @@ CMIDAIRRPGPresenter >> runSimulation [
 							progress value: count // step ] ] ].
 			daysLabel label: (model cormasModel timeStep * model daysPerStep 
 					 printShowingDecimalPlaces: 2).
-			populationChart ifNotNil: [ populationChart refresh ].
-			citizensChart ifNotNil: #refresh.
-			medicalChart ifNotNil: #refresh.
-			map ifNotNil: #refresh.
-			actionPresenter ifNotNil: #clearRound ] ]
+			publicChartsPresenter ifNotNil: [ publicChartsPresenter refresh ].
+			gameMasterPresenter ifNotNil: #clearRound ] ]
 ]
 
 { #category : #accessing }
@@ -136,7 +130,7 @@ CMIDAIRRPGPresenter >> title [
 ]
 
 { #category : #operations }
-CMIDAIRRPGPresenter >> updateResources [
+CMIDAIRRPGPresenter >> updatePublicCharts [
 
-	citizensChart ifNotNil: #refresh
+	publicChartsPresenter ifNotNil: #refresh
 ]

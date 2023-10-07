@@ -15,7 +15,8 @@ Class {
 		'historyText',
 		'wellbeingChart',
 		'hospitalChart',
-		'map'
+		'map',
+		'preventionChart'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
@@ -96,6 +97,7 @@ CMIDAIRRPGPublicChartsPresenter class >> defaultSpec [
 				   add: #hospitalChart);
 		  add: (SpBoxLayout newHorizontal
 				   add: #wellbeingChart;
+				   add: #preventionChart;
 				   add: #map)
 ]
 
@@ -290,6 +292,13 @@ CMIDAIRRPGPublicChartsPresenter >> drawPopulationChart: aCanvas [
 ]
 
 { #category : #drawing }
+CMIDAIRRPGPublicChartsPresenter >> drawPreventionChart: aCanvas [
+
+	aCanvas addShape: self model preventionChart.
+	CMIDAIRZoomToFitInteraction new onShape: aCanvas
+]
+
+{ #category : #drawing }
 CMIDAIRRPGPublicChartsPresenter >> drawWellbeingChart: aCanvas [
 
 	aCanvas addShape: self model wellbeingChart.
@@ -361,6 +370,8 @@ CMIDAIRRPGPublicChartsPresenter >> initializePresenters [
 		                  self drawWellbeingChart: canvas ].
 	hospitalChart := self newRoassal script: [ :canvas | 
 		                 self drawHospitalChart: canvas ].
+	preventionChart := self newRoassal script: [ :canvas | 
+		                   self drawPreventionChart: canvas ].
 	map := self newRoassal script: [ :canvas | self drawMap: canvas ]
 ]
 
@@ -401,6 +412,7 @@ CMIDAIRRPGPublicChartsPresenter >> refresh [
 		populationChart.
 		wellbeingChart.
 		hospitalChart.
+		preventionChart.
 		map } do: #refresh
 ]
 

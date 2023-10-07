@@ -8,7 +8,8 @@ Class {
 		'patientsInICUs',
 		'historyOfOccupiedICUs',
 		'historyOfOccupiedBeds',
-		'vaccineEligibilityRate'
+		'vaccineEligibilityRate',
+		'facemaskPolicy'
 	],
 	#category : #'Cormas-Model-IDAIR-Resource-RPG'
 }
@@ -74,6 +75,18 @@ CMIDAIRRPGResourceModel >> defaultCitizenResourceDynamicsClass [
 ]
 
 { #category : #accessing }
+CMIDAIRRPGResourceModel >> facemaskPolicy [
+
+	^ facemaskPolicy
+]
+
+{ #category : #accessing }
+CMIDAIRRPGResourceModel >> facemaskPolicy: aBoolean [
+
+	facemaskPolicy := aBoolean
+]
+
+{ #category : #accessing }
 CMIDAIRRPGResourceModel >> historyOfOccupiedBeds [
 
 	^ historyOfOccupiedBeds
@@ -113,6 +126,7 @@ CMIDAIRRPGResourceModel >> initialize [
 	patientsInBeds := OrderedCollection new.
 	patientsInICUs := OrderedCollection new.
 	vaccineEligibilityRate := 0.0.
+	facemaskPolicy := false.
 	historyOfOccupiedBeds := OrderedCollection new.
 	historyOfOccupiedICUs := OrderedCollection new
 ]

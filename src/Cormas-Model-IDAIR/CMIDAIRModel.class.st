@@ -758,6 +758,57 @@ CMIDAIRModel >> populationChart [
 	^ RSComposite new shapes: chart build shapes
 ]
 
+{ #category : #charts }
+CMIDAIRModel >> preventionChart [
+
+	^ self submodelAt: #resource do: [ :resourceModel | 
+		  | chart shapes barPlots |
+		  chart := RSChart new.
+		  chart extent: self chartWidth @ self shortChartHeight.
+		  chart colors: (NSScale ordinal range: { (Color gray: 0.1) }).
+		  barPlots := (chart barWidths: { 
+					               (resourceModel vaccineEligibilityRate * 100)
+						               rounded.
+					               (resourceModel facemaskPolicy
+						                ifTrue: [ 100 ]
+						                ifFalse: [ 0 ]) })
+			              barSize: 20;
+			              yourself.
+		  chart
+			  addDecoration: (RSVerticalTick new
+					   fromNames: { 'Vaccine'. 'Facemasks' };
+					   fontSize: 12);
+			  title: 'Current status of prevention policy'.
+		  shapes := chart build shapes.
+		  resourceModel facemaskPolicy ifTrue: [ 
+			  | bar |
+			  bar := barPlots bars second.
+			  shapes add: ((RSLabel text: 'ADVICED')
+					   fontSize: 14;
+					   bold;
+					   position: bar position;
+					   color: Color white) ].
+		  resourceModel vaccineEligibilityRate > 0.1 ifTrue: [ 
+			  | bar percent label |
+			  bar := barPlots bars first.
+			  percent := (resourceModel vaccineEligibilityRate * 100) rounded.
+			  label := (RSLabel text: percent printString , '%')
+				           fontSize: 14;
+				           bold.
+			  percent > 50
+				  ifTrue: [ 
+					  label
+						  position: bar position;
+						  color: Color white ]
+				  ifFalse: [ 
+					  label
+						  translateMiddleLeftTo: bar encompassingRectangle right + 5
+							  @ bar encompassingRectangle center y;
+						  color: Color black ].
+			  shapes add: label ].
+		  RSComposite new shapes: shapes ]
+]
+
 { #category : #history }
 CMIDAIRModel >> recordHistory: aText [
 
