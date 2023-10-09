@@ -21,6 +21,12 @@ CMIDAIRRPGAction >> actionName [
 	^ name
 ]
 
+{ #category : #accessing }
+CMIDAIRRPGAction >> icon [
+
+	^ Cursor blank
+]
+
 { #category : #testing }
 CMIDAIRRPGAction >> isSocialAction [
 

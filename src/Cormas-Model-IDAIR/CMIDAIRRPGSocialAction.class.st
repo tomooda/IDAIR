@@ -13,7 +13,7 @@ CMIDAIRRPGSocialAction class >> all [
 
 	^ { 
 		  CMIDAIRRPGMedicalAction facemask.
-		  self treatmentGuideline.
+		  CMIDAIRRPGMedicalAction treatmentGuideline.
 		  self openQuarrantineCamp.
 		  CMIDAIRRPGMedicalAction vaccination25.
 		  CMIDAIRRPGMedicalAction vaccination50.
@@ -111,12 +111,6 @@ CMIDAIRRPGSocialAction class >> socialDistancing5 [
 	^ self name: 'ID:31 Social distancing level 5' transientFactor: 0.65
 ]
 
-{ #category : #constants }
-CMIDAIRRPGSocialAction class >> treatmentGuideline [
-
-	^ self name: 'ID:22 Issue treatment guidelines' cummulativeFactor: 0.8
-]
-
 { #category : #accessing }
 CMIDAIRRPGSocialAction >> askEffectiveRate: anInteger [
 
@@ -153,6 +147,12 @@ CMIDAIRRPGSocialAction >> execute: aCMIDAIRContactModel [
 			self cummulativeFactor ** rate.
 		aCMIDAIRContactModel cormasModel recordHistory:
 			(self name , '(' , (self printRate: rate) , ')') asText ]
+]
+
+{ #category : #accessing }
+CMIDAIRRPGSocialAction >> icon [
+
+	^ Cursor webLink
 ]
 
 { #category : #initialization }

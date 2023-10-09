@@ -222,6 +222,7 @@ CMIDAIRRPGGameMasterPresenter >> initializePresenters [
 		                         yourself.
 	policyMakerActionList := self newList
 		                         display: [ :action | action name ];
+		                         displayIcon: [ :action | action icon ];
 		                         yourself.
 	policyMakerActionButton := self newButton
 		                           label: 'Yes';
@@ -250,7 +251,7 @@ CMIDAIRRPGGameMasterPresenter >> initializePresenters [
 				                                        removePendingPolicymakerAction ];
 		                                        yourself.
 	gameMasterChart := self newRoassal script: [ :canvas | 
-		                    self drawGameMasterChart: canvas ]
+		                   self drawGameMasterChart: canvas ]
 ]
 
 { #category : #initialization }

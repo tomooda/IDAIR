@@ -77,6 +77,18 @@ CMIDAIRRPGMedicalAction class >> name: aString block: aBlock [
 ]
 
 { #category : #constants }
+CMIDAIRRPGMedicalAction class >> treatmentGuideline [
+
+	^ self
+		  name: 'ID:22 Issue treatment guidelines'
+		  block: [ :resourceModel | 
+			  resourceModel cormasModel
+				  submodelAt: #contact
+				  do: [ :contactModel | 
+					  contactModel socialProfile multiplyCummulativeFactor: 0.8 ] ]
+]
+
+{ #category : #constants }
 CMIDAIRRPGMedicalAction class >> vaccination100 [
 
 	^ self
