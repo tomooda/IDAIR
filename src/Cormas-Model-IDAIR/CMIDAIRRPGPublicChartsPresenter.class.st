@@ -39,66 +39,73 @@ CMIDAIRRPGPublicChartsPresenter class >> deadIcon [
 { #category : #specs }
 CMIDAIRRPGPublicChartsPresenter class >> defaultSpec [
 
+	| populationChartSpec |
+	populationChartSpec := SpPanedLayout newHorizontal
+		                       positionOfSlider: 0.75;
+		                       add: #populationChart;
+		                       add: (SpBoxLayout newVertical
+				                        add: (SpBoxLayout newHorizontal
+						                         vAlignCenter;
+						                         add: #susceptibleCheckbox width: 16;
+						                         add: self susceptibleIcon asPresenter
+						                         expand: false;
+						                         add: ' Susceptible' asPresenter)
+				                        expand: false;
+				                        add: (SpBoxLayout newHorizontal
+						                         vAlignCenter;
+						                         add: #infectedCheckbox width: 16;
+						                         add: self infectedIcon asPresenter
+						                         expand: false;
+						                         add: ' Infected' asPresenter)
+				                        expand: false;
+				                        add: (SpBoxLayout newHorizontal
+						                         vAlignCenter;
+						                         add: #recoveredCheckbox width: 16;
+						                         add: self recoveredIcon asPresenter
+						                         expand: false;
+						                         add: ' Recovered' asPresenter)
+				                        expand: false;
+				                        add: (SpBoxLayout newHorizontal
+						                         vAlignCenter;
+						                         add: #deadCheckbox width: 16;
+						                         add: self deadIcon asPresenter
+						                         expand: false;
+						                         add: ' Dead' asPresenter)
+				                        expand: false;
+				                        add: (SpBoxLayout newHorizontal
+						                         vAlignCenter;
+						                         add: #occupiedICUsCheckbox width: 16;
+						                         add: self occupiedICUsIcon asPresenter
+						                         expand: false;
+						                         add: ' Occupied ICU beds' asPresenter)
+				                        expand: false;
+				                        add: (SpBoxLayout newHorizontal
+						                         vAlignCenter;
+						                         add: #occupiedBedsCheckbox width: 16;
+						                         add: self occupiedBedsIcon asPresenter
+						                         expand: false;
+						                         add:
+							                         ' Occupied regular beds ' asPresenter)
+				                        expand: false;
+				                        add: '' asPresenter expand: false;
+				                        add: (SpBoxLayout newHorizontal
+						                         vAlignCenter;
+						                         add: #decDayButton
+						                         width: self buttonHeight;
+						                         add: #dayField width: 100;
+						                         add: #incDayButton
+						                         width: self buttonHeight;
+						                         yourself)
+				                        expand: false;
+				                        add: #historyText;
+				                        yourself);
+		                       yourself.
+
 	^ SpPanedLayout newVertical
 		  positionOfSlider: 0.7;
-		  add: (SpPanedLayout newHorizontal
-				   positionOfSlider: 0.7;
-				   add: (SpPanedLayout newHorizontal
-						    positionOfSlider: 0.75;
-						    add: #populationChart;
-						    add: (SpBoxLayout newVertical
-								     add: (SpBoxLayout newHorizontal
-										      vAlignCenter;
-										      add: #susceptibleCheckbox width: 16;
-										      add: self susceptibleIcon asPresenter expand: false;
-										      add: ' Susceptible' asPresenter)
-								     expand: false;
-								     add: (SpBoxLayout newHorizontal
-										      vAlignCenter;
-										      add: #infectedCheckbox width: 16;
-										      add: self infectedIcon asPresenter expand: false;
-										      add: ' Infected' asPresenter)
-								     expand: false;
-								     add: (SpBoxLayout newHorizontal
-										      vAlignCenter;
-										      add: #recoveredCheckbox width: 16;
-										      add: self recoveredIcon asPresenter expand: false;
-										      add: ' Recovered' asPresenter)
-								     expand: false;
-								     add: (SpBoxLayout newHorizontal
-										      vAlignCenter;
-										      add: #deadCheckbox width: 16;
-										      add: self deadIcon asPresenter expand: false;
-										      add: ' Dead' asPresenter)
-								     expand: false;
-								     add: (SpBoxLayout newHorizontal
-										      vAlignCenter;
-										      add: #occupiedICUsCheckbox width: 16;
-										      add: self occupiedICUsIcon asPresenter expand: false;
-										      add: ' Occupied ICU beds' asPresenter)
-								     expand: false;
-								     add: (SpBoxLayout newHorizontal
-										      vAlignCenter;
-										      add: #occupiedBedsCheckbox width: 16;
-										      add: self occupiedBedsIcon asPresenter expand: false;
-										      add: ' Occupied regular beds ' asPresenter)
-								     expand: false;
-								     add: '' asPresenter expand: false;
-								     add: (SpBoxLayout newHorizontal
-										      vAlignCenter;
-										      add: #decDayButton width: self buttonHeight;
-										      add: #dayField width: 100;
-										      add: #incDayButton width: self buttonHeight;
-										      yourself)
-								     expand: false;
-								     add: #historyText;
-								     yourself);
-						    yourself);
-				   add: #hospitalChart);
-		  add: (SpBoxLayout newHorizontal
-				   add: #wellbeingChart;
-				   add: #preventionChart;
-				   add: #map)
+		  add: populationChartSpec;
+		  add: #wellbeingChart;
+		  yourself
 ]
 
 { #category : #'accessing-color' }

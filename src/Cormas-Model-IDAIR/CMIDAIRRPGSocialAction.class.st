@@ -115,7 +115,7 @@ CMIDAIRRPGSocialAction class >> socialDistancing5 [
 CMIDAIRRPGSocialAction >> askEffectiveRate: anInteger [
 
 	((UIManager default
-		  request: 'Complient citizens'
+		  request: 'Compliant citizens'
 		  initialAnswer: anInteger printString) ifNotNil: #asInteger) 
 		ifNotNil: [ :answer | 
 			| rate |
