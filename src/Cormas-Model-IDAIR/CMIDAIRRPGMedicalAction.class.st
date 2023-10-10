@@ -85,7 +85,8 @@ CMIDAIRRPGMedicalAction class >> treatmentGuideline [
 			  resourceModel cormasModel
 				  submodelAt: #contact
 				  do: [ :contactModel | 
-					  contactModel socialProfile multiplyCummulativeFactor: 0.8 ] ]
+					  contactModel socialProfile multiplyCummulativeFactor: 0.8 ].
+			  '' ]
 ]
 
 { #category : #constants }
@@ -93,9 +94,7 @@ CMIDAIRRPGMedicalAction class >> vaccination100 [
 
 	^ self
 		  name: 'ID:26 Provide vaccine to 100% of population'
-		  block: [ :resourceModel | 
-			  resourceModel vaccineEligibilityRate: 1.0.
-			  '' ]
+		  block: [ :resourceModel | '' ]
 ]
 
 { #category : #constants }
@@ -103,9 +102,7 @@ CMIDAIRRPGMedicalAction class >> vaccination25 [
 
 	^ self
 		  name: 'ID:23 Provide vaccine to 25% of population'
-		  block: [ :resourceModel | 
-			  resourceModel vaccineEligibilityRate: 0.25.
-			  '' ]
+		  block: [ :resourceModel | '' ]
 ]
 
 { #category : #constants }
@@ -113,9 +110,7 @@ CMIDAIRRPGMedicalAction class >> vaccination50 [
 
 	^ self
 		  name: 'ID:24 Provide vaccine to 50% of population'
-		  block: [ :resourceModel | 
-			  resourceModel vaccineEligibilityRate: 0.5.
-			  '' ]
+		  block: [ :resourceModel | '' ]
 ]
 
 { #category : #constants }
@@ -123,9 +118,7 @@ CMIDAIRRPGMedicalAction class >> vaccination75 [
 
 	^ self
 		  name: 'ID:25 Provide vaccine to 75% of population'
-		  block: [ :resourceModel | 
-			  resourceModel vaccineEligibilityRate: 0.75.
-			  '' ]
+		  block: [ :resourceModel | '' ]
 ]
 
 { #category : #accessing }

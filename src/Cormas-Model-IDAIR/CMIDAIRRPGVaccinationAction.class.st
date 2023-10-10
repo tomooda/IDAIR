@@ -6,7 +6,7 @@ Class {
 
 { #category : #constants }
 CMIDAIRRPGVaccinationAction class >> vaccinated [
-	^ self name: 'Resource Card: Get vaccinated'
+	^ self name: 'RC: Get vaccinated'
 ]
 
 { #category : #execution }
@@ -15,8 +15,10 @@ CMIDAIRRPGVaccinationAction >> execute: aCMIDAIRCitizen [
 	aCMIDAIRCitizen cormasModel
 		submodelAt: #resource
 		do: [ :resourceModel | 
-			aCMIDAIRCitizen contactProfile immuneFactor:
-				1.0 - (resourceModel vaccineEligibilityRate * 0.9) ]
+			aCMIDAIRCitizen contactProfile immuneFactor: 0.1.
+			aCMIDAIRCitizen cormasModel recordHistory:
+				(aCMIDAIRCitizen contactProfile playerName , ': ') asText allBold
+				, self name asText ]
 ]
 
 { #category : #converting }

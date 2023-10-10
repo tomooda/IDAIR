@@ -6,12 +6,8 @@ Class {
 
 { #category : #constants }
 CMIDAIRRPGFacemaskAction class >> facemasked [
-	^ self name: 'Resource Card: Wear facemasks'
-]
 
-{ #category : #constants }
-CMIDAIRRPGFacemaskAction class >> vaccinated [
-	^ self name: 'Resource Card: Get vaccinated'
+	^ self name: 'RC: Wear facemasks'
 ]
 
 { #category : #execution }

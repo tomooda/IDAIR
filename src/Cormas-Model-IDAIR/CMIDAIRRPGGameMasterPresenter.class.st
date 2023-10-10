@@ -145,7 +145,6 @@ CMIDAIRRPGGameMasterPresenter >> drawGameMasterChart: aCanvas [
 	| charts chart |
 	aCanvas color: Color white.
 	charts := { 
-		          self cormasModel preventionChart.
 		          self cormasModel patientsChart.
 		          self cormasModel hospitalChart.
 		          self cormasModel wellbeingChart.

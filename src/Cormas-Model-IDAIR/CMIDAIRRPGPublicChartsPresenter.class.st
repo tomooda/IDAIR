@@ -13,10 +13,7 @@ Class {
 		'incDayButton',
 		'dayField',
 		'historyText',
-		'wellbeingChart',
-		'hospitalChart',
-		'map',
-		'preventionChart'
+		'wellbeingChart'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
@@ -299,13 +296,6 @@ CMIDAIRRPGPublicChartsPresenter >> drawPopulationChart: aCanvas [
 ]
 
 { #category : #drawing }
-CMIDAIRRPGPublicChartsPresenter >> drawPreventionChart: aCanvas [
-
-	aCanvas addShape: self model preventionChart.
-	CMIDAIRZoomToFitInteraction new onShape: aCanvas
-]
-
-{ #category : #drawing }
 CMIDAIRRPGPublicChartsPresenter >> drawWellbeingChart: aCanvas [
 
 	aCanvas addShape: self model wellbeingChart.
@@ -374,12 +364,7 @@ CMIDAIRRPGPublicChartsPresenter >> initializePresenters [
 		            yourself.
 	historyText := self newText.
 	wellbeingChart := self newRoassal script: [ :canvas | 
-		                  self drawWellbeingChart: canvas ].
-	hospitalChart := self newRoassal script: [ :canvas | 
-		                 self drawHospitalChart: canvas ].
-	preventionChart := self newRoassal script: [ :canvas | 
-		                   self drawPreventionChart: canvas ].
-	map := self newRoassal script: [ :canvas | self drawMap: canvas ]
+		                  self drawWellbeingChart: canvas ]
 ]
 
 { #category : #accessing }
@@ -417,10 +402,7 @@ CMIDAIRRPGPublicChartsPresenter >> refresh [
 			printString.
 	{ 
 		populationChart.
-		wellbeingChart.
-		hospitalChart.
-		preventionChart.
-		map } do: #refresh
+		wellbeingChart } do: #refresh
 ]
 
 { #category : #'accessing-color' }
