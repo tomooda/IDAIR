@@ -271,6 +271,12 @@ CMIDAIRRPGCitizenAction >> forYes [
 ]
 
 { #category : #testing }
+CMIDAIRRPGCitizenAction >> isCitizenAction [
+
+	^ true
+]
+
+{ #category : #testing }
 CMIDAIRRPGCitizenAction >> isImmediateAction [
 
 	^ false

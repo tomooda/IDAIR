@@ -21,20 +21,27 @@ CMIDAIRRPGContactModelPresenter >> defaultSpec [
 		citizenSpec
 			add: (SpBoxLayout newHorizontal
 					 add: action name asPresenter width: 200;
-					 add: (self newNumberInput
-							  beFloat;
-							  number: action contactFactor;
-							  climbRate: 0.1;
-							  whenNumberChangedDo: [ :value | action contactFactor: value ];
-							  yourself)
+					 add: (action isCitizenAction
+							  ifTrue: [ 
+								  self newNumberInput
+									  beFloat;
+									  number: action contactFactor;
+									  climbRate: 0.1;
+									  whenNumberChangedDo: [ :value | 
+										  action contactFactor: value ];
+									  yourself ]
+							  ifFalse: [ '' asPresenter ])
 					 width: 100;
-					 add: (self newNumberInput
-							  beInteger;
-							  number: action wellbeingPoints;
-							  climbRate: 1;
-							  whenNumberChangedDo: [ :value | 
-								  action wellbeingPoints: value ];
-							  yourself)
+					 add: (action isCitizenAction
+							  ifTrue: [ 
+								  self newNumberInput
+									  beInteger;
+									  number: action wellbeingPoints;
+									  climbRate: 1;
+									  whenNumberChangedDo: [ :value | 
+										  action wellbeingPoints: value ];
+									  yourself ]
+							  ifFalse: [ '' asPresenter ])
 					 width: 100;
 					 yourself)
 			expand: false ].

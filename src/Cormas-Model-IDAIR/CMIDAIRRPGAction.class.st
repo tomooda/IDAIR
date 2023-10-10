@@ -28,6 +28,12 @@ CMIDAIRRPGAction >> icon [
 ]
 
 { #category : #testing }
+CMIDAIRRPGAction >> isCitizenAction [
+
+	^ false
+]
+
+{ #category : #testing }
 CMIDAIRRPGAction >> isSocialAction [
 
 	^ false
