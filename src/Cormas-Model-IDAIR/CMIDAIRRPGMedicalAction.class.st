@@ -89,38 +89,6 @@ CMIDAIRRPGMedicalAction class >> treatmentGuideline [
 			  '' ]
 ]
 
-{ #category : #constants }
-CMIDAIRRPGMedicalAction class >> vaccination100 [
-
-	^ self
-		  name: 'ID:26 Provide vaccine to 100% of population'
-		  block: [ :resourceModel | '' ]
-]
-
-{ #category : #constants }
-CMIDAIRRPGMedicalAction class >> vaccination25 [
-
-	^ self
-		  name: 'ID:23 Provide vaccine to 25% of population'
-		  block: [ :resourceModel | '' ]
-]
-
-{ #category : #constants }
-CMIDAIRRPGMedicalAction class >> vaccination50 [
-
-	^ self
-		  name: 'ID:24 Provide vaccine to 50% of population'
-		  block: [ :resourceModel | '' ]
-]
-
-{ #category : #constants }
-CMIDAIRRPGMedicalAction class >> vaccination75 [
-
-	^ self
-		  name: 'ID:25 Provide vaccine to 75% of population'
-		  block: [ :resourceModel | '' ]
-]
-
 { #category : #accessing }
 CMIDAIRRPGMedicalAction >> block [
 

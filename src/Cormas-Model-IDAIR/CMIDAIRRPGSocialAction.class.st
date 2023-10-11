@@ -15,10 +15,6 @@ CMIDAIRRPGSocialAction class >> all [
 		  CMIDAIRRPGMedicalAction facemask.
 		  CMIDAIRRPGMedicalAction treatmentGuideline.
 		  self openQuarrantineCamp.
-		  CMIDAIRRPGMedicalAction vaccination25.
-		  CMIDAIRRPGMedicalAction vaccination50.
-		  CMIDAIRRPGMedicalAction vaccination75.
-		  CMIDAIRRPGMedicalAction vaccination100.
 		  self closeBorder.
 		  self socialDistancing1.
 		  self socialDistancing2.
