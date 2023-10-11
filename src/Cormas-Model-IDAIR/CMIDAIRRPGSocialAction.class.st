@@ -141,7 +141,7 @@ CMIDAIRRPGSocialAction >> execute: aCMIDAIRContactModel [
 		aCMIDAIRContactModel socialProfile multiplyCummulativeFactor:
 			self cummulativeFactor ** rate.
 		aCMIDAIRContactModel cormasModel recordHistory:
-			(self name , '(' , (self printRate: rate) , ')') asText ]
+			(self name , ' (' , (self printRate: rate) , ')') asText ]
 ]
 
 { #category : #accessing }
@@ -167,9 +167,7 @@ CMIDAIRRPGSocialAction >> isSocialAction [
 { #category : #private }
 CMIDAIRRPGSocialAction >> printRate: aFloat [
 
-	| str |
-	str := aFloat printString.
-	^ str first: (5 min: str size)
+	^ 'compliance rate ' , (aFloat * 100) rounded printString , '%'
 ]
 
 { #category : #accessing }
