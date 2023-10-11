@@ -12,7 +12,6 @@ Class {
 CMIDAIRRPGSocialAction class >> all [
 
 	^ { 
-		  CMIDAIRRPGMedicalAction facemask.
 		  CMIDAIRRPGMedicalAction treatmentGuideline.
 		  self openQuarrantineCamp.
 		  self closeBorder.
