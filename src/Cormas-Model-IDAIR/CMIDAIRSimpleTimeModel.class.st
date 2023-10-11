@@ -22,7 +22,7 @@ CMIDAIRSimpleTimeModel >> asPresenter [
 { #category : #accessing }
 CMIDAIRSimpleTimeModel >> daysPerStep [
 
-	^ daysPerStep ifNil: [ daysPerStep := 0.25 ]
+	^ daysPerStep ifNil: [ daysPerStep := 1 ]
 ]
 
 { #category : #accessing }

@@ -171,7 +171,12 @@ CMIDAIRRPGDiseaseModel >> initialize [
 	historyOfInfected := OrderedCollection new.
 	historyOfRecovered := OrderedCollection new.
 	historyOfDead := OrderedCollection new.
-	self initializeRound
+	numberOfNewMild := 0.
+	numberOfNewSevere := 0.
+	numberOfNewWorsened := 0.
+	numberOfNewRecovering := 0.
+	numberOfNewRecovered := 0.
+	numberOfNewDead := 0
 ]
 
 { #category : #'round management' }
@@ -183,7 +188,8 @@ CMIDAIRRPGDiseaseModel >> initializeRound [
 	numberOfNewWorsened := 0.
 	numberOfNewRecovering := 0.
 	numberOfNewRecovered := 0.
-	numberOfNewDead := 0
+	numberOfNewDead := 0.
+	self recordHistory
 ]
 
 { #category : #accessing }
@@ -293,13 +299,6 @@ CMIDAIRRPGDiseaseModel >> recordHistory [
 	historyOfInfected add: self numberOfInfected.
 	historyOfRecovered add: self numberOfRecovered.
 	historyOfDead add: self numberOfDead
-]
-
-{ #category : #accessing }
-CMIDAIRRPGDiseaseModel >> step: anInteger [
-
-	super step: anInteger.
-	self recordHistory
 ]
 
 { #category : #accessing }

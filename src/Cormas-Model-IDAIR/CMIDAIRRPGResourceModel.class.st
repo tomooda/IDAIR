@@ -131,6 +131,12 @@ CMIDAIRRPGResourceModel >> initialize [
 	historyOfOccupiedICUs := OrderedCollection new
 ]
 
+{ #category : #control }
+CMIDAIRRPGResourceModel >> initializeRound [
+
+	self recordHistory
+]
+
 { #category : #accessing }
 CMIDAIRRPGResourceModel >> initializers [
 

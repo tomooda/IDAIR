@@ -9,11 +9,11 @@ Class {
 		'deadCheckbox',
 		'occupiedBedsCheckbox',
 		'occupiedICUsCheckbox',
-		'decDayButton',
-		'incDayButton',
-		'dayField',
 		'historyText',
-		'wellbeingChart'
+		'wellbeingChart',
+		'roundField',
+		'decRoundButton',
+		'incRoundButton'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
@@ -87,10 +87,10 @@ CMIDAIRRPGPublicChartsPresenter class >> defaultSpec [
 				                        add: '' asPresenter expand: false;
 				                        add: (SpBoxLayout newHorizontal
 						                         vAlignCenter;
-						                         add: #decDayButton
+						                         add: #decRoundButton
 						                         width: self buttonHeight;
-						                         add: #dayField width: 100;
-						                         add: #incDayButton
+						                         add: #roundField width: 100;
+						                         add: #incRoundButton
 						                         width: self buttonHeight;
 						                         yourself)
 				                        expand: false;
@@ -219,77 +219,60 @@ CMIDAIRRPGPublicChartsPresenter >> drawPatientsChart: aCanvas [
 { #category : #drawing }
 CMIDAIRRPGPublicChartsPresenter >> drawPopulationChart: aCanvas [
 
-	| chart daysPerStep day |
+	| chart |
 	aCanvas color: Color white.
 	chart := RSChart new.
 	chart container: aCanvas.
 	chart extent: 400 @ 300.
-	daysPerStep := self model daysPerStep.
 	self model submodelAt: #disease do: [ :diseaseModel | 
 		susceptibleCheckbox state ifTrue: [ 
 			diseaseModel historyOfSusceptive ifNotEmpty: [ :history | 
 				chart addPlot: (RSLinePlot new
-						 x:
-							 (1 to: history size * daysPerStep + 1 - (daysPerStep * 0.5)
-							  by: daysPerStep)
-						 y: history;
+						 x: (1 to: history size) y: history;
 						 color: self susceptibleColor) ] ].
 		infectedCheckbox state ifTrue: [ 
 			diseaseModel historyOfInfected ifNotEmpty: [ :history | 
 				chart addPlot: (RSLinePlot new
-						 x:
-							 (1 to: history size * daysPerStep + 1 - (daysPerStep * 0.5)
-							  by: daysPerStep)
-						 y: history;
+						 x: (1 to: history size) y: history;
 						 color: self infectedColor) ] ].
 		recoveredCheckbox state ifTrue: [ 
 			diseaseModel historyOfRecovered ifNotEmpty: [ :history | 
 				chart addPlot: (RSLinePlot new
-						 x:
-							 (1 to: history size * daysPerStep + 1 - (daysPerStep * 0.5)
-							  by: daysPerStep)
-						 y: history;
+						 x: (1 to: history size) y: history;
 						 color: self recoveredColor) ] ].
 		deadCheckbox state ifTrue: [ 
 			diseaseModel historyOfDead ifNotEmpty: [ :history | 
 				chart addPlot: (RSLinePlot new
-						 x:
-							 (1 to: history size * daysPerStep + 1 - (daysPerStep * 0.5)
-							  by: daysPerStep)
-						 y: history;
+						 x: (1 to: history size) y: history;
 						 color: self deadColor) ] ] ].
 	self model submodelAt: #resource do: [ :resourceModel | 
 		occupiedBedsCheckbox state ifTrue: [ 
 			resourceModel historyOfOccupiedBeds ifNotEmpty: [ :history | 
 				chart addPlot: (RSLinePlot new
-						 x:
-							 (1 to: history size * daysPerStep + 1 - (daysPerStep * 0.5)
-							  by: daysPerStep)
-						 y: history;
+						 x: (1 to: history size) y: history;
 						 color: self occupiedBedsColor) ] ].
 		occupiedICUsCheckbox state ifTrue: [ 
 			resourceModel historyOfOccupiedICUs ifNotEmpty: [ :history | 
 				chart addPlot: (RSLinePlot new
-						 x:
-							 (1 to: history size * daysPerStep + 1 - (daysPerStep * 0.5)
-							  by: daysPerStep)
-						 y: history;
+						 x: (1 to: history size) y: history;
 						 color: self occupiedICUsColor) ] ] ].
 	chart addDecoration: (RSVerticalTick new
 			 integer;
 			 fontSize: 12).
 	chart
 		addDecoration: (RSHorizontalTick new
+				 numberOfTicks: (self model historySize min: 10);
 				 fontSize: 12;
 				 integer;
 				 yourself);
-		xlabel: 'Time (day)';
+		xlabel: 'Rounds';
 		title: 'Course of the situation'.
 	chart plots
 		ifNotEmpty: [ :plots | 
-			day := dayField number.
-			day * daysPerStep <= plots first xValues last ifTrue: [ 
-				chart addDecoration: (RSXMarkerDecoration new value: day) ] ]
+			| round |
+			round := roundField number.
+			round <= plots first xValues last ifTrue: [ 
+				chart addDecoration: (RSXMarkerDecoration new value: round) ] ]
 		ifEmpty: [ chart addPlot: (RSLinePlot new x: { 0 } y: { 0 }) ].
 	chart build.
 	CMIDAIRZoomToFitInteraction new onShape: aCanvas
@@ -339,29 +322,27 @@ CMIDAIRRPGPublicChartsPresenter >> initializePresenters [
 		                        state: true;
 		                        whenChangedDo: [ self refresh ];
 		                        yourself.
-	decDayButton := self newButton
-		                label: '<';
-		                action: [ 
-			                dayField number:
-					                (dayField number - 1 // 7 - 1 * 7 + 1 max: 1) ];
-		                yourself.
-	incDayButton := self newButton
-		                label: '>';
-		                action: [ 
-			                dayField number:
-					                (dayField number - 1 // 7 + 1 * 7 + 1 min:
-							                 self model timeStep * self model daysPerStep
-							                 + 1) ];
-		                yourself.
-	dayField := self newNumberInput
-		            beInteger;
-		            number: 1;
-		            climbRate: 7;
-		            whenNumberChangedDo: [ :day | 
-			            populationChart refresh.
-			            historyText text:
-					            (self model historyAt: day - 1 // 7 + 1) ];
-		            yourself.
+	decRoundButton := self newButton
+		                  label: '<';
+		                  action: [ 
+			                  roundField number: (roundField number - 1 max: 1) ];
+		                  yourself.
+	incRoundButton := self newButton
+		                  label: '>';
+		                  action: [ 
+			                  roundField number:
+					                  (roundField number + 1
+						                   min: self model historySize - 1
+						                   max: 1) ];
+		                  yourself.
+	roundField := self newNumberInput
+		              beInteger;
+		              number: 1;
+		              climbRate: 1;
+		              whenNumberChangedDo: [ :round | 
+			              populationChart refresh.
+			              historyText text: (self model historyAt: round) ];
+		              yourself.
 	historyText := self newText.
 	wellbeingChart := self newRoassal script: [ :canvas | 
 		                  self drawWellbeingChart: canvas ]
@@ -372,8 +353,7 @@ CMIDAIRRPGPublicChartsPresenter >> modelChanged [
 
 	super modelChanged.
 	self model ifNotNil: [ :model | 
-		dayField text:
-			(model timeStep * model daysPerStep + 1) rounded printString ]
+		roundField text: (model historySize - 1 max: 1) printString ]
 ]
 
 { #category : #'accessing-color' }
@@ -397,9 +377,7 @@ CMIDAIRRPGPublicChartsPresenter >> recoveredColor [
 { #category : #accessing }
 CMIDAIRRPGPublicChartsPresenter >> refresh [
 
-	dayField text:
-		(self model timeStep * self model daysPerStep + 1) rounded
-			printString.
+	roundField text: (self model historySize - 1 max: 1) printString.
 	{ 
 		populationChart.
 		wellbeingChart } do: #refresh
