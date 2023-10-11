@@ -146,9 +146,7 @@ CMIDAIRRPGGameMasterPresenter >> drawGameMasterChart: aCanvas [
 	aCanvas color: Color white.
 	charts := { 
 		          self cormasModel patientsChart.
-		          self cormasModel hospitalChart.
-		          self cormasModel wellbeingChart.
-		          self cormasModel populationChart }.
+		          self cormasModel hospitalChart }.
 	RSVerticalLineLayout new
 		alignCenter;
 		gapSize: 10;

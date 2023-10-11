@@ -700,53 +700,6 @@ CMIDAIRModel >> patientsChart [
 		  RSComposite new shapes: shapes ]
 ]
 
-{ #category : #charts }
-CMIDAIRModel >> populationChart [
-
-	| chart daysPerStep |
-	chart := RSChart new.
-	chart extent: self chartWidth @ self tallChartHeight.
-	daysPerStep := self daysPerStep.
-	self submodelAt: #disease do: [ :diseaseModel | 
-		diseaseModel historyOfInfected ifNotEmpty: [ :historyOfInfected | 
-			chart addPlot: (RSLinePlot new
-					 x: (1 to: historyOfInfected size) y: historyOfInfected;
-					 color: self infectedColor) ].
-		diseaseModel historyOfRecovered ifNotEmpty: [ :historyOfRecovered | 
-			chart addPlot: (RSLinePlot new
-					 x: (1 to: historyOfRecovered size) y: historyOfRecovered;
-					 color: self recoveredColor) ].
-		diseaseModel historyOfDead ifNotEmpty: [ :historyOfDead | 
-			chart addPlot: (RSLinePlot new
-					 x: (1 to: historyOfDead size) y: historyOfDead;
-					 color: self deadColor) ] ].
-	self submodelAt: #resource do: [ :resourceModel | 
-		resourceModel historyOfOccupiedBeds ifNotEmpty: [ 
-			:historyOfOccupiedBeds | 
-			chart addPlot: (RSLinePlot new
-					 x: (1 to: historyOfOccupiedBeds size) y: historyOfOccupiedBeds;
-					 color: self occupiedBedsColor) ].
-		resourceModel historyOfOccupiedICUs ifNotEmpty: [ 
-			:historyOfOccupiedICUs | 
-			chart addPlot: (RSLinePlot new
-					 x: (1 to: historyOfOccupiedICUs size) y: historyOfOccupiedICUs;
-					 color: self occupiedICUsColor) ] ].
-	chart addDecoration: (RSVerticalTick new
-			 integer;
-			 fontSize: 12).
-	chart
-		addDecoration: (RSHorizontalTick new
-				 numberOfTicks: (self historySize min: 5);
-				 fontSize: 12;
-				 integer;
-				 yourself);
-		xlabel: 'Rounds';
-		title: 'Course of the situation'.
-	chart plots ifEmpty: [ 
-		chart addPlot: (RSLinePlot new x: { 0 } y: { 0 }) ].
-	^ RSComposite new shapes: chart build shapes
-]
-
 { #category : #history }
 CMIDAIRModel >> recordHistory: aText [
 
