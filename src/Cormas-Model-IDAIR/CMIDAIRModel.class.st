@@ -104,10 +104,10 @@ CMIDAIRModel class >> howToRunIt [
 CMIDAIRModel >> activityChart [
 
 	| activeColor inactiveColor chart legend shapes |
-	activeColor := Color red.
-	inactiveColor := Color blue.
+	activeColor := Color green mixed: 0.5 with: Color black.
+	inactiveColor := Color orange mixed: 0.5 with: Color white.
 	chart := RSChart new.
-	chart extent: self chartWidth @ self chartHeight.
+	chart extent: self chartWidth @ self shortChartHeight.
 	self yesPopulation ifNotEmpty: [ :yes | 
 		chart addPlot: (RSLinePlot new
 				 x: (1 to: yes size) y: yes;
@@ -138,13 +138,13 @@ CMIDAIRModel >> activityChart [
 		l
 			withBorder;
 			padding: 5 ].
-	legend layout vertical gapSize: 10.
+	legend layout horizontal gapSize: 10.
 	shapes := { 
 		          (RSComposite new shapes: chart build shapes).
 		          (RSComposite new shapes: legend build shapes) }.
-	RSHorizontalLineLayout new
-		alignMiddle;
-		gapSize: 10;
+	RSVerticalLineLayout new
+		alignCenter;
+		gapSize: 5;
 		on: shapes.
 	^ RSComposite new shapes: shapes
 ]
@@ -338,22 +338,31 @@ CMIDAIRModel >> historySize [
 CMIDAIRModel >> hospitalChart [
 
 	^ self submodelAt: #resource do: [ :resourceModel | 
-		  | chart plot |
+		  | chart icu mildBed severeBed shapes |
 		  chart := RSChart new.
 		  chart extent: self chartWidth @ self shortChartHeight.
 		  chart colors: (NSScale ordinal range: { 
 					   Color lightGray.
-					   Color darkGray }).
-
-		  chart addPlot: (plot := CMIDAIRRSBedsPlot new
-				           x1: { 
-						           resourceModel numBeds.
-						           resourceModel numICUs }
-				           x2: { 
-						           resourceModel occupiedBeds.
-						           resourceModel occupiedICUs }
-				           y: (1 to: 2);
-				           yourself).
+					   Color orange }).
+		  chart addPlot: (CMIDAIRRSBedsPlot new
+				   x1: { 
+						   resourceModel numBeds.
+						   resourceModel numICUs }
+				   x2: { 
+						   resourceModel occupiedBedsMild.
+						   0 }
+				   y: (1 to: 2);
+				   yourself).
+		  chart addPlot: (CMIDAIRRSBedsPlot new
+				   x1: { 0. 0 } x2: { 
+						   resourceModel occupiedBeds.
+						   resourceModel occupiedICUs }
+				   y: (1 to: 2);
+				   left: { 
+						   resourceModel occupiedBedsMild.
+						   0 };
+				   secondColor: Color red;
+				   yourself).
 		  chart addDecoration: (RSHorizontalTick new
 				   integer;
 				   fontSize: 12;
@@ -363,7 +372,33 @@ CMIDAIRModel >> hospitalChart [
 					   fromNames: { 'Regular beds'. 'ICU beds' };
 					   fontSize: 12);
 			  title: 'Current status of hospital beds'.
-		  RSComposite new shapes: chart build shapes ]
+		  shapes := { 
+			            (RSComposite new shapes: chart build shapes).
+			            ((RSLabel text: 'Outside the hospital') fontSize: 14).
+			            (RSLabel text:
+				             'Mild: ' , ((self theCitizens count: [ :citizen | 
+					               citizen diseaseDynamics isMildSymptom ])
+				              - resourceModel occupiedBedsMild) printString
+				             , ' cases').
+			            (RSLabel text:
+				             'Severe: ' , ((self theCitizens count: [ :citizen | 
+					               citizen diseaseDynamics isSevereSymptom ])
+				              - resourceModel occupiedBedsSevere
+				              - resourceModel occupiedICUs) printString , ' cases').
+			            (RSLabel text: 'Death: '
+				             ,
+					             (self theCitizens count: [ :citizen | 
+						              citizen diseaseDynamics isDead ]) printString
+				             , ' cases').
+			            (RSLabel text:
+				             'Recovered: '
+				             , (self theCitizens count: [ :citizen | 
+						              citizen diseaseDynamics isRecovered ]) printString
+				             , ' cases') }.
+		  RSVerticalLineLayout new
+			  alignCenter;
+			  on: shapes.
+		  RSComposite new shapes: shapes ]
 ]
 
 { #category : #'user interfaces' }
@@ -765,8 +800,8 @@ CMIDAIRModel >> preventionChart [
 	^ self submodelAt: #contact do: [ :contactModel | 
 		  | chart vaccinationRate facemaskRate shapes bars |
 		  chart := RSChart new.
-		  chart extent: self chartWidth @ self shortChartHeight.
-		  chart colors: (NSScale ordinal range: { Color orange darker }).
+		  chart extent: self chartWidth @ self chartHeight.
+		  chart colors: (NSScale ordinal range: { Color lightGray }).
 		  (chart barWidths: { 
 				   (vaccinationRate := (contactModel vaccinationRate * 100)
 					                       rounded).
@@ -912,10 +947,8 @@ CMIDAIRModel >> wellbeingChart [
 		  wellbeings := (contactModel players values collect: [ :citizen | 
 			                 citizen contactProfile wellbeingPoints ]) asArray.
 		  chart := RSChart new.
-		  chart extent: self chartWidth @ self shortChartHeight.
-		  chart colors:
-			  (NSScale ordinal range:
-				   { (Color blue mixed: 0.3 with: Color white) }).
+		  chart extent: self chartWidth @ self chartHeight.
+		  chart colors: (NSScale ordinal range: { Color lightGray }).
 		  (chart barHeights: wellbeings) barSize: 30.
 		  chart addDecoration: (RSHorizontalTick new
 				   fromNames: names;

@@ -186,6 +186,26 @@ CMIDAIRRPGResourceModel >> occupiedBeds [
 ]
 
 { #category : #accessing }
+CMIDAIRRPGResourceModel >> occupiedBedsMild [
+
+	| num |
+	num := 0.
+	patientsInBeds do: [ :citizen | 
+		citizen diseaseDynamics isMildSymptom ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #accessing }
+CMIDAIRRPGResourceModel >> occupiedBedsSevere [
+
+	| num |
+	num := 0.
+	patientsInBeds do: [ :citizen | 
+		citizen diseaseDynamics isSevereSymptom ifTrue: [ num := num + 1 ] ].
+	^ num
+]
+
+{ #category : #accessing }
 CMIDAIRRPGResourceModel >> occupiedICUs [
 
 	^ patientsInICUs size

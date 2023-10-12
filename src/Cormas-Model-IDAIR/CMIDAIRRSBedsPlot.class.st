@@ -10,3 +10,9 @@ CMIDAIRRSBedsPlot >> createXScale [
 	super createXScale.
 	x2Scale := xScale
 ]
+
+{ #category : #accessing }
+CMIDAIRRSBedsPlot >> secondColor: aColor [
+
+	secondColor := aColor
+]

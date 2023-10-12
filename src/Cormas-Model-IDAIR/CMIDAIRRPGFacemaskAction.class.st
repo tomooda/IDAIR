@@ -14,14 +14,20 @@ CMIDAIRRPGFacemaskAction class >> facemasked [
 CMIDAIRRPGFacemaskAction >> executeNo: aCMIDAIRCitizen [
 
 	aCMIDAIRCitizen contactProfile facemaskFactor: 1.0.
-	aCMIDAIRCitizen contactProfile nofacemasked
+	aCMIDAIRCitizen contactProfile nofacemasked.
+	aCMIDAIRCitizen cormasModel recordHistory:
+		(aCMIDAIRCitizen contactProfile playerName , ': ') asText allBold
+		, (self name , ' - NO') asText
 ]
 
 { #category : #execution }
 CMIDAIRRPGFacemaskAction >> executeYes: aCMIDAIRCitizen [
 
 	aCMIDAIRCitizen contactProfile facemaskFactor: 0.8.
-	aCMIDAIRCitizen contactProfile facemasked
+	aCMIDAIRCitizen contactProfile facemasked.
+	aCMIDAIRCitizen cormasModel recordHistory:
+		(aCMIDAIRCitizen contactProfile playerName , ': ') asText allBold
+		, (self name , ' - YES') asText
 ]
 
 { #category : #converting }
