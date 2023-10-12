@@ -14,7 +14,8 @@ Class {
 		'roundField',
 		'decRoundButton',
 		'incRoundButton',
-		'activityChart'
+		'activityChart',
+		'preventionChart'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
@@ -104,7 +105,8 @@ CMIDAIRRPGPublicChartsPresenter class >> defaultSpec [
 		  add: populationChartSpec;
 		  add: (SpBoxLayout newHorizontal
 				   add: #wellbeingChart;
-				   add: #activityChart);
+				   add: #activityChart;
+				   add: #preventionChart);
 		  yourself
 ]
 
@@ -289,6 +291,13 @@ CMIDAIRRPGPublicChartsPresenter >> drawPopulationChart: aCanvas [
 ]
 
 { #category : #drawing }
+CMIDAIRRPGPublicChartsPresenter >> drawPreventionChart: aCanvas [
+
+	aCanvas addShape: self model preventionChart.
+	CMIDAIRZoomToFitInteraction new onShape: aCanvas
+]
+
+{ #category : #drawing }
 CMIDAIRRPGPublicChartsPresenter >> drawWellbeingChart: aCanvas [
 
 	aCanvas addShape: self model wellbeingChart.
@@ -357,7 +366,9 @@ CMIDAIRRPGPublicChartsPresenter >> initializePresenters [
 	wellbeingChart := self newRoassal script: [ :canvas | 
 		                  self drawWellbeingChart: canvas ].
 	activityChart := self newRoassal script: [ :canvas | 
-		                 self drawActivityChart: canvas ]
+		                 self drawActivityChart: canvas ].
+	preventionChart := self newRoassal script: [ :canvas | 
+		                   self drawPreventionChart: canvas ]
 ]
 
 { #category : #accessing }
@@ -393,7 +404,8 @@ CMIDAIRRPGPublicChartsPresenter >> refresh [
 	{ 
 		populationChart.
 		wellbeingChart.
-		activityChart } do: #refresh
+		activityChart.
+		preventionChart } do: #refresh
 ]
 
 { #category : #'accessing-color' }

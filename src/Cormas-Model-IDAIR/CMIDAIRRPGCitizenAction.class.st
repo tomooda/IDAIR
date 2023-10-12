@@ -258,6 +258,36 @@ CMIDAIRRPGCitizenAction >> contactFactor: aNumber [
 	contactFactor := aNumber
 ]
 
+{ #category : #execution }
+CMIDAIRRPGCitizenAction >> executeNo: aCMIDAIRCitizen [
+
+	aCMIDAIRCitizen contactProfile
+		actionFactor: 1.0;
+		addToWellbeingPoints: self wellbeingPoints negated.
+	aCMIDAIRCitizen locationDynamics locationDesignators:
+		self locationsForNo.
+	aCMIDAIRCitizen contactProfile isMuppetContactProfile ifFalse: [ 
+		aCMIDAIRCitizen cormasModel recordHistory:
+			(aCMIDAIRCitizen contactProfile playerName , ': ') asText allBold
+			, (self name , ' - NO') asText.
+		aCMIDAIRCitizen cormasModel recordCitizenActionNo ]
+]
+
+{ #category : #execution }
+CMIDAIRRPGCitizenAction >> executeYes: aCMIDAIRCitizen [
+
+	aCMIDAIRCitizen contactProfile
+		actionFactor: self contactFactor;
+		addToWellbeingPoints: self wellbeingPoints.
+	aCMIDAIRCitizen locationDynamics locationDesignators:
+		self locationsForYes.
+	aCMIDAIRCitizen contactProfile isMuppetContactProfile ifFalse: [ 
+		aCMIDAIRCitizen cormasModel recordHistory:
+			(aCMIDAIRCitizen contactProfile playerName , ': ') asText allBold
+			, (self name , ' - YES') asText.
+		aCMIDAIRCitizen cormasModel recordCitizenActionYes ]
+]
+
 { #category : #converting }
 CMIDAIRRPGCitizenAction >> forNo [
 

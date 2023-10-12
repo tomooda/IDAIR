@@ -34,6 +34,12 @@ CMIDAIRRPGMuppetContactProfile >> facemaskFactor: aNumber [
 	
 ]
 
+{ #category : #actions }
+CMIDAIRRPGMuppetContactProfile >> facemasked [
+
+	
+]
+
 { #category : #accessing }
 CMIDAIRRPGMuppetContactProfile >> immuneFactor: aNumber [
 ]
@@ -42,6 +48,24 @@ CMIDAIRRPGMuppetContactProfile >> immuneFactor: aNumber [
 CMIDAIRRPGMuppetContactProfile >> isMuppetContactProfile [
 
 	^ true
+]
+
+{ #category : #accessing }
+CMIDAIRRPGMuppetContactProfile >> isVaccinated [
+
+	| context |
+	context := thisContext sender.
+	[ context notNil ] whileTrue: [ 
+		context receiver == self ifTrue: [ 
+			^ self error: 'Recursive mupplets' ].
+		context := context sender ].
+	^ player contactProfile isVaccinated
+]
+
+{ #category : #actions }
+CMIDAIRRPGMuppetContactProfile >> nofacemasked [
+
+	
 ]
 
 { #category : #accessing }
@@ -72,4 +96,10 @@ CMIDAIRRPGMuppetContactProfile >> probabilityFromPrior: aNumber [
 			^ self error: 'Recursive mupplets' ].
 		context := context sender ].
 	^ player contactProfile probabilityFromPrior: aNumber
+]
+
+{ #category : #actions }
+CMIDAIRRPGMuppetContactProfile >> vaccinated [
+
+	
 ]

@@ -7,7 +7,9 @@ Class {
 		'action',
 		'actionName',
 		'wellbeingPoints',
-		'facemaskFactor'
+		'facemaskFactor',
+		'isVaccinated',
+		'isFacemasked'
 	],
 	#category : #'Cormas-Model-IDAIR-Contact-RPG'
 }
@@ -65,7 +67,8 @@ CMIDAIRRPGContactProfile >> clearRound [
 
 	actionFactor := 1.0.
 	action := nil.
-	facemaskFactor := 1.0
+	facemaskFactor := 1.0.
+	isFacemasked := nil
 ]
 
 { #category : #operatoins }
@@ -84,6 +87,12 @@ CMIDAIRRPGContactProfile >> facemaskFactor [
 CMIDAIRRPGContactProfile >> facemaskFactor: aNumber [
 
 	facemaskFactor := aNumber
+]
+
+{ #category : #operatoins }
+CMIDAIRRPGContactProfile >> facemasked [
+
+	isFacemasked := true
 ]
 
 { #category : #accessing }
@@ -105,13 +114,33 @@ CMIDAIRRPGContactProfile >> initialize [
 	immuneFactor := 1.0.
 	facemaskFactor := 1.0.
 	actionFactor := 1.0.
-	wellbeingPoints := 20
+	wellbeingPoints := 20.
+	isVaccinated := false.
+	isFacemasked := nil
+]
+
+{ #category : #accessing }
+CMIDAIRRPGContactProfile >> isFacemasked [
+
+	^ isFacemasked
 ]
 
 { #category : #testing }
 CMIDAIRRPGContactProfile >> isMuppetContactProfile [
 
 	^ false
+]
+
+{ #category : #accessing }
+CMIDAIRRPGContactProfile >> isVaccinated [
+
+	^ isVaccinated
+]
+
+{ #category : #operatoins }
+CMIDAIRRPGContactProfile >> nofacemasked [
+
+	isFacemasked := false
 ]
 
 { #category : #accessing }
@@ -155,6 +184,12 @@ CMIDAIRRPGContactProfile >> playerName [
 CMIDAIRRPGContactProfile >> probabilityFromPrior: aNumber [
 
 	^ aNumber * immuneFactor * facemaskFactor * actionFactor
+]
+
+{ #category : #operatoins }
+CMIDAIRRPGContactProfile >> vaccinated [
+
+	isVaccinated := true
 ]
 
 { #category : #accessing }

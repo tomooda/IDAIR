@@ -759,14 +759,43 @@ CMIDAIRModel >> patientsChart [
 		  RSComposite new shapes: shapes ]
 ]
 
-{ #category : #history }
-CMIDAIRModel >> recordHistory: aText [
+{ #category : #charts }
+CMIDAIRModel >> preventionChart [
 
-	history last add: aText asText
+	^ self submodelAt: #contact do: [ :contactModel | 
+		  | chart vaccinationRate facemaskRate shapes bars |
+		  chart := RSChart new.
+		  chart extent: self chartWidth @ self shortChartHeight.
+		  chart colors: (NSScale ordinal range: { Color orange darker }).
+		  (chart barWidths: { 
+				   (vaccinationRate := (contactModel vaccinationRate * 100)
+					                       rounded).
+				   (facemaskRate := (contactModel facemaskRate * 100) rounded) }) 
+			  barSize: 20.
+		  chart addDecoration: (RSVerticalTick new
+				   fromNames: { 'Vaccination'. 'Facemask' };
+				   fontSize: 12).
+		  chart
+			  addDecoration: (RSHorizontalTick new
+					   fontSize: 12;
+					   integer;
+					   yourself);
+			  title: 'Current status of prevention policy'.
+		  shapes := chart build shapes.
+		  bars := chart plots first bars.
+		  vaccinationRate > 0 ifTrue: [ 
+			  shapes add: ((RSLabel text: vaccinationRate printString , '%')
+					   position: bars first position;
+					   color: Color white) ].
+		  facemaskRate > 0 ifTrue: [ 
+			  shapes add: ((RSLabel text: facemaskRate printString , '%')
+					   position: bars second position;
+					   color: Color white) ].
+		  RSComposite new shapes: shapes ]
 ]
 
 { #category : #history }
-CMIDAIRModel >> recordNo [
+CMIDAIRModel >> recordCitizenActionNo [
 
 	| votes |
 	votes := citizenActivityHistory last.
@@ -774,11 +803,17 @@ CMIDAIRModel >> recordNo [
 ]
 
 { #category : #history }
-CMIDAIRModel >> recordYes [
+CMIDAIRModel >> recordCitizenActionYes [
 
 	| votes |
 	votes := citizenActivityHistory last.
 	votes at: #yes put: (votes at: #yes ifAbsent: [ 0 ]) + 1
+]
+
+{ #category : #history }
+CMIDAIRModel >> recordHistory: aText [
+
+	history last add: aText asText
 ]
 
 { #category : #'charts-colors' }

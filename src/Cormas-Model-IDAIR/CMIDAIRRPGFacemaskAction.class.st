@@ -11,21 +11,29 @@ CMIDAIRRPGFacemaskAction class >> facemasked [
 ]
 
 { #category : #execution }
-CMIDAIRRPGFacemaskAction >> execute: aCMIDAIRCitizen [
+CMIDAIRRPGFacemaskAction >> executeNo: aCMIDAIRCitizen [
 
-	aCMIDAIRCitizen contactProfile facemaskFactor: 0.8
+	aCMIDAIRCitizen contactProfile facemaskFactor: 1.0.
+	aCMIDAIRCitizen contactProfile nofacemasked
+]
+
+{ #category : #execution }
+CMIDAIRRPGFacemaskAction >> executeYes: aCMIDAIRCitizen [
+
+	aCMIDAIRCitizen contactProfile facemaskFactor: 0.8.
+	aCMIDAIRCitizen contactProfile facemasked
 ]
 
 { #category : #converting }
 CMIDAIRRPGFacemaskAction >> forNo [
 
-	^ self
+	^ CMIDAIRRPGCitizenActionWrapperForNo on: self
 ]
 
 { #category : #converting }
 CMIDAIRRPGFacemaskAction >> forYes [
 
-	^ self
+	^ CMIDAIRRPGCitizenActionWrapperForYes on: self
 ]
 
 { #category : #testing }

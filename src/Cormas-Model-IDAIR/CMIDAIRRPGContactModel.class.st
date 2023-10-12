@@ -6,7 +6,9 @@ Class {
 		'players',
 		'citizenActions',
 		'policymakerActions',
-		'hospitalManagerActions'
+		'hospitalManagerActions',
+		'vaccinationRate',
+		'facemaskRate'
 	],
 	#category : #'Cormas-Model-IDAIR-Contact-RPG'
 }
@@ -45,7 +47,7 @@ CMIDAIRRPGContactModel >> citizenActionsDo: aBlock [
 
 { #category : #actions }
 CMIDAIRRPGContactModel >> clearRound [
-
+	self updateStats.
 	self namesAndPlayersDo: [ :name :player | 
 		player contactProfile clearRound ].
 	socialProfile clearRound
@@ -75,6 +77,11 @@ CMIDAIRRPGContactModel >> defaultPolicymakerActions [
 	^ CMIDAIRRPGSocialAction all
 ]
 
+{ #category : #'accessing-stats' }
+CMIDAIRRPGContactModel >> facemaskRate [
+	^ facemaskRate
+]
+
 { #category : #accessing }
 CMIDAIRRPGContactModel >> hospitalManagerActions [
 
@@ -95,7 +102,9 @@ CMIDAIRRPGContactModel >> initialize [
 	citizenActions := self defaultCitizenActions.
 	policymakerActions := self defaultPolicymakerActions.
 	hospitalManagerActions := self defaultHospitalManagerActions.
-	players := OrderedDictionary new
+	players := OrderedDictionary new.
+	facemaskRate := 0.0.
+	vaccinationRate := 0.0
 ]
 
 { #category : #accessing }
@@ -131,6 +140,12 @@ CMIDAIRRPGContactModel >> playerNamed: aString [
 CMIDAIRRPGContactModel >> players [
 
 	^ players
+]
+
+{ #category : #enumerating }
+CMIDAIRRPGContactModel >> playersDo: aBlock [
+
+	players valuesDo: aBlock
 ]
 
 { #category : #accessing }
@@ -171,4 +186,31 @@ CMIDAIRRPGContactModel >> step: anInteger [
 			(citizen isSusceptible and: [ 
 				 self random <= (self probabilityForCitizen: citizen prior: p) ]) 
 				ifTrue: [ citizen beExposed ] ] ]
+]
+
+{ #category : #'accessing-stats' }
+CMIDAIRRPGContactModel >> updateStats [
+
+	| facemasks nofacemasks vaccinated |
+	facemasks := 0.
+	nofacemasks := 0.
+	vaccinated := 0.
+	self playersDo: [ :citizen | 
+		citizen contactProfile isFacemasked ifNotNil: [ :bool | 
+			bool
+				ifTrue: [ facemasks := facemasks + 1 ]
+				ifFalse: [ nofacemasks := nofacemasks + 1 ] ].
+		citizen contactProfile isVaccinated ifTrue: [ 
+			vaccinated := vaccinated + 1 ] ].
+	facemaskRate := facemasks + nofacemasks > 0
+		                ifTrue: [ 
+		                facemasks asFloat
+		                / (facemasks + nofacemasks) asFloat ]
+		                ifFalse: [ 0.0 ].
+	vaccinationRate := vaccinated asFloat / players size asFloat
+]
+
+{ #category : #'accessing-stats' }
+CMIDAIRRPGContactModel >> vaccinationRate [
+	^ vaccinationRate
 ]

@@ -31,35 +31,16 @@ CMIDAIRRPGCitizenActionWrapper >> citizenAction: aCMIDAIRRPGCitizenAction [
 	citizenAction := aCMIDAIRRPGCitizenAction
 ]
 
-{ #category : #accessing }
-CMIDAIRRPGCitizenActionWrapper >> contactFactor [
-
-	^ self subclassResponsibility
-]
-
 { #category : #execution }
 CMIDAIRRPGCitizenActionWrapper >> execute: aCMIDAIRCitizen [
 
-	aCMIDAIRCitizen contactProfile
-		actionFactor: self contactFactor;
-		addToWellbeingPoints: self wellbeingPoints.
-	aCMIDAIRCitizen locationDynamics locationDesignators: self locations.
-	aCMIDAIRCitizen contactProfile isMuppetContactProfile ifFalse: [ 
-		aCMIDAIRCitizen cormasModel recordHistory:
-			(aCMIDAIRCitizen contactProfile playerName , ': ') asText allBold
-			, self name asText ]
+	^ self subclassResponsibility
 ]
 
 { #category : #testing }
 CMIDAIRRPGCitizenActionWrapper >> isImmediateAction [
 
 	^ citizenAction isImmediateAction
-]
-
-{ #category : #accessing }
-CMIDAIRRPGCitizenActionWrapper >> locations [
-
-	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
@@ -70,12 +51,6 @@ CMIDAIRRPGCitizenActionWrapper >> name [
 
 { #category : #accessing }
 CMIDAIRRPGCitizenActionWrapper >> postfix [
-
-	^ self subclassResponsibility
-]
-
-{ #category : #accessing }
-CMIDAIRRPGCitizenActionWrapper >> wellbeingPoints [
 
 	^ self subclassResponsibility
 ]
