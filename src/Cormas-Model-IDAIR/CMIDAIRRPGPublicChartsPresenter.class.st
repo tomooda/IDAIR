@@ -13,7 +13,8 @@ Class {
 		'wellbeingChart',
 		'roundField',
 		'decRoundButton',
-		'incRoundButton'
+		'incRoundButton',
+		'activityChart'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
@@ -101,7 +102,9 @@ CMIDAIRRPGPublicChartsPresenter class >> defaultSpec [
 	^ SpPanedLayout newVertical
 		  positionOfSlider: 0.7;
 		  add: populationChartSpec;
-		  add: #wellbeingChart;
+		  add: (SpBoxLayout newHorizontal
+				   add: #wellbeingChart;
+				   add: #activityChart);
 		  yourself
 ]
 
@@ -187,6 +190,13 @@ CMIDAIRRPGPublicChartsPresenter >> deadColor [
 ]
 
 { #category : #drawing }
+CMIDAIRRPGPublicChartsPresenter >> drawActivityChart: aCanvas [
+
+	aCanvas addShape: self model activityChart.
+	CMIDAIRZoomToFitInteraction new onShape: aCanvas
+]
+
+{ #category : #drawing }
 CMIDAIRRPGPublicChartsPresenter >> drawHospitalChart: aCanvas [
 
 	| charts |
@@ -261,7 +271,7 @@ CMIDAIRRPGPublicChartsPresenter >> drawPopulationChart: aCanvas [
 			 fontSize: 12).
 	chart
 		addDecoration: (RSHorizontalTick new
-				 numberOfTicks: (self model historySize min: 10);
+				 numberOfTicks: (self model historySize - 1 min: 10 max: 1);
 				 fontSize: 12;
 				 integer;
 				 yourself);
@@ -345,7 +355,9 @@ CMIDAIRRPGPublicChartsPresenter >> initializePresenters [
 		              yourself.
 	historyText := self newText.
 	wellbeingChart := self newRoassal script: [ :canvas | 
-		                  self drawWellbeingChart: canvas ]
+		                  self drawWellbeingChart: canvas ].
+	activityChart := self newRoassal script: [ :canvas | 
+		                 self drawActivityChart: canvas ]
 ]
 
 { #category : #accessing }
@@ -380,7 +392,8 @@ CMIDAIRRPGPublicChartsPresenter >> refresh [
 	roundField text: (self model historySize - 1 max: 1) printString.
 	{ 
 		populationChart.
-		wellbeingChart } do: #refresh
+		wellbeingChart.
+		activityChart } do: #refresh
 ]
 
 { #category : #'accessing-color' }

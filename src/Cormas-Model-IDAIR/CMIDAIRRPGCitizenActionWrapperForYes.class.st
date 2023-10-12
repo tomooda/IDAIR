@@ -10,6 +10,14 @@ CMIDAIRRPGCitizenActionWrapperForYes >> contactFactor [
 	^ citizenAction contactFactor
 ]
 
+{ #category : #execution }
+CMIDAIRRPGCitizenActionWrapperForYes >> execute: aCMIDAIRCitizen [
+
+	super execute: aCMIDAIRCitizen.
+	aCMIDAIRCitizen contactProfile isMuppetContactProfile ifFalse: [ 
+		aCMIDAIRCitizen cormasModel recordYes ]
+]
+
 { #category : #accessing }
 CMIDAIRRPGCitizenActionWrapperForYes >> locations [
 

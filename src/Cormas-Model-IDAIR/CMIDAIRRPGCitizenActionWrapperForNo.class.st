@@ -10,6 +10,14 @@ CMIDAIRRPGCitizenActionWrapperForNo >> contactFactor [
 	^ 1.0
 ]
 
+{ #category : #execution }
+CMIDAIRRPGCitizenActionWrapperForNo >> execute: aCMIDAIRCitizen [
+
+	super execute: aCMIDAIRCitizen.
+	aCMIDAIRCitizen contactProfile isMuppetContactProfile ifFalse: [ 
+		aCMIDAIRCitizen cormasModel recordNo ]
+]
+
 { #category : #accessing }
 CMIDAIRRPGCitizenActionWrapperForNo >> locations [
 

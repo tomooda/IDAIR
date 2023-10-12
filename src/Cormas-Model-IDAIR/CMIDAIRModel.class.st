@@ -7,7 +7,8 @@ Class {
 		'submodels',
 		'isHeadless',
 		'initializer',
-		'history'
+		'history',
+		'citizenActivityHistory'
 	],
 	#category : #'Cormas-Model-IDAIR-Core'
 }
@@ -97,6 +98,55 @@ CMIDAIRModel class >> howToRunIt [
 	" Answer a <String> with information about how to run the receiver "
 
 	^ 'Initialize with init, select all Probes, and run'
+]
+
+{ #category : #charts }
+CMIDAIRModel >> activityChart [
+
+	| activeColor inactiveColor chart legend shapes |
+	activeColor := Color red.
+	inactiveColor := Color blue.
+	chart := RSChart new.
+	chart extent: self chartWidth @ self chartHeight.
+	self yesPopulation ifNotEmpty: [ :yes | 
+		chart addPlot: (RSLinePlot new
+				 x: (1 to: yes size) y: yes;
+				 color: activeColor) ].
+	self noPopulation ifNotEmpty: [ :no | 
+		chart addPlot: (RSLinePlot new
+				 x: (1 to: no size) y: no;
+				 color: inactiveColor) ].
+	chart addDecoration: (RSVerticalTick new
+			 integer;
+			 fontSize: 12).
+	chart
+		addDecoration: (RSHorizontalTick new
+				 numberOfTicks: (self historySize - 1 min: 10 max: 1);
+				 fontSize: 12;
+				 integer;
+				 yourself);
+		xlabel: 'Rounds';
+		title: 'Course of the citizen''s activeness'.
+	chart plots ifEmpty: [ 
+		chart addPlot: (RSLinePlot new x: { 0 } y: { 0 }) ].
+	legend := RSLegend new.
+	legend defaultLabel fontSize: 8.
+	legend
+		text: 'number of active citizens' withBoxColor: activeColor;
+		text: 'number of inactive citizens' withBoxColor: inactiveColor.
+	legend legendDo: [ :l | 
+		l
+			withBorder;
+			padding: 5 ].
+	legend layout vertical gapSize: 10.
+	shapes := { 
+		          (RSComposite new shapes: chart build shapes).
+		          (RSComposite new shapes: legend build shapes) }.
+	RSHorizontalLineLayout new
+		alignMiddle;
+		gapSize: 10;
+		on: shapes.
+	^ RSComposite new shapes: shapes
 ]
 
 { #category : #submodels }
@@ -389,7 +439,8 @@ CMIDAIRModel >> initialize [
 	super initialize.
 	submodels := Dictionary new.
 	isHeadless := false.
-	history := OrderedCollection with: OrderedCollection new
+	history := OrderedCollection with: OrderedCollection new.
+	citizenActivityHistory := OrderedCollection with: Dictionary new
 ]
 
 { #category : #initialization }
@@ -459,7 +510,15 @@ CMIDAIRModel >> map [
 { #category : #history }
 CMIDAIRModel >> nextHistory [
 
-	history add: OrderedCollection new
+	history add: OrderedCollection new.
+	citizenActivityHistory add: Dictionary new
+]
+
+{ #category : #history }
+CMIDAIRModel >> noPopulation [
+
+	^ (citizenActivityHistory collect: [ :dictionary | 
+		   dictionary at: #no ifAbsent: [ 0 ] ]) allButLast
 ]
 
 { #category : #probes }
@@ -706,6 +765,22 @@ CMIDAIRModel >> recordHistory: aText [
 	history last add: aText asText
 ]
 
+{ #category : #history }
+CMIDAIRModel >> recordNo [
+
+	| votes |
+	votes := citizenActivityHistory last.
+	votes at: #no put: (votes at: #no ifAbsent: [ 0 ]) + 1
+]
+
+{ #category : #history }
+CMIDAIRModel >> recordYes [
+
+	| votes |
+	votes := citizenActivityHistory last.
+	votes at: #yes put: (votes at: #yes ifAbsent: [ 0 ]) + 1
+]
+
 { #category : #'charts-colors' }
 CMIDAIRModel >> recoveredColor [
 
@@ -818,4 +893,11 @@ CMIDAIRModel >> wellbeingChart [
 			  ylabel: 'points';
 			  title: 'Well-being points'.
 		  RSComposite new shapes: chart build shapes ]
+]
+
+{ #category : #history }
+CMIDAIRModel >> yesPopulation [
+
+	^ (citizenActivityHistory collect: [ :dictionary | 
+		   dictionary at: #yes ifAbsent: [ 0 ] ]) allButLast
 ]
