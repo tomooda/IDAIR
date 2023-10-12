@@ -15,7 +15,8 @@ Class {
 		'removePendingPolicymakerActionButton',
 		'gamePresenter',
 		'gameMasterChart',
-		'gameMasterChartInteraction'
+		'gameMasterChartInteraction',
+		'currentActionsText'
 	],
 	#category : #'Cormas-Model-IDAIR-RPG-UI'
 }
@@ -83,7 +84,11 @@ CMIDAIRRPGGameMasterPresenter class >> defaultSpec [
 				   add: policyMakerSpec expand: true;
 				   add: '    ' asPresenter width: 10;
 				   yourself);
-		  add: #gameMasterChart;
+		  add: (SpPanedLayout newVertical
+				   positionOfSlider: 0.7;
+				   add: #gameMasterChart;
+				   add: #currentActionsText;
+				   yourself);
 		  yourself
 ]
 
@@ -102,6 +107,7 @@ CMIDAIRRPGGameMasterPresenter >> citizenPlay: action [
 			ifFalse: [ 
 				citizen contactProfile action: action.
 				playerList refresh ].
+		self updateCurrentActionsText.
 		gameMasterChart refresh.
 		gamePresenter updatePublicCharts ]
 ]
@@ -177,6 +183,7 @@ CMIDAIRRPGGameMasterPresenter >> hospitalManagerPlay: aCMIDAIRRPGAction [
 			submodelAt: #resource
 			do: [ :resourceModel | 
 				aCMIDAIRRPGAction execute: resourceModel.
+				self updateCurrentActionsText.
 				gamePresenter ifNotNil: #updatePublicCharts.
 				gameMasterChart refresh ] ]
 ]
@@ -248,7 +255,8 @@ CMIDAIRRPGGameMasterPresenter >> initializePresenters [
 				                                        removePendingPolicymakerAction ];
 		                                        yourself.
 	gameMasterChart := self newRoassal script: [ :canvas | 
-		                   self drawGameMasterChart: canvas ]
+		                   self drawGameMasterChart: canvas ].
+	currentActionsText := self newText.
 ]
 
 { #category : #initialization }
@@ -264,6 +272,7 @@ CMIDAIRRPGGameMasterPresenter >> modelChanged [
 	super modelChanged.
 	self
 		updateChart;
+		updateCurrentActionsText;
 		updatePlayerList;
 		updateCitizenActionList;
 		updatePolicyMakerActionList;
@@ -322,6 +331,7 @@ CMIDAIRRPGGameMasterPresenter >> policymakerPlay: aCMIDAIRRPGAction [
 				contactModel cormasModel
 					submodelAt: #resource
 					do: [ :resourceModel | aCMIDAIRRPGAction execute: resourceModel ] ].
+		self updateCurrentActionsText.
 		gamePresenter ifNotNil: #updatePublicCharts.
 		gameMasterChart refresh ]
 ]
@@ -375,6 +385,12 @@ CMIDAIRRPGGameMasterPresenter >> updateChart [
 CMIDAIRRPGGameMasterPresenter >> updateCitizenActionList [
 
 	citizenActionList items: self model citizenActions
+]
+
+{ #category : #updating }
+CMIDAIRRPGGameMasterPresenter >> updateCurrentActionsText [
+
+	currentActionsText text: self model cormasModel latestHistory
 ]
 
 { #category : #updating }

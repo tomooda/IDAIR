@@ -504,6 +504,12 @@ CMIDAIRModel >> isHeadless: aBoolean [
 	isHeadless := aBoolean = true
 ]
 
+{ #category : #history }
+CMIDAIRModel >> latestHistory [
+
+	^ self historyAt: self historySize
+]
+
 { #category : #initialization }
 CMIDAIRModel >> loadDefaultSubmodels [
 
