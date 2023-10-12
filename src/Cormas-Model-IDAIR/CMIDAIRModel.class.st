@@ -338,7 +338,7 @@ CMIDAIRModel >> historySize [
 CMIDAIRModel >> hospitalChart [
 
 	^ self submodelAt: #resource do: [ :resourceModel | 
-		  | chart icu mildBed severeBed shapes |
+		  | chart shapes |
 		  chart := RSChart new.
 		  chart extent: self chartWidth @ self shortChartHeight.
 		  chart colors: (NSScale ordinal range: { 
