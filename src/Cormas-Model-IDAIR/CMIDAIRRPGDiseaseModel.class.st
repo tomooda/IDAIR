@@ -211,11 +211,9 @@ CMIDAIRRPGDiseaseModel >> numberOfDead [
 { #category : #accessing }
 CMIDAIRRPGDiseaseModel >> numberOfInfected [
 
-	| num |
-	num := 0.
-	self cormasModel theCitizens do: [ :citizen | 
-		citizen diseaseDynamics isInfected ifTrue: [ num := num + 1 ] ].
-	^ num
+	^ self cormasModel theCitizens count: [ :citizen | 
+		  citizen diseaseDynamics isMildSymptom or: [ 
+			  citizen diseaseDynamics isSevereSymptom ] ]
 ]
 
 { #category : #accessing }
