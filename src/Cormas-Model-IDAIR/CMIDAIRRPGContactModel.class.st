@@ -8,7 +8,8 @@ Class {
 		'policymakerActions',
 		'hospitalManagerActions',
 		'vaccinationRate',
-		'facemaskRate'
+		'facemaskRate',
+		'hiddenPatientsBeta'
 	],
 	#category : #'Cormas-Model-IDAIR-Contact-RPG'
 }
@@ -83,6 +84,18 @@ CMIDAIRRPGContactModel >> facemaskRate [
 ]
 
 { #category : #accessing }
+CMIDAIRRPGContactModel >> hiddenPatientsBeta [
+
+	^ hiddenPatientsBeta
+]
+
+{ #category : #accessing }
+CMIDAIRRPGContactModel >> hiddenPatientsBeta: anInteger [
+
+	hiddenPatientsBeta := anInteger
+]
+
+{ #category : #accessing }
 CMIDAIRRPGContactModel >> hospitalManagerActions [
 
 	^ hospitalManagerActions
@@ -104,7 +117,8 @@ CMIDAIRRPGContactModel >> initialize [
 	hospitalManagerActions := self defaultHospitalManagerActions.
 	players := OrderedDictionary new.
 	facemaskRate := 0.0.
-	vaccinationRate := 0.0
+	vaccinationRate := 0.0.
+	hiddenPatientsBeta := 2.0
 ]
 
 { #category : #accessing }
@@ -177,7 +191,7 @@ CMIDAIRRPGContactModel >> step: anInteger [
 
 	| numberOfCitizensInCommunity totalBeta |
 	numberOfCitizensInCommunity := self numberOfCitizensInCommunity.
-	totalBeta := self totalBeta.
+	totalBeta := self totalBeta + hiddenPatientsBeta.
 	totalBeta > 0.0 ifTrue: [ 
 		| p |
 		p := socialProfile probabilityFromPrior:

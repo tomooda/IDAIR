@@ -106,6 +106,11 @@ CMIDAIRModel >> activityChart [
 	| chart |
 	chart := RSChart new.
 	chart extent: self chartWidth @ self shortChartHeight.
+	chart
+		minValueY: 0;
+		maxValueY: (self
+				 submodelAt: #contact
+				 do: [ :contactModel | contactModel players size ]).
 	self yesPopulation ifNotEmpty: [ :yes | 
 		chart addPlot: ((yes size > 1
 				  ifTrue: [ RSLinePlot new ]
@@ -126,7 +131,7 @@ CMIDAIRModel >> activityChart [
 		xlabel: 'Rounds';
 		title: 'Course of the citizen''s activeness'.
 	chart plots ifEmpty: [ 
-		chart addPlot: (RSLinePlot new x: { 0 } y: { 0 }) ].
+		chart addPlot: (RSLinePlot new x: { 1 } y: { 0 }) ].
 	^ RSComposite new shapes: chart build shapes
 ]
 
