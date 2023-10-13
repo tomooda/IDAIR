@@ -239,33 +239,45 @@ CMIDAIRRPGPublicChartsPresenter >> drawPopulationChart: aCanvas [
 	self model submodelAt: #disease do: [ :diseaseModel | 
 		susceptibleCheckbox state ifTrue: [ 
 			diseaseModel historyOfSusceptive ifNotEmpty: [ :history | 
-				chart addPlot: (RSLinePlot new
+				chart addPlot: ((history size > 1
+						  ifTrue: [ RSLinePlot new ]
+						  ifFalse: [ CMIDAIRRSScatterPlot new ])
 						 x: (1 to: history size) y: history;
 						 color: self susceptibleColor) ] ].
 		infectedCheckbox state ifTrue: [ 
 			diseaseModel historyOfInfected ifNotEmpty: [ :history | 
-				chart addPlot: (RSLinePlot new
+				chart addPlot: ((history size > 1
+						  ifTrue: [ RSLinePlot new ]
+						  ifFalse: [ CMIDAIRRSScatterPlot new ])
 						 x: (1 to: history size) y: history;
 						 color: self infectedColor) ] ].
 		recoveredCheckbox state ifTrue: [ 
 			diseaseModel historyOfRecovered ifNotEmpty: [ :history | 
-				chart addPlot: (RSLinePlot new
+				chart addPlot: ((history size > 1
+						  ifTrue: [ RSLinePlot new ]
+						  ifFalse: [ CMIDAIRRSScatterPlot new ])
 						 x: (1 to: history size) y: history;
 						 color: self recoveredColor) ] ].
 		deadCheckbox state ifTrue: [ 
 			diseaseModel historyOfDead ifNotEmpty: [ :history | 
-				chart addPlot: (RSLinePlot new
+				chart addPlot: ((history size > 1
+						  ifTrue: [ RSLinePlot new ]
+						  ifFalse: [ CMIDAIRRSScatterPlot new ])
 						 x: (1 to: history size) y: history;
 						 color: self deadColor) ] ] ].
 	self model submodelAt: #resource do: [ :resourceModel | 
 		occupiedBedsCheckbox state ifTrue: [ 
 			resourceModel historyOfOccupiedBeds ifNotEmpty: [ :history | 
-				chart addPlot: (RSLinePlot new
+				chart addPlot: ((history size > 1
+						  ifTrue: [ RSLinePlot new ]
+						  ifFalse: [ CMIDAIRRSScatterPlot new ])
 						 x: (1 to: history size) y: history;
 						 color: self occupiedBedsColor) ] ].
 		occupiedICUsCheckbox state ifTrue: [ 
 			resourceModel historyOfOccupiedICUs ifNotEmpty: [ :history | 
-				chart addPlot: (RSLinePlot new
+				chart addPlot: ((history size > 1
+						  ifTrue: [ RSLinePlot new ]
+						  ifFalse: [ CMIDAIRRSScatterPlot new ])
 						 x: (1 to: history size) y: history;
 						 color: self occupiedICUsColor) ] ] ].
 	chart addDecoration: (RSVerticalTick new

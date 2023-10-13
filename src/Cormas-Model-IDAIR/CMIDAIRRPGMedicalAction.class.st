@@ -24,20 +24,28 @@ CMIDAIRRPGMedicalAction class >> assignICU [
 			   request: 'Number of ICU beds?'
 			   initialAnswer: '1') ifNotNil: [ :answer | 
 			  answer asInteger ifNotNil: [ :num | 
-				  resourceModel occupyICU: num.
-				  ' (' , num printString , ')' ] ] ]
+				  | res |
+				  res := resourceModel occupyICU: num.
+				  ' (' , res printString , ' severe)' ] ] ]
 ]
 
 { #category : #constants }
 CMIDAIRRPGMedicalAction class >> assignRegularBed [
 
 	^ self name: 'ID:19 Occupy regular bed' block: [ :resourceModel | 
-		  (UIManager default
-			   request: 'Number of regular beds?'
-			   initialAnswer: '1') ifNotNil: [ :answer | 
-			  answer asInteger ifNotNil: [ :num | 
-				  resourceModel occupyBed: num.
-				  ' (' , num printString , ')' ] ] ]
+		  | dialog mild severe |
+		  dialog := CMIDAIRRegularBedAssignmentPresenter new
+			            openModalWithSpec.
+		  dialog isOk
+			  ifTrue: [ 
+				  mild := dialog presenter mild.
+				  severe := dialog presenter severe.
+				  (mild notNil and: [ severe notNil ]) ifTrue: [ 
+					  (resourceModel occupyBedForMild: mild severe: severe) 
+						  ifNotNil: [ :pair | 
+							  ' (' , pair first printString , ' mild, '
+							  , pair second printString , ' severe)' ] ] ]
+			  ifFalse: [ nil ] ]
 ]
 
 { #category : #constants }

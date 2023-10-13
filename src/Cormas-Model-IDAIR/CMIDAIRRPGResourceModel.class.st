@@ -228,18 +228,42 @@ CMIDAIRRPGResourceModel >> occupyBed: anInteger [
 ]
 
 { #category : #operations }
+CMIDAIRRPGResourceModel >> occupyBedForMild: numMild severe: numSevere [
+
+	| mild severe |
+	mild := (self cormasModel theCitizens select: [ :citizen | 
+		         citizen diseaseDynamics isMildSymptom ]) asArray shuffle 
+		        copyWithoutAll: patientsInBeds , patientsInICUs.
+	mild := mild first: (numMild min: mild size).
+	severe := (self cormasModel theCitizens select: [ :citizen | 
+		           citizen diseaseDynamics isSevereSymptom ]) asArray
+		          shuffle copyWithoutAll: patientsInBeds , patientsInICUs.
+	severe := severe first: (numSevere min: severe size).
+	^ mild size + severe size <= (numBeds - patientsInBeds size)
+		  ifTrue: [ 
+			  severe do: [ :citizen | self assignBed: citizen ].
+			  mild do: [ :citizen | self assignBed: citizen ].
+			  { 
+				  mild size.
+				  severe size } ]
+		  ifFalse: [ nil ]
+]
+
+{ #category : #operations }
 CMIDAIRRPGResourceModel >> occupyICU: anInteger [
 
-	| candidates |
+	| candidates res |
 	candidates := ((self cormasModel theCitizens select: [ :citizen | 
 		                citizen diseaseDynamics isSevereSymptom ]) asArray
 		               shuffle copyWithoutAll: patientsInICUs)
 	              , (patientsInBeds select: [ :citizen | 
 			               citizen diseaseDynamics isSevereSymptom ]) asArray
 			              shuffle.
-	1 to:
-	((anInteger min: numICUs - patientsInICUs size) min: candidates size)
-	do: [ :index | self assignICU: (candidates at: index) ]
+	1
+		to: (res := (anInteger min: numICUs - patientsInICUs size) min:
+				        candidates size)
+		do: [ :index | self assignICU: (candidates at: index) ].
+	^ res
 ]
 
 { #category : #operations }

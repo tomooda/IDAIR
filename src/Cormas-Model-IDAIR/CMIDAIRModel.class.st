@@ -103,20 +103,18 @@ CMIDAIRModel class >> howToRunIt [
 { #category : #charts }
 CMIDAIRModel >> activityChart [
 
-	| activeColor inactiveColor chart legend shapes |
-	activeColor := Color green mixed: 0.5 with: Color black.
-	inactiveColor := Color orange mixed: 0.5 with: Color white.
+	| chart |
 	chart := RSChart new.
 	chart extent: self chartWidth @ self shortChartHeight.
 	self yesPopulation ifNotEmpty: [ :yes | 
-		chart addPlot: (RSLinePlot new
-				 x: (1 to: yes size) y: yes;
-				 color: activeColor) ].
-	self noPopulation ifNotEmpty: [ :no | 
-		chart addPlot: (RSLinePlot new
-				 x: (1 to: no size) y: no;
-				 color: inactiveColor) ].
+		chart addPlot: ((yes size > 1
+				  ifTrue: [ RSLinePlot new ]
+				  ifFalse: [ CMIDAIRRSScatterPlot new ])
+				 y: yes;
+				 color: Color darkGray;
+				 yourself) ].
 	chart addDecoration: (RSVerticalTick new
+			 numberOfTicks: 2;
 			 integer;
 			 fontSize: 12).
 	chart
@@ -129,24 +127,7 @@ CMIDAIRModel >> activityChart [
 		title: 'Course of the citizen''s activeness'.
 	chart plots ifEmpty: [ 
 		chart addPlot: (RSLinePlot new x: { 0 } y: { 0 }) ].
-	legend := RSLegend new.
-	legend defaultLabel fontSize: 8.
-	legend
-		text: 'number of active citizens' withBoxColor: activeColor;
-		text: 'number of inactive citizens' withBoxColor: inactiveColor.
-	legend legendDo: [ :l | 
-		l
-			withBorder;
-			padding: 5 ].
-	legend layout horizontal gapSize: 10.
-	shapes := { 
-		          (RSComposite new shapes: chart build shapes).
-		          (RSComposite new shapes: legend build shapes) }.
-	RSVerticalLineLayout new
-		alignCenter;
-		gapSize: 5;
-		on: shapes.
-	^ RSComposite new shapes: shapes
+	^ RSComposite new shapes: chart build shapes
 ]
 
 { #category : #submodels }
