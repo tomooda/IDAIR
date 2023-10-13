@@ -92,6 +92,13 @@ CMIDAIRRPGDiseaseModel >> defaultDiseaseDynamicsClass [
 	^ CMIDAIRRPGSusceptible
 ]
 
+{ #category : #'round management' }
+CMIDAIRRPGDiseaseModel >> finalizeRound [
+
+	super finalizeRound.
+	self recordHistory
+]
+
 { #category : #accessing }
 CMIDAIRRPGDiseaseModel >> historyOfDead [
 
@@ -188,8 +195,7 @@ CMIDAIRRPGDiseaseModel >> initializeRound [
 	numberOfNewWorsened := 0.
 	numberOfNewRecovering := 0.
 	numberOfNewRecovered := 0.
-	numberOfNewDead := 0.
-	self recordHistory
+	numberOfNewDead := 0
 ]
 
 { #category : #accessing }

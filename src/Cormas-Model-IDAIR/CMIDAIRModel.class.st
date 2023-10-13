@@ -408,14 +408,9 @@ CMIDAIRModel >> init [
 		neighbourhood: 8
 		closed: false.
 	initializer ifNotNil: [ initializer value: self ].
-"	self
-		displayPov: #pov of: CMIDAIRLocation;
-		displayPov: #diseasePov of: CMIDAIRCitizen.
-	self halt.
-	CMR3SpacePresenter openFor: self projectManager.
-	self projectAnnouncer announce: CMSChangePoVAnnouncement new"
-	"self createN: 1000 randomlyLocatedEntities: CMIDAIRCitizen.
-	1 to: 10 do: [ :index | (self theCitizens at: index) beAsymptomatic ]"
+	self
+		submodelAt: #disease
+		do: [ :diseaseModel | diseaseModel finalizeRound ]
 ]
 
 { #category : #scheduling }

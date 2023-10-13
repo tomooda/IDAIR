@@ -143,8 +143,12 @@ CMIDAIRRPGPresenter >> runSimulation [
 							progress value: count // step ] ] ].
 			daysLabel label: (model cormasModel timeStep * model daysPerStep 
 					 printShowingDecimalPlaces: 2).
+			model cormasModel
+				submodelAt: #disease
+				do: [ :diseaseModel | diseaseModel finalizeRound ].
 			gameMasterPresenter ifNotNil: #clearRound.
-			publicChartsPresenter ifNotNil: [ publicChartsPresenter refresh ] ] ]
+			publicChartsPresenter ifNotNil: [ publicChartsPresenter refresh ].
+			1 ] ]
 ]
 
 { #category : #accessing }
