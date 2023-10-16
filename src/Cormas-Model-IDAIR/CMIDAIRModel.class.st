@@ -124,7 +124,7 @@ CMIDAIRModel >> activityChart [
 			 fontSize: 12).
 	chart
 		addDecoration: (RSHorizontalTick new
-				 numberOfTicks: (self historySize - 1 min: 10 max: 1);
+				 numberOfTicks: (self historySize min: 10 max: 1);
 				 fontSize: 12;
 				 integer;
 				 yourself);
@@ -954,5 +954,13 @@ CMIDAIRModel >> wellbeingChart [
 CMIDAIRModel >> yesPopulation [
 
 	^ (citizenActivityHistory collect: [ :dictionary | 
-		   dictionary at: #yes ifAbsent: [ 0 ] ]) allButLast
+		   dictionary at: #yes ifAbsent: [ 0 ] ]) ifNotEmpty: [ :populations | 
+		  self submodelAt: #contact do: [ :contactModel | 
+			  populations
+				  at: populations size
+				  put: (contactModel players values count: [ :citizen | 
+							   | action |
+							   action := citizen contactProfile action.
+							   action notNil and: [ action isForYes ] ]);
+				  yourself ] ]
 ]

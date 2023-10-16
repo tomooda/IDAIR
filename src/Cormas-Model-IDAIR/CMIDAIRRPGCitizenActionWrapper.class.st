@@ -38,6 +38,18 @@ CMIDAIRRPGCitizenActionWrapper >> execute: aCMIDAIRCitizen [
 ]
 
 { #category : #testing }
+CMIDAIRRPGCitizenActionWrapper >> isForNo [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #testing }
+CMIDAIRRPGCitizenActionWrapper >> isForYes [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #testing }
 CMIDAIRRPGCitizenActionWrapper >> isImmediateAction [
 
 	^ citizenAction isImmediateAction

@@ -285,7 +285,7 @@ CMIDAIRRPGPublicChartsPresenter >> drawPopulationChart: aCanvas [
 			 fontSize: 12).
 	chart
 		addDecoration: (RSHorizontalTick new
-				 numberOfTicks: (self model historySize - 1 min: 10 max: 2);
+				 numberOfTicks: (self model historySize min: 10 max: 2);
 				 fontSize: 12;
 				 integer;
 				 yourself);
