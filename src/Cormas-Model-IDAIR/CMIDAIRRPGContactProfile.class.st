@@ -143,6 +143,12 @@ CMIDAIRRPGContactProfile >> nofacemasked [
 	isFacemasked := false
 ]
 
+{ #category : #operatoins }
+CMIDAIRRPGContactProfile >> novaccinated [
+
+	isVaccinated := false
+]
+
 { #category : #accessing }
 CMIDAIRRPGContactProfile >> player [
 

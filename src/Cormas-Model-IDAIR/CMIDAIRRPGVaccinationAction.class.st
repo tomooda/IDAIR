@@ -12,6 +12,9 @@ CMIDAIRRPGVaccinationAction class >> vaccinated [
 { #category : #execution }
 CMIDAIRRPGVaccinationAction >> executeNo: aCMIDAIRCitizen [
 
+	aCMIDAIRCitizen contactProfile
+		immuneFactor: 1.0;
+		novaccinated.
 	aCMIDAIRCitizen cormasModel recordHistory:
 		(aCMIDAIRCitizen contactProfile playerName , ': ') asText allBold
 		, (self name , ' - NO') asText

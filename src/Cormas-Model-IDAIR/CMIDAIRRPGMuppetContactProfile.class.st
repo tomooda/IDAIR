@@ -68,6 +68,12 @@ CMIDAIRRPGMuppetContactProfile >> nofacemasked [
 	
 ]
 
+{ #category : #actions }
+CMIDAIRRPGMuppetContactProfile >> novaccinated [
+
+	
+]
+
 { #category : #accessing }
 CMIDAIRRPGMuppetContactProfile >> player [
 
