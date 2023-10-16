@@ -40,6 +40,10 @@ CMIDAIRResourceModel >> defaultCitizenResourceDynamicsClass [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'round management' }
+CMIDAIRResourceModel >> finalizeRound [
+]
+
 { #category : #accessing }
 CMIDAIRResourceModel >> socialPreventionResourceFactor [
 

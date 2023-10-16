@@ -146,6 +146,9 @@ CMIDAIRRPGPresenter >> runSimulation [
 			model cormasModel
 				submodelAt: #disease
 				do: [ :diseaseModel | diseaseModel finalizeRound ].
+			model cormasModel
+				submodelAt: #resource
+				do: [ :resourceModel | resourceModel finalizeRound ].
 			gameMasterPresenter ifNotNil: #clearRound.
 			publicChartsPresenter ifNotNil: [ publicChartsPresenter refresh ].
 			1 ] ]

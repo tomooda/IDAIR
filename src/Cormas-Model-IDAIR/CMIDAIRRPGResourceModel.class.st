@@ -86,6 +86,14 @@ CMIDAIRRPGResourceModel >> facemaskPolicy: aBoolean [
 	facemaskPolicy := aBoolean
 ]
 
+{ #category : #'round management' }
+CMIDAIRRPGResourceModel >> finalizeRound [
+
+	super finalizeRound.
+	self checkPatientsInBeds.
+	self checkPatientsInICUs
+]
+
 { #category : #accessing }
 CMIDAIRRPGResourceModel >> historyOfOccupiedBeds [
 
@@ -209,22 +217,6 @@ CMIDAIRRPGResourceModel >> occupiedBedsSevere [
 CMIDAIRRPGResourceModel >> occupiedICUs [
 
 	^ patientsInICUs size
-]
-
-{ #category : #operations }
-CMIDAIRRPGResourceModel >> occupyBed: anInteger [
-
-	| candidates |
-	candidates := (self cormasModel theCitizens select: [ :citizen | 
-		               citizen diseaseDynamics isSevereSymptom ]) asArray
-		              shuffle
-	              , (self cormasModel theCitizens select: [ :citizen | 
-			               citizen diseaseDynamics isMildSymptom ]) asArray
-			              shuffle copyWithoutAll:
-		              patientsInBeds , patientsInICUs.
-	1 to:
-	((anInteger min: numBeds - patientsInBeds size) min: candidates size)
-	do: [ :index | self assignBed: (candidates at: index) ]
 ]
 
 { #category : #operations }
