@@ -34,8 +34,11 @@ CMIDAIRRPGCitizenAction class >> all [
 		  self useHerbal.
 		  self getMonthlyMedication.
 		  self regularHealthCheckup.
-		  self bringFamilyToHospital } asSortedCollection: [ :less :more | 
-		  less name <= more name ]
+		  self bringFamilyToHospital.
+		  CMIDAIRRPGFacemaskAction facemasked.
+		  CMIDAIRRPGVaccinationAction vaccinated } asSortedCollection: [ 
+		  :less 
+		  :more | less name <= more name ]
 ]
 
 { #category : #constants }
