@@ -34,7 +34,7 @@ CMIDAIRRPGGameMasterPresenter class >> defaultSpec [
 		               yourself.
 	citizenSpec add:
 		(SpBoxLayout newHorizontal add: (SpPanedLayout newVertical
-				  positionOfSlider: 0.5;
+				  positionOfSlider: 0.3;
 				  add: #playerList;
 				  add: (SpBoxLayout newVertical
 						   add: #citizenActionList;

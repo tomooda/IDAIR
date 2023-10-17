@@ -12,15 +12,15 @@ Class {
 CMIDAIRRPGSocialAction class >> all [
 
 	^ { 
-		  CMIDAIRRPGMedicalAction treatmentGuideline.
-		  self openQuarrantineCamp.
-		  self closeBorder.
 		  self socialDistancing1.
 		  self socialDistancing2.
 		  self socialDistancing3.
 		  self socialDistancing4.
 		  self socialDistancing5.
 		  self lockdown.
+		  self closeBorder.
+		  self quarrantine.
+		  CMIDAIRRPGMedicalAction treatmentGuideline.
 		  CMIDAIRRPGMedicalAction increase1ICU2RB.
 		  CMIDAIRRPGMedicalAction increase2ICU4RB } asSortedCollection: [ 
 		  :less 
@@ -30,19 +30,13 @@ CMIDAIRRPGSocialAction class >> all [
 { #category : #constants }
 CMIDAIRRPGSocialAction class >> closeBorder [
 
-	^ self name: 'ID:34 Close the border' transientFactor: 0.7
-]
-
-{ #category : #constants }
-CMIDAIRRPGSocialAction class >> facemask [
-
-	^ self name: 'ID:35 Wear a facemask' transientFactor: 1.0
+	^ self name: 'ID:31 Close the border' transientFactor: 0.7
 ]
 
 { #category : #constants }
 CMIDAIRRPGSocialAction class >> lockdown [
 
-	^ self name: 'ID:32 Lockdown' transientFactor: 0.5
+	^ self name: 'ID:30 Lockdown' transientFactor: 0.5
 ]
 
 { #category : #'instance creation' }
@@ -71,39 +65,39 @@ CMIDAIRRPGSocialAction class >> name: aString transientFactor: aNumber cummulati
 ]
 
 { #category : #constants }
-CMIDAIRRPGSocialAction class >> openQuarrantineCamp [
+CMIDAIRRPGSocialAction class >> quarrantine [
 
-	^ self name: 'ID:33 Quarantine' cummulativeFactor: 0.8
+	^ self name: 'ID:32 Quarantine' cummulativeFactor: 0.8
 ]
 
 { #category : #constants }
 CMIDAIRRPGSocialAction class >> socialDistancing1 [
 
-	^ self name: 'ID:27 Social distancing level 1' transientFactor: 0.9
+	^ self name: 'ID:25 Social distancing level 1' transientFactor: 0.9
 ]
 
 { #category : #constants }
 CMIDAIRRPGSocialAction class >> socialDistancing2 [
 
-	^ self name: 'ID:28 Social distancing level 2' transientFactor: 0.8
+	^ self name: 'ID:26 Social distancing level 2' transientFactor: 0.8
 ]
 
 { #category : #constants }
 CMIDAIRRPGSocialAction class >> socialDistancing3 [
 
-	^ self name: 'ID:29 Social distancing level 3' transientFactor: 0.75
+	^ self name: 'ID:27 Social distancing level 3' transientFactor: 0.75
 ]
 
 { #category : #constants }
 CMIDAIRRPGSocialAction class >> socialDistancing4 [
 
-	^ self name: 'ID:30 Social distancing level 4' transientFactor: 0.7
+	^ self name: 'ID:28 Social distancing level 4' transientFactor: 0.7
 ]
 
 { #category : #constants }
 CMIDAIRRPGSocialAction class >> socialDistancing5 [
 
-	^ self name: 'ID:31 Social distancing level 5' transientFactor: 0.65
+	^ self name: 'ID:29 Social distancing level 5' transientFactor: 0.65
 ]
 
 { #category : #accessing }

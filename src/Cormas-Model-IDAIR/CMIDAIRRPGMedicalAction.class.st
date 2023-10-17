@@ -11,15 +11,15 @@ Class {
 CMIDAIRRPGMedicalAction class >> all [
 
 	^ { 
-		  self assignRegularBed.
-		  self assignICU } asSortedCollection: [ :less :more | 
+		  self assignICU.
+		  self assignRegularBed } asSortedCollection: [ :less :more | 
 		  less name <= more name ]
 ]
 
 { #category : #constants }
 CMIDAIRRPGMedicalAction class >> assignICU [
 
-	^ self name: 'ID:18 Occupy ICU bed' block: [ :resourceModel | 
+	^ self name: 'ID:22 Occupy ICU bed' block: [ :resourceModel | 
 		  (UIManager default
 			   request: 'Number of ICU beds?'
 			   initialAnswer: '1') ifNotNil: [ :answer | 
@@ -32,7 +32,7 @@ CMIDAIRRPGMedicalAction class >> assignICU [
 { #category : #constants }
 CMIDAIRRPGMedicalAction class >> assignRegularBed [
 
-	^ self name: 'ID:19 Occupy regular bed' block: [ :resourceModel | 
+	^ self name: 'ID:23 Occupy regular bed' block: [ :resourceModel | 
 		  | dialog mild severe |
 		  dialog := CMIDAIRRegularBedAssignmentPresenter new
 			            openModalWithSpec.
@@ -49,18 +49,10 @@ CMIDAIRRPGMedicalAction class >> assignRegularBed [
 ]
 
 { #category : #constants }
-CMIDAIRRPGMedicalAction class >> facemask [
-
-	^ self name: 'ID:35 Wear a facemask' block: [ :resourceModel | 
-		  resourceModel facemaskPolicy: true.
-		  '' ]
-]
-
-{ #category : #constants }
 CMIDAIRRPGMedicalAction class >> increase1ICU2RB [
 
 	^ self
-		  name: 'ID:20 Increase bed capacity(1ICU+2RB)'
+		  name: 'ID:38 Increase bed capacity(1ICU+2RB)'
 		  block: [ :resourceModel | 
 			  resourceModel increaseBeds: 2 ICUs: 1.
 			  '' ]
@@ -70,7 +62,7 @@ CMIDAIRRPGMedicalAction class >> increase1ICU2RB [
 CMIDAIRRPGMedicalAction class >> increase2ICU4RB [
 
 	^ self
-		  name: 'ID:21 Increase bed capacity(2ICU+4RB)'
+		  name: 'ID:39 Increase bed capacity(2ICU+4RB)'
 		  block: [ :resourceModel | 
 			  resourceModel increaseBeds: 4 ICUs: 2.
 			  '' ]
@@ -88,7 +80,7 @@ CMIDAIRRPGMedicalAction class >> name: aString block: aBlock [
 CMIDAIRRPGMedicalAction class >> treatmentGuideline [
 
 	^ self
-		  name: 'ID:22 Issue treatment guidelines'
+		  name: 'ID:33 Issue treatment guidelines'
 		  block: [ :resourceModel | 
 			  resourceModel cormasModel
 				  submodelAt: #contact
