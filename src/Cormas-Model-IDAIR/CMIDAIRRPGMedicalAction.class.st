@@ -12,7 +12,8 @@ CMIDAIRRPGMedicalAction class >> all [
 
 	^ { 
 		  self assignICU.
-		  self assignRegularBed } asSortedCollection: [ :less :more | 
+		  self assignRegularBed.
+		  self moveToICU } asSortedCollection: [ :less :more | 
 		  less name <= more name ]
 ]
 
@@ -66,6 +67,19 @@ CMIDAIRRPGMedicalAction class >> increase2ICU4RB [
 		  block: [ :resourceModel | 
 			  resourceModel increaseBeds: 4 ICUs: 2.
 			  '' ]
+]
+
+{ #category : #constants }
+CMIDAIRRPGMedicalAction class >> moveToICU [
+
+	^ self name: 'ID:?? Move to ICU bed' block: [ :resourceModel | 
+		  (UIManager default
+			   request: 'Number of ICU beds?'
+			   initialAnswer: '1') ifNotNil: [ :answer | 
+			  answer asInteger ifNotNil: [ :num | 
+				  | res |
+				  res := resourceModel moveToICU: num.
+				  ' (' , res printString , ' severe)' ] ] ]
 ]
 
 { #category : #'instance creation' }

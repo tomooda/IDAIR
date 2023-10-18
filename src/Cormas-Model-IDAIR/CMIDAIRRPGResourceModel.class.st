@@ -163,6 +163,20 @@ CMIDAIRRPGResourceModel >> isInICU: aCMIDAIRCitizen [
 	^ patientsInICUs includes: aCMIDAIRCitizen
 ]
 
+{ #category : #operations }
+CMIDAIRRPGResourceModel >> moveToICU: anInteger [
+
+	| candidates res |
+	candidates := (patientsInBeds select: [ :citizen | 
+		               citizen diseaseDynamics isSevereSymptom ]) asArray
+		              shuffle.
+	1
+		to: (res := (anInteger min: numICUs - patientsInICUs size) min:
+				        candidates size)
+		do: [ :index | self assignICU: (candidates at: index) ].
+	^ res
+]
+
 { #category : #accessing }
 CMIDAIRRPGResourceModel >> numBeds [
 
