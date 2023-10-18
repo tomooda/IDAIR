@@ -119,7 +119,6 @@ CMIDAIRModel >> activityChart [
 				 color: Color darkGray;
 				 yourself) ].
 	chart addDecoration: (RSVerticalTick new
-			 numberOfTicks: 2;
 			 integer;
 			 fontSize: 12).
 	chart
