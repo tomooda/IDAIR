@@ -290,6 +290,7 @@ CMIDAIRRPGPublicChartsPresenter >> drawPopulationChart: aCanvas [
 				 integer;
 				 yourself);
 		xlabel: 'Rounds';
+		ylabel: 'Number of patients';
 		title: 'Course of the situation'.
 	chart plots
 		ifNotEmpty: [ :plots | 

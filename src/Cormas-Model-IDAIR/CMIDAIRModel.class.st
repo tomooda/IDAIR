@@ -128,6 +128,7 @@ CMIDAIRModel >> activityChart [
 				 integer;
 				 yourself);
 		xlabel: 'Rounds';
+		ylabel: 'Number of players';
 		title: 'Course of the citizen''s activeness'.
 	chart plots ifEmpty: [ 
 		chart addPlot: (RSLinePlot new x: { 1 } y: { 0 }) ].
