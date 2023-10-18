@@ -303,10 +303,10 @@ CMIDAIRRPGGameMasterPresenter >> playHospitalManagerAction [
 { #category : #operations }
 CMIDAIRRPGGameMasterPresenter >> playPolicymakerAction [
 
-	pendingPolicymakerActionList selectedItem ifNotNil: [ :action | 
-		self policymakerPlay: action.
-		pendingPolicymakerActionList items:
-			(pendingPolicymakerActionList items copyWithout: action) ]
+	^ pendingPolicymakerActionList selectedItem ifNotNil: [ :action | 
+		  (self policymakerPlay: action) ifNil: [ ^ nil ].
+		  pendingPolicymakerActionList items:
+			  (pendingPolicymakerActionList items copyWithout: action) ]
 ]
 
 { #category : #updating }
@@ -324,16 +324,18 @@ CMIDAIRRPGGameMasterPresenter >> playerName [
 { #category : #operations }
 CMIDAIRRPGGameMasterPresenter >> policymakerPlay: aCMIDAIRRPGAction [
 
-	self model ifNotNil: [ :contactModel | 
-		aCMIDAIRRPGAction isSocialAction
-			ifTrue: [ aCMIDAIRRPGAction execute: contactModel ]
-			ifFalse: [ 
-				contactModel cormasModel
-					submodelAt: #resource
-					do: [ :resourceModel | aCMIDAIRRPGAction execute: resourceModel ] ].
-		self updateCurrentActionsText.
-		gamePresenter ifNotNil: #updatePublicCharts.
-		gameMasterChart refresh ]
+	^ self model ifNotNil: [ :contactModel | 
+		  aCMIDAIRRPGAction isSocialAction
+			  ifTrue: [ 
+			  (aCMIDAIRRPGAction execute: contactModel) ifNil: [ ^ nil ] ]
+			  ifFalse: [ 
+				  contactModel cormasModel
+					  submodelAt: #resource
+					  do: [ :resourceModel | 
+					  aCMIDAIRRPGAction execute: resourceModel ] ].
+		  self updateCurrentActionsText.
+		  gamePresenter ifNotNil: #updatePublicCharts.
+		  gameMasterChart refresh ]
 ]
 
 { #category : #operations }

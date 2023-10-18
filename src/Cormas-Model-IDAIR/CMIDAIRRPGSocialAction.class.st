@@ -128,14 +128,14 @@ CMIDAIRRPGSocialAction >> cummulativeFactor: aNumber [
 { #category : #execution }
 CMIDAIRRPGSocialAction >> execute: aCMIDAIRContactModel [
 
-	(self askEffectiveRate: aCMIDAIRContactModel players size) ifNotNil: [ 
-		:rate | 
-		aCMIDAIRContactModel socialProfile transientFactor:
-			self transientFactor ** rate.
-		aCMIDAIRContactModel socialProfile multiplyCummulativeFactor:
-			self cummulativeFactor ** rate.
-		aCMIDAIRContactModel cormasModel recordHistory:
-			(self name , ' (' , (self printRate: rate) , ')') asText ]
+	^ (self askEffectiveRate: aCMIDAIRContactModel players size) 
+		  ifNotNil: [ :rate | 
+			  aCMIDAIRContactModel socialProfile transientFactor:
+				  self transientFactor ** rate.
+			  aCMIDAIRContactModel socialProfile multiplyCummulativeFactor:
+				  self cummulativeFactor ** rate.
+			  aCMIDAIRContactModel cormasModel recordHistory:
+				  (self name , ' (' , (self printRate: rate) , ')') asText ]
 ]
 
 { #category : #accessing }
