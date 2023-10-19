@@ -72,7 +72,7 @@ CMIDAIRRPGMedicalAction class >> increase2ICU4RB [
 { #category : #constants }
 CMIDAIRRPGMedicalAction class >> moveToICU [
 
-	^ self name: 'ID:?? Move to ICU bed' block: [ :resourceModel | 
+	^ self name: 'ID:40 Move to ICU bed' block: [ :resourceModel | 
 		  (UIManager default
 			   request: 'Number of ICU beds?'
 			   initialAnswer: '1') ifNotNil: [ :answer | 
