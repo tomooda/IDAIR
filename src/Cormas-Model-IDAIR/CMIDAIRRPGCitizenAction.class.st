@@ -245,7 +245,7 @@ CMIDAIRRPGCitizenAction class >> travelAbroad [
 	^ self
 		  name: 'ID:14 Travel abroad to study'
 		  contactFactor: 1.5
-		  wellbeingPoints: 15
+		  wellbeingPoints: 5
 		  locationsForYes: { #out }
 		  locationsForNo: { #suburban . #urban}
 ]
@@ -256,7 +256,7 @@ CMIDAIRRPGCitizenAction class >> useHerbal [
 	^ self
 		  name: 'ID:18 Use herbal treatment'
 		  contactFactor: 1.0
-		  wellbeingPoints: 5
+		  wellbeingPoints: 10
 		  locationsForYes: { #hospital . #urban . #suburban }
 		  locationsForNo: { #urban . #suburban }
 ]
@@ -267,7 +267,7 @@ CMIDAIRRPGCitizenAction class >> vacation [
 	^ self
 		  name: 'ID:15 Go on a vacation'
 		  contactFactor: 1.5
-		  wellbeingPoints: 15
+		  wellbeingPoints: 10
 		  locationsForYes: { #out }
 		  locationsForNo: { #suburban . #urban}
 ]
