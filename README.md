@@ -11,7 +11,7 @@ You can download executable applications from [our release page](https://github.
 #### Manual installation on the Pharo9 system
 
 1. Download Pharo 9 from [the Pharo project](https://pharo.org/).
-2. Install Cormas v0.7 from [The Cormas project](https://github.com/cormas/cormas) following their instructions.
+2. Install Cormas v0.5 from [The Cormas project](https://github.com/cormas/cormas) following their instructions.
 3. The I-DAIR ABM requires Roassal3 v1.0 from [The Roassal3 project](https://github.com/ObjectProfile/Roassal3). Cormas v0.8 also installs Roassal3, but the installation process sometimes fails to install the correct version. Please reload Roassal3 v1.0 if it's not cleanly installed.
 4. Add this repository to Iceberg and load the *Cormas-Model-IDAIR* package.
 5. Don't forget to save the image.
